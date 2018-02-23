@@ -49,6 +49,12 @@ body, input, textarea, select {
     width:100%;
     height:100%;
     overflow:auto;
+    top:70px;
+    height:calc(100% - 70px);
+}
+#app.fullsize {
+    top:0;
+    height: 100%;
 }
 
 

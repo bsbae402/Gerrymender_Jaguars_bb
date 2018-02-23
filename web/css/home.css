@@ -2,7 +2,7 @@
 #main {
     position: relative;
     width:100%;
-    height:85%;
+    height:82%;
     min-height:500px;
     text-align: center;
 }
@@ -26,7 +26,7 @@
     width: 100%;
     height: 100%;
     z-index:2;
-    background:rgba(0, 0, 0,0.7);
+    background:rgba(0, 0, 0, 0.8);
 }
 
 #main .stuff {
@@ -42,6 +42,7 @@
     user-select: none;
     margin-top:40px;
     margin-bottom:39px;
+    letter-spacing: 2px;
 }
 #main .stuff h1::after {
     display: block;
@@ -64,6 +65,7 @@
     border:4px solid #def;
     cursor:pointer;
     background:rgba(180, 200, 220, 0.4);
+    border-radius:14px;
 }
 #main .stuff .started:hover {
     background:rgba(180, 200, 220, 0.8);
@@ -74,6 +76,7 @@
 
 #links {
     background:#f5f5f5;
+    background:#f3faf3;
     width:100%;
     padding:50px 15px 55px;
 }
@@ -150,6 +153,18 @@
 #features .center .feature.wired { background-image: url("./../img/home/feature/wired.png"); }
 #features .center .feature.bbc { background-image: url("./../img/home/feature/bbc.png"); }
 
+
+#footer {
+    width:100%;
+    background:#114;
+    padding:30px 0;
+}
+#footer .copyright {
+    width: 100%;
+    text-align: center;
+    color:#fff;
+    font-size:18px;
+}
 
 
 

@@ -1,6 +1,153 @@
 
+header {
+    position: fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:70px;
+    padding-bottom:0px;
+    z-index:20;
+    text-align: center;
+    -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; transition: all 0.3s ease-out;
+}
+
+header::before {
+    content:" ";
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:30px;
+    background:linear-gradient(rgba(10, 10, 40, 1),rgba(10, 10, 40, 0));
+    opacity:0;
+}
+header::after {
+    content:" ";
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:70px;
+    background:#e1f0fa;
+    opacity:1;
+    -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; transition: all 0.3s ease-out;
+}
+
+header .center {
+    position: relative;
+    z-index:2;
+    display: inline-block;
+    width:100%;
+    amax-width:1100px;
+    height: 100%;
+}
+
+header .left {
+    position: absolute;
+    left:0;
+    top:0;
+    height:100%;
+    user-select: none;
+}
+header .logocontainer {
+    margin-left:24px;
+    width:40px;
+    height:40px;
+    position: relative;
+}
+header .logocontainer .logo {
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url("./../img/logoblue.png");
+}
+header .logocontainer .logo.c {
+    background-image: url("./../img/logocolor.png");
+    opacity: 0;
+}
+header .logotext {
+    color:#226;
+    font-size:19px;
+    margin-left:16px;
+    line-height:20px;
+    text-align: left;
+    font-weight:700;
+    opacity:1;
+}
+
+header .right {
+    position: absolute;
+    left:0;
+    right:0;
+    text-align: right;
+    height:100%;
+    padding-right:25px;
+    font-size: 0;
+}
+header .right .link {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left:22px;
+    font-size:20px;
+    color:#114;
+    height:100%;
+    cursor:pointer;
+}
+header .right .link:hover {
+    color:#88b;
+}
+header .right .vbar {
+    display: inline-block;
+    vertical-align: middle;
+    width:3px;
+    height:50%;
+    background:#114;
+    margin:0 5px 0 25px;
+}
 
 
+
+header.custom {
+    background:transparent;
+    height:140px;
+}
+header.custom::before {
+    opacity:1;
+}
+header.custom::after {
+    opacity:0;
+}
+header.custom .logocontainer {
+    margin-left:47px;
+    width:70px;
+    height:70px;
+}
+header.custom .logotext {
+    color:#eef;
+    opacity:0;
+}
+header.custom .logocontainer .logo.c {
+    opacity: 1;
+}
+
+header.custom .right {
+    padding-right:40px;
+}
+header.custom .right .link {
+    color:#e6eeff;
+    font-size:25px;
+}
+header.custom .right .link:hover {
+    color:#bdf;
+}
+header.custom .right .vbar {
+    width:5px;
+    background:#e6eeff;
+    height:40%;
+}
 
 
 
