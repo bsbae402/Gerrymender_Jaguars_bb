@@ -12,6 +12,10 @@ body * {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 body, input, textarea, select {
     font-family: "Blogger Sans";
 }
