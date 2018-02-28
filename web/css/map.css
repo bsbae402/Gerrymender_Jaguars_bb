@@ -4,6 +4,8 @@
     left:0;
     top:0;
     width:50%;
+    min-width:450px;
+    max-width:calc(100% - 450px);
     height:100%;
     font-size:0;
 }
@@ -13,21 +15,36 @@
     right:0;
     top:0;
     width:50%;
+    min-width:450px;
+    max-width:calc(100% - 450px);
     height:100%;
 }
 
 #mapbox {
-    padding-right:3px;
+    padding-right:2px;
     background:#eee;
+    min-width:;
 }
-#mapbox .resizemove {
+#sidebox {
+    padding-left:2px;
+    background:#fee;
+}
+#sidebox > .resizemove {
     position: absolute;
-    left:calc(100% - 3px);
+    left:-3px;
     top:0;
-    width:3px;
+    width:calc(3px * 2);
+    height:100%;
+    cursor:ew-resize;
+}
+#sidebox > .resizemove::before {
+    position: absolute;
+    content:" ";
+    left:2px;
+    width:2px;
+    top:0;
     height:100%;
     background:#888;
-    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
-    cursor:ew-resize;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
