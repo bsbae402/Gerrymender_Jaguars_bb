@@ -46,6 +46,10 @@ $(function() {
 		mdown = false;
 	});
 
+	$("#mapbox .switchregion, #mapbox .selectregion .x").click(() => {
+		$("#mapbox .selectregion").toggleClass("show");
+	});
+
 
 
 
