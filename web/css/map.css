@@ -1,4 +1,8 @@
 
+#app {
+    overflow: hidden;
+}
+
 #mapbox {
     position: absolute;
     left:0;
@@ -23,7 +27,6 @@
 #mapbox {
     padding-right:2px;
     background:#eee;
-    min-width:;
 }
 #sidebox {
     padding-left:2px;
@@ -47,4 +50,79 @@
     background:#888;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
+
+#mapbox {
+    position: relative;
+}
+#map {
+    position: absolute;
+    left:0;
+    top:0;
+}
+#sample {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url("./../img/sample.png");
+}
+
+
+
+#sidebox > .tabs {
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:40px;
+    padding:8px 0 7px 16px;
+    font-size:0;
+    user-select: none;
+}
+#sidebox > .tabs::after {
+    position: absolute;
+    content:" ";
+    left:19px;
+    width:calc(100% - 19px * 2);
+    top:100%;
+    height:1px;
+    background-color:#668;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.4);
+}
+#sidebox > .tabs .tab {
+    display: inline-block;
+    vertical-align: middle;
+    padding:4px 4px;
+    margin-right:14px;
+    font-size:17px;
+    cursor:pointer;
+    color:#779;
+}
+#sidebox > .tabs .tab:hover {
+    color:#99a;
+}
+#sidebox > .tabs .tab:active {
+    color:#aad;
+}
+#sidebox > .tabs .tab.active {
+    color:#004;
+}
+
+#sidebox > .containers {
+    position: absolute;
+    left:0;
+    top:40px;
+    width:100%;
+    height:calc(100% - 40px);
+}
+#sidebox > .containers .container {
+    display: none;
+
+}
+#sidebox > .containers .container.active {
+    display: block;
+}
+
+
 

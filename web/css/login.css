@@ -3,12 +3,49 @@
 	padding-top:50px;
 }
 
+#login .carousel {
+	position: relative;
+	display: inline-block;
+	width:300px;
+	overflow:hidden;
+	font-size:0;
+}
+#login .carousel .shift {
+	position: relative;
+	display: block;
+	width:100%;
+	overflow:visible;
+	white-space: nowrap;
+	left:0%;
+}
+#login .carousel.a .shift {
+	left:-100%;
+}
+#login .carousel .shift .screen {
+	display: inline-block;
+	vertical-align: top;
+	width:100%;
+}
+
 #login h1 {
 	display: block;
 	font-size:40px;
 	font-weight: normal;
 	user-select: none;
-	padding-bottom:10px;
+	margin-bottom:3px;
+}
+#login .subtext {
+	font-size:14px;
+	cursor:pointer;
+	color:#aaa;
+	padding-bottom:3px;
+	user-select: none;
+}
+#login .subtext:hover {
+	text-decoration: underline;
+}
+#login .subtext:active {
+	color:#555;
 }
 #login .holder {
 	width:250px;
@@ -17,7 +54,7 @@
 }
 #login .field {
 	display: block;
-	margin-top:20px;
+	margin-top:10px;
 	width:100%;
 }
 #login .field .label {
@@ -32,14 +69,19 @@
 	width: 100%;
 	font-size:24px;
 	color:#222;
-	padding:6px 6px 4px;
+	padding:4px 6px 6px;
 	border-radius: 6px;
 	border-color:#8bd;
+	outline:none;
+	box-shadow: inset 0px 0px 1px #226;
+}
+#login .field input:focus {
+	border-color:#246;
 }
 #login .button {
-	margin-top:50px;
+	margin-top:35px;
 	display: inline-block;
-	padding:15px 40px 12px;
+	padding:15px 40px 16px;
 	font-size:24px;
 	cursor: pointer;
 	border-radius: 7px;
@@ -47,6 +89,7 @@
 	color:#259;
 	cursor: pointer;
 	background:#eef;
+	user-select: none;
 }
 #login .button:hover {
 	border-color: #59b;
