@@ -184,6 +184,27 @@
 #sidebox > .containers .container.active {
     display: block;
 }
+#sidebox > .containers .container h2 {
+    font-size:26px;
+}
+#sidebox > .containers .container .label {
+    margin-top:14px;
+    margin-bottom:4px;
+    font-size:16px;
+}
+#sidebox > .containers .container select {
+    display: block;
+    min-width:200px;
+}
+#sidebox > .containers .container .button {
+    display: inline-block;
+    cursor:pointer;
+    margin-top:22px;
+    padding:5px 8px;
+    border:1px solid #000;
+    background:#ccc;
+    border-radius: 4px;
+}
 
 
 
