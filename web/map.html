@@ -11,8 +11,8 @@
 		<!-- All Pages -->
 		<script src="js/vendor/jmin.js"></script>
 		<script src="js/script.js"></script>
+		<script src="js/api/api.js"></script>
 
-		<!-- All Pages -->
 		<script src="js/map.js"></script>
 
 
@@ -22,7 +22,7 @@
     		
 		<header data-include="header"></header>
 
-		<div id="app">
+		<div id="app" class="mapapp">
 
 			<div id="mapbox">
 
@@ -32,14 +32,16 @@
 
 				<div id="sample"></div>
 
-				<div class="switchregion">Switch Region</div>
+				<div class="switchregion">Switch State</div>
 
 				<div class="selectregion t3">
-					<h1>Select a Region</h1>
+					<h1>Select a State</h1>
 					<div class="regions">
+						<!--
 						<div class="region">New Hampshire</div>
 						<div class="region">Ohio</div>
 						<div class="region">Rhode Island</div>
+						-->
 					</div>
 
 					<div class="x">x</div>
@@ -47,57 +49,81 @@
 
 			</div>
 
-			<div id="sidebox">
+			<div class="sidebox left" id="cview">
 				
 				<div class="resizemove"></div>
 
-				<div class="tabs">
-					<div name="g" class="tab">Gerrymandering</div>
-					<div name="a" class="tab">Analysis</div>
-					<div name="r" class="tab">Redistrict</div>
+				<div class="titletop">
+					<div class="link active">View</div>
+					<div class="link">Redistrict</div>
 				</div>
 
-				<div class="containers">
+				<div class="content">
+					abc
+				</div>
 
-					<div name="g" class="container gerrymandering">
-						<h2>Check Gerrymandering</h2>
-						<div class="label">Region</div>
-						<select>
-							<option>Select</option>
-						</select>
-						<div class="label">Year</div>
-						<select>
-							<option>Select</option>
-						</select>
-						<div class="button">Check</div>
+			</div>
+
+			<div class="sidebox right" id="credistrict">
+				
+				<div class="resizemove"></div>
+
+				<div class="titletop">
+					<div class="link active">Redistrict</div>
+					<div class="link">View</div>
+				</div>
+
+				<div class="content">
+
+					<div class="tabs">
+						<div name="g" class="tab">Gerrymandering</div>
+						<div name="a" class="tab">Analysis</div>
+						<div name="r" class="tab">Redistrict</div>
 					</div>
 
-					<div name="a" class="container analysis">
-						<h2>Get analysis of region</h2>
-						<div class="label">Region</div>
-						<select>
-							<option>Select</option>
-						</select>
-						<div class="button">Get Report</div>
-						<br /><br />
-						<img src="/img/sample2.png" />
-					</div>
+					<div class="containers">
 
-					<div name="r" class="container redistrict">
-						<h2>Redistrict a state</h2>
-						<div class="label">Compactness Type</div>
-						<select>
-							<option>Select</option>
-						</select>
-						<div class="label">Region</div>
-						<select>
-							<option>Select</option>
-						</select>
-						<div class="label">Year</div>
-						<select>
-							<option>Select</option>
-						</select>
-						<div class="button">Redistrict</div>
+						<div name="g" class="container gerrymandering">
+							<h2>Check Gerrymandering</h2>
+							<div class="label">Region</div>
+							<select>
+								<option>Select</option>
+							</select>
+							<div class="label">Year</div>
+							<select>
+								<option>Select</option>
+							</select>
+							<div class="button">Check</div>
+						</div>
+
+						<div name="a" class="container analysis">
+							<h2>Get analysis of region</h2>
+							<div class="label">Region</div>
+							<select>
+								<option>Select</option>
+							</select>
+							<div class="button">Get Report</div>
+							<br /><br />
+							<img src="/img/sample2.png" />
+						</div>
+
+						<div name="r" class="container redistrict">
+							<h2>Redistrict a state</h2>
+							<div class="label">Compactness Type</div>
+							<select>
+								<option>Select</option>
+							</select>
+							<div class="label">Region</div>
+							<select>
+								<option>Select</option>
+							</select>
+							<div class="label">Year</div>
+							<select>
+								<option>Select</option>
+							</select>
+							<div class="button">Redistrict</div>
+						</div>
+
 					</div>
 
 				</div>

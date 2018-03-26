@@ -1,6 +1,8 @@
 var ENDPOINT = "";
 
 var API_CALLS = [
+    
+    // account
     {
         name : "login",
         method : "POST",
@@ -15,6 +17,21 @@ var API_CALLS = [
             }
         },
     },
+
+    // states
+    {
+        name : "getstates",
+        method : "GET",
+        url : "states/get",
+        response : function(r={}, data={}) {
+            var states = (r && r.states);
+            return states || [];
+        },
+        dummy : function(data={}) {
+            return ["New Hampsphire", "Rhode Island", "Ohio"];
+        },
+    },
+
 ];
 
 
@@ -55,29 +72,38 @@ var API_CALLS = [
 
         } else {
 
-            $.ajax({
-                url : ENDPOINT + "" + CALL.url,
-                method : CALL.method,
-                data : opts.data,
-                success : function(r) {
+            if (CALL.dummy) {
 
-                    try {
+                var data = CALL.dummy(opts.data);
+                opts.response(data);
 
-                        r = JSON.parse(r);
-                        if (typeof CALL.response == "function")
-                            r = CALL.response(r, opts.data);
+            } else {
 
-                    } catch (e) {
-                        opts.error("Couldn't parse response for API call ["+opts.name+"]");
-                    }
+                $.ajax({
+                    url : ENDPOINT + "" + CALL.url,
+                    method : CALL.method,
+                    data : opts.data,
+                    success : function(r) {
 
-                    opts.response(r);
+                        try {
 
-                },
-                error : function(jqXHR, errorText) {
-                    opts.error("Error for API Call ["+opts.name+"]: " + errorText);
-                },
-            });
+                            r = JSON.parse(r);
+                            if (typeof CALL.response == "function")
+                                r = CALL.response(r, opts.data);
+
+                        } catch (e) {
+                            opts.error("Couldn't parse response for API call ["+opts.name+"]");
+                        }
+
+                        opts.response(r);
+
+                    },
+                    error : function(jqXHR, errorText) {
+                        opts.error("Error for API Call ["+opts.name+"]: " + errorText);
+                    },
+                });
+
+            }
 
         }
 

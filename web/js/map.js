@@ -1,6 +1,9 @@
 
 $(function() {
 
+	var openTab = -1,
+		mapWPercent = 50;
+
 	function resize() {
 		var w = $("#mapbox").width(),
 			h = $("#mapbox").height();
@@ -21,6 +24,46 @@ $(function() {
 	resize();
 
 
+	function adjustOpenTabs() {
+		$("#mapbox").css("width", mapWPercent + "%");
+
+		$(".sidebox").css("width", (100 - mapWPercent) + "%");
+		if (openTab == -1)
+			$(".sidebox.right").css("right", "-" + (100 - mapWPercent) + "%");
+		if (openTab == 1)
+			$(".sidebox.left").css("left", "-" + (100 - mapWPercent) + "%");
+	}
+	var noToggle = false;
+	function toggleTabs() {
+		if (noToggle) return;
+		noToggle = true;
+		openTab = -openTab;
+
+		var props = {
+			duration : 600,
+			complete : () => noToggle = false
+		};
+
+		var lr = (openTab == 1) ? "left" : "right",
+			rl = (openTab == -1) ? "left" : "right";
+
+		var adjustCSS = {}, animateCSS = {};
+		adjustCSS[lr] = (100 - mapWPercent) + "%";
+		adjustCSS[rl] = "";
+		animateCSS[lr] = "0%";
+		$("#mapbox").css(adjustCSS).animate(animateCSS, props);
+
+		var a = {}, b = {};
+		a[lr] = -(100 - mapWPercent) + "%";
+		b[rl] = "0%";
+		$(".sidebox."+lr).animate(a, props);
+		$(".sidebox."+rl).animate(b, props);
+	}
+	$(".sidebox .titletop .link").click(function() {
+		if (!$(this).hasClass("active"))
+			toggleTabs();
+	});
+
 	var mdown = false,
 		omx = 0,
 		oresizex = 0;
@@ -36,11 +79,16 @@ $(function() {
 		if (!mdown)
 			return;
 
-		var md = e.pageX - omx;
-		var neww = oresizex + md,
-			perc = 100 * neww / $("#app").outerWidth();
-		$("#mapbox").css("width", perc + "%");
-		$("#sidebox").css("width", (100 - perc) + "%");
+		var neww = (openTab == 1) ?
+			oresizex + (e.pageX - omx) :
+			oresizex - (e.pageX - omx);
+
+		var perc = 100 * neww / $("#app").outerWidth();
+		perc = Math.max(Math.min(perc, 70), 30);
+		mapWPercent = perc;
+		
+		adjustOpenTabs();
+
 		resize();
 	}).on("mouseup", function(e) {
 		mdown = false;
@@ -49,9 +97,6 @@ $(function() {
 	$("#mapbox .switchregion, #mapbox .selectregion .x").click(() => {
 		$("#mapbox .selectregion").toggleClass("show");
 	});
-
-
-
 
 
 	$("#sidebox > .tabs .tab").click(function() {
@@ -63,6 +108,26 @@ $(function() {
 		$("#sidebox > .containers .container[name=\""+n+"\"]").addClass("active");
 	});
 	$("#sidebox > .tabs .tab").first().click();
+
+
+
+
+	APICall({
+		name : "getstates",
+		response : (r) => {
+			r.forEach((region) => {
+				$("#mapbox .selectregion .regions").append(
+					$("<div>").addClass("region")
+						.html(region)
+					);
+			})
+		}
+	});
+
+
+
+
+
 
 
 

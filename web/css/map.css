@@ -1,46 +1,60 @@
 
-#app {
+#app.mapapp {
     overflow: hidden;
 }
 
 #mapbox {
     position: absolute;
-    left:0;
-    top:0;
-    width:50%;
-    min-width:450px;
-    max-width:calc(100% - 450px);
-    height:100%;
-    font-size:0;
-}
-
-#sidebox {
-    position: absolute;
     right:0;
     top:0;
     width:50%;
-    min-width:450px;
-    max-width:calc(100% - 450px);
+    /*min-width:450px;
+    max-width:calc(100% - 450px);*/
     height:100%;
+    font-size:0;
+    overflow: hidden;
+}
+
+.sidebox {
+    position: absolute;
+    top:0;
+    width:50%;
+    /*min-width:450px;
+    max-width:calc(100% - 450px);*/
+    height:100%;
+}
+
+.sidebox.right {
+    right:-50%;
+}
+.sidebox.left {
+    left:0%;
 }
 
 #mapbox {
     padding-right:2px;
     background:#eee;
 }
-#sidebox {
-    padding-left:2px;
+
+.sidebox {
     background:#fee;
 }
-#sidebox > .resizemove {
+
+.sidebox > .resizemove {
     position: absolute;
-    left:-3px;
     top:0;
     width:calc(3px * 2);
     height:100%;
     cursor:ew-resize;
+    z-index:4;
 }
-#sidebox > .resizemove::before {
+.sidebox.left > .resizemove {
+    right:-3px;
+}
+.sidebox.right > .resizemove {
+    left:-3px;
+}
+.sidebox > .resizemove::before {
     position: absolute;
     content:" ";
     left:2px;
@@ -51,13 +65,13 @@
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
-#mapbox {
-    position: relative;
-}
+
+
 #map {
     position: absolute;
     left:0;
     top:0;
+    user-select: none;
 }
 #sample {
     display: block;
@@ -77,6 +91,7 @@
     background:rgba(0,0,0,0.7);
     color:#fff;
     padding:20px 25px;
+    user-select: none;
 }
 #mapbox .selectregion.show {
     top:0%;
@@ -113,14 +128,17 @@
 
 #mapbox .switchregion {
     position: absolute;
-    bottom:5px;
-    right:5px;
-    padding:3px 6px 4px;
-    font-size:13px;
+    top:11px;
+    left:9px;
+    padding:5px 8px 6px;
+    font-size:15px;
     color:#fff;
     background:#000;
     cursor: pointer;
     user-select: none;
+    text-align: center;
+    width:100px;
+    height:30px;
 }
 #mapbox .switchregion:hover {
     color:#bbb;
@@ -130,81 +148,62 @@
 }
 
 
-#sidebox > .tabs {
-    position: absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:40px;
-    padding:8px 0 7px 16px;
-    font-size:0;
+.sidebox {
     user-select: none;
+    overflow:hidden;
 }
-#sidebox > .tabs::after {
-    position: absolute;
-    content:" ";
-    left:19px;
-    width:calc(100% - 19px * 2);
-    top:100%;
-    height:1px;
-    background-color:#668;
-    box-shadow: 0px 1px 1px rgba(0,0,0,0.4);
+.sidebox.left {
+    padding-right:2px;
 }
-#sidebox > .tabs .tab {
-    display: inline-block;
-    vertical-align: middle;
-    padding:4px 4px;
-    margin-right:14px;
-    font-size:17px;
-    cursor:pointer;
-    color:#779;
-}
-#sidebox > .tabs .tab:hover {
-    color:#99a;
-}
-#sidebox > .tabs .tab:active {
-    color:#aad;
-}
-#sidebox > .tabs .tab.active {
-    color:#004;
+.sidebox.right {
+    padding-left:2px;
 }
 
-#sidebox > .containers {
-    position: absolute;
-    left:0;
-    top:40px;
+.sidebox .titletop {
+    position: relative;
     width:100%;
-    height:calc(100% - 40px);
+    padding:15px 20px 4px;
+    height:56px;
 }
-#sidebox > .containers .container {
-    display: none;
-    padding:18px 25px;
+.sidebox .titletop::after {
+    content:" ";
+    font-size:0;
+    position: absolute;
+    left:20px;
+    bottom:0;
+    width:calc(100% - 70px);
+    height:1px;
+    background:#000;
+}
+.sidebox .content {
+    height:calc(100% - 56px);
+    padding:15px 20px 15px;
     overflow-y:auto;
 }
-#sidebox > .containers .container.active {
-    display: block;
-}
-#sidebox > .containers .container h2 {
-    font-size:26px;
-}
-#sidebox > .containers .container .label {
-    margin-top:14px;
-    margin-bottom:4px;
-    font-size:16px;
-}
-#sidebox > .containers .container select {
-    display: block;
-    min-width:200px;
-}
-#sidebox > .containers .container .button {
+
+.sidebox .titletop .link {
     display: inline-block;
-    cursor:pointer;
-    margin-top:22px;
-    padding:5px 8px;
-    border:1px solid #000;
-    background:#ccc;
-    border-radius: 4px;
+    font-size:29px;
+    margin-left:2px;
+    margin-right:15px;
+    color:#aaa;
+    cursor: pointer;
 }
+.sidebox .titletop .link:hover {
+    color:#777;
+}
+.sidebox .titletop .link:active {
+    color:#116;
+}
+.sidebox .titletop .link.active {
+    color:#113;
+    cursor:default;
+}
+
+
+
+
+
 
 
 
