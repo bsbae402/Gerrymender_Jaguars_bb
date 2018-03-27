@@ -32,6 +32,31 @@ var API_CALLS = [
         },
     },
 
+    // state
+    {
+        name : "getstate",
+        method : "GET",
+        url : "states/get",
+        response : function(r={}, data={}) {
+            var states = (r && r.states);
+            return states || [];
+        },
+        dummy : function(data={}) {
+            return {
+                regions : [
+                    {
+                        name: "Whatever",
+                        outline: [10, 30, 10, 90, 20, 110, 90, 110, 0, 110, 0, 50, 10, 20]
+                    },
+                    {
+                        name: "Whatever",
+                        outline: [110, 30, 110, 90, 120, 110, 190, 110, 100, 110, 100, 50, 110, 20]
+                    }
+                ]
+            };
+        },
+    },
+
 ];
 
 
