@@ -43,7 +43,7 @@ public class AccountController {
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
-        return "{ user_id : 1, user_type : 2, username : \"" + parameterMap.get("username")[0] + "\" }";
+        return "{ \"user_id\" : 1, \"user_type\" : 2, \"username\" : \"" + parameterMap.get("username")[0] + "\" }";
     }
 
     @RequestMapping(value="/accounts", method = RequestMethod.GET)

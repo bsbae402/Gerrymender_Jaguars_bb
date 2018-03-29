@@ -21,7 +21,12 @@ $(function() {
 
 			APICall({
 				name : "login",
+				data : {
+					username : "asdf",
+					password : "qwer",
+				},
 				response : (r) => {
+					r = JSON.parse(r)
 					console.log(r);
 				}
 			});
