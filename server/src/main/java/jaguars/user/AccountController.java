@@ -28,32 +28,61 @@ public class AccountController {
         };
     }
 
-    @RequestMapping(value="/accounts", method = RequestMethod.POST)
-    public void postPerson(@RequestBody Account account) {
-        accountRepository.save(account);
-    }
-
-    @RequestMapping(value="/accounts/{id}", method = RequestMethod.GET)
-    public Account getPerson(@PathVariable String id) {
-        // accountRepository.findOne(id) returns null if it can't find an entity with the id
-        System.out.println("response: " + accountRepository.findOne(id));
-        return accountRepository.findOne(id);
-    }
-
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request) {
+        System.out.println("login() call");
         Map<String, String[]> parameterMap = request.getParameterMap();
-        String username = parameterMap.get("username")[0];
+        System.out.println(parameterMap);
+        String[] usernameArr = parameterMap.get("username");
+        // String[] is used because there can be multiple parameters on the same name, like:
+        // {name=John, name=Joe, name=Mia}
+        System.out.println(usernameArr[0]);
+        // System.out.println(username[1]); <- throw exception if only one username passed
         return "{ \"user_id\" : 1, \"user_type\" : 2 }";
     }
 
-    @RequestMapping(value="/accounts", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
+    public String signup(HttpServletRequest request) {
+        System.out.println("signup() call");
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        System.out.println(parameterMap);
+        String[] usernameArr = parameterMap.get("username");
+        System.out.println(usernameArr[0]);
+        return "{ \"user_id\" : 1 }";
+    }
+
+    @RequestMapping(value = "/user/list/{id}", method = RequestMethod.GET)
+    public String getUser(HttpServletRequest request, @PathVariable String id) {
+        System.out.println("getUser() call");
+        // access the DB here
+        return "{ \"username\" : \"bongsung\", \"email\" : \"bong@sung.com\" }";
+    }
+
+    // -- not used for app, delete later
+    @RequestMapping(value="/account", method = RequestMethod.POST)
+    public void postAccount(@RequestBody Account account) {
+        System.out.println("postAccount() call");
+        System.out.println(account);
+        accountRepository.save(account);
+    }
+
+    @RequestMapping(value="/account/{id}", method = RequestMethod.GET)
+    public Account getAccount(@PathVariable String id) {
+        System.out.println("getAccount() call");
+        System.out.println("response: " + accountRepository.findOne(id));
+        // accountRepository.findOne(id) returns null if it can't find an entity with the id
+        return accountRepository.findOne(id);
+    }
+
+    @RequestMapping(value="/account", method = RequestMethod.GET)
     public List<Account> getAllAccounts() {
+        System.out.println("getAllAccount() call");
         return (List<Account>) accountRepository.findAll();
     }
 
-    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.DELETE)
-    public void deletePerson(@PathVariable String id) {
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.DELETE)
+    public void deleteAccount(@PathVariable String id) {
+        System.out.println("deleteAccount() call");
         // accountRepository.findOne(id) returns null if it can't find an entity with the id
         System.out.println("response: " + accountRepository.findOne(id));
         // void CrudRepository.delete()
