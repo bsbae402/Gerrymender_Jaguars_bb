@@ -16,7 +16,7 @@ public class AccountController {
         accountRepository.save(account);
     }
 
-    @RequestMapping(value="/accounts/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/user/login", method = RequestMethod.POST)
     public Account getPerson(@PathVariable String id) {
         // accountRepository.findOne(id) returns null if it can't find an entity with the id
         System.out.println("response: " + accountRepository.findOne(id));
