@@ -1,7 +1,12 @@
 package jaguars.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
 
@@ -11,16 +16,31 @@ public class AccountController {
     @Autowired
     AccountRepository accountRepository;
 
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*");
+            }
+        };
+    }
+
     @RequestMapping(value="/accounts", method = RequestMethod.POST)
     public void postPerson(@RequestBody Account account) {
         accountRepository.save(account);
     }
 
-    @RequestMapping(value="/user/login", method = RequestMethod.POST)
+    @RequestMapping(value="/accounts/{id}", method = RequestMethod.GET)
     public Account getPerson(@PathVariable String id) {
         // accountRepository.findOne(id) returns null if it can't find an entity with the id
         System.out.println("response: " + accountRepository.findOne(id));
         return accountRepository.findOne(id);
+    }
+
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    public String login(@RequestBody MultiValueMap<String,String> formData) {
+        return "{ user_id : 1, user_type : 2 }";
     }
 
     @RequestMapping(value="/accounts", method = RequestMethod.GET)
