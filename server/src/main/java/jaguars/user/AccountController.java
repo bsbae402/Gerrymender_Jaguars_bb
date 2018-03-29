@@ -1,6 +1,7 @@
 package jaguars.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,11 +17,16 @@ public class AccountController {
         accountRepository.save(account);
     }
 
-    @RequestMapping(value="/user/login", method = RequestMethod.POST)
+    @RequestMapping(value="/accounts/{id}", method = RequestMethod.GET)
     public Account getPerson(@PathVariable String id) {
         // accountRepository.findOne(id) returns null if it can't find an entity with the id
         System.out.println("response: " + accountRepository.findOne(id));
         return accountRepository.findOne(id);
+    }
+
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    public String login(@RequestBody MultiValueMap<String,String> formData) {
+        return "{ user_id : 1, user_type : 2 }";
     }
 
     @RequestMapping(value="/accounts", method = RequestMethod.GET)
