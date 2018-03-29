@@ -8,7 +8,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 // We may not need this class. We want to have a request verified first.
 @RestController
@@ -39,8 +41,9 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public String login(@RequestBody MultiValueMap<String,String> formData) {
-        return "{ user_id : 1, user_type : 2 }";
+    public String login(HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        return "{ user_id : 1, user_type : 2, username : \"" + parameterMap.get("username")[0] + "\" }";
     }
 
     @RequestMapping(value="/accounts", method = RequestMethod.GET)
