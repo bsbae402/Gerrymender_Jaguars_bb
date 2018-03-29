@@ -28,7 +28,16 @@ var API_CALLS = [
             return states || [];
         },
         dummy : function(data={}) {
-            return ["New Hampsphire", "Rhode Island", "Ohio"];
+            return (["New Hampsphire", "Rhode Island", "Ohio"]).map((a) => {
+                var startYear = Math.floor(Math.random() * 4) + 2004,
+                    endYear = Math.floor(Math.random() * 6) + 5 + startYear;
+                var years = [];
+                for(var i=startYear;i<=endYear;i++) years.push(i);
+                return {
+                    state_name : a,
+                    years : years,
+                }
+            });
         },
     },
 
@@ -42,15 +51,48 @@ var API_CALLS = [
             return states || [];
         },
         dummy : function(data={}) {
+            if (data.state_name == "Ohio") {
+                var districts = [];
+                for(var i=0;i<8;i++) {
+                    var precincts = [];
+                    for(var j=0;j<8;j++) {
+                        var r = Math.floor(Math.random() * 5000) + 10;
+                        var d = Math.floor(Math.random() * 5000) + 10;
+                        precincts.push({
+                            name : "Random " + i + " " + j,
+                            voteR : r,
+                            voteD : d,
+                            outline : [
+                                i * 48, j * 48, i * 48 + 48, j * 48,
+                                i * 48 + 48, j * 48 + 48, i * 48, j * 48 + 48
+                            ]
+                        })
+                    }
+                    districts.push({
+                        precincts,
+                    })
+                }
+                return {
+                    districts,
+                }
+            }
             return {
-                regions : [
+                districts : [
                     {
-                        name: "Whatever",
-                        outline: [10, 30, 10, 90, 20, 110, 90, 110, 0, 110, 0, 50, 10, 20]
-                    },
-                    {
-                        name: "Whatever",
-                        outline: [110, 30, 110, 90, 120, 110, 190, 110, 100, 110, 100, 50, 110, 20]
+                        precincts: [
+                            {
+                                name: "Whatever",
+                                voteR : 500,
+                                voteD : 100,
+                                outline: [10, 30, 90, 30, 90, 110, 100, 130, 0, 130, 0, 50]
+                            },
+                            {
+                                name: "Whatever",
+                                voteR : 100,
+                                voteD : 500,
+                                outline: [110, 50, 190, 50, 190, 140, 200, 180, 100, 130, 140, 60]
+                            },
+                        ]
                     }
                 ]
             };

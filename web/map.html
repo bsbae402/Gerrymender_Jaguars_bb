@@ -13,6 +13,8 @@
 		<script src="js/script.js"></script>
 		<script src="js/api/api.js"></script>
 
+		<script src="js/util.js"></script>
+		<script src="js/svg.js"></script>
 		<script src="js/map.js"></script>
 
 
@@ -29,8 +31,6 @@
 				<svg id="map" viewBox="0 0 500 500" width="500" height="500">
 
 				</svg>
-
-				<div id="sample"></div>
 
 				<div class="switchregion">Switch State</div>
 
@@ -75,56 +75,21 @@
 
 				<div class="content">
 
-					<div class="tabs">
-						<div name="g" class="tab">Gerrymandering</div>
-						<div name="a" class="tab">Analysis</div>
-						<div name="r" class="tab">Redistrict</div>
-					</div>
+					<div>Map Profile</div>
+					<input type="button" value="Save as" class="button button1" />
+					<input type="button" value="Save" class="button button1" />
+					<input type="button" value="Load" class="button button1" />
+					<input type="button" value="Delete" class="button button1" />
 
-					<div class="containers">
+					<br />
+					<br />
 
-						<div name="g" class="container gerrymandering">
-							<h2>Check Gerrymandering</h2>
-							<div class="label">Region</div>
-							<select>
-								<option>Select</option>
-							</select>
-							<div class="label">Year</div>
-							<select>
-								<option>Select</option>
-							</select>
-							<div class="button">Check</div>
-						</div>
+					<input type="checkbox" />
+					<div class="label">Manual redistricting</div>
 
-						<div name="a" class="container analysis">
-							<h2>Get analysis of region</h2>
-							<div class="label">Region</div>
-							<select>
-								<option>Select</option>
-							</select>
-							<div class="button">Get Report</div>
-							<br /><br />
-							<img src="/img/sample2.png" />
-						</div>
+					<input type="button" value="Redistrict" class="button" />
 
-						<div name="r" class="container redistrict">
-							<h2>Redistrict a state</h2>
-							<div class="label">Compactness Type</div>
-							<select>
-								<option>Select</option>
-							</select>
-							<div class="label">Region</div>
-							<select>
-								<option>Select</option>
-							</select>
-							<div class="label">Year</div>
-							<select>
-								<option>Select</option>
-							</select>
-							<div class="button">Redistrict</div>
-						</div>
-
-					</div>
+					<div class="miniheader">Redistrict results/analytics</div>
 
 				</div>
 

@@ -1,0 +1,27 @@
+
+#tutorial {
+	padding-top:20px;
+	background:#eee;
+	min-height: 100%;
+}
+
+#tutorial > div {
+	display: inline-block;
+	max-width:800px;
+}
+
+#tutorial h1 {
+	width: 100%;
+	text-align: center;
+	font-weight:400;
+	margin-top:10px;
+}
+#tutorial p {
+	text-align: left;
+	font-weight:300;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+
+

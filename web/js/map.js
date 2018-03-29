@@ -111,18 +111,85 @@ $(function() {
 
 
 
-
+	var states;
 	APICall({
 		name : "getstates",
 		response : (r) => {
-			r.forEach((region) => {
+			states = r;
+			states.forEach((region) => {
 				$("#mapbox .selectregion .regions").append(
 					$("<div>").addClass("region")
-						.html(region)
+						.html(region.state_name)
+						.click((e) => {
+							$("#mapbox .selectregion").removeClass("show");
+							selectState(region)
+						})
 					);
-			})
+			});
+
+			selectState(states[0]);
 		}
 	});
+
+
+	var mapData;
+	function selectState(state) {
+		APICall({
+			name : "getstate",
+			data : {
+				state_name : state.state_name,
+				year : state.years[0],
+			},
+			response : (r) => {
+				mapData = r;
+
+				mapData.districts.forEach((district) => {
+					district.precincts.forEach((precinct) => {
+						precinct.outline = mapArrayToCoords(precinct.outline);
+					})
+				});
+
+				renderMap();
+			}
+		});
+	}
+
+	function renderMap() {
+		$("#map").empty();
+
+		$map = $(createSVG("g"));
+		$map.attr("transform", "translate(30, 40)");
+		$("#map").append($map);
+
+		mapData.districts.forEach((district) => {
+			district.precincts.forEach((precinct) => {
+				var points = precinct.outline.map((a) => a.x + "," + a.y).join(" ");
+
+				var $poly = $(createSVG("polygon"));
+				$poly.attr("class", "precinct");
+				//$poly.attr("class", "precinct " + ((precinct.voteR > precinct.voteD) ? "blue" : "red"));
+
+				var a = [0, 0, 255],
+					b = [255, 0, 0];
+				var perc = (precinct.voteR / (precinct.voteR + precinct.voteD));
+				for(var i=0;i<b.length;i++)
+					b[i] = Math.round(a[i] + (b[i] - a[i]) * perc);
+				$poly.attr("fill", "rgb(" + b.join(",") + ")");
+
+				$map.append($poly);
+
+				$poly.attr("points", points);
+
+
+			})
+		});
+	}
+
+
+
+
+
+
 
 
 
