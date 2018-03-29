@@ -28,26 +28,34 @@ public class AccountController {
         };
     }
 
+//    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+//    public String login(HttpServletRequest request) {
+//        System.out.println("login() call");
+//        Map<String, String[]> parameterMap = request.getParameterMap();
+//        System.out.println(parameterMap);
+//        String[] usernameArr = parameterMap.get("username");
+//        // String[] is used because there can be multiple parameters on the same name, like:
+//        // {name=John, name=Joe, name=Mia}
+//        System.out.println(usernameArr[0]);
+//        // System.out.println(username[1]); <- throw exception if only one username passed
+//        return "{ \"user_id\" : 1, \"user_type\" : 2 }";
+//    }
+
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request) {
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
         System.out.println("login() call");
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        System.out.println(parameterMap);
-        String[] usernameArr = parameterMap.get("username");
-        // String[] is used because there can be multiple parameters on the same name, like:
-        // {name=John, name=Joe, name=Mia}
-        System.out.println(usernameArr[0]);
-        // System.out.println(username[1]); <- throw exception if only one username passed
+        System.out.println("username: " + username);
+        System.out.println("password: " + password);
         return "{ \"user_id\" : 1, \"user_type\" : 2 }";
     }
 
     @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
-    public String signup(HttpServletRequest request) {
+    public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
+                         @RequestParam("email") String email) {
         System.out.println("signup() call");
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        System.out.println(parameterMap);
-        String[] usernameArr = parameterMap.get("username");
-        System.out.println(usernameArr[0]);
+        System.out.println("username: " + username);
+        System.out.println("password: " + password);
+        System.out.println("email: " + email);
         return "{ \"user_id\" : 1 }";
     }
 
