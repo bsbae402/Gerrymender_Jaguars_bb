@@ -26,7 +26,6 @@ $(function() {
 					password : "qwer",
 				},
 				response : (r) => {
-					r = JSON.parse(r)
 					console.log(r);
 				}
 			});
