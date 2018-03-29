@@ -6,7 +6,7 @@ var API_CALLS = [
     {
         name : "login",
         method : "POST",
-        url : "login",
+        url : "user/login",
         response : function(r={}, data={}) {
             return r;
         },
@@ -45,7 +45,7 @@ var API_CALLS = [
     {
         name : "getstate",
         method : "GET",
-        url : "states/get",
+        url : "state/get",
         response : function(r={}, data={}) {
             var states = (r && r.states);
             return states || [];
