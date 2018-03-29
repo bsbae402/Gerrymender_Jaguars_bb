@@ -1,4 +1,4 @@
-var ENDPOINT = "";
+var ENDPOINT = "http://localhost:8080/";
 
 var API_CALLS = [
     
@@ -10,7 +10,7 @@ var API_CALLS = [
         response : function(r={}, data={}) {
             return r;
         },
-        dummy : function(data={}) {
+        adummy : function(data={}) {
             return {
                 user_id : 0,
                 user_type : 1
