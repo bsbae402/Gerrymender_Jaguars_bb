@@ -10,16 +10,14 @@ public class Account {
     private String id;
     private String password;
     private String email;
-    private UserRole role;
 
     public Account() {
     }
 
-    public Account(String id, String password, String email, UserRole role) {
+    public Account(String id, String password, String email) {
         this.id = id;
         this.password = password;
         this.email = email;
-        this.role = role;
     }
 
     public String getId() { return id; }
@@ -42,14 +40,6 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     @Override

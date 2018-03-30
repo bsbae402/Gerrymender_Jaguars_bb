@@ -31,11 +31,10 @@
             <version>0.9.5</version>
         </dependency>
 
-        <!-- remove after setting mysql interaction -->
+        <!-- Use MySQL Connector-J -->
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <scope>runtime</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <!-- remove after figuring out how to render a html page -->
