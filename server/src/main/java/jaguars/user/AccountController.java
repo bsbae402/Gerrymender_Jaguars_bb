@@ -1,5 +1,8 @@
 package jaguars.user;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
@@ -8,12 +11,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 // We may not need this class. We want to have a request verified first.
 @RestController
 public class AccountController {
+    @Autowired
+    AccountManager am;
     @Autowired
     AccountRepository accountRepository;
 
@@ -26,19 +32,6 @@ public class AccountController {
             }
         };
     }
-
-//    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-//    public String login(HttpServletRequest request) {
-//        System.out.println("login() call");
-//        Map<String, String[]> parameterMap = request.getParameterMap();
-//        System.out.println(parameterMap);
-//        String[] usernameArr = parameterMap.get("username");
-//        // String[] is used because there can be multiple parameters on the same name, like:
-//        // {name=John, name=Joe, name=Mia}
-//        System.out.println(usernameArr[0]);
-//        // System.out.println(username[1]); <- throw exception if only one username passed
-//        return "{ \"user_id\" : 1, \"user_type\" : 2 }";
-//    }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
@@ -63,6 +56,21 @@ public class AccountController {
         System.out.println("getUser() call");
         // access the DB here
         return "{ \"username\" : \"bongsung\", \"email\" : \"bong@sung.com\" }";
+    }
+
+    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
+    public String getAllUsers() {
+        System.out.println("getAllUsers() call");
+        // access the DB here
+
+        ArrayList<Account> accountList = am.getAllAccounts();
+        JsonArray retJsonArr = Json.array();
+        for(Account a : accountList) {
+            JsonObject obj = Json.object().add("username", a.getId())
+                .add("email", a.getEmail());
+            retJsonArr.add(obj);
+        }
+        return retJsonArr.toString();
     }
 
     //// -- not used for app, delete later

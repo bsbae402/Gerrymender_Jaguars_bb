@@ -30,4 +30,12 @@ public class StateManager {
     public State getState(int stateId) {
         return states.get(stateId);
     }
+
+    public State getStateByNameYear(String name, int year) {
+        for(State s : states.values()) {
+            if(s.getName().equals(name) && s.getYear() == year)
+                return s;
+        }
+        return null;
+    }
 }
