@@ -2,7 +2,6 @@ package jaguars.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -60,13 +59,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/user/list/{id}", method = RequestMethod.GET)
-    public String getUser(HttpServletRequest request, @PathVariable String id) {
+    public String getUser(@PathVariable String id) {
         System.out.println("getUser() call");
         // access the DB here
         return "{ \"username\" : \"bongsung\", \"email\" : \"bong@sung.com\" }";
     }
 
-    // -- not used for app, delete later
+    //// -- not used for app, delete later
     @RequestMapping(value="/account", method = RequestMethod.POST)
     public void postAccount(@RequestBody Account account) {
         System.out.println("postAccount() call");
