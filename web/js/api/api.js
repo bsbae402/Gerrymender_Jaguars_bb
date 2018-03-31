@@ -18,6 +18,20 @@ var API_CALLS = [
             }
         },
     },
+    {
+        name : "signup",
+        method : "POST",
+        url : "user/signup",
+        response : function(r={}, data={}) {
+            return r;
+        },
+        dummy : function(data={}) {
+            return {
+                user_id : 0,
+                error : 0,
+            }
+        },
+    },
 
     // states
     {
