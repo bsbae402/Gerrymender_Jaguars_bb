@@ -27,7 +27,12 @@ public class UserManager {
     }
 
     public ArrayList<User> getAllUsers() {
-        return new ArrayList<User>(users.values());
+        ArrayList<User> allUsers = new ArrayList<>();
+        for(User u : userRepository.findAll()) {
+            System.out.println(u);
+            allUsers.add(u);
+        }
+        return allUsers;
     }
 
     public User findUser(String id) {

@@ -91,7 +91,6 @@ public class UserController {
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
     public String getAllUsers() {
         System.out.println("getAllUsers() call");
-        // access the DB here
 
         ArrayList<User> userList = um.getAllUsers();
         JsonArray retJsonArr = Json.array();
