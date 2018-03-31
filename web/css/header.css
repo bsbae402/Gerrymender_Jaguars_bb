@@ -112,6 +112,12 @@ header .right .vbar {
     background:#114;
     margin:0 5px 0 25px;
 }
+header .right .loggedin {
+    display: inline-block;
+}
+header .right .loggedin.hide {
+    display: none;
+}
 
 
 

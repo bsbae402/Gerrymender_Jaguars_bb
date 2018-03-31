@@ -34,6 +34,7 @@ $(function() {
 						$(".login .error").addClass("show");
 					} else {
 						jset("user", {
+							loggedin : true,
 							username : user,
 							id : r.user_id,
 							type : r.user_type,
