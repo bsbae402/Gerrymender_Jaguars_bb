@@ -9,3 +9,24 @@ function mapArrayToCoords(arr) {
     }
     return a;
 }
+
+function pget(key, defaultValue=0) {
+    var value = localStorage.getItem(key);
+    if (value == null)
+        return defaultValue;
+    return value;
+}
+function pgetint(key, defaultValue=0) {
+    return parseInt(pget(key, defaultValue));
+}
+function jget(key, defaultValue={}) {
+    return JSON.parse(pget(key, defaultValue));
+}
+function pset(key, value=0) {
+    localStorage.setItem(key, value);
+    return value;
+}
+function jset(key, value={}) {
+    pset(key, JSON.stringify(value));
+    return value;
+}

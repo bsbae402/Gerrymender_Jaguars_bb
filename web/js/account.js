@@ -19,14 +19,28 @@ $(function() {
 	$(".screen .button").click(function() {
 		if ($(this).closest(".screen").hasClass("login")) {
 
+			var user = $(".login .username").val(),
+				pass = $(".login .password").val();
+
+			$(".login .error").removeClass("show");
 			APICall({
 				name : "login",
 				data : {
-					username : "asdf",
-					password : "qwer",
+					username : user,
+					password : pass,
 				},
 				response : (r) => {
-					console.log(r);
+					if (r.error) {
+						$(".login .error").addClass("show");
+					} else {
+						jset("user", {
+							username : user,
+							id : r.user_id,
+							type : r.user_type,
+						});
+
+						window.location.href = "/map.html";
+					}
 				}
 			});
 			

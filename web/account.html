@@ -10,6 +10,7 @@
 
 		<!-- All Pages -->
 		<script src="js/vendor/jmin.js"></script>
+		<script src="js/util.js"></script>
 		<script src="js/script.js"></script>
 		<script src="js/api/api.js"></script>
 
@@ -35,7 +36,7 @@
 							<h1>Log In</h1>
 							<div class="subtext">Don't have an account yet?</div>
 
-							<div class="holder">
+							<form name="loginForm" class="holder">
 
 								<div class="field">
 									<div class="label">Username</div>
@@ -47,9 +48,11 @@
 									<input class="last password" type="password" />
 								</div>
 
+								<div class="error"></div>
+
 								<div class="button">Log In</div>
 
-							</div>
+							</form>
 
 						</div>
 
@@ -58,7 +61,7 @@
 							<h1>Sign Up</h1>
 							<div class="subtext">Already have an account?</div>
 
-							<div class="holder">
+							<form name="signupForm" class="holder">
 
 								<div class="field">
 									<div class="label">Pick a Username</div>
@@ -75,9 +78,11 @@
 									<input class="last password2" type="password" />
 								</div>
 
-								<div class="button">Log In</div>
+								<div class="error"></div>
 
-							</div>
+								<div class="button">Sign Up</div>
+
+							</form>
 							
 						</div>
 

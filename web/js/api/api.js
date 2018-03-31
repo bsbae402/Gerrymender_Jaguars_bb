@@ -13,7 +13,8 @@ var API_CALLS = [
         _dummy : function(data={}) {
             return {
                 user_id : 0,
-                user_type : 1
+                user_type : 2,
+                error : 0
             }
         },
     },
