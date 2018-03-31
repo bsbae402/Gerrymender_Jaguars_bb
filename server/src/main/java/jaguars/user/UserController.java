@@ -30,23 +30,28 @@ public class UserController {
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
         System.out.println("login() call");
-        User user = um.findUser(username);
-        if(user == null) {
+        ArrayList<User> users = new ArrayList<User>(um.findUsersByUsername(username));
+        if(users.size() < 1) {
             JsonObject retObj = Json.object().add("error", 2)
                     .add("user_id", "")
                     .add("user_type", -1);
             return retObj.toString();
         }
+        System.out.println("user has been found");
+        if(users.size() > 1)
+            System.out.println("BUT there seems more than one users of the same name...");
+
+        User user = users.get(0);
         if(!password.equals(user.getPassword())) {
+            System.out.println("password not match!");
             JsonObject retObj = Json.object().add("error", 1)
                     .add("user_id", "")
                     .add("user_type", -1);
             return retObj.toString();
         }
-        System.out.println("user has been found");
         System.out.println(user);
         JsonObject retObj = Json.object().add("error", 0)
-                .add("user_id", username);
+                .add("user_id", user.getId());
         switch (user.getRole()) {
             case USER:
                 retObj.add("user_type", 1);
@@ -69,15 +74,16 @@ public class UserController {
         System.out.println("username: " + username);
         System.out.println("password: " + password);
         System.out.println("email: " + email);
-        User existingUser = um.findUser(username);
-        if(existingUser != null) {
+        ArrayList<User> users = new ArrayList<User>(um.findUsersByUsername(username));
+        if(users.size() >= 1) {
             System.out.println("user already exists!");
             return "{ \"user_id\" : -1 }";
         }
 
         System.out.println("save a new user");
-        um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
-        JsonObject retObj = Json.object().add("user_id", username);
+        User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
+        System.out.println(createdUser);
+        JsonObject retObj = Json.object().add("user_id", createdUser.getId());
         return retObj.toString();
     }
 
@@ -95,7 +101,8 @@ public class UserController {
         ArrayList<User> userList = um.getAllUsers();
         JsonArray retJsonArr = Json.array();
         for(User a : userList) {
-            JsonObject obj = Json.object().add("username", a.getId())
+            JsonObject obj = Json.object().add("user_id", a.getId())
+                .add("username", a.getUsername())
                 .add("email", a.getEmail());
             retJsonArr.add(obj);
         }

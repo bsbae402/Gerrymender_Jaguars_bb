@@ -2,12 +2,16 @@ package jaguars.user;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String username;
     private String password;
     private String email;
     private UserRole role;
@@ -15,17 +19,27 @@ public class User {
     public User() {
     }
 
-    public User(String id, String password, String email, UserRole role) {
-        this.id = id;
+    public User(String username, String password, String email, UserRole role) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
     }
 
-    public String getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -55,7 +69,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +

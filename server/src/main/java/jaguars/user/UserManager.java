@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class UserManager {
@@ -16,14 +17,6 @@ public class UserManager {
     public UserManager() {
         // this is temporary...
         users = new HashMap<>();
-//        User bongsung = new User("bong", "sung123", "bs@gmail.com");
-//        User roger = new User("roger", "654321", "roger@abc.com");
-//        User dummy1 = new User("dummy1", "asdf", "asdf@asdf.com");
-//        User dummy2 = new User("dummy2", "qwer", "qwer@qwer.com");
-//        users.put(bongsung.getId(), bongsung);
-//        users.put(roger.getId(), roger);
-//        users.put(dummy1.getId(), dummy1);
-//        users.put(dummy2.getId(), dummy2);
     }
 
     public ArrayList<User> getAllUsers() {
@@ -35,12 +28,17 @@ public class UserManager {
         return allUsers;
     }
 
-    public User findUser(String id) {
-        return userRepository.findOne(id);
+    public User findUserById(int userId) {
+        return userRepository.findOne(userId);
     }
 
-    public void saveUser(String id, String password, String email, UserRole role) {
-        User newUser = new User(id, password, email, role);
-        userRepository.save(newUser);
+    public List<User> findUsersByUsername(String username) {
+        ArrayList<User> userList = (ArrayList<User>) userRepository.findByUsername(username);
+        return userList;
+    }
+
+    public User saveUser(String username, String password, String email, UserRole role) {
+        User newUser = new User(username, password, email, role);
+        return userRepository.save(newUser);    // seems like it returned the created entity
     }
 }
