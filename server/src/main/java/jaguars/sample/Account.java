@@ -1,4 +1,4 @@
-package jaguars.user;
+package jaguars.sample;
 
 
 import javax.persistence.Entity;

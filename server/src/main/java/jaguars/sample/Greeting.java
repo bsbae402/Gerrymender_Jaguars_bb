@@ -1,4 +1,4 @@
-package jaguars.user;
+package jaguars.sample;
 
 public class Greeting {
     private final long id;

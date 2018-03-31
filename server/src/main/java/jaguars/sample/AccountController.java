@@ -1,4 +1,4 @@
-package jaguars.user;
+package jaguars.sample;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
@@ -10,10 +10,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 // We may not need this class. We want to have a request verified first.
 @RestController
@@ -33,47 +31,6 @@ public class AccountController {
         };
     }
 
-    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        System.out.println("login() call");
-        System.out.println("username: " + username);
-        System.out.println("password: " + password);
-        return "{ \"user_id\" : 1, \"user_type\" : 2 }";
-    }
-
-    @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
-    public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
-                         @RequestParam("email") String email) {
-        System.out.println("signup() call");
-        System.out.println("username: " + username);
-        System.out.println("password: " + password);
-        System.out.println("email: " + email);
-        return "{ \"user_id\" : 1 }";
-    }
-
-    @RequestMapping(value = "/user/list/{id}", method = RequestMethod.GET)
-    public String getUser(@PathVariable String id) {
-        System.out.println("getUser() call");
-        // access the DB here
-        return "{ \"username\" : \"bongsung\", \"email\" : \"bong@sung.com\" }";
-    }
-
-    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
-    public String getAllUsers() {
-        System.out.println("getAllUsers() call");
-        // access the DB here
-
-        ArrayList<Account> accountList = am.getAllAccounts();
-        JsonArray retJsonArr = Json.array();
-        for(Account a : accountList) {
-            JsonObject obj = Json.object().add("username", a.getId())
-                .add("email", a.getEmail());
-            retJsonArr.add(obj);
-        }
-        return retJsonArr.toString();
-    }
-
-    //// -- not used for app, delete later
     @RequestMapping(value="/account", method = RequestMethod.POST)
     public void postAccount(@RequestBody Account account) {
         System.out.println("postAccount() call");
@@ -108,7 +65,7 @@ public class AccountController {
 //                "status": 500,
 //                "error": "Internal Server Error",
 //                "exception": "org.springframework.dao.EmptyResultDataAccessException",
-//                "message": "No class jaguars.user.Account entity with id aaa exists!",
+//                "message": "No class jaguars.sample.Account entity with id aaa exists!",
 //                "path": "/accounts/aaa"
 //        }
     }

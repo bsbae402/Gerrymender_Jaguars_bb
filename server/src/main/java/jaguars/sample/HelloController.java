@@ -1,4 +1,4 @@
-package jaguars.user;
+package jaguars.sample;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
