@@ -7,3 +7,5 @@ derby.log
 /bin/
 
 server/.idea
+.classpath
+.project
