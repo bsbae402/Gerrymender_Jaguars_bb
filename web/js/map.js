@@ -4,7 +4,7 @@ $(function() {
 	var openTab = -1,
 		mapWPercent = 50;
 
-	function resize() {
+	function resize() {return;
 		var w = $("#mapbox").width(),
 			h = $("#mapbox").height();
 
@@ -142,6 +142,7 @@ $(function() {
 			},
 			response : (r) => {
 				mapData = r;
+				mapData.state_name = state.state_name;
 
 				mapData.districts.forEach((district) => {
 					district.precincts.forEach((precinct) => {
@@ -154,35 +155,20 @@ $(function() {
 		});
 	}
 
+	// LEAFLET INITIALIZATION
+	var lmap = L.map('map').setView([51.505, -0.09], 13);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	    maxZoom: 18,
+	    id: 'mapbox.streets',
+	    accessToken: 'pk.eyJ1Ijoicm9nZXItdGhhdCIsImEiOiJjamZmazFvdnM0dG1hMndxaGFqcmRiN2ViIn0.6CACaDuW3jp3eZwutrRrWQ'
+	}).addTo(lmap);
+
 	function renderMap() {
 		$("#map").empty();
 
-		$map = $(createSVG("g"));
-		$map.attr("transform", "translate(30, 40)");
-		$("#map").append($map);
+		console.log(mapData);
 
-		mapData.districts.forEach((district) => {
-			district.precincts.forEach((precinct) => {
-				var points = precinct.outline.map((a) => a.x + "," + a.y).join(" ");
-
-				var $poly = $(createSVG("polygon"));
-				$poly.attr("class", "precinct");
-				//$poly.attr("class", "precinct " + ((precinct.voteR > precinct.voteD) ? "blue" : "red"));
-
-				var a = [0, 0, 255],
-					b = [255, 0, 0];
-				var perc = (precinct.voteR / (precinct.voteR + precinct.voteD));
-				for(var i=0;i<b.length;i++)
-					b[i] = Math.round(a[i] + (b[i] - a[i]) * perc);
-				$poly.attr("fill", "rgb(" + b.join(",") + ")");
-
-				$map.append($poly);
-
-				$poly.attr("points", points);
-
-
-			})
-		});
 	}
 
 

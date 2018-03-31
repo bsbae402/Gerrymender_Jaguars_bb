@@ -10,7 +10,7 @@ var API_CALLS = [
         response : function(r={}, data={}) {
             return r;
         },
-        adummy : function(data={}) {
+        _dummy : function(data={}) {
             return {
                 user_id : 0,
                 user_type : 1
@@ -28,7 +28,7 @@ var API_CALLS = [
             return states || [];
         },
         dummy : function(data={}) {
-            return (["New Hampsphire", "Rhode Island", "Ohio"]).map((a) => {
+            return (["New Hampsphire", "Wisconsin", "Ohio"]).map((a) => {
                 var startYear = Math.floor(Math.random() * 4) + 2004,
                     endYear = Math.floor(Math.random() * 6) + 5 + startYear;
                 var years = [];
