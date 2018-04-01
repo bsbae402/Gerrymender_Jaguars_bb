@@ -9,3 +9,6 @@ derby.log
 server/.idea
 .classpath
 .project
+
+.idea
+*.iml
