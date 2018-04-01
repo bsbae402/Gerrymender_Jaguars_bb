@@ -34,8 +34,10 @@ public class StateController {
     }
 
     @RequestMapping(value = "state/get/list", method = RequestMethod.GET)
-    public ArrayList<State> getStateList() {
-        return sm.getAllStates();
+    public String getStateList() {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        return gson.toJson(sm.getAllStates());
     }
 
     @RequestMapping(value = "state/get/name/year", method = RequestMethod.POST)
