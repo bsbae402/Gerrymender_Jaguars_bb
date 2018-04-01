@@ -2,23 +2,31 @@ package jaguars.user;
 
 import jaguars.sample.Account;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class MapProfile {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne
+    private String profileTitle;
+
+    // If we use fetch = FetchType.LAZY, when we try to return a List<MapProfile> as a REST response,
+    // we will see error Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotWritableException
+    // which is from Jackson JSON because it cannot convert nested object.
+
+    // I have decided to use "unidirectional approach"
+    // The reason behind this is to avoid implementation difficulty in bidirectional approach.
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
     private Account account;
 
     public MapProfile() {
     }
 
-    public MapProfile(int id, Account account) {
-        this.id = id;
+    public MapProfile(String profileTitle, Account account) {
+        this.profileTitle = profileTitle;
         this.account = account;
     }
 
@@ -28,6 +36,14 @@ public class MapProfile {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProfileTitle() {
+        return profileTitle;
+    }
+
+    public void setProfileTitle(String profileTitle) {
+        this.profileTitle = profileTitle;
     }
 
     public Account getAccount() {
@@ -42,6 +58,7 @@ public class MapProfile {
     public String toString() {
         return "MapProfile{" +
                 "id=" + id +
+                ", profileTitle='" + profileTitle + '\'' +
                 ", account=" + account +
                 '}';
     }

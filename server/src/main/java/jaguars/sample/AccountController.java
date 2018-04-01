@@ -57,16 +57,6 @@ public class AccountController {
         System.out.println("deleteAccount() call");
         // accountRepository.findOne(id) returns null if it can't find an entity with the id
         System.out.println("response: " + accountRepository.findOne(id));
-        // void CrudRepository.delete()
         accountRepository.delete(id);
-        // if there is no entity with the id, the response body is like:
-//        {
-//            "timestamp": 1521566544622,
-//                "status": 500,
-//                "error": "Internal Server Error",
-//                "exception": "org.springframework.dao.EmptyResultDataAccessException",
-//                "message": "No class jaguars.sample.Account entity with id aaa exists!",
-//                "path": "/accounts/aaa"
-//        }
     }
 }
