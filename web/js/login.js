@@ -1,5 +1,5 @@
 
-$(function() {
+whenReady(function() {
 
 	$(".subtext").click(() => {
 		var $this = $("#app .carousel").toggleClass("a");
@@ -23,6 +23,7 @@ $(function() {
 				pass = $(".login .password").val();
 
 			$(".login .error").removeClass("show");
+
 			APICall({
 				name : "login",
 				data : {
@@ -47,6 +48,42 @@ $(function() {
 			
 		} else {
 
+			var user = $(".signup .username").val(),
+				pass = $(".signup .password").val(),
+				pass2 = $(".signup .password2").val();
+
+			$(".signup .error").removeClass("show");
+
+			if (pass !== pass2) {
+				$(".signup .error").addClass("show").html("The passwords do not match");
+				return;
+			}
+
+			APICall({
+				name : "signup",
+				data : {
+					username : user,
+					password : pass,
+				},
+				response : (r) => {
+					if (r.error) {
+						$(".signup .error").addClass("show");
+						if (r.error === 1)
+							$(".signup .error").html("Username already exists");
+						else
+							$(".signup .error").html("Unknown error");
+					} else {
+						jset("user", {
+							loggedin : true,
+							username : user,
+							id : r.user_id,
+							type : 1,
+						});
+
+						window.location.href = "/account.html";
+					}
+				}
+			});
 
 		}
 	});
