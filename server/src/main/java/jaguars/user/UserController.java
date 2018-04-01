@@ -88,10 +88,34 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/list/{id}", method = RequestMethod.GET)
-    public String getUser(@PathVariable String id) {
+    public String getUser(@PathVariable int id) {
         System.out.println("getUser() call");
-        // access the DB here
-        return "{ \"username\" : \"bongsung\", \"email\" : \"bong@sung.com\" }";
+        User user = um.findUserById(id);
+        if(user == null) {
+            JsonObject retObj = Json.object().add("error", 1)
+                    .add("user_id", -1)
+                    .add("username", "")
+                    .add("email", "")
+                    .add("role", -1);
+            return retObj.toString();
+        }
+
+        JsonObject retObj = Json.object().add("error", 0)
+                .add("user_id", user.getId())
+                .add("username", user.getUsername())
+                .add("email", user.getEmail());
+        switch (user.getRole()) {
+            case USER:
+                retObj.add("user_type", 1);
+                break;
+            case ADMIN:
+                retObj.add("user_type", 2);
+                break;
+            default: // should not reach here
+                retObj.add("user_type", 0);
+                break;
+        }
+        return retObj.toString();
     }
 
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
