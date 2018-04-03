@@ -3,6 +3,7 @@ package jaguars.map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -13,6 +14,9 @@ public class StateManager {
 
     @Autowired
     private StateRepository sr;
+
+    @Autowired
+    private HttpSession httpSession;
 
     public StateManager() {
         states = new TreeMap<Integer, State>();
@@ -33,5 +37,17 @@ public class StateManager {
 
     public List<State> getStatesByNameYear(String name, int electionYear) {
         return sr.findByNameAndElectionYear(name, electionYear);
+    }
+
+    public void setSessionState(State state) {
+        System.out.println("setSessionState() call");
+        System.out.println("session id: " + httpSession.getId());
+        httpSession.setAttribute("state", (Object)state);
+    }
+
+    public State getSessionsState() {
+        System.out.println("getSessionState() call");
+        System.out.println("session id: " + httpSession.getId());
+        return (State)httpSession.getAttribute("state");
     }
 }

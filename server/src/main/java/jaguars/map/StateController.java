@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +55,19 @@ public class StateController {
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
         return gson.toJson(firstOne);
+    }
+
+    @RequestMapping(value = "session/set/state", method = RequestMethod.POST)
+    public void setSessionStateById(@RequestParam("state_id") int stateId){
+        State state = sm.getState(stateId);
+        sm.setSessionState(state);
+    }
+
+    @RequestMapping(value = "session/get/state", method = RequestMethod.GET)
+    public String getSessionStateById(){
+        State state = sm.getSessionsState();
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        return gson.toJson(state);
     }
 }
