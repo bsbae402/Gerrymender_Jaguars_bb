@@ -10,6 +10,9 @@ function mapArrayToCoords(arr) {
     return a;
 }
 
+function pdelete(key) {
+    localStorage.removeItem(key);
+}
 function pget(key, defaultValue=0) {
     var value = localStorage.getItem(key);
     if (value == null)
@@ -20,7 +23,15 @@ function pgetint(key, defaultValue=0) {
     return parseInt(pget(key, defaultValue));
 }
 function jget(key, defaultValue={}) {
-    return JSON.parse(pget(key, defaultValue));
+    var value = localStorage.getItem(key);
+    if (value == null)
+        return defaultValue;
+    try {
+        value = JSON.parse(value);
+    } catch(e) {
+        value = defaultValue;
+    }
+    return value;
 }
 function pset(key, value=0) {
     localStorage.setItem(key, value);

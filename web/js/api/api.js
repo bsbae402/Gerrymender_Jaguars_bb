@@ -18,6 +18,38 @@ var API_CALLS = [
             }
         },
     },
+    {
+        name : "signup",
+        method : "POST",
+        url : "user/signup",
+        response : function(r={}, data={}) {
+            return r;
+        },
+        dummy : function(data={}) {
+            return {
+                user_id : 0,
+                error : 0,
+            }
+        },
+    },
+    {
+        name : "getusers",
+        method : "GET",
+        url : "user/list",
+        response : function(r={}, data={}) {
+            return r;
+        },
+        dummy : function(data={}) {
+            var a = [];
+            for(var i=5;i<10;i++) {
+                a.push({
+                    user_id : i,
+                    username : "User" + i,
+                    email : "Randomemail"+i+"@gmail.com",
+                })
+            }
+        },
+    },
 
     // states
     {
