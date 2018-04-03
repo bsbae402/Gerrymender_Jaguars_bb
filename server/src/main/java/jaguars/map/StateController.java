@@ -58,9 +58,13 @@ public class StateController {
     }
 
     @RequestMapping(value = "session/set/state", method = RequestMethod.POST)
-    public void setSessionStateById(@RequestParam("state_id") int stateId){
+    public String setSessionStateById(@RequestParam("state_id") int stateId){
         State state = sm.getState(stateId);
         sm.setSessionState(state);
+        State actualSessionState = sm.getSessionsState();
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        return gson.toJson(actualSessionState);
     }
 
     @RequestMapping(value = "session/get/state", method = RequestMethod.GET)

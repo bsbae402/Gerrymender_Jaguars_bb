@@ -24,7 +24,7 @@ public class VotingDataStateController {
         return gson.toJson(vdsl);
     }
 
-    @RequestMapping(value = "/votingdatastate/get/stateid", method = RequestMethod.POST)
+    @RequestMapping(value = "/votingdatastate/get/bystateid", method = RequestMethod.POST)
     public String getVotingDataStateByStateId(@RequestParam("state_id") int stateId) {
         List<VotingDataState> vdsl = vdsm.getVotingDataStateListByStateId(stateId);
         Gson gson = new GsonBuilder()
