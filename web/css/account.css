@@ -1,0 +1,19 @@
+
+#account {
+	width: 100%;
+	text-align: center;
+	min-height:100%;
+	background: #fffff5;
+}
+#account .container {
+	text-align: center;
+	display: inline-block;
+	width:900px;
+	max-width:calc(100% - 40px);
+	text-align: left;
+	padding:25px 0 20px;
+}
+#account h1 {
+	font-weight:400;
+}
+

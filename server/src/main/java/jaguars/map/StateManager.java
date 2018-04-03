@@ -1,41 +1,53 @@
 package jaguars.map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 @Service
 public class StateManager {
     TreeMap<Integer, State> states;
 
+    @Autowired
+    private StateRepository sr;
+
+    @Autowired
+    private HttpSession httpSession;
+
     public StateManager() {
         states = new TreeMap<Integer, State>();
-        State nh1 = new State(0, "New Hampshire", 2016);
-        State nh2 = new State(1, "New Hampshire", 2014);
-        State oh1 = new State(100, "Ohio", 2016);
-        State oh2 = new State(101, "Ohio", 2014);
-        State wi1 = new State(201, "Wisconsin", 2016);
-        states.put(nh1.getId(), nh1);
-        states.put(nh2.getId(), nh2);
-        states.put(oh1.getId(), oh1);
-        states.put(oh2.getId(), oh2);
-        states.put(wi1.getId(), wi1);
     }
 
     public ArrayList<State> getAllStates() {
-        return new ArrayList<State>(states.values());
+        ArrayList<State> allStates = new ArrayList<>();
+        for(State s : sr.findAll()) {
+            System.out.println(s);
+            allStates.add(s);
+        }
+        return allStates;
     }
 
     public State getState(int stateId) {
-        return states.get(stateId);
+        return sr.findOne(stateId);
     }
 
-    public State getStateByNameYear(String name, int year) {
-        for(State s : states.values()) {
-            if(s.getName().equals(name) && s.getYear() == year)
-                return s;
-        }
-        return null;
+    public List<State> getStatesByNameYear(String name, int electionYear) {
+        return sr.findByNameAndElectionYear(name, electionYear);
+    }
+
+    public void setSessionState(State state) {
+        System.out.println("setSessionState() call");
+        System.out.println("session id: " + httpSession.getId());
+        httpSession.setAttribute("state", (Object)state);
+    }
+
+    public State getSessionsState() {
+        System.out.println("getSessionState() call");
+        System.out.println("session id: " + httpSession.getId());
+        return (State)httpSession.getAttribute("state");
     }
 }

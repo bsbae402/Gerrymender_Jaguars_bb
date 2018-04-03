@@ -1,4 +1,4 @@
-.loading {
+#loading {
     position: fixed;
     left:0;
     top:0;
@@ -7,13 +7,13 @@
     z-index:101;
     background:#fafafa;
 }
-.loading.hide {
+#loading.hide {
     display: none;
 }
 
 @keyframes loading-spinner1 { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-.loading::before {
+#loading::before {
     position: absolute;
     left:48%;
     top:48%;

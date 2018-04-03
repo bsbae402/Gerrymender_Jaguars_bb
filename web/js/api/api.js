@@ -32,6 +32,24 @@ var API_CALLS = [
             }
         },
     },
+    {
+        name : "getusers",
+        method : "GET",
+        url : "user/list",
+        response : function(r={}, data={}) {
+            return r;
+        },
+        dummy : function(data={}) {
+            var a = [];
+            for(var i=5;i<10;i++) {
+                a.push({
+                    user_id : i,
+                    username : "User" + i,
+                    email : "Randomemail"+i+"@gmail.com",
+                })
+            }
+        },
+    },
 
     // states
     {

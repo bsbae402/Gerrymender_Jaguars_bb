@@ -1,15 +1,13 @@
 package jaguars.map;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class State {
+public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String name;
     private int population;
     private int electionYear;
@@ -17,16 +15,21 @@ public class State {
     private double perimeter;
     private String geoId;
 
-    public State() {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "state_id")
+    private State state;
+
+    public District() {
     }
 
-    public State(String name, int population, int electionYear, double area, double perimeter, String geoId) {
+    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, State state) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
         this.area = area;
         this.perimeter = perimeter;
         this.geoId = geoId;
+        this.state = state;
     }
 
     public int getId() {
@@ -85,9 +88,17 @@ public class State {
         this.geoId = geoId;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
-        return "State{" +
+        return "District{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", population=" + population +
@@ -95,6 +106,7 @@ public class State {
                 ", area=" + area +
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
+                ", state=" + state +
                 '}';
     }
 }
