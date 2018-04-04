@@ -21,8 +21,7 @@ public class State {
     public State() {
     }
 
-    public State(int id, String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes) {
-        this.id = id;
+    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;

@@ -3,7 +3,7 @@ package jaguars.map;
 import javax.persistence.*;
 
 @Entity
-public class District {
+public class Precinct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -15,15 +15,16 @@ public class District {
     private double perimeter;
     private String geoId;
     private int totalVotes;
+    private boolean isBorder;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "state_id")
-    private State state;
+    @JoinColumn(name = "district_id")
+    private District district;
 
-    public District() {
+    public Precinct() {
     }
 
-    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, State state) {
+    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean isBorder, District district) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -31,7 +32,8 @@ public class District {
         this.perimeter = perimeter;
         this.geoId = geoId;
         this.totalVotes = totalVotes;
-        this.state = state;
+        this.isBorder = isBorder;
+        this.district = district;
     }
 
     public int getId() {
@@ -98,17 +100,25 @@ public class District {
         this.totalVotes = totalVotes;
     }
 
-    public State getState() {
-        return state;
+    public boolean isBorder() {
+        return isBorder;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setBorder(boolean border) {
+        isBorder = border;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
     }
 
     @Override
     public String toString() {
-        return "District{" +
+        return "Precinct{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", population=" + population +
@@ -117,7 +127,8 @@ public class District {
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
-                ", state=" + state +
+                ", isBorder=" + isBorder +
+                ", district=" + district +
                 '}';
     }
 }
