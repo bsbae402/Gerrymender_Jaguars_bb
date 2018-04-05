@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class VotingDataStateController {
+public class VotingDataPrecinctController {
     @Autowired
-    private VotingDataStateManager vdsm;
+    private VotingDataPrecinctManager vdpm;
 
-    @RequestMapping(value = "votingdatastate/get/list", method = RequestMethod.GET)
-    public String getAllVotindDataStates() {
-        List<VotingDataState> vdsl = vdsm.getAllVotingDataStates();
+    @RequestMapping(value = "votingdataprecinct/get/list", method = RequestMethod.GET)
+    public String getAllVotindDataPrecincts() {
+        List<VotingDataPrecinct> vdpl = vdpm.getAllVotingDataPreincts();
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vdsl);
+        return gson.toJson(vdpl);
     }
 
-    @RequestMapping(value = "/votingdatastate/get/bystateid", method = RequestMethod.POST)
-    public String getVotingDataStateByStateId(@RequestParam("state_id") int stateId) {
-        List<VotingDataState> vdsl = vdsm.getVotingDataStateListByStateId(stateId);
-        if(vdsl == null) {
+    @RequestMapping(value = "/votingdataprecinct/get/byprecinctid", method = RequestMethod.POST)
+    public String getVotingDataPrecinctByPrecinctId(@RequestParam("precinct_id") int precinctId) {
+        List<VotingDataPrecinct> vdpl = vdpm.getVotingDataPrecinctListByPrecinctId(precinctId);
+        if(vdpl == null) {
             JsonObject retObj = Json.object().add("error", -1);
             return retObj.toString();
         }
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vdsl);
+        return gson.toJson(vdpl);
     }
 }
