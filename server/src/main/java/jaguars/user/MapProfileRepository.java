@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface MapProfileRepository extends CrudRepository<MapProfile, Integer> {
-    public List<MapProfile> findByAccount(Account account);
+    List<MapProfile> findByAccount(Account account);
 }

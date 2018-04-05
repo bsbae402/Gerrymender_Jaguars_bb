@@ -1,14 +1,8 @@
 package jaguars.sample;
 
 
-import jaguars.user.MapProfile;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Account {

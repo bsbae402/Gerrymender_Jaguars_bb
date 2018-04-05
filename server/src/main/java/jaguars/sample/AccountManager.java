@@ -1,6 +1,5 @@
 package jaguars.sample;
 
-import jaguars.user.MapProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +29,14 @@ public class AccountManager {
     }
 
     public void setActiveAccountSession(Account loginedAccount) {
+        System.out.println("setActiveAccountSession() call");
+        System.out.println("session id: " + session.getId());
         session.setAttribute("ActiveAccount", loginedAccount);
     }
 
     public Account getActiveAccountSession() {
+        System.out.println("getActiveAccountSession() call");
+        System.out.println("session id: " + session.getId());
         return (Account) session.getAttribute("ActiveAccount");
     }
 }

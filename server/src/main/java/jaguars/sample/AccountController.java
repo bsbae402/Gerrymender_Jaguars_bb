@@ -1,7 +1,6 @@
 package jaguars.sample;
 
 import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
