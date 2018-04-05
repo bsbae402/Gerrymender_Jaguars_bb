@@ -52,4 +52,30 @@ public class PrecinctController {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
         return gson.toJson(precinct);
     }
+
+    @RequestMapping(value = "borderprecinct/get/bydistrictid", method = RequestMethod.POST)
+    public String getBorderPrecinctsOfDistrict(@RequestParam("district_id") int districtId) {
+        List<Precinct> borderPrecinctsOfDistrict = pm.getBorderPrecinctsOfDistrict(districtId);
+        // in case of not existing district id
+        if(borderPrecinctsOfDistrict == null) {
+            JsonObject retObj = Json.object().add("error", -1);
+            return retObj.toString();
+        }
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        return gson.toJson(borderPrecinctsOfDistrict);
+    }
+
+    @RequestMapping(value = "borderprecinct/get/bystateid", method = RequestMethod.POST)
+    public String getBorderPrecinctsOfState(@RequestParam("state_id") int stateId) {
+        List<Precinct> borderPrecinctsOfState = pm.getBorderPrecinctsOfState(stateId);
+        // in case of not existing state id
+        if(borderPrecinctsOfState == null) {
+            JsonObject retObj = Json.object().add("error", -1);
+            return retObj.toString();
+        }
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        return gson.toJson(borderPrecinctsOfState);
+    }
 }

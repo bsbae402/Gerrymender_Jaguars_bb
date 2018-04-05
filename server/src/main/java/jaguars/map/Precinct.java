@@ -16,6 +16,7 @@ public class Precinct {
     private String geoId;
     private int totalVotes;
     private boolean isBorder;
+    private String code;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "district_id")
@@ -24,7 +25,7 @@ public class Precinct {
     public Precinct() {
     }
 
-    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean isBorder, District district) {
+    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean isBorder, String code, District district) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -33,6 +34,7 @@ public class Precinct {
         this.geoId = geoId;
         this.totalVotes = totalVotes;
         this.isBorder = isBorder;
+        this.code = code;
         this.district = district;
     }
 
@@ -116,6 +118,14 @@ public class Precinct {
         this.district = district;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "Precinct{" +
@@ -128,6 +138,7 @@ public class Precinct {
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
                 ", isBorder=" + isBorder +
+                ", code='" + code + '\'' +
                 ", district=" + district +
                 '}';
     }

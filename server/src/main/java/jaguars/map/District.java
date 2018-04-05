@@ -15,6 +15,7 @@ public class District {
     private double perimeter;
     private String geoId;
     private int totalVotes;
+    private String code;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
@@ -23,7 +24,7 @@ public class District {
     public District() {
     }
 
-    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, State state) {
+    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, State state) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -31,6 +32,7 @@ public class District {
         this.perimeter = perimeter;
         this.geoId = geoId;
         this.totalVotes = totalVotes;
+        this.code = code;
         this.state = state;
     }
 
@@ -106,6 +108,14 @@ public class District {
         this.state = state;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "District{" +
@@ -117,6 +127,7 @@ public class District {
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
+                ", code='" + code + '\'' +
                 ", state=" + state +
                 '}';
     }

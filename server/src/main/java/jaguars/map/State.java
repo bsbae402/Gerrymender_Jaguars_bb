@@ -17,11 +17,12 @@ public class State {
     private double perimeter;
     private String geoId;
     private int totalVotes;
+    private String code;
 
     public State() {
     }
 
-    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes) {
+    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -29,6 +30,7 @@ public class State {
         this.perimeter = perimeter;
         this.geoId = geoId;
         this.totalVotes = totalVotes;
+        this.code = code;
     }
 
     public int getId() {
@@ -95,6 +97,14 @@ public class State {
         this.totalVotes = totalVotes;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "State{" +
@@ -106,6 +116,7 @@ public class State {
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
+                ", code='" + code + '\'' +
                 '}';
     }
 }
