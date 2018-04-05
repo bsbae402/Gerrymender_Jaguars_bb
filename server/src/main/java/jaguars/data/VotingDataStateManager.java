@@ -26,6 +26,8 @@ public class VotingDataStateManager {
 
     public List<VotingDataState> getVotingDataStateListByStateId(int stateId) {
         State state = stateRepository.findOne(stateId);
+        if(state == null)
+            return null;
         return vdsr.findByState(state);
     }
 
