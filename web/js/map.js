@@ -145,23 +145,13 @@ whenReady(function() {
 
 		active.sy = sy;
 
-		console.log(sy);
-		return;
-
 		APICall("getstate",
 			{
-				state_name : state.state_name,
-				year : state.years[0],
+				name : sy.name,
+				year : sy.election_year,
 			})
 			.then((r) => {
 				mapData = r;
-				mapData.state_name = state.state_name;
-
-				mapData.districts.forEach((district) => {
-					district.precincts.forEach((precinct) => {
-						precinct.outline = mapArrayToCoords(precinct.outline);
-					})
-				});
 
 				renderMap();
 			});
@@ -178,7 +168,7 @@ whenReady(function() {
 	}).addTo(lmap);
 
 	function renderMap() {
-		$("#map").empty();
+		//$("#map").empty();
 
 		console.log(mapData);
 

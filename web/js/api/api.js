@@ -103,7 +103,7 @@ var API_CALLS = [
     {
         name : "getstate",
         method : "GET",
-        url : "state/get",
+        url : "state/get/{name}/{year}",
         response : function(r={}, data={}) {
             var states = (r && r.states);
             return states || [];
@@ -208,6 +208,7 @@ var API_CALLS = [
             } else {
 
                 var URL = CALL.url;
+                // add {} replacement swapping from data urls
 
                 $.ajax({
                     url : ENDPOINT + "" + URL,
