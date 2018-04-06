@@ -10,6 +10,13 @@ function mapArrayToCoords(arr) {
     return a;
 }
 
+function randomInt(a, b) {
+    return a + Math.floor(Math.random() * (b-a));
+}
+function randomFloat(a, b) {
+    return a + (Math.random() * (b-a));
+}
+
 function pdelete(key) {
     localStorage.removeItem(key);
 }
