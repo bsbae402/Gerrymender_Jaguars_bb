@@ -55,22 +55,47 @@ var API_CALLS = [
     {
         name : "getstates",
         method : "GET",
-        url : "states/get",
+        url : "state/get/list",
         response : function(r={}, data={}) {
-            var states = (r && r.states);
-            return states || [];
+            var states = {};
+            r.forEach((sy) => {
+                if (!states.hasOwnProperty(sy.name))
+                    states[sy.name] = {
+                        name : sy.name,
+                        years : [],
+                        yearMap : {}
+                    }
+                var state = states[sy.name];
+
+                state.years.push(sy.election_year);
+                state.yearMap[sy.election_year] = sy;
+            });
+            var states2 = [];
+            for (var i in states)
+                if (states.hasOwnProperty(i))
+                    states2.push(states[i]);
+            return states2;
         },
         dummy : function(data={}) {
-            return (["New Hampsphire", "Wisconsin", "Ohio"]).map((a) => {
+            var states = [];
+            (["New Hampsphire", "Wisconsin", "Ohio"]).forEach((a, index) => {
                 var startYear = Math.floor(Math.random() * 4) + 2004,
                     endYear = Math.floor(Math.random() * 6) + 5 + startYear;
                 var years = [];
-                for(var i=startYear;i<=endYear;i++) years.push(i);
-                return {
-                    state_name : a,
-                    years : years,
-                }
+                for(var i=startYear;i<=endYear;i++)
+                    states.push({
+                        id : index * 100 + (i - startYear),
+                        name : a,
+                        population : randomInt(100, 100000),
+                        election_year : i,
+                        area : randomFloat(1000, 50000),
+                        perimeter : randomFloat(1000, 50000),
+                        geoId : "dummy",
+                        total_votes : randomInt(100, 10000),
+                        code : "dummy",
+                    });
             });
+            return states;
         },
     },
 
@@ -142,16 +167,15 @@ var API_CALLS = [
         throw str;
     }
 
-    var APICall = function(opts) {
+    var APICall = function(name="", data={}, opts={}) {
         if (typeof opts != "object") {
             defaultError("Invalid opts, non object, passed to APICall");
             return;
         }
 
         opts = $.extend({
-            name : "",
-            data : {},
-            response : () => {},
+            name : name,
+            data : data,
             error : defaultError,
         }, opts);
 
@@ -161,26 +185,32 @@ var API_CALLS = [
             return;
         }
 
+        var useDummy = false;
+
         if (!ENDPOINT) {
             if (!CALL.dummy) {
                 opts.error("No dummy endpoint for ["+opts.name+"]");
                 return;
             }
+            useDummy = true;
+        } else if (CALL.dummy) {
+            useDummy = true;
+        }
 
-            var data = CALL.dummy(opts.data);
-            opts.response(data);
+        return new Promise(function (resolve=()=>{}, reject=()=>{}) {
 
-        } else {
-
-            if (CALL.dummy) {
+            if (useDummy) {
 
                 var data = CALL.dummy(opts.data);
-                opts.response(data);
+                data = CALL.response(data, opts.data);
+                resolve(data);
 
             } else {
 
+                var URL = CALL.url;
+
                 $.ajax({
-                    url : ENDPOINT + "" + CALL.url,
+                    url : ENDPOINT + "" + URL,
                     method : CALL.method,
                     data : opts.data,
                     success : function(r) {
@@ -192,20 +222,32 @@ var API_CALLS = [
                                 r = CALL.response(r, opts.data);
 
                         } catch (e) {
-                            opts.error("Couldn't parse response for API call ["+opts.name+"]");
+                            reject("Couldn't parse response for API call ["+opts.name+"]");
                         }
 
-                        opts.response(r);
+                        resolve(r);
 
                     },
                     error : function(jqXHR, errorText) {
-                        opts.error("Error for API Call ["+opts.name+"]: " + errorText);
+                        var status = error.status;
+
+                        if (status == 401) {
+                            console.log("Unauthorized");
+                            return;
+                        }
+
+                        reject({
+                            status : status,
+                            text : error.responseText,
+                            string : "Error for API Call ["+opts.name+"]: " + errorText,
+                        });
                     },
                 });
 
             }
 
-        }
+        });
+
 
     }
 

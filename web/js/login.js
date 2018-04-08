@@ -24,13 +24,12 @@ whenReady(function() {
 
 			$(".login .error").removeClass("show");
 
-			APICall({
-				name : "login",
-				data : {
+			APICall("login",
+				{
 					username : user,
 					password : pass,
-				},
-				response : (r) => {
+				})
+				.then((r) => {
 					if (r.error) {
 						$(".login .error").addClass("show");
 					} else {
@@ -43,12 +42,12 @@ whenReady(function() {
 
 						window.location.href = "/map.html";
 					}
-				}
-			});
+				});
 			
 		} else {
 
-			var user = $(".signup .username").val(),
+			var email = $(".signup .email").val(),
+				user = $(".signup .username").val(),
 				pass = $(".signup .password").val(),
 				pass2 = $(".signup .password2").val();
 
@@ -59,13 +58,13 @@ whenReady(function() {
 				return;
 			}
 
-			APICall({
-				name : "signup",
-				data : {
+			APICall("signup",
+				{
 					username : user,
 					password : pass,
-				},
-				response : (r) => {
+					email : email,
+				})
+				.then((r) => {
 					if (r.error) {
 						$(".signup .error").addClass("show");
 						if (r.error === 1)
@@ -82,8 +81,7 @@ whenReady(function() {
 
 						window.location.href = "/account.html";
 					}
-				}
-			});
+				});
 
 		}
 	});

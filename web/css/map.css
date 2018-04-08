@@ -164,6 +164,7 @@
 .sidebox {
     user-select: none;
     overflow:hidden;
+    font-family:"Open Sans";
 }
 .sidebox.left {
     padding-right:2px;
@@ -173,6 +174,7 @@
 }
 
 .sidebox .titletop {
+    font-family: "Blogger Sans";
     position: relative;
     width:100%;
     padding:15px 20px 4px;
@@ -190,7 +192,7 @@
 }
 .sidebox .content {
     height:calc(100% - 56px);
-    padding:15px 20px 15px;
+    padding:12px 22px 15px;
     overflow-y:auto;
 }
 
@@ -212,6 +214,57 @@
     color:#113;
     cursor:default;
 }
+
+.sidebox .label {
+    user-select: none;
+    font-size:15px;
+}
+
+
+#cview .yearbox {
+    margin-top:6px;
+    width:100%;
+    border:1px solid #aaa;
+    box-shadow: inset 0px 0px 1px 1px rgb(0, 0, 0, 0.15);
+    background:#fff;
+    height:80px;
+    overflow-y:auto;
+    overflow-x:hidden;
+
+}
+#cview .yearbox .yearselect {
+    width:100%;
+    padding:1px 6px;
+    height:20px;
+    cursor:pointer;
+    font-size:0;
+}
+#cview .yearbox .yearselect:hover {
+    background:#cef;
+}
+#cview .yearbox .yearselect.active {
+    background:#cef;
+}
+#cview .yearbox .yearselect > div {
+    font-size:13px;
+    display: inline-block;
+}
+#cview .yearbox .yearselect .year {
+    width:80px;
+}
+#cview .yearbox .yearselect .votes {
+    width:90px;
+}
+#cview .yearbox .yearselect .votes::after { content: " votes"; }
+#cview .yearbox .yearselect .population {
+    width:130px;
+}
+#cview .yearbox .yearselect .population::before {
+    content:"/";
+    margin-right:10px;
+}
+#cview .yearbox .yearselect .population::after { content: " people"; }
+
 
 #credistrict .label {
     display: inline-block;

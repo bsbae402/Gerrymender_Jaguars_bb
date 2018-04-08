@@ -1,5 +1,5 @@
 
-$(function() {
+whenReady(function() {
 
 	var openTab = -1,
 		mapWPercent = 50;
@@ -112,35 +112,48 @@ $(function() {
 
 
 	var states;
-	APICall({
-		name : "getstates",
-		response : (r) => {
-			states = r;
-			states.forEach((region) => {
-				$("#mapbox .selectregion .regions").append(
-					$("<div>").addClass("region")
-						.html(region.state_name)
-						.click((e) => {
-							$("#mapbox .selectregion").removeClass("show");
-							selectState(region)
-						})
-					);
-			});
 
-			selectState(states[0]);
-		}
-	});
+	var active = {
+		state : null,
+		sy : null,
+	};
+
+	function selectState(state) {
+		active.state = state;
+
+		$("#cview .yearbox").empty();
+		state.years.forEach((year) => {
+			var $year = $("<div>").addClass("yearselect").attr("year", year);
+			var yearData = state.yearMap[year];
+
+			$year.append(
+				$("<div>").addClass("year").html(year),
+				$("<div>").addClass("votes").html(yearData.total_votes),
+				$("<div>").addClass("population").html(yearData.population),
+				);
+
+			$("#cview .yearbox").append($year);
+		});
+
+		selectSY(state.yearMap[state.years[0]]);
+	}
 
 
 	var mapData;
-	function selectState(state) {
-		APICall({
-			name : "getstate",
-			data : {
+	function selectSY(sy) {
+		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
+
+		active.sy = sy;
+
+		console.log(sy);
+		return;
+
+		APICall("getstate",
+			{
 				state_name : state.state_name,
 				year : state.years[0],
-			},
-			response : (r) => {
+			})
+			.then((r) => {
 				mapData = r;
 				mapData.state_name = state.state_name;
 
@@ -151,9 +164,9 @@ $(function() {
 				});
 
 				renderMap();
-			}
-		});
+			});
 	}
+
 
 	// LEAFLET INITIALIZATION
 	var lmap = L.map('map').setView([51.505, -0.09], 13);
@@ -181,6 +194,21 @@ $(function() {
 
 
 
+	APICall("getstates").then((r) => {
+		states = r;
+		states.forEach((region) => {
+			$("#mapbox .selectregion .regions").append(
+				$("<div>").addClass("region")
+					.html(region.name)
+					.click((e) => {
+						$("#mapbox .selectregion").removeClass("show");
+						selectState(region);
+					})
+				);
+		});
+
+		selectState(states[0]);
+	});
 
 
 
