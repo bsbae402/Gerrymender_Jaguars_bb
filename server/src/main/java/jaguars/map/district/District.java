@@ -1,5 +1,7 @@
 package jaguars.map.district;
 
+import jaguars.map.state.State;
+
 import javax.persistence.*;
 
 @Entity

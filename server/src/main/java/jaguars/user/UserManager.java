@@ -9,15 +9,11 @@ import java.util.List;
 
 @Service
 public class UserManager {
-    HashMap<String, User> users; // we may not use this.
 
     @Autowired
     UserRepository userRepository;
 
-    public UserManager() {
-        // this is temporary...
-        users = new HashMap<>();
-    }
+    public UserManager() {}
 
     public ArrayList<User> getAllUsers() {
         ArrayList<User> allUsers = new ArrayList<>();
