@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
@@ -50,6 +51,7 @@ public class UserController {
             return retObj.toString();
         }
         System.out.println(user);
+        um.setSessionState(user);
         JsonObject retObj = Json.object().add("error", 0)
                 .add("user_id", user.getId());
         switch (user.getRole()) {
@@ -64,6 +66,19 @@ public class UserController {
                 break;
         }
 
+        return retObj.toString();
+    }
+
+    @RequestMapping(value = "/user/logout", method = RequestMethod.POST)
+    public String logout() {
+        int error = 0;
+
+        if (um.getSessionState() != null)
+            um.invalidateSessionState();
+        else
+            error = 1;
+
+        JsonObject retObj = Json.object().add("error", error);
         return retObj.toString();
     }
 

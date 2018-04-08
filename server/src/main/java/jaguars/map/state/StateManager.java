@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 @Service
 public class StateManager {
-    TreeMap<Integer, State> states;
+
 
     @Autowired
     private StateRepository sr;
@@ -18,9 +18,7 @@ public class StateManager {
     @Autowired
     private HttpSession httpSession;
 
-    public StateManager() {
-        states = new TreeMap<Integer, State>();
-    }
+    public StateManager() {}
 
     public ArrayList<State> getAllStates() {
         ArrayList<State> allStates = new ArrayList<>();
