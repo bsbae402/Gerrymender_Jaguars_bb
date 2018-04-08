@@ -1,4 +1,4 @@
-package jaguars.map;
+package jaguars.map.state;
 
 import org.springframework.data.repository.CrudRepository;
 

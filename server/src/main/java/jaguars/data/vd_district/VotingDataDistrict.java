@@ -1,11 +1,12 @@
-package jaguars.data;
+package jaguars.data.vd_district;
 
-import jaguars.map.Precinct;
+import jaguars.data.PoliticalParty;
+import jaguars.map.district.District;
 
 import javax.persistence.*;
 
 @Entity
-public class VotingDataPrecinct {
+public class VotingDataDistrict {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -14,16 +15,16 @@ public class VotingDataPrecinct {
     private int votes;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "precinct_id")
-    private Precinct precinct;
+    @JoinColumn(name = "district_id")
+    private District district;
 
-    public VotingDataPrecinct() {
+    public VotingDataDistrict() {
     }
 
-    public VotingDataPrecinct(PoliticalParty politicalParty, int votes, Precinct precinct) {
+    public VotingDataDistrict(PoliticalParty politicalParty, int votes, District district) {
         this.politicalParty = politicalParty;
         this.votes = votes;
-        this.precinct = precinct;
+        this.district = district;
     }
 
     public int getId() {
@@ -50,21 +51,21 @@ public class VotingDataPrecinct {
         this.votes = votes;
     }
 
-    public Precinct getPrecinct() {
-        return precinct;
+    public District getDistrict() {
+        return district;
     }
 
-    public void setPrecinct(Precinct precinct) {
-        this.precinct = precinct;
+    public void setDistrict(District district) {
+        this.district = district;
     }
 
     @Override
     public String toString() {
-        return "VotingDataState{" +
+        return "VotingDataDistrict{" +
                 "id=" + id +
                 ", politicalParty=" + politicalParty +
                 ", votes=" + votes +
-                ", precinct=" + precinct +
+                ", district=" + district +
                 '}';
     }
 }

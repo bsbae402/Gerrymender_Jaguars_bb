@@ -1,15 +1,15 @@
-package jaguars.map;
+package jaguars.map.precinct;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jaguars.map.district.District;
+
+import javax.persistence.*;
 
 @Entity
-public class State {
+public class Precinct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String name;
     private int population;
     private int electionYear;
@@ -17,12 +17,17 @@ public class State {
     private double perimeter;
     private String geoId;
     private int totalVotes;
+    private boolean isBorder;
     private String code;
 
-    public State() {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "district_id")
+    private District district;
+
+    public Precinct() {
     }
 
-    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code) {
+    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean isBorder, String code, District district) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -30,7 +35,9 @@ public class State {
         this.perimeter = perimeter;
         this.geoId = geoId;
         this.totalVotes = totalVotes;
+        this.isBorder = isBorder;
         this.code = code;
+        this.district = district;
     }
 
     public int getId() {
@@ -97,6 +104,22 @@ public class State {
         this.totalVotes = totalVotes;
     }
 
+    public boolean isBorder() {
+        return isBorder;
+    }
+
+    public void setBorder(boolean border) {
+        isBorder = border;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
     public String getCode() {
         return code;
     }
@@ -107,7 +130,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "State{" +
+        return "Precinct{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", population=" + population +
@@ -116,7 +139,9 @@ public class State {
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
+                ", isBorder=" + isBorder +
                 ", code='" + code + '\'' +
+                ", district=" + district +
                 '}';
     }
 }

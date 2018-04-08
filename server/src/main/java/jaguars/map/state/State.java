@@ -1,13 +1,15 @@
-package jaguars.map;
+package jaguars.map.state;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class District {
+public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String name;
     private int population;
     private int electionYear;
@@ -17,14 +19,10 @@ public class District {
     private int totalVotes;
     private String code;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "state_id")
-    private State state;
-
-    public District() {
+    public State() {
     }
 
-    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, State state) {
+    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -33,7 +31,6 @@ public class District {
         this.geoId = geoId;
         this.totalVotes = totalVotes;
         this.code = code;
-        this.state = state;
     }
 
     public int getId() {
@@ -100,14 +97,6 @@ public class District {
         this.totalVotes = totalVotes;
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
     public String getCode() {
         return code;
     }
@@ -118,7 +107,7 @@ public class District {
 
     @Override
     public String toString() {
-        return "District{" +
+        return "State{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", population=" + population +
@@ -128,7 +117,6 @@ public class District {
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
                 ", code='" + code + '\'' +
-                ", state=" + state +
                 '}';
     }
 }

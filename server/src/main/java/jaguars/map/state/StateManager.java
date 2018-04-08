@@ -1,4 +1,4 @@
-package jaguars.map;
+package jaguars.map.state;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

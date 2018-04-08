@@ -1,9 +1,9 @@
-package jaguars.map;
+package jaguars.map.district;
 
 import javax.persistence.*;
 
 @Entity
-public class Precinct {
+public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -15,17 +15,16 @@ public class Precinct {
     private double perimeter;
     private String geoId;
     private int totalVotes;
-    private boolean isBorder;
     private String code;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "district_id")
-    private District district;
+    @JoinColumn(name = "state_id")
+    private State state;
 
-    public Precinct() {
+    public District() {
     }
 
-    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean isBorder, String code, District district) {
+    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, State state) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -33,9 +32,8 @@ public class Precinct {
         this.perimeter = perimeter;
         this.geoId = geoId;
         this.totalVotes = totalVotes;
-        this.isBorder = isBorder;
         this.code = code;
-        this.district = district;
+        this.state = state;
     }
 
     public int getId() {
@@ -102,20 +100,12 @@ public class Precinct {
         this.totalVotes = totalVotes;
     }
 
-    public boolean isBorder() {
-        return isBorder;
+    public State getState() {
+        return state;
     }
 
-    public void setBorder(boolean border) {
-        isBorder = border;
-    }
-
-    public District getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(District district) {
-        this.district = district;
+    public void setState(State state) {
+        this.state = state;
     }
 
     public String getCode() {
@@ -128,7 +118,7 @@ public class Precinct {
 
     @Override
     public String toString() {
-        return "Precinct{" +
+        return "District{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", population=" + population +
@@ -137,9 +127,8 @@ public class Precinct {
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
-                ", isBorder=" + isBorder +
                 ", code='" + code + '\'' +
-                ", district=" + district +
+                ", state=" + state +
                 '}';
     }
 }

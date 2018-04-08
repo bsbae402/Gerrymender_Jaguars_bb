@@ -1,7 +1,7 @@
-package jaguars.data;
+package jaguars.data.vd_district;
 
-import jaguars.map.District;
-import jaguars.map.DistrictRepository;
+import jaguars.map.district.District;
+import jaguars.map.district.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

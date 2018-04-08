@@ -1,5 +1,6 @@
-package jaguars.map;
+package jaguars.map.district;
 
+import jaguars.map.state.State;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

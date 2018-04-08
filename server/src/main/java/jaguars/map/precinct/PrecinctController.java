@@ -1,10 +1,11 @@
-package jaguars.map;
+package jaguars.map.precinct;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import jaguars.map.district.DistrictManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

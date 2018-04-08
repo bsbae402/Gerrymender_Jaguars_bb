@@ -1,5 +1,9 @@
-package jaguars.map;
+package jaguars.map.precinct;
 
+import jaguars.map.state.State;
+import jaguars.map.state.StateRepository;
+import jaguars.map.district.District;
+import jaguars.map.district.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
