@@ -131,35 +131,61 @@ whenReady(function() {
 				$("<div>").addClass("votes").html(yearData.total_votes),
 				$("<div>").addClass("population").html(yearData.population),
 				);
+			$year.click(function() {
+				var year = $(this).attr("year"),	
+					sy = active.state.yearMap[year];
+
+				selectSY(sy);
+			});
 
 			$("#cview .yearbox").append($year);
 		});
 
-		selectSY(state.yearMap[state.years[0]]);
+		selectSY();
+		//selectSY(state.yearMap[state.years[0]]);
 	}
 
 
 	var mapData;
-	function selectSY(sy) {
-		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
+	function selectSY(sy=null) {
+		if (sy) {
 
-		active.sy = sy;
+			$("#cview .yearbox .yearselect.active").removeClass("active");
+			$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
 
-		APICall("getstate",
-			{
-				name : sy.name,
-				year : sy.election_year,
-			})
-			.then((r) => {
-				mapData = r;
+			active.sy = sy;
+
+			APICall("getstate",
+				{
+					name : sy.name,
+					year : sy.election_year,
+				})
+				.then((r) => {
+					mapData = r;
+
+					renderMap();
+				});
+
+		} else {
+
+			var stateName = active.state.name;
+			stateName = stateName.replace(/ /g, "_");
+
+			$.get("/data/district/" + stateName + ".json", function(r) {
+				mapData = {
+					geojsons : [r]
+				}
 
 				renderMap();
 			});
+
+		}
 	}
 
+	var mapData = null;
 
 	// LEAFLET INITIALIZATION
-	var lmap = L.map('map').setView([51.505, -0.09], 13);
+	var lmap = L.map('map').setView([43.19, -71.572], 7);
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 	    maxZoom: 18,
@@ -167,10 +193,28 @@ whenReady(function() {
 	    accessToken: 'pk.eyJ1Ijoicm9nZXItdGhhdCIsImEiOiJjamZmazFvdnM0dG1hMndxaGFqcmRiN2ViIn0.6CACaDuW3jp3eZwutrRrWQ'
 	}).addTo(lmap);
 
-	function renderMap() {
-		//$("#map").empty();
+	var extraLayers = []
 
-		console.log(mapData);
+	function renderMap() {
+		extraLayers.forEach((extraLayer) => {
+			lmap.removeLayer(extraLayer);
+		});
+		extraLayers = [];
+
+		if (mapData.geojsons) {
+			mapData.geojsons.forEach((geojson) => {
+				var geojsonLayer = L.geoJSON(geojson);
+				extraLayers.push(geojsonLayer);
+				geojsonLayer.addTo(lmap);
+			});
+
+			if (extraLayers.length == 1) {
+				var bounds = extraLayers[0].getBounds();
+				lmap.fitBounds(bounds);
+			}
+		}
+
+
 
 	}
 
