@@ -3,24 +3,25 @@ package jaguars.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class UserManager {
-    HashMap<String, User> users; // we may not use this.
 
     @Autowired
     UserRepository userRepository;
 
-    public UserManager() {
-        // this is temporary...
-        users = new HashMap<>();
-    }
+    @Autowired
+    private HttpSession httpSession;
+
+    public UserManager() {}
 
     public ArrayList<User> getAllUsers() {
         ArrayList<User> allUsers = new ArrayList<>();
+
         for(User u : userRepository.findAll()) {
             System.out.println(u);
             allUsers.add(u);
@@ -41,4 +42,21 @@ public class UserManager {
         User newUser = new User(username, password, email, role);
         return userRepository.save(newUser);    // seems like it returned the created entity
     }
+
+    public void setSessionState(User user) {
+        System.out.println("setSessionState() call");
+        httpSession.setAttribute("User", (Object)user);
+    }
+
+    public User getSessionState() {
+        System.out.println("getSessionState() call");
+        return (User)httpSession.getAttribute("User");
+    }
+
+    public void invalidateSessionState() {
+        System.out.println("invalidateSessionState() call");
+        httpSession.invalidate();
+    }
+
+
 }

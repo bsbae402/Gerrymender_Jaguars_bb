@@ -1,4 +1,4 @@
-package jaguars.data;
+package jaguars.data.vd_state;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class VotingDataDistrictController {
+public class VotingDataStateController {
     @Autowired
-    private VotingDataDistrictManager vddm;
+    private VotingDataStateManager vdsm;
 
-    @RequestMapping(value = "votingdatadistrict/get/list", method = RequestMethod.GET)
-    public String getAllVotingDataDistricts() {
-        List<VotingDataDistrict> vddl = vddm.getAllVotingDataDistricts();
+    @RequestMapping(value = "votingdatastate/get/list", method = RequestMethod.GET)
+    public String getAllVotindDataStates() {
+        List<VotingDataState> vdsl = vdsm.getAllVotingDataStates();
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vddl);
+        return gson.toJson(vdsl);
     }
 
-    @RequestMapping(value = "/votingdatadistrict/get/bydistrictid", method = RequestMethod.POST)
-    public String getVotingDataDistrictsByStateId(@RequestParam("district_id") int districtId) {
-        List<VotingDataDistrict> vddl = vddm.getVotingDataDistrictListByDistrictId(districtId);
-        if(vddl == null) {
+    @RequestMapping(value = "/votingdatastate/get/bystateid", method = RequestMethod.POST)
+    public String getVotingDataStateByStateId(@RequestParam("state_id") int stateId) {
+        List<VotingDataState> vdsl = vdsm.getVotingDataStateListByStateId(stateId);
+        if(vdsl == null) {
             JsonObject retObj = Json.object().add("error", -1);
             return retObj.toString();
         }
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vddl);
+        return gson.toJson(vdsl);
     }
 }

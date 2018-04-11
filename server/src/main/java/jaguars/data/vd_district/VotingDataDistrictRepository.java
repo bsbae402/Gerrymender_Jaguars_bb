@@ -1,6 +1,6 @@
-package jaguars.data;
+package jaguars.data.vd_district;
 
-import jaguars.map.District;
+import jaguars.map.district.District;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package jaguars.data;
+package jaguars.data.vd_state;
 
-import jaguars.map.State;
+import jaguars.map.state.State;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

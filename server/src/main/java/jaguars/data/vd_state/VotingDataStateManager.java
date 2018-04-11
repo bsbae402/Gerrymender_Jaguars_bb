@@ -1,7 +1,7 @@
-package jaguars.data;
+package jaguars.data.vd_state;
 
-import jaguars.map.State;
-import jaguars.map.StateRepository;
+import jaguars.map.state.State;
+import jaguars.map.state.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

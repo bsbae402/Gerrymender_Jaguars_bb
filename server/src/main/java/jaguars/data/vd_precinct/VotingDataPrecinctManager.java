@@ -1,7 +1,7 @@
-package jaguars.data;
+package jaguars.data.vd_precinct;
 
-import jaguars.map.Precinct;
-import jaguars.map.PrecinctRepository;
+import jaguars.map.precinct.Precinct;
+import jaguars.map.precinct.PrecinctRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

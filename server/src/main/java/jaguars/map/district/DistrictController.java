@@ -1,4 +1,4 @@
-package jaguars.map;
+package jaguars.map.district;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
@@ -18,9 +18,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.util.List;
 
 @RestController
-public class StateController {
+public class DistrictController {
     @Autowired
-    private StateManager sm;
+    private DistrictManager dm;
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -32,44 +32,38 @@ public class StateController {
         };
     }
 
-    @RequestMapping(value = "state/get/list", method = RequestMethod.GET)
-    public String getStateList() {
+    @RequestMapping(value = "district/get/list", method = RequestMethod.GET)
+    public String getAllDistricts() {
+        System.out.println("getAllDistricts() call");
+        List<District> districts = dm.getAllDistricts();
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(sm.getAllStates());
+        return gson.toJson(districts);
     }
 
-    @RequestMapping(value = "state/get/name/year", method = RequestMethod.POST)
-    public String getStateByNameYear(@RequestParam("name") String name, @RequestParam("year") int year) {
-        List<State> foundStates = sm.getStatesByNameYear(name, year);
-        if(foundStates.size() < 1){
+    @RequestMapping(value = "district/get/bystateid", method = RequestMethod.POST)
+    public String getDistrictListByStateId(@RequestParam("state_id") int stateId) {
+        System.out.println("getDistrictListByStateId() call");
+        List<District> districtList = dm.getDistrictListByStateId(stateId);
+        if(districtList == null) {
             JsonObject retObj = Json.object().add("error", -1);
             return retObj.toString();
         }
-        if(foundStates.size() > 1)
-            System.out.println("Multiple states found for given name and year!!!");
-
-        State firstOne = foundStates.get(0);
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(firstOne);
+        return gson.toJson(districtList);
     }
 
-    @RequestMapping(value = "session/set/state", method = RequestMethod.POST)
-    public String setSessionStateById(@RequestParam("state_id") int stateId){
-        State state = sm.getState(stateId);
-        sm.setSessionState(state);
-        State actualSessionState = sm.getSessionsState();
+    @RequestMapping(value = "district/get/byid", method = RequestMethod.POST)
+    public String getDistrictById(@RequestParam("district_id") int districtId) {
+        System.out.println("getDistrictById() call");
+        District district = dm.getDistrictById(districtId);
+        if(district == null) {
+            JsonObject retObj = Json.object().add("error", -1);
+            return retObj.toString();
+        }
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(actualSessionState);
-    }
-
-    @RequestMapping(value = "session/get/state", method = RequestMethod.GET)
-    public String getSessionStateById(){
-        State state = sm.getSessionsState();
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(state);
+        return gson.toJson(district);
     }
 }

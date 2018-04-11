@@ -1,4 +1,4 @@
-package jaguars.user;
+package jaguars.user.map_profile;
 
 import jaguars.sample.Account;
 import jaguars.sample.AccountManager;

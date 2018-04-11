@@ -1,11 +1,12 @@
-package jaguars.data;
+package jaguars.data.vd_state;
 
-import jaguars.map.District;
+import jaguars.data.PoliticalParty;
+import jaguars.map.state.State;
 
 import javax.persistence.*;
 
 @Entity
-public class VotingDataDistrict {
+public class VotingDataState {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -14,16 +15,16 @@ public class VotingDataDistrict {
     private int votes;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "district_id")
-    private District district;
+    @JoinColumn(name = "state_id")
+    private State state;
 
-    public VotingDataDistrict() {
+    public VotingDataState() {
     }
 
-    public VotingDataDistrict(PoliticalParty politicalParty, int votes, District district) {
+    public VotingDataState(PoliticalParty politicalParty, int votes, State state) {
         this.politicalParty = politicalParty;
         this.votes = votes;
-        this.district = district;
+        this.state = state;
     }
 
     public int getId() {
@@ -50,21 +51,21 @@ public class VotingDataDistrict {
         this.votes = votes;
     }
 
-    public District getDistrict() {
-        return district;
+    public State getState() {
+        return state;
     }
 
-    public void setDistrict(District district) {
-        this.district = district;
+    public void setState(State state) {
+        this.state = state;
     }
 
     @Override
     public String toString() {
-        return "VotingDataDistrict{" +
+        return "VotingDataState{" +
                 "id=" + id +
                 ", politicalParty=" + politicalParty +
                 ", votes=" + votes +
-                ", district=" + district +
+                ", state=" + state +
                 '}';
     }
 }

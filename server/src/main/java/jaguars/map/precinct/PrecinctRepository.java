@@ -1,5 +1,6 @@
-package jaguars.map;
+package jaguars.map.precinct;
 
+import jaguars.map.district.District;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

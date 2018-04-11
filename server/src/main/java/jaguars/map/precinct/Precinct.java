@@ -1,4 +1,6 @@
-package jaguars.map;
+package jaguars.map.precinct;
+
+import jaguars.map.district.District;
 
 import javax.persistence.*;
 
