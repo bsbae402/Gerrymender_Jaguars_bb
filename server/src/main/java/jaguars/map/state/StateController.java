@@ -39,7 +39,7 @@ public class StateController {
         return gson.toJson(sm.getAllStates());
     }
 
-    @RequestMapping(value = "state/get/name/year", method = RequestMethod.POST)
+    @RequestMapping(value = "state/get/byname/byyear", method = RequestMethod.POST)
     public String getStateByNameYear(@RequestParam("name") String name, @RequestParam("year") int year) {
         List<State> foundStates = sm.getStatesByNameYear(name, year);
         if(foundStates.size() < 1){
@@ -66,7 +66,7 @@ public class StateController {
     }
 
     @RequestMapping(value = "session/get/state", method = RequestMethod.GET)
-    public String getSessionStateById(){
+    public String getSessionState(){
         State state = sm.getSessionsState();
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
