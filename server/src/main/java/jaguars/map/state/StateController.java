@@ -39,6 +39,13 @@ public class StateController {
         return gson.toJson(sm.getAllStates());
     }
 
+    @RequestMapping(value = "state/get/list/byyear", method = RequestMethod.POST)
+    public String getStateListByYear(@RequestParam("year") int year) {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        return gson.toJson(sm.getStatesByYear(year));
+    }
+
     @RequestMapping(value = "state/get/byname/byyear", method = RequestMethod.POST)
     public String getStateByNameYear(@RequestParam("name") String name, @RequestParam("year") int year) {
         List<State> foundStates = sm.getStatesByNameYear(name, year);

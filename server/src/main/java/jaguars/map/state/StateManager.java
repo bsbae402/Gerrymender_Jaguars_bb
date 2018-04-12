@@ -32,7 +32,12 @@ public class StateManager {
     }
 
     public List<State> getStatesByNameYear(String name, int electionYear) {
+        // returning empty list if there are no matches.
         return sr.findByNameAndElectionYear(name, electionYear);
+    }
+
+    public List<State> getStatesByYear(int electionYear) {
+        return sr.findByElectionYear(electionYear);
     }
 
     public void setSessionState(State state) {
