@@ -10,8 +10,6 @@ import java.util.TreeMap;
 
 @Service
 public class StateManager {
-
-
     @Autowired
     private StateRepository sr;
 
@@ -47,5 +45,15 @@ public class StateManager {
         System.out.println("getSessionState() call");
         System.out.println("session id: " + httpSession.getId());
         return (State)httpSession.getAttribute("state");
+    }
+
+    public List<String> getAllStateCodes() {
+        List<State> allStates = new ArrayList<>();
+        List<String> stateCodes = new ArrayList<>();
+        for(State s : sr.findAll()) {
+            if(!stateCodes.contains(s.getCode()))
+                stateCodes.add(s.getCode());
+        }
+        return stateCodes;
     }
 }
