@@ -76,7 +76,7 @@ var API_CALLS = [
                     states2.push(states[i]);
             return states2;
         },
-        dummy : function(data={}) {
+        _dummy : function(data={}) {
             var states = [];
             (["New Hampshire", "Wisconsin", "Ohio"]).forEach((a, index) => {
                 var startYear = Math.floor(Math.random() * 4) + 2004,
