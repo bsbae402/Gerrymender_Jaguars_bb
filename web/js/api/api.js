@@ -19,6 +19,14 @@ var API_CALLS = [
         },
     },
     {
+        name : "logout",
+        method : "POST",
+        url : "user/logout",
+        response : function(r={}, data={}) {
+            return r;
+        },
+    },
+    {
         name : "signup",
         method : "POST",
         url : "user/signup",
@@ -51,7 +59,7 @@ var API_CALLS = [
         },
     },
 
-    // states
+    // states/districts/precincts
     {
         name : "getstates",
         method : "GET",
@@ -98,63 +106,19 @@ var API_CALLS = [
             return states;
         },
     },
-
-    // state
     {
-        name : "getstate",
-        method : "GET",
-        url : "state/get/{name}/{year}",
-        response : function(r={}, data={}) {
-            var states = (r && r.states);
-            return states || [];
-        },
-        dummy : function(data={}) {
-            if (data.state_name == "Ohio") {
-                var districts = [];
-                for(var i=0;i<8;i++) {
-                    var precincts = [];
-                    for(var j=0;j<8;j++) {
-                        var r = Math.floor(Math.random() * 5000) + 10;
-                        var d = Math.floor(Math.random() * 5000) + 10;
-                        precincts.push({
-                            name : "Random " + i + " " + j,
-                            voteR : r,
-                            voteD : d,
-                            outline : [
-                                i * 48, j * 48, i * 48 + 48, j * 48,
-                                i * 48 + 48, j * 48 + 48, i * 48, j * 48 + 48
-                            ]
-                        })
-                    }
-                    districts.push({
-                        precincts,
-                    })
-                }
-                return {
-                    districts,
-                }
-            }
-            return {
-                districts : [
-                    {
-                        precincts: [
-                            {
-                                name: "Whatever",
-                                voteR : 500,
-                                voteD : 100,
-                                outline: [10, 30, 90, 30, 90, 110, 100, 130, 0, 130, 0, 50]
-                            },
-                            {
-                                name: "Whatever",
-                                voteR : 100,
-                                voteD : 500,
-                                outline: [110, 50, 190, 50, 190, 140, 200, 180, 100, 130, 140, 60]
-                            },
-                        ]
-                    }
-                ]
-            };
-        },
+        name : "getdistricts",
+        method : "POST",
+        url : "/district/get/bystateid",
+        response : (r, data) => r,
+    },
+
+    // geojson
+    {
+        name : "getdistrictsgeojson",
+        method : "POST",
+        url : "/geojson/district/bystateid",
+        response : (r, data) => r,
     },
 
 ];

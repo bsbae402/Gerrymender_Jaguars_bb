@@ -19,6 +19,7 @@
 		<script src="js/api/api.js"></script>
 
 		<script src="js/svg.js"></script>
+		<script src="js/leaflet.js"></script>
 		<script src="js/map.js"></script>
 
 
@@ -43,11 +44,7 @@
 				<div class="selectregion t3">
 					<h1>Select a State</h1>
 					<div class="regions">
-						<!--
-						<div class="region">New Hampshire</div>
-						<div class="region">Ohio</div>
-						<div class="region">Rhode Island</div>
-						-->
+						
 					</div>
 
 					<div class="x">x</div>
@@ -68,6 +65,61 @@
 					<div class="label">Select a year</div>
 
 					<div class="yearbox"></div>
+
+					<div class="infoselects">
+						<div class="infoselect" info="syinfo">State</div>
+						<div class="infoselect" info="dinfo">District</div>
+						<div class="infoselect" info="pinfo">Precinct</div>
+					</div>
+
+					<div class="infos">
+
+						<div class="info syinfo">
+							<div class="lrfield statename">
+								<div class="left">State Name</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield year">
+								<div class="left">Year</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield population">
+								<div class="left">Population</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield area">
+								<div class="left">Area</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield perimeter">
+								<div class="left">Perimeter</div>
+								<div class="right"></div>
+							</div>
+						</div>
+
+						<div class="info dinfo">
+							<div class="lrfield statename">
+								<div class="left">State Name</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield year">
+								<div class="left">Year</div>
+								<div class="right"></div>
+							</div>
+						</div>
+
+						<div class="info pinfo">
+							<div class="lrfield statename">
+								<div class="left">State Name</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield year">
+								<div class="left">Year</div>
+								<div class="right"></div>
+							</div>
+						</div>
+
+					</div>
 
 				</div>
 

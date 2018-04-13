@@ -116,7 +116,32 @@ whenReady(function() {
 	var active = {
 		state : null,
 		sy : null,
+		districts : null,
+		district : null,
+		precincts : null,
+		precinct : null,
 	};
+
+	function loadStates() {
+		APICall("getstates").then((r) => {
+			states = r;
+			states.forEach((region) => {
+				$("#mapbox .selectregion .regions").append(
+					$("<div>").addClass("region")
+						.html(region.name)
+						.click((e) => {
+							$("#mapbox .selectregion").removeClass("show");
+							selectState(region);
+						})
+					);
+			});
+
+			selectState(states[0]);
+		});
+
+		$("#cview .infoselects .infoselect").removeClass("ok active");
+		$("#cview .infos .info").removeClass("active");
+	}
 
 	function selectState(state) {
 		active.state = state;
@@ -141,115 +166,64 @@ whenReady(function() {
 			$("#cview .yearbox").append($year);
 		});
 
-		selectSY();
-		//selectSY(state.yearMap[state.years[0]]);
+		selectSY(state.yearMap[state.years[0]]);
 	}
 
+	$("#cview .infoselects .infoselect").click(function() {
+		if (!$(this).hasClass("ok") || $(this).hasClass("active"))
+			return;
 
-	var mapData;
-	function selectSY(sy=null) {
-		if (sy) {
-
-			$("#cview .yearbox .yearselect.active").removeClass("active");
-			$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
-
-			active.sy = sy;
-
-			APICall("getstate",
-				{
-					name : sy.name,
-					year : sy.election_year,
-				})
-				.then((r) => {
-					mapData = r;
-
-					renderMap();
-				});
-
-		} else {
-
-			var stateName = active.state.name;
-			stateName = stateName.replace(/ /g, "_");
-
-			$.get("/data/district/" + stateName + ".json", function(r) {
-				mapData = {
-					geojsons : [r]
-				}
-
-				renderMap();
-			});
-
-		}
-	}
-
-	var mapData = null;
-
-	// LEAFLET INITIALIZATION
-	var lmap = L.map('map').setView([43.19, -71.572], 7);
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	    maxZoom: 18,
-	    id: 'mapbox.streets',
-	    accessToken: 'pk.eyJ1Ijoicm9nZXItdGhhdCIsImEiOiJjamZmazFvdnM0dG1hMndxaGFqcmRiN2ViIn0.6CACaDuW3jp3eZwutrRrWQ'
-	}).addTo(lmap);
-
-	var extraLayers = []
-
-	function renderMap() {
-		extraLayers.forEach((extraLayer) => {
-			lmap.removeLayer(extraLayer);
-		});
-		extraLayers = [];
-
-		if (mapData.geojsons) {
-			mapData.geojsons.forEach((geojson) => {
-				var geojsonLayer = L.geoJSON(geojson);
-				extraLayers.push(geojsonLayer);
-				geojsonLayer.addTo(lmap);
-			});
-
-			if (extraLayers.length == 1) {
-				var bounds = extraLayers[0].getBounds();
-				lmap.fitBounds(bounds);
-			}
-		}
-
-
-
-	}
-
-
-
-
-
-
-
-
-
-
-
-	APICall("getstates").then((r) => {
-		states = r;
-		states.forEach((region) => {
-			$("#mapbox .selectregion .regions").append(
-				$("<div>").addClass("region")
-					.html(region.name)
-					.click((e) => {
-						$("#mapbox .selectregion").removeClass("show");
-						selectState(region);
-					})
-				);
-		});
-
-		selectState(states[0]);
+		var show = $(this).attr("info");
+		console.log(show);
 	});
 
 
+	function selectSY(sy) {
+		$("#cview .infoselects [info=syinfo]").addClass("ok active");
+		$("#cview .infos .syinfo").addClass("active");
 
+		$("#cview .syinfo .statename .right").html(sy.name);
+		$("#cview .syinfo .year .right").html(sy.election_year);
+		$("#cview .syinfo .population .right").html(sy.population);
+		$("#cview .syinfo .area .right").html(sy.area + " sq mi");
+		$("#cview .syinfo .perimeter .right").html(sy.perimeter + " mi");
 
+		$("#cview .yearbox .yearselect.active").removeClass("active");
+		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
 
+		if (active.sy != sy) {
 
+			APICall("getdistrictsgeojson",
+				{
+					state_id : sy.id,
+				})
+				.then((r) => {
+					map.cleanLayers();
+
+					map.addGeoJSON(r);
+
+					map.fitBounds();
+
+					APICall("getdistricts",
+						{
+							state_id : sy.id,
+						})
+						.then((r) => {
+							active.districts = r;
+							console.log(active.districts)
+						});
+
+				});
+
+		}
+
+		active.sy = sy;
+	}
+
+	var map = new LeafletMap();
+
+	map.init("map");
+
+	loadStates();
 
 });
-
-

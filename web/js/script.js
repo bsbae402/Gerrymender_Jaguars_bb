@@ -31,8 +31,10 @@
         }
 
         $("header .logout").click(function() {
-            pdelete("user");
-            window.location.href = "/login.html";
+            APICall("logout").then((r) => {
+                pdelete("user");
+                window.location.href = "/login.html";
+            })
         });
 
     });

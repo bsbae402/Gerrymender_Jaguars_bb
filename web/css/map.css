@@ -266,6 +266,65 @@
 #cview .yearbox .yearselect .population::after { content: " people"; }
 
 
+
+#cview .infoselects {
+    width: calc(100% - 60px);
+    margin-top:16px;
+    border-bottom:1px solid #000;
+    padding-bottom:4px;
+}
+#cview .infoselects .infoselect {
+    display: inline-block;
+    margin-left:3px;
+    margin-right:20px;
+    color:#777;
+    cursor:not-allowed;
+}
+#cview .infoselects .infoselect.ok {
+    color:#000;
+    cursor:pointer;
+}
+#cview .infoselects .infoselect.ok.active {
+    color:#007;
+}
+
+#cview .infos {
+
+}
+#cview .infos .info {
+    margin-top:12px;
+    display: none;
+}
+#cview .infos .info.active {
+    display: block;
+}
+
+
+
+#cview .syinfo {
+    padding:0 5px;
+}
+#cview .syinfo .lrfield {
+    width: 100%;
+    display: block;
+    font-size: 0;
+    margin-top:7px;
+}
+#cview .syinfo .lrfield > div {
+    display: inline-block;
+    width: 130px;
+    font-size:15px;
+}
+#cview .syinfo .lrfield .left {
+    font-weight: 600;
+}
+#cview .syinfo .lrfield .right {
+    display: inline-block;
+    width: calc(100% - 130px);
+}
+
+
+
 #credistrict .label {
     display: inline-block;
 }
