@@ -4,6 +4,11 @@ public class AppConstants {
     public static final int[] CENSUS_YEARS = {1990, 2000, 2010};
     public static final String[] STATE_CODES = {"OH", "NH", "WI"};
 
+    // Algorithm
+    public static final double DEFAULT_COMPACT_WEIGHT_PP = 1.0;
+    public static final double DEAFULT_COMPACT_WEIGHT_SCH = 1.0;
+    public static final double DEFAULT_POPULATION_THRESHOLD = 0.01;
+
     // API JSON names
     public static final String JSON_NAME_VOTING_DATA = "voting_data";
 

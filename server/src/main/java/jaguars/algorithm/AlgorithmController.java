@@ -11,7 +11,7 @@ public class AlgorithmController {
     @Autowired
     private Algorithm algorithm;
 
-    @RequestMapping(value = "/alogirhtm/start", method = RequestMethod.GET)
+    @RequestMapping(value = "/algorithm/start", method = RequestMethod.GET)
     public String startRedistrictAlgorithm() {
         algorithm.mainLogic();
 
