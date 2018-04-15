@@ -27,7 +27,12 @@ public class VotingDataPrecinct {
     @JoinColumn(name = "precinct_id")
     private Precinct precinct;
 
-    public VotingDataPrecinct() {
+    public VotingDataPrecinct() {}
+
+    public VotingDataPrecinct(VotingDataPrecinct vdp) {
+        this.politicalParty = vdp.getPoliticalParty();
+        this.votes = vdp.getVotes();
+        this.original = false;
     }
 
     public VotingDataPrecinct(PoliticalParty politicalParty, int votes, boolean original, Precinct precinct) {

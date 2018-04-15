@@ -27,7 +27,13 @@ public class VotingDataState {
     @JoinColumn(name = "state_id")
     private State state;
 
-    public VotingDataState() {
+    public VotingDataState() {}
+
+    public VotingDataState(VotingDataState vds) {
+        this.politicalParty = vds.getPoliticalParty();
+        this.votes = vds.getVotes();
+        this.original = false;
+        this.state = vds.getState();
     }
 
     public VotingDataState(PoliticalParty politicalParty, int votes, boolean original, State state) {

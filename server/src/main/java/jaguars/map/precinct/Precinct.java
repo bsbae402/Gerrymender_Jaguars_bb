@@ -46,7 +46,24 @@ public class Precinct {
     @OneToMany(mappedBy = "precinct")
     private Set<VotingDataPrecinct> votingDataPrecincts;
 
-    public Precinct() {
+    public Precinct() {}
+
+    public Precinct(Precinct precinct) {
+        this.name = precinct.getName();
+        this.population = precinct.getPopulation();
+        this.electionYear = precinct.getElectionYear();
+        this.area = precinct.getArea();
+        this.perimeter = precinct.getPerimeter();
+        this.geoId = precinct.getGeoId();
+        this.totalVotes = precinct.getTotalVotes();
+        this.border = precinct.isBorder();
+        this.code = precinct.getCode();
+        this.original = false;
+        for (VotingDataPrecinct vdp : precinct.getVotingDataPrecincts()) {
+            VotingDataPrecinct newVdp = new VotingDataPrecinct(vdp);
+            newVdp.setPrecinct(this);
+            this.votingDataPrecincts.add(newVdp);
+        }
     }
 
     public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean border, String code, boolean original, District district) {

@@ -2,6 +2,7 @@ package jaguars.algorithm;
 
 import jaguars.map.district.DistrictManager;
 import jaguars.map.precinct.PrecinctManager;
+import jaguars.map.state.State;
 import jaguars.map.state.StateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class Algorithm {
     private HttpSession httpSession;
 
     public void mainLogic() {
+        State initialState = sm.getSessionsState();
+
+
 
     }
 }

@@ -1,12 +1,14 @@
 package jaguars.map.state;
 
+import jaguars.data.vd_district.VotingDataDistrict;
+import jaguars.data.vd_precinct.VotingDataPrecinct;
+import jaguars.map.district.District;
+import jaguars.map.precinct.Precinct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class StateManager {
@@ -53,10 +55,29 @@ public class StateManager {
     public List<String> getAllStateCodes() {
         List<State> allStates = new ArrayList<>();
         List<String> stateCodes = new ArrayList<>();
+
         for(State s : sr.findAll()) {
             if(!stateCodes.contains(s.getCode()))
                 stateCodes.add(s.getCode());
         }
         return stateCodes;
+    }
+
+    public State cloneState(State state) {
+        State newState = new State(state);
+        Set<District> newDistricts = new HashSet<>();
+
+        for (District d : state.getDistricts()) {
+            District newDistrict = new District(d);
+            newDistrict.setState(newState);
+            newDistricts.add(newDistrict);
+
+            for (Precinct p : d.getPrecincts()) {
+                Precinct newPrecinct = new Precinct(p);
+                newPrecinct.setDistrict(newDistrict);
+                newDistrict.getPrecincts().add(newPrecinct);
+            }
+        }
+        return newState;
     }
 }

@@ -27,7 +27,12 @@ public class VotingDataDistrict {
     @JoinColumn(name = "district_id")
     private District district;
 
-    public VotingDataDistrict() {
+    public VotingDataDistrict() {}
+
+    public VotingDataDistrict(VotingDataDistrict vdd) {
+        this.politicalParty = vdd.getPoliticalParty();
+        this.votes = vdd.getVotes();
+        this.original = false;
     }
 
     public VotingDataDistrict(PoliticalParty politicalParty, int votes, boolean original, District district) {

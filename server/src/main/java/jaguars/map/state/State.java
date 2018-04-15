@@ -41,8 +41,7 @@ public class State {
     @OneToMany(mappedBy = "state")
     private Set<VotingDataState> votingDataStates = new HashSet<>();
 
-    public State() {
-    }
+    public State() {}
 
     public State(State state){
         this.name = state.getName();
@@ -53,7 +52,12 @@ public class State {
         this.geoId = state.getGeoId();
         this.totalVotes = state.getTotalVotes();
         this.code = state.getCode();
-        this.original = state.isOriginal();
+        this.original = false;
+        for (VotingDataState vds : state.getVotingDataStates()) {
+            VotingDataState newVds = new VotingDataState(vds);
+            vds.setState(this);
+            this.votingDataStates.add(newVds);
+        }
     }
 
     public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original) {

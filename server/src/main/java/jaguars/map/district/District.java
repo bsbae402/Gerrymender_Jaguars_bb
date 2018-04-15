@@ -50,7 +50,23 @@ public class District {
     @OneToMany(mappedBy = "district")
     private Set<VotingDataDistrict> votingDataDistricts = new HashSet<>();
 
-    public District() {
+    public District() {}
+
+    public District(District district) {
+        this.name = district.getName();
+        this.population = district.getPopulation();
+        this.electionYear = district.getElectionYear();
+        this.area = district.getArea();
+        this.perimeter = district.getPerimeter();
+        this.geoId = district.getGeoId();
+        this.totalVotes = district.getTotalVotes();
+        this.code = district.getCode();
+        this.original = false;
+        for (VotingDataDistrict vdd : district.getVotingDataDistricts()) {
+            VotingDataDistrict newVdd = new VotingDataDistrict(vdd);
+            newVdd.setDistrict(this);
+            this.getVotingDataDistricts().add(newVdd);
+        }
     }
 
     public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original, State state) {
