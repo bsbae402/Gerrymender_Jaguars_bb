@@ -8,6 +8,7 @@ public class AppConstants {
     public static final double DEFAULT_COMPACT_WEIGHT_PP = 1.0;
     public static final double DEAFULT_COMPACT_WEIGHT_SCH = 1.0;
     public static final double DEFAULT_POPULATION_THRESHOLD = 0.01;
+    public static final int MAX_LOOP_STEPS = 100;
 
     // API JSON names
     public static final String JSON_NAME_VOTING_DATA = "voting_data";

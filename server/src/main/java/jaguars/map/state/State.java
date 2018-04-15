@@ -204,4 +204,14 @@ public class State {
         }
         return null;
     }
+
+    public Precinct getPrecinctByPrecinctCode(String precinctCode) {
+        for(District d : districts) {
+            for(Precinct p : d.getPrecincts()) {
+                if(p.getCode().equals(precinctCode))
+                    return p;
+            }
+        }
+        return null;
+    }
 }

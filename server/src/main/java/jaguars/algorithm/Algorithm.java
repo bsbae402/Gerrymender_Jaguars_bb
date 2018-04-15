@@ -1,5 +1,6 @@
 package jaguars.algorithm;
 
+import jaguars.AppConstants;
 import jaguars.map.district.District;
 import jaguars.map.district.DistrictManager;
 import jaguars.map.precinct.Precinct;
@@ -50,29 +51,49 @@ public class Algorithm {
         return newDistrictState;
     }
 
-    public void mainLogic() {
+    public boolean isImproved() {
+
+    }
+
+    public State mainLogic() {
         State oldState = sm.cloneState(sm.getSessionsState());
-        Precinct targetPrecinctOld = getRandomPrecinct(oldState.getBorderPrecincts());
-        State newState = generateNewDistrictBoundaries(targetPrecinctOld, oldState);
-        Precinct targetPrecinctNew = null;
-        for(District d : newState.getDistricts()) {
-            for(Precinct p : d.getPrecincts())
-                if(p.getCode().equals(targetPrecinctOld.getCode()))
-                    targetPrecinctNew = p;
+
+        int loopSteps = 0;
+        while(loopSteps < AppConstants.MAX_LOOP_STEPS) {
+            Precinct targetPrecinctOld = getRandomPrecinct(oldState.getBorderPrecincts());
+            State newState = generateNewDistrictBoundaries(targetPrecinctOld, oldState);
+            Precinct targetPrecinctNew = newState.getPrecinctByPrecinctCode(targetPrecinctOld.getCode());
+
+            District oldDist1 = targetPrecinctOld.getDistrict();
+            District newDist1 = newState.getDistrictByDistrictCode(oldDist1.getCode());
+            District newDist2 = targetPrecinctNew.getDistrict();
+            District oldDist2 = oldState.getDistrictByDistrictCode(newDist2.getCode());
+            double[] compactnessMeasuresOld1 = cm.getCompactnessMeasures(oldDist1);
+            double[] compactnessMeasuresOld2 = cm.getCompactnessMeasures(oldDist2);
+            double[] compactnessMeasuresNew1 = cm.getCompactnessMeasures(newDist1);
+            double[] compactnessMeasuresNew2 = cm.getCompactnessMeasures(newDist2);
+            // compare old sum and new sum of compactness
+
+            ArrayList<Integer> districtPopultions = new ArrayList<>();
+            for(District d : newState.getDistricts())
+                districtPopultions.add(d.getPopulation());
+            boolean overPopThrs = MeasureCalculator.checkPopulationThreshold(newState.getPopulation(), districtPopultions);
+            if(overPopThrs) {
+                loopSteps++;
+                continue;
+            }
+
+            //double oldEfficiencyGap = MeasureCalculator.getEfficiencyGap(oldState)
+            //double newEfficiencyGap = MeasureCalculator.getEfficiencyGap(newState)
+            //if(oldEfficiencyGap < newEfficiencyGap) {
+            //loopSteps++;
+            //continue
+            //}
+
+            oldState = newState;
+            loopSteps = 0;
         }
-        District oldDist1 = targetPrecinctOld.getDistrict();
-        District newDist1 = newState.getDistrictByDistrictCode(oldDist1.getCode());
-        District newDist2 = targetPrecinctNew.getDistrict();
-        District oldDist2 = oldState.getDistrictByDistrictCode(newDist2.getCode());
-        double[] compactnessMeasuresOld1 = cm.getCompactnessMeasures(oldDist1);
-        double[] compactnessMeasuresOld2 = cm.getCompactnessMeasures(oldDist2);
-        double[] compactnessMeasuresNew1 = cm.getCompactnessMeasures(newDist1);
-        double[] compactnessMeasuresNew2 = cm.getCompactnessMeasures(newDist2);
 
-        ArrayList<Integer> districtPopultions = new ArrayList<>();
-        for(District d : newState.getDistricts())
-            districtPopultions.add(d.getPopulation());
-        boolean overPopThrs = MeasureCalculator.checkPopulationThreshold(newState.getPopulation(), districtPopultions);
-
+        return oldState;
     }
 }
