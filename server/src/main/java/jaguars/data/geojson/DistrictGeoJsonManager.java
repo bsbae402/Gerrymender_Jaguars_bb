@@ -53,8 +53,8 @@ public class DistrictGeoJsonManager {
                     }
                     if(!fileNotExist) {
                         fileReader = new FileReader(geojsonPath);
-                        FeatureCollection featureCollection = gson.fromJson(fileReader, FeatureCollection.class);
-                        districtGeoJsonFeatureCollections.put(stateCensus, featureCollection);
+//                        FeatureCollection featureCollection = gson.fromJson(fileReader, FeatureCollection.class);
+//                        districtGeoJsonFeatureCollections.put(stateCensus, featureCollection);
                     }
                 }
             }

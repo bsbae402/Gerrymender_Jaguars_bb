@@ -1,5 +1,7 @@
 package jaguars.data.vd_district;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 import jaguars.data.PoliticalParty;
 import jaguars.map.district.District;
 
@@ -7,13 +9,20 @@ import javax.persistence.*;
 
 @Entity
 public class VotingDataDistrict {
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Expose
     private PoliticalParty politicalParty;
+    @Expose
     private int votes;
+    @Expose
+    private boolean original;
 
+    @JsonIgnore
+    @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "district_id")
     private District district;
@@ -21,9 +30,10 @@ public class VotingDataDistrict {
     public VotingDataDistrict() {
     }
 
-    public VotingDataDistrict(PoliticalParty politicalParty, int votes, District district) {
+    public VotingDataDistrict(PoliticalParty politicalParty, int votes, boolean original, District district) {
         this.politicalParty = politicalParty;
         this.votes = votes;
+        this.original = original;
         this.district = district;
     }
 
@@ -51,6 +61,14 @@ public class VotingDataDistrict {
         this.votes = votes;
     }
 
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
+    }
+
     public District getDistrict() {
         return district;
     }
@@ -65,7 +83,7 @@ public class VotingDataDistrict {
                 "id=" + id +
                 ", politicalParty=" + politicalParty +
                 ", votes=" + votes +
-                ", district=" + district +
+                ", original=" + original +
                 '}';
     }
 }

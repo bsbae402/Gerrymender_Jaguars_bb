@@ -21,7 +21,6 @@ public class StateManager {
     public ArrayList<State> getAllStates() {
         ArrayList<State> allStates = new ArrayList<>();
         for(State s : sr.findAll()) {
-            System.out.println(s);
             allStates.add(s);
         }
         return allStates;
@@ -32,7 +31,6 @@ public class StateManager {
     }
 
     public List<State> getStatesByNameYear(String name, int electionYear) {
-        // returning empty list if there are no matches.
         return sr.findByNameAndElectionYear(name, electionYear);
     }
 

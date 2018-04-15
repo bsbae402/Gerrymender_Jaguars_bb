@@ -51,8 +51,8 @@ public class StateGeoJsonManager {
                     }
                     if(!fileNotExist) {
                         fileReader = new FileReader(geojsonPath);
-                        FeatureCollection featureCollection = gson.fromJson(fileReader, FeatureCollection.class);
-                        stateGeoJsonFeatureCollections.put(stateCensus, featureCollection);
+//                        FeatureCollection featureCollection = gson.fromJson(fileReader, FeatureCollection.class);
+//                        stateGeoJsonFeatureCollections.put(stateCensus, featureCollection);
                     }
                 }
             }

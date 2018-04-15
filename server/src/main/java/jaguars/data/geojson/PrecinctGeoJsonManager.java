@@ -52,8 +52,8 @@ public class PrecinctGeoJsonManager {
                     }
                     if(!fileNotExist) {
                         fileReader = new FileReader(geojsonPath);
-                        FeatureCollection featureCollection = gson.fromJson(fileReader, FeatureCollection.class);
-                        precinctGeoJsonFeatureCollections.put(stateCensus, featureCollection);
+//                        FeatureCollection featureCollection = gson.fromJson(fileReader, FeatureCollection.class);
+//                        precinctGeoJsonFeatureCollections.put(stateCensus, featureCollection);
                     }
                 }
             }

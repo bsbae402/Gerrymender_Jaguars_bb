@@ -1,28 +1,50 @@
 package jaguars.map.state;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.google.gson.annotations.Expose;
+import jaguars.data.vd_state.VotingDataState;
+import jaguars.map.district.District;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class State {
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Expose
     private String name;
+    @Expose
     private int population;
+    @Expose
     private int electionYear;
+    @Expose
     private double area;
+    @Expose
     private double perimeter;
+    @Expose
     private String geoId;
+    @Expose
     private int totalVotes;
+    @Expose
     private String code;
+    @Expose
+    private boolean original;
+
+    @Expose(serialize = false)
+    @OneToMany(mappedBy = "state")
+    private Set<District> districts = new HashSet<>();
+
+    @Expose(serialize = false)
+    @OneToMany(mappedBy = "state")
+    private Set<VotingDataState> votingDataStates = new HashSet<>();
 
     public State() {
     }
 
-    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code) {
+    public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -31,6 +53,7 @@ public class State {
         this.geoId = geoId;
         this.totalVotes = totalVotes;
         this.code = code;
+        this.original = original;
     }
 
     public int getId() {
@@ -105,6 +128,30 @@ public class State {
         this.code = code;
     }
 
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
+    }
+
+    public Set<District> getDistricts() {
+        return districts;
+    }
+
+    public void setDistricts(Set<District> districts) {
+        this.districts = districts;
+    }
+
+    public Set<VotingDataState> getVotingDataStates() {
+        return votingDataStates;
+    }
+
+    public void setVotingDataStates(Set<VotingDataState> votingDataStates) {
+        this.votingDataStates = votingDataStates;
+    }
+
     @Override
     public String toString() {
         return "State{" +
@@ -117,6 +164,7 @@ public class State {
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
                 ", code='" + code + '\'' +
+                ", original=" + original +
                 '}';
     }
 }

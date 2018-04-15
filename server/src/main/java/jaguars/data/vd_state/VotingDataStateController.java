@@ -19,22 +19,7 @@ public class VotingDataStateController {
     private VotingDataStateManager vdsm;
 
     @RequestMapping(value = "votingdatastate/get/list", method = RequestMethod.GET)
-    public String getAllVotindDataStates() {
-        List<VotingDataState> vdsl = vdsm.getAllVotingDataStates();
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vdsl);
-    }
-
-    @RequestMapping(value = "/votingdatastate/get/bystateid", method = RequestMethod.POST)
-    public String getVotingDataStateByStateId(@RequestParam("state_id") int stateId) {
-        List<VotingDataState> vdsl = vdsm.getVotingDataStateListByStateId(stateId);
-        if(vdsl == null) {
-            JsonObject retObj = Json.object().add("error", -1);
-            return retObj.toString();
-        }
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vdsl);
+    public List<VotingDataState> getAllVotindDataStates() {
+        return vdsm.getAllVotingDataStates();
     }
 }
