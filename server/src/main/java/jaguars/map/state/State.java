@@ -3,8 +3,10 @@ package jaguars.map.state;
 import com.google.gson.annotations.Expose;
 import jaguars.data.vd_state.VotingDataState;
 import jaguars.map.district.District;
+import jaguars.map.precinct.Precinct;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -182,5 +184,16 @@ public class State {
                 ", code='" + code + '\'' +
                 ", original=" + original +
                 '}';
+    }
+
+    public ArrayList<Precinct> getBorderPrecincts() {
+        ArrayList<Precinct> borderPrecincts = new ArrayList<>();
+        for(District d : getDistricts()) {
+            for(Precinct p : d.getPrecincts()) {
+                if(p.isBorder())
+                    borderPrecincts.add(p);
+            }
+        }
+        return borderPrecincts;
     }
 }
