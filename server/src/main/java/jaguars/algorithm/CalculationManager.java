@@ -1,5 +1,6 @@
 package jaguars.algorithm;
 
+import jaguars.AppConstants;
 import jaguars.data.PoliticalParty;
 import jaguars.data.vd_district.VotingDataDistrict;
 import jaguars.map.district.District;
@@ -11,26 +12,15 @@ import java.util.ArrayList;
 @Service
 public class CalculationManager {
 
-    public double[] getCompactnessMeasures(District targetDistrict){
-        double area = targetDistrict.getArea();
-        double perimeter = targetDistrict.getPerimeter();
+    private double getCompactnessMeasure(District district){
+        double area = district.getArea();
+        double perimeter = district.getPerimeter();
         double[] measures = {MeasureCalculator.calculateCompactnessPP(area, perimeter),
                 MeasureCalculator.calculateCompactnessSch(area, perimeter)};
-        return measures;
+        return (measures[0] + measures[1]) / 2;
     }
 
-    public boolean getPopulationThres(State state) {
-        int[] districtPops = new int[state.getDistricts().size()];
-        int i = 0;
-
-        for (District d : state.getDistricts()) {
-            districtPops[i] = d.getPopulation();
-            i++;
-        }
-        return MeasureCalculator.calculatePopThreshold(state.getPopulation(), districtPops);
-    }
-
-    public double getEfficiencyGap(State state) {
+    private double getEfficiencyGap(State state) {
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
         int demWasted = 0;
         int repWasted = 0;
@@ -56,6 +46,31 @@ public class CalculationManager {
                 }
             }
         }
-        return MeasureCalculator.calculateEfficiencyGap(state.getTotalVotes(), repWasted, demWasted);
+        return Math.abs(MeasureCalculator.calculateEfficiencyGap(state.getTotalVotes(), repWasted, demWasted));
+    }
+
+    public double objectiveFunction(State state){
+        ArrayList<District> districts = new ArrayList<>(state.getDistricts());
+        double compactnessSum = 0;
+        double avgCompactness;
+
+        for (District d : state.getDistricts()) {
+            compactnessSum += getCompactnessMeasure(d);
+        }
+        avgCompactness = compactnessSum / (double)districts.size();
+        double efficiencyGapScore = 1 - getEfficiencyGap(state);
+
+        return (AppConstants.DEFAULT_COMPACTNESS_WEIGHT * avgCompactness) + (AppConstants.DEFAULT_EFFICIENCY_WEIGHT * efficiencyGapScore);
+    }
+
+    public boolean getPopulationThres(State state) {
+        int[] districtPops = new int[state.getDistricts().size()];
+        int i = 0;
+
+        for (District d : state.getDistricts()) {
+            districtPops[i] = d.getPopulation();
+            i++;
+        }
+        return MeasureCalculator.calculatePopThreshold(state.getPopulation(), districtPops);
     }
 }

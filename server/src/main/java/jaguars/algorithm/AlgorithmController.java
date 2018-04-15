@@ -13,10 +13,12 @@ public class AlgorithmController {
     private Algorithm algorithm;
 
     @RequestMapping(value = "/algorithm/start", method = RequestMethod.GET)
-    public String startRedistrictAlgorithm() {
+    public State startRedistrictAlgorithm() {
         State updatedState = algorithm.mainLogic();
 
-        return "";
+        return updatedState;
     }
+
+
 
 }

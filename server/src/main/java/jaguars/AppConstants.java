@@ -5,8 +5,8 @@ public class AppConstants {
     public static final String[] STATE_CODES = {"OH", "NH", "WI"};
 
     // Algorithm
-    public static final double DEFAULT_COMPACT_WEIGHT_PP = 1.0;
-    public static final double DEAFULT_COMPACT_WEIGHT_SCH = 1.0;
+    public static final double DEFAULT_COMPACTNESS_WEIGHT = 0.5;
+    public static final double DEFAULT_EFFICIENCY_WEIGHT = 0.5;
     public static final double DEFAULT_POPULATION_THRESHOLD = 0.01;
     public static final int MAX_LOOP_STEPS = 100;
 
