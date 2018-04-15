@@ -196,4 +196,12 @@ public class State {
         }
         return borderPrecincts;
     }
+
+    public District getDistrictByDistrictCode(String districtCode) {
+        for(District d : districts) {
+            if(d.getCode().equals(districtCode))
+                return d;
+        }
+        return null;
+    }
 }

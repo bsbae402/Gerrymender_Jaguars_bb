@@ -1,5 +1,6 @@
 package jaguars.map.district;
 
+import jaguars.map.precinct.Precinct;
 import jaguars.map.state.State;
 import jaguars.map.state.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class DistrictManager {
 
     public District getDistrictById(int districtId) {
         return districtRepository.findOne(districtId);
+    }
+
+    public List<District> getAdjacentDistrictsOfPrecinct(Precinct target) {
+        return null;
     }
 }

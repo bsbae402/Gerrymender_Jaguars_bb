@@ -4,7 +4,7 @@ import jaguars.AppConstants;
 
 import java.util.ArrayList;
 
-public class MeasureCalculator {
+public final class MeasureCalculator {
 
     public static double calculateCompactnessPP(double area, double perimeter){
         return 4 * Math.PI * (area / (perimeter * perimeter));
@@ -16,7 +16,7 @@ public class MeasureCalculator {
         return 1 / (perimeter / circumference);
     }
 
-    public boolean checkPopulationThreshold(int statePop, ArrayList<Integer> districtPops) {
+    public static boolean checkPopulationThreshold(int statePop, ArrayList<Integer> districtPops) {
         int delta = (int)(statePop * AppConstants.DEFAULT_POPULATION_THRESHOLD);
         int equalPop = statePop / districtPops.size();
         int lowerThreshold = equalPop - delta;
