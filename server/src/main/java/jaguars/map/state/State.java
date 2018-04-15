@@ -44,6 +44,18 @@ public class State {
     public State() {
     }
 
+    public State(State state){
+        this.name = state.getName();
+        this.population = state.getPopulation();
+        this.electionYear = state.getElectionYear();
+        this.area = state.getArea();
+        this.perimeter = state.getPerimeter();
+        this.geoId = state.getGeoId();
+        this.totalVotes = state.getTotalVotes();
+        this.code = state.getCode();
+        this.original = state.isOriginal();
+    }
+
     public State(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original) {
         this.name = name;
         this.population = population;
