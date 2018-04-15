@@ -16,9 +16,9 @@ public final class MeasureCalculator {
         return 1 / (perimeter / circumference);
     }
 
-    public static boolean checkPopulationThreshold(int statePop, ArrayList<Integer> districtPops) {
+    public static boolean calculatePopThreshold(int statePop, int[] districtPops) {
         int delta = (int)(statePop * AppConstants.DEFAULT_POPULATION_THRESHOLD);
-        int equalPop = statePop / districtPops.size();
+        int equalPop = statePop / districtPops.length;
         int lowerThreshold = equalPop - delta;
         int higherThreshold = equalPop + delta;
         for (Integer districtPop : districtPops){
@@ -28,5 +28,7 @@ public final class MeasureCalculator {
         return true;
     }
 
-
+    public static double calculateEfficiencyGap(int total, int rep, int dem) {
+        return (rep - dem) / total;
+    }
 }
