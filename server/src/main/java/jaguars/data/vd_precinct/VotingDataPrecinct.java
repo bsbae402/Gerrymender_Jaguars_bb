@@ -1,5 +1,7 @@
 package jaguars.data.vd_precinct;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 import jaguars.data.PoliticalParty;
 import jaguars.map.precinct.Precinct;
 
@@ -7,13 +9,20 @@ import javax.persistence.*;
 
 @Entity
 public class VotingDataPrecinct {
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Expose
     private PoliticalParty politicalParty;
+    @Expose
     private int votes;
+    @Expose
+    private boolean original;
 
+    @JsonIgnore
+    @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "precinct_id")
     private Precinct precinct;
@@ -21,9 +30,10 @@ public class VotingDataPrecinct {
     public VotingDataPrecinct() {
     }
 
-    public VotingDataPrecinct(PoliticalParty politicalParty, int votes, Precinct precinct) {
+    public VotingDataPrecinct(PoliticalParty politicalParty, int votes, boolean original, Precinct precinct) {
         this.politicalParty = politicalParty;
         this.votes = votes;
+        this.original = original;
         this.precinct = precinct;
     }
 
@@ -51,6 +61,14 @@ public class VotingDataPrecinct {
         this.votes = votes;
     }
 
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
+    }
+
     public Precinct getPrecinct() {
         return precinct;
     }
@@ -61,11 +79,11 @@ public class VotingDataPrecinct {
 
     @Override
     public String toString() {
-        return "VotingDataState{" +
+        return "VotingDataPrecinct{" +
                 "id=" + id +
                 ", politicalParty=" + politicalParty +
                 ", votes=" + votes +
-                ", precinct=" + precinct +
+                ", original=" + original +
                 '}';
     }
 }

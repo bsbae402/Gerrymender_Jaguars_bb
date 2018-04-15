@@ -22,14 +22,11 @@ public class DistrictManager {
         return districts;
     }
 
-    public List<District> getDistrictListByStateId(int stateId) {
+    public List<District> getDistricts(int stateId) {
         State state = stateRepository.findOne(stateId);
-        System.out.println("state found: " + state);
         if(state == null)
             return null;
-        List<District> districtList = districtRepository.findByState(state);
-        // it is possible that state exists, but there is no districts under the state
-        return districtList;
+        return districtRepository.findByState(state);
     }
 
     public District getDistrictById(int districtId) {

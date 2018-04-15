@@ -19,22 +19,7 @@ public class VotingDataDistrictController {
     private VotingDataDistrictManager vddm;
 
     @RequestMapping(value = "votingdatadistrict/get/list", method = RequestMethod.GET)
-    public String getAllVotingDataDistricts() {
-        List<VotingDataDistrict> vddl = vddm.getAllVotingDataDistricts();
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vddl);
-    }
-
-    @RequestMapping(value = "/votingdatadistrict/get/bydistrictid", method = RequestMethod.POST)
-    public String getVotingDataDistrictsByStateId(@RequestParam("district_id") int districtId) {
-        List<VotingDataDistrict> vddl = vddm.getVotingDataDistrictListByDistrictId(districtId);
-        if(vddl == null) {
-            JsonObject retObj = Json.object().add("error", -1);
-            return retObj.toString();
-        }
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vddl);
+    public List<VotingDataDistrict> getAllVotingDataDistricts() {
+        return vddm.getAllVotingDataDistricts();
     }
 }

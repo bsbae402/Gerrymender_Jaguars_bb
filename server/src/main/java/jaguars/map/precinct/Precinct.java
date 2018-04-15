@@ -1,33 +1,55 @@
 package jaguars.map.precinct;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+import jaguars.data.vd_precinct.VotingDataPrecinct;
 import jaguars.map.district.District;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Precinct {
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Expose
     private String name;
+    @Expose
     private int population;
+    @Expose
     private int electionYear;
+    @Expose
     private double area;
+    @Expose
     private double perimeter;
+    @Expose
     private String geoId;
+    @Expose
     private int totalVotes;
-    private boolean isBorder;
+    @Expose
+    private boolean border;
+    @Expose
     private String code;
+    @Expose
+    private boolean original;
 
+    @JsonIgnore
+    @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "district_id")
     private District district;
 
+    @Expose(serialize = false)
+    @OneToMany(mappedBy = "precinct")
+    private Set<VotingDataPrecinct> votingDataPrecincts;
+
     public Precinct() {
     }
 
-    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean isBorder, String code, District district) {
+    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean border, String code, boolean original, District district) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -35,8 +57,9 @@ public class Precinct {
         this.perimeter = perimeter;
         this.geoId = geoId;
         this.totalVotes = totalVotes;
-        this.isBorder = isBorder;
+        this.border = border;
         this.code = code;
+        this.original = original;
         this.district = district;
     }
 
@@ -105,11 +128,27 @@ public class Precinct {
     }
 
     public boolean isBorder() {
-        return isBorder;
+        return border;
     }
 
     public void setBorder(boolean border) {
-        isBorder = border;
+        this.border = border;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
     }
 
     public District getDistrict() {
@@ -120,12 +159,12 @@ public class Precinct {
         this.district = district;
     }
 
-    public String getCode() {
-        return code;
+    public Set<VotingDataPrecinct> getVotingDataPrecincts() {
+        return votingDataPrecincts;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setVotingDataPrecincts(Set<VotingDataPrecinct> votingDataPrecincts) {
+        this.votingDataPrecincts = votingDataPrecincts;
     }
 
     @Override
@@ -139,9 +178,9 @@ public class Precinct {
                 ", perimeter=" + perimeter +
                 ", geoId='" + geoId + '\'' +
                 ", totalVotes=" + totalVotes +
-                ", isBorder=" + isBorder +
+                ", border=" + border +
                 ", code='" + code + '\'' +
-                ", district=" + district +
+                ", original=" + original +
                 '}';
     }
 }

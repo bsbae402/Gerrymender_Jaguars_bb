@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface PrecinctRepository extends CrudRepository<Precinct, Integer> {
     List<Precinct> findByDistrict(District district);
-    List<Precinct> findByDistrictAndIsBorder(District district, boolean isBorder);
 }

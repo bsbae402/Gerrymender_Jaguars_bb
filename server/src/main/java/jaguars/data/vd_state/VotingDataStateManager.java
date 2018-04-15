@@ -12,8 +12,6 @@ import java.util.List;
 public class VotingDataStateManager {
     @Autowired
     private VotingDataStateRepository vdsr;
-    @Autowired
-    private StateRepository stateRepository;
 
     public List<VotingDataState> getAllVotingDataStates() {
         List<VotingDataState> votingDataStateList = new ArrayList<>();
@@ -23,12 +21,4 @@ public class VotingDataStateManager {
         }
         return votingDataStateList;
     }
-
-    public List<VotingDataState> getVotingDataStateListByStateId(int stateId) {
-        State state = stateRepository.findOne(stateId);
-        if(state == null)
-            return null;
-        return vdsr.findByState(state);
-    }
-
 }

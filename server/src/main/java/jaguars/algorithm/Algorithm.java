@@ -1,6 +1,5 @@
 package jaguars.algorithm;
 
-import jaguars.map.district.District;
 import jaguars.map.district.DistrictManager;
 import jaguars.map.precinct.PrecinctManager;
 import jaguars.map.state.StateManager;
@@ -24,6 +23,6 @@ public class Algorithm {
     private HttpSession httpSession;
 
     public void mainLogic() {
-        // alogirhtm starts here
+
     }
 }
