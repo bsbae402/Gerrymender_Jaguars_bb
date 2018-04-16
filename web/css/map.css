@@ -283,9 +283,26 @@
 #cview .infoselects .infoselect.ok {
     color:#000;
     cursor:pointer;
+    position: relative;
 }
 #cview .infoselects .infoselect.ok.active {
     color:#007;
+}
+#cview .infoselects .infoselect::after {
+    content:" ";
+    font-size: 0;
+    position: absolute;
+    left:0;
+    width:100%;
+    height:1px;
+    background:#007;
+    transition: all 0.2s ease-out;
+    opacity:0;
+    bottom:-4px;
+}
+#cview .infoselects .infoselect.ok.active::after {
+    opacity:1;
+    bottom:0px;
 }
 
 #cview .infos {
@@ -304,21 +321,21 @@
 #cview .syinfo {
     padding:0 5px;
 }
-#cview .syinfo .lrfield {
+#cview .info .lrfield {
     width: 100%;
     display: block;
     font-size: 0;
     margin-top:7px;
 }
-#cview .syinfo .lrfield > div {
+#cview .info .lrfield > div {
     display: inline-block;
     width: 130px;
     font-size:15px;
 }
-#cview .syinfo .lrfield .left {
+#cview .info .lrfield .left {
     font-weight: 600;
 }
-#cview .syinfo .lrfield .right {
+#cview .info .lrfield .right {
     display: inline-block;
     width: calc(100% - 130px);
 }

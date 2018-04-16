@@ -116,8 +116,10 @@ whenReady(function() {
 	var active = {
 		state : null,
 		sy : null,
+		districtsLayer : null,
 		districts : null,
 		district : null,
+		precinctsLayer : null,
 		precincts : null,
 		precinct : null,
 	};
@@ -174,8 +176,22 @@ whenReady(function() {
 			return;
 
 		var show = $(this).attr("info");
-		console.log(show);
+		$("#cview .infos .info.active").removeClass("active");
+		$("#cview .infos .info."+show).addClass("active");
+
+		$("#cview .infoselects .infoselect.active").removeClass("active");
+		$(this).addClass("active");
 	});
+	function activateTabAndSelect(limit="") {
+		var last = $("#cview .infoselect.active").last();
+		if (last.attr("info") == "pinfo") return;
+
+		last = last.next();
+		if (limit && limit != last.attr("info")) return;
+
+		last.addClass("ok");
+		last.click();
+	}
 
 
 	function selectSY(sy) {
@@ -200,7 +216,8 @@ whenReady(function() {
 				.then((r) => {
 					map.cleanLayers();
 
-					map.addGeoJSON(r);
+					var districtsLayer = map.addGeoJSON(r, "districts");
+					active.districtsLayer = districtsLayer;
 
 					map.fitBounds();
 
@@ -210,7 +227,8 @@ whenReady(function() {
 						})
 						.then((r) => {
 							active.districts = r;
-							console.log(active.districts)
+
+							map.attachGeoJSONdata(districtsLayer, r);
 						});
 
 				});
@@ -220,9 +238,54 @@ whenReady(function() {
 		active.sy = sy;
 	}
 
+	function selectDistrict(id) {
+		var district = active.districts.find((d) => d.id == id),
+			sy = active.sy;
+		if (!district) return;
+
+		activateTabAndSelect("dinfo");
+		
+		$("#cview .dinfo .statename .right").html(sy.name);
+		$("#cview .dinfo .year .right").html(sy.election_year);
+		$("#cview .dinfo .code .right").html(district.code);
+		$("#cview .dinfo .population .right").html(district.population);
+		$("#cview .dinfo .area .right").html(district.area + " sq mi");
+		$("#cview .dinfo .perimeter .right").html(district.perimeter + " mi");
+		console.log(district)
+
+		return;
+
+		APICall("getprecincts",
+			{
+				district_id : id,
+			})
+			.then((r) => {
+				active.precincts = r;
+
+				APICall("getprecinctsgeojson",
+					{
+						state_id : active.sy.id,
+					})
+					.then((r) => {
+						var precinctsLayer = map.addGeoJSON(r, "precincts");
+						active.precinctsLayer = precinctsLayer;
+
+						map.fitBounds(precinctsLayer);
+
+
+					});
+			});
+	}
+
 	var map = new LeafletMap();
 
 	map.init("map");
+
+	map.onClick = function(layerObject, data, props) {
+		if (layerObject.name == "districts") {
+			selectDistrict(data.id);
+		}
+	}
 
 	loadStates();
 

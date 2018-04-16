@@ -109,7 +109,13 @@ var API_CALLS = [
     {
         name : "getdistricts",
         method : "POST",
-        url : "/district/get/bystateid",
+        url : "district/get/bystateid",
+        response : (r, data) => r,
+    },
+    {
+        name : "getprecincts",
+        method : "POST",
+        url : "precinct/get/bydistrictid",
         response : (r, data) => r,
     },
 
@@ -117,7 +123,13 @@ var API_CALLS = [
     {
         name : "getdistrictsgeojson",
         method : "POST",
-        url : "/geojson/district/bystateid",
+        url : "geojson/district/bystateid",
+        response : (r, data) => r,
+    },
+    {
+        name : "getprecinctsgeojson",
+        method : "POST",
+        url : "geojson/precinct/bystateid",
         response : (r, data) => r,
     },
 
