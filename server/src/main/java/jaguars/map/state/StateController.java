@@ -31,20 +31,15 @@ public class StateController {
         };
     }
 
-    @RequestMapping(value = "state/get/all", method = RequestMethod.GET)
-    public List<State> getAllStates() {
-        return sm.getAllStates();
-    }
-
     @RequestMapping(value = "state/get/first", method = RequestMethod.GET)
     public State getFirstState() {
         List<State> states = sm.getAllStates();
         return states.get(0);
     }
 
-    @RequestMapping(value = "state/get/list", method = RequestMethod.POST)
-    public String getDefaultStateList(@RequestParam("name") String name, @RequestParam("year") int year) {
-        List<State> states = sm.getStatesByNameYear(name, year);
+    @RequestMapping(value = "state/get/list", method = RequestMethod.GET)
+    public String getDefaultStateList() {
+        List<State> states = sm.getOriginalStates();
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .excludeFieldsWithoutExposeAnnotation()

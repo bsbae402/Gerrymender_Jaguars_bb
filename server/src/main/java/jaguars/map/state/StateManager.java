@@ -34,8 +34,8 @@ public class StateManager {
         return sr.findByNameAndElectionYear(name, electionYear);
     }
 
-    public List<State> getStatesByYear(int electionYear) {
-        return sr.findByElectionYear(electionYear);
+    public List<State> getOriginalStates() {
+        return sr.findByOriginal(true);
     }
 
     public void setSessionState(State state) {
