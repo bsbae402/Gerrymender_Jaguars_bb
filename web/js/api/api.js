@@ -65,6 +65,7 @@ var API_CALLS = [
         method : "GET",
         url : "state/get/list",
         response : function(r={}, data={}) {
+            r = handleVotingData(r);
             var states = {};
             r.forEach((sy) => {
                 if (!states.hasOwnProperty(sy.name))
@@ -84,39 +85,18 @@ var API_CALLS = [
                     states2.push(states[i]);
             return states2;
         },
-        _dummy : function(data={}) {
-            var states = [];
-            (["New Hampshire", "Wisconsin", "Ohio"]).forEach((a, index) => {
-                var startYear = Math.floor(Math.random() * 4) + 2004,
-                    endYear = Math.floor(Math.random() * 6) + 5 + startYear;
-                var years = [];
-                for(var i=startYear;i<=endYear;i++)
-                    states.push({
-                        id : index * 100 + (i - startYear),
-                        name : a,
-                        population : randomInt(100, 100000),
-                        election_year : i,
-                        area : randomFloat(1000, 50000),
-                        perimeter : randomFloat(1000, 50000),
-                        geoId : "dummy",
-                        total_votes : randomInt(100, 10000),
-                        code : "dummy",
-                    });
-            });
-            return states;
-        },
     },
     {
         name : "getdistricts",
         method : "POST",
         url : "district/get/bystateid",
-        response : (r, data) => r,
+        response : (r, data) => handleVotingData(r),
     },
     {
         name : "getprecincts",
         method : "POST",
         url : "precinct/get/bydistrictid",
-        response : (r, data) => r,
+        response : (r, data) => handleVotingData(r),
     },
 
     // geojson
@@ -134,6 +114,23 @@ var API_CALLS = [
     },
 
 ];
+
+
+function handleVotingData(r) {
+    r.forEach((a) => {
+        if (!a.voting_data) return;
+        a.votes = {
+            total : a.voting_data.map((v) => v.votes).reduce((a, b) => a + b, 0),
+            DEM : 0,
+            REP : 0,
+            OTHER : 0,
+        };
+        a.voting_data.forEach((v) => {
+            a.votes[v.political_party] = v.votes;
+        });
+    });
+    return r;
+}
 
 
 

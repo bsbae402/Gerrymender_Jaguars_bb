@@ -81,10 +81,13 @@ class LeafletMap {
 
 			if (!data) {
 				props.active = false;
-				layer.setStyle({
-					color : buildColor(COLOR.DISABLED),
-					weight : 1
-				})
+				if (layerObject.settings.hideIfInvalid)
+					this.lmap.removeLayer(layer);
+				else
+					layer.setStyle({
+						color : buildColor(COLOR.DISABLED),
+						weight : 1
+					})
 			} else {
 				props.active = true;
 				layer.setStyle({
@@ -107,6 +110,7 @@ class LeafletMap {
 	        mouseover : (e) => {
 	        	var layer = e.target, feature = layer.feature, props = feature.properties;
 	        	if (props.active) {
+	        		props.mouseovered = true;
 		        	layer.setStyle({
 		        		color : buildColor(settings.color.HOVER)
 		        	})
@@ -115,9 +119,12 @@ class LeafletMap {
 	        mouseout : (e) => {
 	        	var layer = e.target, feature = layer.feature, props = feature.properties;
 
-	        	layer.setStyle({
-	        		color : buildColor(props.active ? settings.color.STANDARD : settings.color.DISABLED)
-	        	})
+	        	if (props.mouseovered) {
+	        		props.mouseovered = false;
+		        	layer.setStyle({
+		        		color : buildColor(props.active ? settings.color.STANDARD : settings.color.DISABLED)
+		        	})
+		        }
 	        },
 	    });
 	}
@@ -127,11 +134,15 @@ class LeafletMap {
 			var data = layerObject.data.find((d) => d.geo_id == props.GEOID10);
 
 			if (data) {
-				this.onClick(layerObject, data, props);
+				this.onClick(layerObject, data, props, e.target);
 			}
 		}
 	}
 
+	fitBounds2(layer) {
+		var bounds = layer.getBounds();
+		this.lmap.fitBounds(bounds);
+	}
 	fitBounds(layer=null) {
 		if (!layer)
 			if (this.allLayers.length)
@@ -148,13 +159,13 @@ class LeafletMap {
 var COLOR_SCHEME = {
 	REGULAR : {
 		STANDARD : [50, 50, 200],
-		HOVER : [0, 0, 120],
+		HOVER : [0, 0, 80],
 		DISABLED : [150, 150, 150],
 	},
 	BACKGROUND : {
-		STANDARD : [110, 110, 240],
-		HOVER : [60, 60, 170],
-		DISABLED : [180, 180, 180],
+		STANDARD : [140, 190, 250],
+		HOVER : [90, 140, 190],
+		DISABLED : [210, 210, 210],
 	},
 }
 function buildColor(arr, alpha=1) {
