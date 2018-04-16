@@ -38,7 +38,7 @@ public class PrecinctGeoJsonManager {
                         geojsonPath = AppConstants.PATH_PRECINCT_GEOJSON_NH2010;
                         break;
                     case "WI2010":
-                        geojsonPath = AppConstants.PATH_DISTRICT_GEOJSON_WI2010;
+                        geojsonPath = AppConstants.PATH_PRECINCT_GEOJSON_WI2010;
                         break;
                     default:
                         fileNotExistYet = true;
