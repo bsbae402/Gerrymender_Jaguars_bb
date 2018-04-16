@@ -47,7 +47,7 @@
             $(this).load($(this).data('include') + '.html', function() {
                 count--;
                 if (count === 0) {
-                    
+
                     var fail = rs
                         .map((r) => r() === false)
                         .reduce((a, b) => a || b);
@@ -55,7 +55,7 @@
                     if (fail) {
 
                     } else {
-                        $("#loading").addClass("hide");
+                        $(".loading").addClass("hide");
                     }
 
                 }
