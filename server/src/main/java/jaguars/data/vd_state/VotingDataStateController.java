@@ -1,14 +1,8 @@
 package jaguars.data.vd_state;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,22 +13,7 @@ public class VotingDataStateController {
     private VotingDataStateManager vdsm;
 
     @RequestMapping(value = "votingdatastate/get/list", method = RequestMethod.GET)
-    public String getAllVotindDataStates() {
-        List<VotingDataState> vdsl = vdsm.getAllVotingDataStates();
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vdsl);
-    }
-
-    @RequestMapping(value = "/votingdatastate/get/bystateid", method = RequestMethod.POST)
-    public String getVotingDataStateByStateId(@RequestParam("state_id") int stateId) {
-        List<VotingDataState> vdsl = vdsm.getVotingDataStateListByStateId(stateId);
-        if(vdsl == null) {
-            JsonObject retObj = Json.object().add("error", -1);
-            return retObj.toString();
-        }
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(vdsl);
+    public List<VotingDataState> getAllVotindDataStates() {
+        return vdsm.getAllVotingDataStates();
     }
 }

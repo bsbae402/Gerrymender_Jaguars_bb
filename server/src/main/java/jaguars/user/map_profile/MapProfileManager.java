@@ -1,6 +1,5 @@
 package jaguars.user.map_profile;
 
-import jaguars.sample.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +20,8 @@ public class MapProfileManager {
         return mapProfiles;
     }
 
-    public MapProfile saveMapProfile(String profileTitle, Account targetAccount) {
-        MapProfile createdProfile = mpr.save(new MapProfile(profileTitle, targetAccount));
-        System.out.println("created map profile: ");
-        System.out.println(createdProfile);
+    public MapProfile saveMapProfile(String profileTitle) {
+        MapProfile createdProfile = mpr.save(new MapProfile(profileTitle));
         return createdProfile;
     }
-
-    public List<MapProfile> getMapProfilesByAccount(Account targetAccount) {
-        return mpr.findByAccount(targetAccount);
-    }
-
 }

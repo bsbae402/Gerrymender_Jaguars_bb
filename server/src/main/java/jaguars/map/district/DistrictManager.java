@@ -1,5 +1,6 @@
 package jaguars.map.district;
 
+import jaguars.map.precinct.Precinct;
 import jaguars.map.state.State;
 import jaguars.map.state.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +23,18 @@ public class DistrictManager {
         return districts;
     }
 
-    public List<District> getDistrictListByStateId(int stateId) {
+    public List<District> getDistricts(int stateId) {
         State state = stateRepository.findOne(stateId);
-        System.out.println("state found: " + state);
         if(state == null)
             return null;
-        List<District> districtList = districtRepository.findByState(state);
-        // it is possible that state exists, but there is no districts under the state
-        return districtList;
+        return districtRepository.findByState(state);
     }
 
     public District getDistrictById(int districtId) {
         return districtRepository.findOne(districtId);
+    }
+
+    public List<District> getAdjacentDistrictsOfPrecinct(Precinct target) {
+        return null;
     }
 }

@@ -13,7 +13,7 @@ public class VotingDataDistrictManager {
     @Autowired
     private VotingDataDistrictRepository vddr;
     @Autowired
-    private DistrictRepository districtRepository;
+    private DistrictRepository dr;
 
     public List<VotingDataDistrict> getAllVotingDataDistricts() {
         List<VotingDataDistrict> votingDataDistrictList = new ArrayList<>();
@@ -24,8 +24,8 @@ public class VotingDataDistrictManager {
         return votingDataDistrictList;
     }
 
-    public List<VotingDataDistrict> getVotingDataDistrictListByDistrictId(int districtId) {
-        District district = districtRepository.findOne(districtId);
+    public List<VotingDataDistrict> getVotingDataDistrictsByDistrictId(int districtId) {
+        District district = dr.findOne(districtId);
         if(district == null)
             return null;
         return vddr.findByDistrict(district);

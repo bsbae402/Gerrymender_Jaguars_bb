@@ -30,7 +30,6 @@ public class GeoJsonController {
         }
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(new GeometryAdapterFactory()).create();
         String retStr = gson.toJson(sFeatureCollection);
-        System.out.println(retStr);
         return retStr;
     }
 
@@ -43,7 +42,6 @@ public class GeoJsonController {
         }
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(new GeometryAdapterFactory()).create();
         String retStr = gson.toJson(dFeatureCollection);
-        System.out.println(retStr);
         return retStr;
     }
 
@@ -56,7 +54,6 @@ public class GeoJsonController {
         }
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(new GeometryAdapterFactory()).create();
         String retStr = gson.toJson(pFeatureCollection);
-        System.out.println(retStr);
         return retStr;
     }
 }

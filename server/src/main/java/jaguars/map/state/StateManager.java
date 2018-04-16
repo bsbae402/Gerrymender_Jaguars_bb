@@ -1,12 +1,12 @@
 package jaguars.map.state;
 
+import jaguars.map.district.District;
+import jaguars.map.precinct.Precinct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class StateManager {
@@ -21,7 +21,6 @@ public class StateManager {
     public ArrayList<State> getAllStates() {
         ArrayList<State> allStates = new ArrayList<>();
         for(State s : sr.findAll()) {
-            System.out.println(s);
             allStates.add(s);
         }
         return allStates;
@@ -32,33 +31,45 @@ public class StateManager {
     }
 
     public List<State> getStatesByNameYear(String name, int electionYear) {
-        // returning empty list if there are no matches.
         return sr.findByNameAndElectionYear(name, electionYear);
     }
 
-    public List<State> getStatesByYear(int electionYear) {
-        return sr.findByElectionYear(electionYear);
+    public List<State> getOriginalStates() {
+        return sr.findByOriginal(true);
     }
 
     public void setSessionState(State state) {
-        System.out.println("setSessionState() call");
-        System.out.println("session id: " + httpSession.getId());
         httpSession.setAttribute("state", (Object)state);
     }
 
     public State getSessionsState() {
-        System.out.println("getSessionState() call");
-        System.out.println("session id: " + httpSession.getId());
         return (State)httpSession.getAttribute("state");
     }
 
     public List<String> getAllStateCodes() {
-        List<State> allStates = new ArrayList<>();
         List<String> stateCodes = new ArrayList<>();
         for(State s : sr.findAll()) {
             if(!stateCodes.contains(s.getCode()))
                 stateCodes.add(s.getCode());
         }
         return stateCodes;
+    }
+
+    public State cloneState(State state) {
+        State newState = new State(state);
+        Set<District> newDistricts = new HashSet<>();
+
+        for (District d : state.getDistricts()) {
+            District newDistrict = new District(d);
+            newDistrict.setState(newState);
+            newDistricts.add(newDistrict);
+
+            for (Precinct p : d.getPrecincts()) {
+                Precinct newPrecinct = new Precinct(p);
+                newPrecinct.setDistrict(newDistrict);
+                newDistrict.getPrecincts().add(newPrecinct);
+            }
+        }
+        return newState;
     }
 }

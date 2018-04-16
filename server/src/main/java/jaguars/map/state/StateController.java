@@ -1,10 +1,8 @@
 package jaguars.map.state;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
+import jaguars.AppConstants;
+import jaguars.data.vd_state.VotingDataState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class StateController {
@@ -32,34 +31,28 @@ public class StateController {
         };
     }
 
+    @RequestMapping(value = "state/get/first", method = RequestMethod.GET)
+    public State getFirstState() {
+        List<State> states = sm.getAllStates();
+        return states.get(0);
+    }
+
     @RequestMapping(value = "state/get/list", method = RequestMethod.GET)
-    public String getStateList() {
+    public String getDefaultStateList() {
+        List<State> states = sm.getOriginalStates();
         Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(sm.getAllStates());
-    }
-
-    @RequestMapping(value = "state/get/list/byyear", method = RequestMethod.POST)
-    public String getStateListByYear(@RequestParam("year") int year) {
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(sm.getStatesByYear(year));
-    }
-
-    @RequestMapping(value = "state/get/byname/byyear", method = RequestMethod.POST)
-    public String getStateByNameYear(@RequestParam("name") String name, @RequestParam("year") int year) {
-        List<State> foundStates = sm.getStatesByNameYear(name, year);
-        if(foundStates.size() < 1){
-            JsonObject retObj = Json.object().add("error", -1);
-            return retObj.toString();
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        JsonArray stateJsonArray = new JsonArray();
+        for(State state : states) {
+            Set<VotingDataState> stateVotingDataLi = state.getVotingDataStates();
+            JsonElement votingDataLiJson = gson.toJsonTree(stateVotingDataLi);
+            JsonElement stateJson = gson.toJsonTree(state);
+            stateJson.getAsJsonObject().add(AppConstants.JSON_NAME_VOTING_DATA, votingDataLiJson);
+            stateJsonArray.add(stateJson);
         }
-        if(foundStates.size() > 1)
-            System.out.println("Multiple states found for given name and year!!!");
-
-        State firstOne = foundStates.get(0);
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(firstOne);
+        return stateJsonArray.toString();
     }
 
     @RequestMapping(value = "session/set/state", method = RequestMethod.POST)
