@@ -251,9 +251,6 @@ whenReady(function() {
 		$("#cview .dinfo .population .right").html(district.population);
 		$("#cview .dinfo .area .right").html(district.area + " sq mi");
 		$("#cview .dinfo .perimeter .right").html(district.perimeter + " mi");
-		console.log(district)
-
-		return;
 
 		APICall("getprecincts",
 			{
