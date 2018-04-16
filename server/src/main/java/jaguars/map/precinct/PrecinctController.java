@@ -5,8 +5,6 @@ import com.eclipsesource.json.JsonObject;
 import com.google.gson.*;
 import jaguars.AppConstants;
 import jaguars.data.vd_precinct.VotingDataPrecinct;
-import jaguars.data.vd_precinct.VotingDataPrecinctManager;
-import jaguars.map.district.DistrictManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +18,6 @@ import java.util.Set;
 public class PrecinctController {
     @Autowired
     PrecinctManager pm;
-
-    @Autowired
-    VotingDataPrecinctManager vdpm;
 
     @RequestMapping(value = "precinct/get/list", method = RequestMethod.GET)
     public List<Precinct> getAllPrecincts() {

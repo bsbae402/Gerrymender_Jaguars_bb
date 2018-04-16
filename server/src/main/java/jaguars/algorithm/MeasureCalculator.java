@@ -2,8 +2,6 @@ package jaguars.algorithm;
 
 import jaguars.AppConstants;
 
-import java.util.ArrayList;
-
 public final class MeasureCalculator {
 
     public static double calculateCompactnessPP(double area, double perimeter){

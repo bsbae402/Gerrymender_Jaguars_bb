@@ -1,7 +1,6 @@
 package jaguars.algorithm;
 
 import jaguars.AppConstants;
-import jaguars.data.PoliticalParty;
 import jaguars.data.vd_district.VotingDataDistrict;
 import jaguars.map.district.District;
 import jaguars.map.state.State;

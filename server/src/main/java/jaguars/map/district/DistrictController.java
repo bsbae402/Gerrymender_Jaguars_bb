@@ -4,8 +4,6 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 import com.google.gson.*;
 import jaguars.AppConstants;
-import jaguars.data.vd_district.VotingDataDistrict;
-import jaguars.data.vd_district.VotingDataDistrictManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +20,6 @@ import java.util.List;
 public class DistrictController {
     @Autowired
     private DistrictManager dm;
-    @Autowired
-    private VotingDataDistrictManager vddm;
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

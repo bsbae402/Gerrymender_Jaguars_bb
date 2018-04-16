@@ -14,7 +14,7 @@ public class VotingDataPrecinctManager {
     private VotingDataPrecinctRepository vdpr;
 
     @Autowired
-    private PrecinctRepository precinctRepository;
+    private PrecinctRepository pr;
 
     public List<VotingDataPrecinct> getAllVotingDataPreincts() {
         List<VotingDataPrecinct> votingDataPrecinctList = new ArrayList<>();
@@ -25,8 +25,8 @@ public class VotingDataPrecinctManager {
         return votingDataPrecinctList;
     }
 
-    public List<VotingDataPrecinct> getVotingDataPrecinctListByPrecinctId(int precinctId) {
-        Precinct precinct = precinctRepository.findOne(precinctId);
+    public List<VotingDataPrecinct> getVotingDataPrecinctsByPrecinctId(int precinctId) {
+        Precinct precinct = pr.findOne(precinctId);
         if(precinct == null)
             return null;
         return vdpr.findByPrecinct(precinct);

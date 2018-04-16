@@ -5,12 +5,10 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class UserManager {
-
     @Autowired
     UserRepository userRepository;
 
@@ -40,21 +38,18 @@ public class UserManager {
 
     public User saveUser(String username, String password, String email, UserRole role) {
         User newUser = new User(username, password, email, role);
-        return userRepository.save(newUser);    // seems like it returned the created entity
+        return userRepository.save(newUser);
     }
 
     public void setSessionState(User user) {
-        System.out.println("setSessionState() call");
         httpSession.setAttribute("User", (Object)user);
     }
 
     public User getSessionState() {
-        System.out.println("getSessionState() call");
         return (User)httpSession.getAttribute("User");
     }
 
     public void invalidateSessionState() {
-        System.out.println("invalidateSessionState() call");
         httpSession.invalidate();
     }
 

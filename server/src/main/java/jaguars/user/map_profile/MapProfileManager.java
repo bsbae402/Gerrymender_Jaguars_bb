@@ -22,8 +22,6 @@ public class MapProfileManager {
 
     public MapProfile saveMapProfile(String profileTitle) {
         MapProfile createdProfile = mpr.save(new MapProfile(profileTitle));
-        System.out.println("created map profile: ");
-        System.out.println(createdProfile);
         return createdProfile;
     }
 }

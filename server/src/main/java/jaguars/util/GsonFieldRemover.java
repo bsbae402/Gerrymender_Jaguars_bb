@@ -10,9 +10,8 @@ public final class GsonFieldRemover {
     public static void removeFieldsByClass(JsonElement jsonElement, Class elementClass, Class fieldClass) {
         List<Field> fields = Arrays.asList(elementClass.getDeclaredFields());
         for(Field field : fields) {
-            if(field.getType().equals(fieldClass)) {
+            if(field.getType().equals(fieldClass))
                 jsonElement.getAsJsonObject().remove(field.getName());
-            }
         }
     }
 }
