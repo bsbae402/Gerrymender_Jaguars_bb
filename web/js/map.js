@@ -117,9 +117,11 @@ whenReady(function() {
 		state : null,
 		sy : null,
 		districtsLayer : null,
+		districtLayer : null,
 		districts : null,
 		district : null,
 		precinctsLayer : null,
+		precinctLayer : null,
 		precincts : null,
 		precinct : null,
 	};
@@ -181,9 +183,20 @@ whenReady(function() {
 
 		$("#cview .infoselects .infoselect.active").removeClass("active");
 		$(this).addClass("active");
+
+		if (show == "syinfo") {
+			if (active.districtsLayer)
+				map.fitBounds(active.districtsLayer);
+		} else if (show == "dinfo") {
+			if (active.districtLayer)
+				map.fitBounds2(active.districtLayer);
+		} else if (show == "pinfo") {
+			if (active.precinctLayer)
+				map.fitBounds2(active.precinctLayer);
+		}
 	});
 	function activateTabAndSelect(limit="") {
-		var last = $("#cview .infoselect.active").last();
+		var last = $("#cview .infoselect.ok").last();
 		if (last.attr("info") == "pinfo") return;
 
 		last = last.next();
@@ -192,17 +205,37 @@ whenReady(function() {
 		last.addClass("ok");
 		last.click();
 	}
+	function unactivateTabs() {
+		$("#cview .infos .info").removeClass("ok active");
+		$("#cview .infoselects .infoselect").removeClass("ok active");
+	}
+	function clickTab(info) {
+		$("#cview .infoselects .infoselect[info="+info+"]").click()
+	}
 
+	function setupVoteBar(votes, $el) {
+		var parties = ["Democrat", "Republican", "Other"];
+		(["DEM", "REP", "OTHER"]).forEach((party, index) => {
+			var perc = (votes.total > 0) ? (votes[party] / votes.total * 100) : 0;
+			$el.find("[" + party + "]").css("width", perc + "%");
+			$el.find("[" + party + "] .hover div").html(
+				parties[index]+
+				"<br>"+
+				votes[party] + "/" + votes.total+  " (" + perc.toFixed(1) + "%)");
+		});
+	}
 
 	function selectSY(sy) {
-		$("#cview .infoselects [info=syinfo]").addClass("ok active");
-		$("#cview .infos .syinfo").addClass("active");
+		unactivateTabs();
+		$("#cview .infoselects [info=syinfo]").addClass("ok");
+		clickTab("syinfo");
 
 		$("#cview .syinfo .statename .right").html(sy.name);
 		$("#cview .syinfo .year .right").html(sy.election_year);
 		$("#cview .syinfo .population .right").html(sy.population);
 		$("#cview .syinfo .area .right").html(sy.area + " sq mi");
 		$("#cview .syinfo .perimeter .right").html(sy.perimeter + " mi");
+		setupVoteBar(sy.votes, $("#cview .syinfo .votes"));
 
 		$("#cview .yearbox .yearselect.active").removeClass("active");
 		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
@@ -238,10 +271,12 @@ whenReady(function() {
 		active.sy = sy;
 	}
 
-	function selectDistrict(id) {
+	function selectDistrict(id, districtLayer) {
 		var district = active.districts.find((d) => d.id == id),
 			sy = active.sy;
 		if (!district) return;
+		active.district = district;
+		active.districtLayer = districtLayer;
 
 		activateTabAndSelect("dinfo");
 		
@@ -251,6 +286,12 @@ whenReady(function() {
 		$("#cview .dinfo .population .right").html(district.population);
 		$("#cview .dinfo .area .right").html(district.area + " sq mi");
 		$("#cview .dinfo .perimeter .right").html(district.perimeter + " mi");
+		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
+
+		map.setGeoJSONsettings(active.districtsLayer, {
+			color : COLOR_SCHEME.BACKGROUND
+		});
+
 
 		APICall("getprecincts",
 			{
@@ -264,23 +305,49 @@ whenReady(function() {
 						state_id : active.sy.id,
 					})
 					.then((r) => {
-						var precinctsLayer = map.addGeoJSON(r, "precincts");
+						var precinctsLayer = map.addGeoJSON(r, "precincts", {
+							hideIfInvalid : true,
+						});
 						active.precinctsLayer = precinctsLayer;
 
-						map.fitBounds(precinctsLayer);
+						map.attachGeoJSONdata(precinctsLayer, active.precincts);
 
-
+						map.fitBounds2(districtLayer);
 					});
 			});
+	}
+
+	function selectPrecinct(id, precinctLayer) {
+		var precinct = active.precincts.find((d) => d.id == id),
+			sy = active.sy;
+		if (!precinct) return;
+		active.precinct = precinct;
+		active.precinctLayer = precinctLayer;
+
+		activateTabAndSelect("pinfo");
+
+		$("#cview .pinfo .name .right").html(precinct.name);
+		$("#cview .pinfo .statename .right").html(sy.name);
+		$("#cview .pinfo .year .right").html(sy.election_year);
+		$("#cview .pinfo .code .right").html(precinct.code);
+		$("#cview .pinfo .population .right").html(precinct.population);
+		$("#cview .pinfo .area .right").html(precinct.area + " sq mi");
+		$("#cview .pinfo .perimeter .right").html(precinct.perimeter + " mi");
+		setupVoteBar(precinct.votes, $("#cview .pinfo .votes"));
+
+		map.fitBounds2(precinctLayer);
 	}
 
 	var map = new LeafletMap();
 
 	map.init("map");
 
-	map.onClick = function(layerObject, data, props) {
+	map.onClick = function(layerObject, data, props, layer) {
 		if (layerObject.name == "districts") {
-			selectDistrict(data.id);
+			selectDistrict(data.id, layer);
+		}
+		if (layerObject.name == "precincts") {
+			selectPrecinct(data.id, layer);
 		}
 	}
 
