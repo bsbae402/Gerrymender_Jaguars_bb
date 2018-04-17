@@ -65,7 +65,7 @@ public class District {
         for (VotingDataDistrict vdd : district.getVotingDataDistricts()) {
             VotingDataDistrict newVdd = new VotingDataDistrict(vdd);
             newVdd.setDistrict(this);
-            this.getVotingDataDistricts().add(newVdd);
+            this.votingDataDistricts.add(newVdd);
         }
     }
 

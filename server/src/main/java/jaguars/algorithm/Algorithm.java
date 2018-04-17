@@ -43,20 +43,18 @@ public class Algorithm {
     }
 
     public State mainLogic() {
-        State oldState = sm.cloneState(sm.getSessionsState());
+        int sessionStateId = sm.getSessionsStateId();
+        State oldState = sm.cloneState(sm.getState(sessionStateId));
         int loopSteps = 0;
-
         while(loopSteps < AppConstants.MAX_LOOP_STEPS) {
             Precinct targetPrecinctOld = getRandomPrecinct(oldState.getBorderPrecincts());
             State newState = generateNewDistrictBoundaries(targetPrecinctOld, oldState);
-
             if(cm.getPopulationThres(newState)) {
                 loopSteps++;
                 continue;
             }
             double oldScore = cm.objectiveFunction(oldState);
             double newScore = cm.objectiveFunction(newState);
-
             if (newScore < oldScore){
                 loopSteps++;
                 continue;
@@ -64,7 +62,6 @@ public class Algorithm {
             oldState = newState;
             loopSteps = 0;
         }
-
         return oldState;
     }
 }
