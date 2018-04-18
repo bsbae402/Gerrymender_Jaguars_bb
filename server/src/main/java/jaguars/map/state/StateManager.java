@@ -38,12 +38,17 @@ public class StateManager {
         return sr.findByOriginal(true);
     }
 
-    public void setSessionState(State state) {
-        httpSession.setAttribute("state", (Object)state);
+    public int setSessionStateId(int stateId) {
+        State existingState = sr.findOne(stateId);
+        if(existingState == null) {
+            return -1;
+        }
+        httpSession.setAttribute("stateId", stateId);
+        return 0;
     }
 
-    public State getSessionsState() {
-        return (State)httpSession.getAttribute("state");
+    public int getSessionsStateId() {
+        return (int)httpSession.getAttribute("stateId");
     }
 
     public List<String> getAllStateCodes() {
@@ -58,18 +63,17 @@ public class StateManager {
     public State cloneState(State state) {
         State newState = new State(state);
         Set<District> newDistricts = new HashSet<>();
-
         for (District d : state.getDistricts()) {
             District newDistrict = new District(d);
             newDistrict.setState(newState);
             newDistricts.add(newDistrict);
-
             for (Precinct p : d.getPrecincts()) {
                 Precinct newPrecinct = new Precinct(p);
                 newPrecinct.setDistrict(newDistrict);
                 newDistrict.getPrecincts().add(newPrecinct);
             }
         }
+        newState.setDistricts(newDistricts);
         return newState;
     }
 }

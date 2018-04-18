@@ -6,6 +6,7 @@ import jaguars.data.vd_precinct.VotingDataPrecinct;
 import jaguars.map.district.District;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -44,7 +45,7 @@ public class Precinct {
 
     @Expose(serialize = false)
     @OneToMany(mappedBy = "precinct")
-    private Set<VotingDataPrecinct> votingDataPrecincts;
+    private Set<VotingDataPrecinct> votingDataPrecincts = new HashSet<>();
 
     public Precinct() {}
 

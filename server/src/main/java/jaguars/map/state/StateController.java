@@ -55,21 +55,23 @@ public class StateController {
         return stateJsonArray.toString();
     }
 
-    @RequestMapping(value = "session/set/state", method = RequestMethod.POST)
-    public String setSessionStateById(@RequestParam("state_id") int stateId){
-        State state = sm.getState(stateId);
-        sm.setSessionState(state);
-        State actualSessionState = sm.getSessionsState();
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(actualSessionState);
+    @RequestMapping(value = "session/set/stateid", method = RequestMethod.POST)
+    public String setSessionStateId(@RequestParam("state_id") int stateId){
+        int errno = sm.setSessionStateId(stateId);
+        JsonObject retObj = new JsonObject();
+        if(errno == -1) {
+            retObj.addProperty("error", -1);
+        } else {
+            retObj.addProperty("error", 0);
+        }
+        return retObj.toString();
     }
 
-    @RequestMapping(value = "session/get/state", method = RequestMethod.GET)
-    public String getSessionState(){
-        State state = sm.getSessionsState();
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-        return gson.toJson(state);
+    @RequestMapping(value = "session/get/stateid", method = RequestMethod.GET)
+    public String getSessionStateId(){
+        int stateId = sm.getSessionsStateId();
+        JsonObject retObj = new JsonObject();
+        retObj.addProperty("state_id", stateId);
+        return retObj.toString();
     }
 }
