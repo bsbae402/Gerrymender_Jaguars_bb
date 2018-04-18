@@ -488,6 +488,6 @@ whenReady(function() {
 		});
 	})();
 
-	loadStates();
+	//loadStates();
 
 });

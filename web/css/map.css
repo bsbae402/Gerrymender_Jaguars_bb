@@ -3,11 +3,13 @@
     overflow: hidden;
 }
 
+
+
 #mapbox {
     position: absolute;
     right:0;
     top:0;
-    width:50%;
+    width:100%;
     /*min-width:450px;
     max-width:calc(100% - 450px);*/
     height:100%;
@@ -28,7 +30,7 @@
     right:-50%;
 }
 .sidebox.left {
-    left:0%;
+    left:-50%;
 }
 
 #mapbox {
