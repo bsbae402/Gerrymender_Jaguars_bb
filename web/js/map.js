@@ -226,6 +226,11 @@ whenReady(function() {
 	}
 
 	function selectSY(sy) {
+		if (active.sy == sy)
+			return;
+
+		active.sy = sy;
+
 		unactivateTabs();
 		$("#cview .infoselects [info=syinfo]").addClass("ok");
 		clickTab("syinfo");
@@ -240,35 +245,29 @@ whenReady(function() {
 		$("#cview .yearbox .yearselect.active").removeClass("active");
 		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
 
-		if (active.sy != sy) {
+		APICall("getdistrictsgeojson",
+			{
+				state_id : sy.id,
+			})
+			.then((r) => {
+				map.cleanLayers();
 
-			APICall("getdistrictsgeojson",
-				{
-					state_id : sy.id,
-				})
-				.then((r) => {
-					map.cleanLayers();
+				var districtsLayer = map.addGeoJSON(r, "districts");
+				active.districtsLayer = districtsLayer;
 
-					var districtsLayer = map.addGeoJSON(r, "districts");
-					active.districtsLayer = districtsLayer;
+				map.fitBounds();
 
-					map.fitBounds();
+				APICall("getdistricts",
+					{
+						state_id : sy.id,
+					})
+					.then((r) => {
+						active.districts = r;
 
-					APICall("getdistricts",
-						{
-							state_id : sy.id,
-						})
-						.then((r) => {
-							active.districts = r;
+						map.attachGeoJSONdata(districtsLayer, r);
+					});
 
-							map.attachGeoJSONdata(districtsLayer, r);
-						});
-
-				});
-
-		}
-
-		active.sy = sy;
+			});
 	}
 
 	function selectDistrict(id, districtLayer) {
