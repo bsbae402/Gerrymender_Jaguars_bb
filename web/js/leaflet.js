@@ -21,6 +21,11 @@ class LeafletMap {
 		}).addTo(this.lmap);
 	}
 
+	resize() {
+		if (this.lmap)
+			this.lmap.invalidateSize();
+	}
+
 	cleanLayers() {
 		for(var l in this.layers) {
 			this.layers[l].forEach((extraLayer) => {
@@ -67,8 +72,9 @@ class LeafletMap {
 		layerObject.settings = $.extend(layerObject.settings, settings);
 		this.updateRender(layerObject);
 	}
-	attachGeoJSONdata(layerObject, data) {
+	attachGeoJSONdata(layerObject, data, mapToData=null) {
 		layerObject.data = data;
+		layerObject.mapToData = mapToData;
 		this.updateRender(layerObject);
 	}
 	updateRender(layerObject) {
@@ -77,7 +83,11 @@ class LeafletMap {
 		layerObject.layer.eachLayer((layer) => {
 			var feature = layer.feature,
 				props = layer.feature.properties;
-			var data = layerObject.data.find((d) => d.geo_id == props.GEOID10);
+
+			var mapFunc = (d, props) => d.geo_id == props.GEOID10;
+			if (layerObject.mapToData)
+				mapFunc = layerObject.mapToData;
+			var data = layerObject.data.find((d) => mapFunc(d, props));
 
 			if (!data) {
 				props.active = false;
@@ -100,10 +110,6 @@ class LeafletMap {
 	onGeoJSONFeature(feature, layer, layerObject) {
 		var props = feature.properties;
 		var settings = layerObject.settings;
-
-		function findData(geoId) {
-			return layerObject.data.find((d) => d.GEOID10 == geoId);
-		}
 
 		layer.on({
 	        click: (e) => this.onGeoJSONclick(e, layerObject),
@@ -131,7 +137,10 @@ class LeafletMap {
 	onGeoJSONclick(e, layerObject) {
 		var feature = e.target.feature, props = feature.properties;
 		if (props.active) {
-			var data = layerObject.data.find((d) => d.geo_id == props.GEOID10);
+			var mapFunc = (d, props) => d.geo_id == props.GEOID10;
+			if (layerObject.mapToData)
+				mapFunc = layerObject.mapToData;
+			var data = layerObject.data.find((d) => mapFunc(d, props));
 
 			if (data) {
 				this.onClick(layerObject, data, props, e.target);
@@ -153,10 +162,29 @@ class LeafletMap {
 			this.lmap.fitBounds(bounds);
 		}
 	}
+	fitBoundsActive(layer=null, left=0, top=0) {
+		if (!layer)
+			if (this.allLayers.length)
+				layer = this.allLayers[0];
+		if (layer) {
+			var layers = layer.layer;
+			var arrLayers = [];
+			layers.eachLayer((layer) => layer.feature.properties.active ? arrLayers.push(layer) : null);
+			var bounds = (new L.featureGroup(arrLayers)).getBounds();
+			this.lmap.fitBounds(bounds, {
+				paddingTopLeft:L.point(left, top)
+			});
+		}
+	}
 
 }
 
 var COLOR_SCHEME = {
+	STATES : {
+		STANDARD : [0, 0, 90],
+		HOVER : [40, 40, 160],
+		DISABLED : [150, 150, 150],
+	},
 	REGULAR : {
 		STANDARD : [50, 50, 200],
 		HOVER : [0, 0, 80],

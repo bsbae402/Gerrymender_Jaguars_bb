@@ -71,6 +71,8 @@ var API_CALLS = [
                 if (!states.hasOwnProperty(sy.name))
                     states[sy.name] = {
                         name : sy.name,
+                        geo_id : sy.geo_id,
+                        code : sy.code,
                         years : [],
                         yearMap : {}
                     }

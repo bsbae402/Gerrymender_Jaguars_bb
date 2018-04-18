@@ -2,7 +2,8 @@
 whenReady(function() {
 
 	var openTab = -1,
-		mapWPercent = 50;
+		mapWPercent = 50,
+		fullMap = true;
 
 	function resize() {return;
 		var w = $("#mapbox").width(),
@@ -26,6 +27,7 @@ whenReady(function() {
 
 	function adjustOpenTabs() {
 		$("#mapbox").css("width", mapWPercent + "%");
+		map.resize();
 
 		$(".sidebox").css("width", (100 - mapWPercent) + "%");
 		if (openTab == -1)
@@ -34,15 +36,19 @@ whenReady(function() {
 			$(".sidebox.left").css("left", "-" + (100 - mapWPercent) + "%");
 	}
 	var noToggle = false;
+	var baseProps = {
+		duration : 600,
+		step : function(a) {
+			map.resize();
+		}
+	}
 	function toggleTabs() {
 		if (noToggle) return;
 		noToggle = true;
 		openTab = -openTab;
 
-		var props = {
-			duration : 600,
-			complete : () => noToggle = false
-		};
+		var props = $.extend({}, baseProps);
+		props.complete = () => noToggle = false;
 
 		var lr = (openTab == 1) ? "left" : "right",
 			rl = (openTab == -1) ? "left" : "right";
@@ -63,6 +69,40 @@ whenReady(function() {
 		if (!$(this).hasClass("active"))
 			toggleTabs();
 	});
+	function showSides() {
+		if (!fullMap) return;
+		fullMap = false;
+		$("#mapbox").removeClass("fullstates");
+		$("#mapbox").animate({
+			width : mapWPercent + "%"
+		}, baseProps);
+
+		var lr = (openTab == 1) ? "left" : "right",
+			rl = (openTab == -1) ? "left" : "right";
+
+		var a = {}, b = {};
+		a[lr] = -(100 - mapWPercent) + "%";
+		b[rl] = "0%";
+		$(".sidebox."+lr).animate(a, baseProps);
+		$(".sidebox."+rl).animate(b, baseProps);
+	}
+	function hideSides() {
+		if (fullMap) return;
+		fullMap = true;
+		$("#mapbox").addClass("fullstates");
+		$("#mapbox").animate({
+			width : "100%"
+		}, baseProps);
+
+		var lr = (openTab == 1) ? "left" : "right",
+			rl = (openTab == -1) ? "left" : "right";
+
+		var a = {}, b = {};
+		a[lr] = -(100 - mapWPercent) + "%";
+		b[rl] = -(100 - mapWPercent) + "%";
+		$(".sidebox."+lr).animate(a, baseProps);
+		$(".sidebox."+rl).animate(b, baseProps);
+	}
 
 	var mdown = false,
 		omx = 0,
@@ -94,9 +134,6 @@ whenReady(function() {
 		mdown = false;
 	});
 
-	$("#mapbox .switchregion, #mapbox .selectregion .x").click(() => {
-		$("#mapbox .selectregion").toggleClass("show");
-	});
 
 
 	$("#sidebox > .tabs .tab").click(function() {
@@ -126,29 +163,46 @@ whenReady(function() {
 		precinct : null,
 	};
 
-	function loadStates() {
-		APICall("getstates").then((r) => {
-			states = r;
-			states.forEach((region) => {
-				$("#mapbox .selectregion .regions").append(
-					$("<div>").addClass("region")
-						.html(region.name)
-						.click((e) => {
-							$("#mapbox .selectregion").removeClass("show");
-							selectState(region);
-						})
-					);
+	var statesGeoJSON, statesLayer;
+	function loadStatesLoaded() {
+		hideSides();
+		Object.keys(active).forEach((key) => active[key] = null);
+		if (states && statesGeoJSON) {
+			map.cleanLayers();
+			statesLayer = map.addGeoJSON(statesGeoJSON, "states", {
+				color: COLOR_SCHEME.STATES,
 			});
 
-			selectState(states[0]);
+			map.attachGeoJSONdata(statesLayer, states,
+				(state, props) => state.name == props.NAME);
+			map.fitBoundsActive(statesLayer, 0, 80);
+
+			$(".mapapp").removeClass("loading");
+		}
+	}
+	function loadStates() {
+		$.get("/data/states.json", function(r) {
+			statesGeoJSON = r;
+			loadStatesLoaded();
+		});
+
+		APICall("getstates").then((r) => {
+			states = r;
+			loadStatesLoaded();
 		});
 
 		$("#cview .infoselects .infoselect").removeClass("ok active");
 		$("#cview .infos .info").removeClass("active");
 	}
+	$("#mapbox .switchregion").click(() => {
+		loadStatesLoaded();
+	});
 
 	function selectState(state) {
+		showSides();
+
 		active.state = state;
+		$(".mapapp").addClass("loading");
 
 		$("#cview .yearbox").empty();
 		state.years.forEach((year) => {
@@ -170,7 +224,7 @@ whenReady(function() {
 			$("#cview .yearbox").append($year);
 		});
 
-		selectSY(state.yearMap[state.years[0]]);
+		selectSY(state.yearMap[state.years[0]], true);
 	}
 
 	$("#cview .infoselects .infoselect").click(function() {
@@ -225,9 +279,11 @@ whenReady(function() {
 		});
 	}
 
-	function selectSY(sy) {
+	function selectSY(sy, initial=false) {
 		if (active.sy == sy)
 			return;
+
+		$(".mapapp").addClass("loading");
 
 		active.sy = sy;
 
@@ -265,6 +321,8 @@ whenReady(function() {
 						active.districts = r;
 
 						map.attachGeoJSONdata(districtsLayer, r);
+
+						$(".mapapp").removeClass("loading");
 					});
 
 			});
@@ -347,6 +405,12 @@ whenReady(function() {
 		}
 		if (layerObject.name == "precincts") {
 			selectPrecinct(data.id, layer);
+		}
+		if (layerObject.name == "states") {
+			states.forEach((state) => {
+				if (state.name == props.NAME)
+					selectState(state);
+			})
 		}
 	}
 
@@ -488,6 +552,6 @@ whenReady(function() {
 		});
 	})();
 
-	//loadStates();
+	loadStates();
 
 });
