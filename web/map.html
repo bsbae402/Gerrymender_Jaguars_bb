@@ -28,19 +28,24 @@
 
 	<body>
 
-		<div class="loading"></div>
+		<div id="loading" class="spinner"></div>
     		
 		<header data-include="header"></header>
 
-		<div id="app" class="mapapp">
+		<div id="app" class="mapapp loading">
 
-			<div id="mapbox">
+			<div id="maploading" class="spinner">
+				
+			</div>
+
+			<div id="mapbox" class="fullstates">
 
 				<div id="map">
 
 				</div>
 
-				<div class="switchregion">Switch State</div>
+				<div class="maplabel centertop selectstatelabel">Select a State</div>
+				<div class="maplabel switchregion">Switch State</div>
 
 				<div class="selectregion t3">
 					<h1>Select a State</h1>

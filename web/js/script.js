@@ -55,7 +55,7 @@
                     if (fail) {
 
                     } else {
-                        $(".loading").addClass("hide");
+                        $("#loading").addClass("hide");
                     }
 
                 }
