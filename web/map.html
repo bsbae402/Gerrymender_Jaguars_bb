@@ -20,6 +20,7 @@
 
 		<script src="js/svg.js"></script>
 		<script src="js/leaflet.js"></script>
+		<script src="js/ui.js"></script>
 		<script src="js/map.js"></script>
 
 
@@ -196,21 +197,30 @@
 
 				<div class="content">
 
-					<div>Map Profile</div>
-					<input type="button" value="Save as" class="button button1" />
-					<input type="button" value="Save" class="button button1" />
-					<input type="button" value="Load" class="button button1" />
-					<input type="button" value="Delete" class="button button1" />
-
-					<br />
-					<br />
-
-					<input type="checkbox" />
-					<div class="label">Manual redistricting</div>
-
-					<input type="button" value="Redistrict" class="button" />
-
-					<div class="miniheader">Redistrict results/analytics</div>
+					<div class="constraint">
+						<div class="label">Compactness Weight: <span></span></div>
+						<div class="slider cw" slider="cw"></div>
+					</div>
+					<div class="constraint">
+						<div class="label">Efficiency Weight: <span></span></div>
+						<div class="slider ew" slider="ew"></div>
+					</div>
+					<div class="constraint">
+						<div class="label">Population Threshold: <span></span></div>
+						<div class="slider pt" slider="pt"></div>
+					</div>
+					<div class="algorithm">
+						<div class="button run">Run algorithm</div>
+						<div class="button pause disabled">Pause algorithm</div>
+						<div class="button stop disabled">Stop algorithm</div>
+					</div>
+					<div class="algresults">
+						<div class="progressbar">
+							<div class="scrolling"></div>
+							<div class="progress t2"></div>
+						</div>
+						<div class="button reset">Reset</div>
+					</div>
 
 				</div>
 

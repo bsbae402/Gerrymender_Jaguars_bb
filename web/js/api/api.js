@@ -99,6 +99,44 @@ var API_CALLS = [
         response : (r, data) => handleVotingData(r),
     },
 
+    // algorithm
+    {
+        name : "startalgorithm",
+        method : "POST",
+        url : "/algorithm/start",
+        response : (r, data) => r,
+        dummy : () => {
+            window.algloop = 0;
+            return {
+                algorithm_id : 0,
+                loops : 100,
+            }
+        },
+    },
+    {
+        name : "getalgorithmupdate",
+        method : "POST",
+        url : "/algorithm/update",
+        response : (r, data) => r,
+        dummy : (data={}) => {
+            window.algloop += 3 + Math.floor(Math.random() * 8);
+            return {
+                is_running : window.algloop < 100,
+                all_changes : [],
+                loop : window.algloop,
+            }
+        },
+    },
+    {
+        name : "stopalgorithm",
+        method : "POST",
+        url : "/algorithm/stop",
+        response : (r, data) => r,
+        dummy : () => {
+            is_running : false
+        },
+    },
+
     // geojson
     {
         name : "getdistrictsgeojson",

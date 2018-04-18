@@ -350,6 +350,144 @@ whenReady(function() {
 		}
 	}
 
+	// Redistricting
+	$("#cview .titletop .link:last-child").click();
+	var sliders = {
+		cw : [0, 1, 0.5],
+		ew : [0, 1, 0.5],
+		pt : [0.001, 0.25, 0.1],
+	}
+	$("#credistrict .slider").each(function(index) {
+		var $slider = $(this), $c = $slider.closest(".constraint");
+		var s = $slider.attr("slider");
+		var slider = new Slider($slider, (sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]));
+		sliders[s][3] = slider;
+		slider.onChangeAlways((v) => {
+			var n = sliders[s][0] + (sliders[s][1] - sliders[s][0]) * v;
+			$c.find(".label span").html(n.toFixed(4));
+			sliders[s][4] = n;
+		}, true);
+	});
+	(function() {
+		var pair = [sliders.cw, sliders.ew];
+		pair.forEach((p) => {
+			p[3].onChange((v) => {
+				var o = (pair[0] == p) ? pair[1] : pair[0];
+				o[3].change(1 - v, false);
+			});
+		});
+	})();
+	// algorithm
+	(function() {
+		var updates = [], UPDATE_TIME = 500,
+			lastUpdate = 0,
+			running = false,
+			paused = false, renderTime = 0,
+			totalLoops = 0,
+			aid = -1;
+
+		function reset() {
+			aid = -1;
+			$("#credistrict .algresults").removeClass("show");
+			$("#credistrict .algorithm .pause").html("Pause algorithm");
+			$("#credistrict .algorithm .run").removeClass("disabled");
+			$("#credistrict .algresults .progressbar .scrolling").removeClass("stop");
+			$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").addClass("disabled");
+		}
+
+		setInterval(() => {
+			if (running) {
+				if (new Date().getTime() > lastUpdate + UPDATE_TIME) {
+					lastUpdate = new Date().getTime();
+					APICall("getalgorithmupdate", { algorithm_id : aid })
+						.then(function(r) {
+							updates.push(r);
+							if (!r.is_running) {
+								lastUpdate = Infinity;
+							}
+						});
+				}
+
+				if (!paused && updates.length) {
+					if (new Date().getTime() > renderTime + UPDATE_TIME) {
+						renderTime = new Date().getTime();
+						var update = updates.shift();
+						// update.all_changes
+						var perc = update.loop / totalLoops * 100;
+						$("#credistrict .algresults .progress").css("width", perc + "%");
+						if (!update.is_running) {
+							// finished
+							$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").addClass("disabled");
+						}
+					}
+				}
+			}
+		}, 20);
+
+		for(var i=0;i<60;i++) {
+			$("#credistrict .algresults .progressbar .scrolling").append(
+				$("<div>").addClass("ul"),
+				$("<div>").addClass("br"),
+				);
+		}
+
+		$("#credistrict .algresults .reset").click(function() {
+			running = false;
+			reset();
+		});
+		$("#credistrict .algorithm .stop").click(function() {
+			if ($(this).hasClass("disabled")) return;
+			if (!running) return;
+			running = false;
+			$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").addClass("disabled");
+			$("#credistrict .algresults .progressbar .scrolling").addClass("stop");
+		});
+		$("#credistrict .algorithm .pause").click(function() {
+			if ($(this).hasClass("disabled")) return;
+			if (!running) return;
+			if (!paused) {
+				paused = true;
+				$(this).html("Resume algorithm");
+				$("#credistrict .algresults .progressbar .scrolling").addClass("stop");
+			} else {
+				renderTime = new Date().getTime() - UPDATE_TIME / 2;
+				paused = false;
+				$(this).html("Pause algorithm");
+				$("#credistrict .algresults .progressbar .scrolling").removeClass("stop");
+			}
+		});
+		$("#credistrict .algorithm .run").click(function() {
+			if (!active.sy) return;
+			if (running) return;
+			$(this).addClass("disabled");
+
+			var map = [["cw", "compactness_weight"],
+					   ["ew", "efficiency_weight"],
+					   ["pt", "population_threshold"]];
+			var data = {
+				state_id : active.sy.id
+			};
+			map.forEach((a) => {
+				data[a[1]] = sliders[a[0]][4];
+			});
+
+			APICall("startalgorithm", data)
+				.then((r) => {
+					updates = [];
+					running = true;
+					paused = false;
+					aid = r.algorithm_id;
+					totalLoops = r.loops;
+					lastUpdate = 0;
+					renderTime = 0;
+
+					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").removeClass("disabled");
+					$("#credistrict .algresults .progress").css("width", 0);
+					$("#credistrict .algresults").addClass("show");
+				});
+		});
+	})();
+
 	loadStates();
 
 });

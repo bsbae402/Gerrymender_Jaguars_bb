@@ -413,26 +413,87 @@
 
 
 
+#credistrict .constraint {
+    margin-bottom:9px;
+}
 #credistrict .label {
     display: inline-block;
+    font-size:13px;
+}
+#credistrict .label span {
+    font-weight: 600;
+}
+#credistrict .slider {
+    display: block;
+    width: 100%;
+    margin-top:5px;
+}
+#credistrict .algorithm {
+    padding-top: 8px;
 }
 #credistrict .button {
-    display: block;
-    padding:5px 10px;
-    margin-top:5px;
-    cursor: pointer;
-}
-#credistrict .button.button1 {
-    display: inline-block;
+    font-size:13px;
     margin-right:10px;
 }
-#credistrict .miniheader {
+#credistrict .algresults {
+    display: none;
+    margin-top:15px;
+}
+#credistrict .algresults.show {
     display: block;
-    margin-top:20px;
-    border-bottom:1px solid #000;
-    max-width:60%;
-    padding-bottom:2px;
-    margin-bottom:10px;
+}
+#credistrict .progressbar {
+    position: relative;
+    width: 100%;
+    height:30px;
+    border-radius:3px;
+    overflow: hidden;
+    background:#ddd;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
+}
+@keyframes slideshow {
+  0%    { left: -280px; }
+  100%  { left: 0px; }
+}
+#credistrict .progressbar .progress {
+    position: relative;
+    width:0%;
+    max-width: 100%;
+    height:100%;
+    background:#aca;
+    box-shadow: inset 0px 0px 1px 1px rgba(30, 100, 30, 0.2);
+}
+#credistrict .progressbar .scrolling {
+    position: absolute;
+    left:0;
+    top:0;
+    width: 100%;
+    white-space: nowrap;
+    height: 30px;
+    font-size: 0;
+    overflow: visible;
+    animation: slideshow 4s linear infinite;
+}
+#credistrict .progressbar .scrolling.stop {
+    animation-play-state: paused;
+}
+#credistrict .progressbar .scrolling > div {
+    display: inline-block;
+    width: 0;
+    height: 0;
+}
+#credistrict .progressbar .scrolling > div.ul {
+    border-top:30px solid #aaa;
+    border-right:30px solid transparent;
+    margin-right:10px;
+}
+#credistrict .progressbar .scrolling > div.br {
+    border-bottom:30px solid #aaa;
+    border-left:30px solid transparent;
+}
+#credistrict .algresults .reset {
+    margin-top:15px;
 }
 
 
