@@ -351,7 +351,7 @@ whenReady(function() {
 	}
 
 	// Redistricting
-	$("#cview .titletop .link:last-child").click();
+	//$("#cview .titletop .link:last-child").click();
 	var sliders = {
 		cw : [0, 1, 0.5],
 		ew : [0, 1, 0.5],

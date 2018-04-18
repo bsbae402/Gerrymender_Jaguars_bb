@@ -240,7 +240,7 @@ function handleVotingData(r) {
                         resolve(r);
 
                     },
-                    error : function(jqXHR, errorText) {
+                    error : function(error, errorText) {
                         var status = error.status;
 
                         if (status == 401) {
