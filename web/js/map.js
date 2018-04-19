@@ -169,12 +169,56 @@ whenReady(function() {
 
 	var statesGeoJSON, statesLayer;
 	function loadStatesLoaded() {
+		function hoverState($el, layer, props) {
+			if (!props.active) return false;
+			var state = states.find((state) => state.name == props.NAME);
+			if (!state) return false;
+
+			var vtotal = state.recent.votes.DEM + state.recent.votes.REP,
+				vratio = state.recent.votes.DEM / vtotal;
+			var absratio = 0.5 - Math.abs(vratio - 0.5),
+				amount = absratio < 0.1 ? "Extremely" : (absratio < 0.2 ? "Very" : (absratio < 0.35 ? "Moderately" : "Slightly")),
+				party = vratio > 0.5 ? "Democratic" : "Republican";
+			$el.append(
+				$("<div>").addClass("title").html(state.name + " [" + state.code + "]"),
+				$("<div>").addClass("info").append(
+					$("<div>").html("Years of Data"),
+					$("<div>").html(state.numOfYears + " year(s)"),
+					),
+				$("<div>").addClass("info").append(
+					$("<div>").html("Average Population"),
+					$("<div>").html(state.population),
+					),
+				$("<div>").addClass("info").append(
+					$("<div>").html("Average Voters"),
+					$("<div>").html(state.total_votes + " (" + (100 * state.total_votes / state.population).toFixed(2) + "%)"),
+					),
+				$("<div>").addClass("info").append(
+					$("<div>").html(state.recent.election_year + " Population"),
+					$("<div>").html(state.recent.population),
+					),
+				$("<div>").addClass("info").append(
+					$("<div>").html(state.recent.election_year + " Voters"),
+					$("<div>").html(state.recent.total_votes + " (" + (100 * state.recent.total_votes / state.recent.population).toFixed(2) + "%)"),
+					),
+				$("<div>").addClass("votepadding"),
+				$("<div>").addClass("spectrum").append(
+					$("<div>").addClass("tick").css("left", (vratio * 100) + "%"),
+					$("<div>").addClass("text").html(amount + " " + party)
+						.css(vratio <= 0.5 ? "left" : "right", "calc(6px + " + (absratio * 100) + "%)"),
+					),
+				);
+
+			return true;
+		}
+
 		hideSides();
 		Object.keys(active).forEach((key) => active[key] = null);
 		if (states && statesGeoJSON) {
 			map.cleanLayers();
 			statesLayer = map.addGeoJSON(statesGeoJSON, "states", {
 				color: COLOR_SCHEME.STATES,
+				hover : hoverState,
 			});
 
 			map.attachGeoJSONdata(statesLayer, states,

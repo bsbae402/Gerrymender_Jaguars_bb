@@ -148,16 +148,18 @@ header.custom .logocontainer .logo.c {
 
 header.custom .right {
     padding-right:60px;
+    height:110px;
 }
 header.custom .right .link {
     color:#e6eeff;
     font-size:22px;
+    font-weight:500;
 }
 header.custom .right .link:hover {
     color:#bdf;
 }
 header.custom .right .vbar {
-    width:1px;
+    width:2px;
     background:#e6eeff;
     height:25%;
 }

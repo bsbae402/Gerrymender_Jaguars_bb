@@ -74,17 +74,29 @@ var API_CALLS = [
                         geo_id : sy.geo_id,
                         code : sy.code,
                         years : [],
+                        syears : [],
                         yearMap : {}
                     }
                 var state = states[sy.name];
 
                 state.years.push(sy.election_year);
+                state.syears.push(sy);
                 state.yearMap[sy.election_year] = sy;
             });
             var states2 = [];
             for (var i in states)
                 if (states.hasOwnProperty(i))
                     states2.push(states[i]);
+
+            // aggregate data of states
+            states2.forEach((state) => {
+                state.numOfYears = state.years.length;
+                state.population = state.syears.map((sy) => sy.population).reduce((a, b) => a + b, 0) / state.numOfYears;
+                state.total_votes = state.syears.map((sy) => sy.total_votes).reduce((a, b) => a + b, 0) / state.numOfYears;
+                state.years.sort();
+                state.recent = state.yearMap[state.years[state.years.length - 1]];
+            });
+
             return states2;
         },
     },
