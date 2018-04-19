@@ -1,5 +1,32 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,700");
+
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 100;
+    src: url('fonts/Proxima Nova/Proxima Nova Thin.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 300;
+    src: url('fonts/Proxima Nova/Proxima Nova Light.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 400;
+    src: url('fonts/Proxima Nova/Proxima Nova Regular.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 700;
+    src: url('fonts/Proxima Nova/Proxima Nova Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Proxima Nova';
+    font-weight: 800;
+    src: url('fonts/Proxima Nova/Proxima Nova Extrabold.otf') format('opentype');
+}
 
 @font-face {
     font-family: "Blogger Sans";

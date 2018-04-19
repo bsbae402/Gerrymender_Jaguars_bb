@@ -1,3 +1,5 @@
+var MAPBOX_API_URL = "https://api.mapbox.com/styles/v1/roger-that/cjg6nbnkha3712rmuzpsgv4lq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9nZXItdGhhdCIsImEiOiJjamZmazFvdnM0dG1hMndxaGFqcmRiN2ViIn0.6CACaDuW3jp3eZwutrRrWQ";
+
 class LeafletMap {
 
 	constructor() {
@@ -13,7 +15,7 @@ class LeafletMap {
 	init(id) {
 		this.lmap = L.map(id).setView([43.19, -71.572], 7);
 
-		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		L.tileLayer(MAPBOX_API_URL, {
 		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		    maxZoom: 18,
 		    id: 'mapbox.streets',
@@ -88,6 +90,18 @@ class LeafletMap {
 			if (layerObject.mapToData)
 				mapFunc = layerObject.mapToData;
 			var data = layerObject.data.find((d) => mapFunc(d, props));
+
+			/*
+			var a = [0, 0, 200], b = [200, 0, 0], c = Math.random();
+			var d = a.map((value, index) => a[index] + (b[index] - a[index]) * c).map(Math.round);
+			console.log(d);
+			layer.setStyle({
+				color : buildColor(d),
+				weight : 1
+			})
+			props.active = true;
+			return;
+			*/
 
 			if (!data) {
 				props.active = false;

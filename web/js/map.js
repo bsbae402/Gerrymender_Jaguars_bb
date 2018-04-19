@@ -3,9 +3,13 @@ whenReady(function() {
 
 	var openTab = -1,
 		mapWPercent = 50,
-		fullMap = true;
+		fullMap = true,
+		map = null;
 
-	function resize() {return;
+	function resize() {
+		if (map)
+			map.resize();
+		return;
 		var w = $("#mapbox").width(),
 			h = $("#mapbox").height();
 
@@ -395,7 +399,7 @@ whenReady(function() {
 		map.fitBounds2(precinctLayer);
 	}
 
-	var map = new LeafletMap();
+	map = new LeafletMap();
 
 	map.init("map");
 

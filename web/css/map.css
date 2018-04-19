@@ -97,19 +97,25 @@
 #mapbox .maplabel {
     position: absolute;
     z-index:11;
-    font-family:"Open Sans";
-    padding:5px 11px 6px;
+    font-family: Raleway;
+    font-weight:300;
+    padding:7px 11px 9px;
     font-size:15px;
     color:#000;
     background:#fff;
     cursor: pointer;
     user-select: none;
     border:2px solid rgba(0,0,0,0.2);
-    font-weight:600;
+}
+#mapbox .maplabelstatic {
+    border-color:rgba(0, 0, 90, 1);
+    background:rgba(0, 0, 90, 0.2);
+    color:#006;
+    text-shadow:1px 1px rgba(200, 200, 200, 1);
 }
 #mapbox .maplabel.centertop {
     margin:0 auto;
-    top:11px;
+    top:40px;
     width:200px;
     left:calc(50% - 100px);
     text-align: center;

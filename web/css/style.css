@@ -17,7 +17,7 @@ a {
 }
 
 body, input, textarea, select {
-    font-family: "Blogger Sans";
+    font-family: "Proxima Nova";
 }
 
 .t2 { -webkit-transition: all 0.2s ease-out; -moz-transition: all 0.2s ease-out; -o-transition: all 0.2s ease-out; transition: all 0.2s ease-out; }
