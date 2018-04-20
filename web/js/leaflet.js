@@ -220,6 +220,8 @@ class LeafletMap {
 			var bounds = layer.getBounds();
 			this.lmap.fitBounds(bounds);
 		}
+    	this.hover.active = null;
+    	this.hover.$el.addClass("hide");
 	}
 	fitBoundsActive(layer=null, left=0, top=0) {
 		if (!layer)
@@ -245,8 +247,8 @@ var COLOR_SCHEME = {
 		DISABLED : [150, 150, 150],
 	},
 	REGULAR : {
-		STANDARD : [50, 50, 200],
-		HOVER : [0, 0, 80],
+		STANDARD : [0, 0, 80],
+		HOVER : [70, 70, 190],
 		DISABLED : [150, 150, 150],
 	},
 	BACKGROUND : {

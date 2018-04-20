@@ -187,19 +187,19 @@ whenReady(function() {
 					),
 				$("<div>").addClass("info").append(
 					$("<div>").html("Average Population"),
-					$("<div>").html(state.population),
+					$("<div>").html(commaNumbers(state.population)),
 					),
 				$("<div>").addClass("info").append(
 					$("<div>").html("Average Voters"),
-					$("<div>").html(state.total_votes + " (" + (100 * state.total_votes / state.population).toFixed(2) + "%)"),
+					$("<div>").html(commaNumbers(state.total_votes) + " (" + (100 * state.total_votes / state.population).toFixed(2) + "%)"),
 					),
 				$("<div>").addClass("info").append(
 					$("<div>").html(state.recent.election_year + " Population"),
-					$("<div>").html(state.recent.population),
+					$("<div>").html(commaNumbers(state.recent.population)),
 					),
 				$("<div>").addClass("info").append(
 					$("<div>").html(state.recent.election_year + " Voters"),
-					$("<div>").html(state.recent.total_votes + " (" + (100 * state.recent.total_votes / state.recent.population).toFixed(2) + "%)"),
+					$("<div>").html(commaNumbers(state.recent.total_votes) + " (" + (100 * state.recent.total_votes / state.recent.population).toFixed(2) + "%)"),
 					),
 				$("<div>").addClass("votepadding"),
 				$("<div>").addClass("spectrum").append(
@@ -259,8 +259,8 @@ whenReady(function() {
 
 			$year.append(
 				$("<div>").addClass("year").html(year),
-				$("<div>").addClass("votes").html(yearData.total_votes),
-				$("<div>").addClass("population").html(yearData.population),
+				$("<div>").addClass("votes").html(commaNumbers(yearData.total_votes)),
+				$("<div>").addClass("population").html(commaNumbers(yearData.population)),
 				);
 			$year.click(function() {
 				var year = $(this).attr("year"),	
@@ -341,9 +341,9 @@ whenReady(function() {
 
 		$("#cview .syinfo .statename .right").html(sy.name);
 		$("#cview .syinfo .year .right").html(sy.election_year);
-		$("#cview .syinfo .population .right").html(sy.population);
-		$("#cview .syinfo .area .right").html(sy.area + " sq mi");
-		$("#cview .syinfo .perimeter .right").html(sy.perimeter + " mi");
+		$("#cview .syinfo .population .right").html(commaNumbers(sy.population));
+		$("#cview .syinfo .area .right").html(commaNumbers((sy.area / 1000000).toFixed(1)) + " sq km");
+		$("#cview .syinfo .perimeter .right").html(commaNumbers((sy.perimeter / 1000000).toFixed(1)) + " km");
 		setupVoteBar(sy.votes, $("#cview .syinfo .votes"));
 
 		$("#cview .yearbox .yearselect.active").removeClass("active");
@@ -388,9 +388,9 @@ whenReady(function() {
 		$("#cview .dinfo .statename .right").html(sy.name);
 		$("#cview .dinfo .year .right").html(sy.election_year);
 		$("#cview .dinfo .code .right").html(district.code);
-		$("#cview .dinfo .population .right").html(district.population);
-		$("#cview .dinfo .area .right").html(district.area + " sq mi");
-		$("#cview .dinfo .perimeter .right").html(district.perimeter + " mi");
+		$("#cview .dinfo .population .right").html(commaNumbers(district.population));
+		$("#cview .dinfo .area .right").html(commaNumbers((district.area / 1000000).toFixed(1)) + " sq km");
+		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000000).toFixed(1)) + " km");
 		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
 
 		map.setGeoJSONsettings(active.districtsLayer, {
@@ -435,9 +435,9 @@ whenReady(function() {
 		$("#cview .pinfo .statename .right").html(sy.name);
 		$("#cview .pinfo .year .right").html(sy.election_year);
 		$("#cview .pinfo .code .right").html(precinct.code);
-		$("#cview .pinfo .population .right").html(precinct.population);
-		$("#cview .pinfo .area .right").html(precinct.area + " sq mi");
-		$("#cview .pinfo .perimeter .right").html(precinct.perimeter + " mi");
+		$("#cview .pinfo .population .right").html(commaNumbers(precinct.population));
+		$("#cview .pinfo .area .right").html(commaNumbers((precinct.area / 1000000).toFixed(1)) + " sq km");
+		$("#cview .pinfo .perimeter .right").html(commaNumbers((precinct.perimeter / 1000000).toFixed(1)) + " km");
 		setupVoteBar(precinct.votes, $("#cview .pinfo .votes"));
 
 		map.fitBounds2(precinctLayer);

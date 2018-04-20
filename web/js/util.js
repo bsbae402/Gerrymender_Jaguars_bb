@@ -48,3 +48,7 @@ function jset(key, value={}) {
     pset(key, JSON.stringify(value));
     return value;
 }
+
+function commaNumbers(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
