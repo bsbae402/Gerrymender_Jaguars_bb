@@ -13,7 +13,7 @@ public class AppConstants {
     // API JSON names
     public static final String JSON_NAME_VOTING_DATA = "voting_data";
 
-    // Path
+    // Path GeoJSON
     public static final String PATH_RESOURCES = "src/main/resources";
     public static final String PATH_GEOJSONS = PATH_RESOURCES + "/geojsons";
     public static final String PATH_STATE_GEOJSON_OH2010 = PATH_GEOJSONS + "/state_boundaries/state_tl_2010_39_OH.json";
@@ -25,4 +25,8 @@ public class AppConstants {
     public static final String PATH_PRECINCT_GEOJSON_OH2010 = PATH_GEOJSONS + "/precinct_boundaries/OH_precincts_2010.json";
     public static final String PATH_PRECINCT_GEOJSON_NH2010 = PATH_GEOJSONS + "/precinct_boundaries/NH_precincts_2010.json";
     public static final String PATH_PRECINCT_GEOJSON_WI2010 = PATH_GEOJSONS + "/precinct_boundaries/WI_precincts_2010.json";
+
+    // Path json
+    public static final String PATH_JSONS = PATH_RESOURCES + "/jsons";
+    public static final String PATH_PRECINCT_NEIGHBORS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbors.json";
 }
