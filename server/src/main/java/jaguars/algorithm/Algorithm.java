@@ -18,10 +18,20 @@ public class Algorithm {
     @Autowired
     private CalculationManager cm;
 
+    private double compactnessWeight = AppConstants.DEFAULT_COMPACTNESS_WEIGHT;
+    private double efficiencyWeight = AppConstants.DEFAULT_EFFICIENCY_WEIGHT;
+    private double populationThreshold = AppConstants.DEFAULT_POPULATION_THRESHOLD;
+
     private Precinct getRandomPrecinct(ArrayList<Precinct> borderPrecincts) {
         Random rand = new Random();
         int idx = rand.nextInt(borderPrecincts.size());
         return borderPrecincts.get(idx);
+    }
+
+    public void updateWeights(double compactnessWeight, double efficiencyWeight, double populationThreshold){
+        this.compactnessWeight = compactnessWeight;
+        this.efficiencyWeight = efficiencyWeight;
+        this.populationThreshold = populationThreshold;
     }
 
     private State generateNewDistrictBoundaries(Precinct targetPrecinct, State oldDistrictState) {

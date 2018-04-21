@@ -14,12 +14,10 @@ public class AlgorithmController {
     private Algorithm algorithm;
 
     @RequestMapping(value = "/algorithm/start", method = RequestMethod.POST)
-    public State startRedistrictAlgorithm(@RequestParam("compactness_weight") double compactnessWeight,
+    public String startRedistrictAlgorithm(@RequestParam("compactness_weight") double compactnessWeight,
                                           @RequestParam("efficiency_weight") double efficiencyWeight,
                                           @RequestParam("population_threshold") double populationThreshold) {
-
-        State updatedState = algorithm.mainLogic();
-        return updatedState;
+        return "";
     }
 
     @RequestMapping(value = "/algorithm/update", method = RequestMethod.POST)

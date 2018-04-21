@@ -21,7 +21,6 @@ public class UserManager {
         ArrayList<User> allUsers = new ArrayList<>();
 
         for(User u : userRepository.findAll()) {
-            System.out.println(u);
             allUsers.add(u);
         }
         return allUsers;
@@ -64,6 +63,8 @@ public class UserManager {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
+
+        userRepository.save(user);
     }
 
 }
