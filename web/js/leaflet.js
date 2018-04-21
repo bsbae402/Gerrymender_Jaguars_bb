@@ -10,9 +10,15 @@ class LeafletMap {
 		};
 
 		this.onClick = () => {};
+
+		this.hover = {
+			activeLayer : null,
+			$el : null,
+		};
 	}
 
 	init(id) {
+		this.$map = $("#" + id);
 		this.lmap = L.map(id).setView([43.19, -71.572], 7);
 
 		L.tileLayer(MAPBOX_API_URL, {
@@ -21,11 +27,34 @@ class LeafletMap {
 		    id: 'mapbox.streets',
 		    accessToken: 'pk.eyJ1Ijoicm9nZXItdGhhdCIsImEiOiJjamZmazFvdnM0dG1hMndxaGFqcmRiN2ViIn0.6CACaDuW3jp3eZwutrRrWQ'
 		}).addTo(this.lmap);
+
+		this.hover.$el = $("<div>").addClass("popup hide");
+		this.$map.append(this.hover.$el);
+		this.$map.mousemove((e) => this.hoverMousemove(e));
 	}
 
 	resize() {
 		if (this.lmap)
 			this.lmap.invalidateSize();
+	}
+
+	hoverMousemove(e) {
+		var PADDING = 10;
+		var mx = e.pageX - $("#map").offset().left, my = e.pageY - $("#map").offset().top;
+		var w = this.hover.$el.outerWidth(), h = this.hover.$el.outerHeight(),
+			maxw = this.$map.outerWidth(), maxh = this.$map.outerHeight();
+		var pos = {
+			x : mx + 15,
+			y : my + 15,
+		};
+		if (pos.x + w >= maxw - PADDING)
+			pos.x = mx - 2 - w;
+		if (pos.y + h >= maxh - PADDING)
+			pos.y = my - 3 - h;
+		this.hover.$el.css({
+			left : pos.x + "px",
+			top : pos.y + "px",
+		})
 	}
 
 	cleanLayers() {
@@ -50,6 +79,7 @@ class LeafletMap {
 			settings : {
 				color : COLOR_SCHEME.REGULAR,
 				hideIfInvalid : false,
+				hover : () => false,
 			},
 		};
 		layerObject.settings = $.extend(layerObject.settings, settings);
@@ -116,7 +146,7 @@ class LeafletMap {
 				props.active = true;
 				layer.setStyle({
 					color : buildColor(COLOR.STANDARD),
-					weight : 3
+					weight : 2
 				})
 			}
 		});
@@ -129,11 +159,21 @@ class LeafletMap {
 	        click: (e) => this.onGeoJSONclick(e, layerObject),
 	        mouseover : (e) => {
 	        	var layer = e.target, feature = layer.feature, props = feature.properties;
+
 	        	if (props.active) {
 	        		props.mouseovered = true;
 		        	layer.setStyle({
 		        		color : buildColor(settings.color.HOVER)
 		        	})
+		        }
+
+		        this.hover.$el.attr("style", "").attr("css", "popup hide").html("");
+		        var shouldHover = settings.hover(this.hover.$el, layer, props);
+		        if (shouldHover) {
+		        	this.hover.active = layer;
+		        	this.hover.$el.removeClass("hide");
+		        } else {
+		        	this.hover.active = null;
 		        }
 	        },
 	        mouseout : (e) => {
@@ -144,6 +184,11 @@ class LeafletMap {
 		        	layer.setStyle({
 		        		color : buildColor(props.active ? settings.color.STANDARD : settings.color.DISABLED)
 		        	})
+		        }
+
+		        if (this.hover.active == layer) {
+		        	this.hover.active = null;
+		        	this.hover.$el.addClass("hide");
 		        }
 	        },
 	    });
@@ -175,6 +220,8 @@ class LeafletMap {
 			var bounds = layer.getBounds();
 			this.lmap.fitBounds(bounds);
 		}
+    	this.hover.active = null;
+    	this.hover.$el.addClass("hide");
 	}
 	fitBoundsActive(layer=null, left=0, top=0) {
 		if (!layer)
@@ -200,8 +247,8 @@ var COLOR_SCHEME = {
 		DISABLED : [150, 150, 150],
 	},
 	REGULAR : {
-		STANDARD : [50, 50, 200],
-		HOVER : [0, 0, 80],
+		STANDARD : [0, 0, 80],
+		HOVER : [70, 70, 190],
 		DISABLED : [150, 150, 150],
 	},
 	BACKGROUND : {
