@@ -29,4 +29,9 @@ public class AppConstants {
     // Path json
     public static final String PATH_JSONS = PATH_RESOURCES + "/jsons";
     public static final String PATH_PRECINCT_NEIGHBORS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbors.json";
+
+    // return codes
+    public static final int ON_SUCCESS = 0;
+    public static final int ON_ERROR = 1;
+    public static final int USER_NOT_OK = -1;
 }

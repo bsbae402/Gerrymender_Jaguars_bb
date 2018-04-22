@@ -3,6 +3,7 @@ package jaguars.user;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
+import jaguars.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
@@ -119,16 +120,57 @@ public class UserController {
         return retObj.toString();
     }
 
-    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
+    /********************************
+     *  ADMIN USER FUNCTIONALITY    *
+     ********************************/
+    @RequestMapping(value = "/admin/user/list", method = RequestMethod.GET)
     public String getAllUsers() {
-        ArrayList<User> userList = um.getAllUsers();
-        JsonArray retJsonArr = Json.array();
-        for(User a : userList) {
-            JsonObject obj = Json.object().add("user_id", a.getId())
-                .add("username", a.getUsername())
-                .add("email", a.getEmail());
-            retJsonArr.add(obj);
-        }
-        return retJsonArr.toString();
+        //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN) {
+            ArrayList<User> userList = um.getAllUsers();
+            JsonArray retJsonArr = Json.array();
+            for (User a : userList) {
+                JsonObject obj = Json.object().add("user_id", a.getId())
+                        .add("username", a.getUsername())
+                        .add("password", a.getPassword())
+                        .add("email", a.getEmail())
+                        .add("role", a.getRole().name());
+                retJsonArr.add(obj);
+            }
+            return retJsonArr.toString();
+
     }
+
+    @RequestMapping(value = "/admin/user/{userid}", method = RequestMethod.DELETE)
+    public String adminDeleteUser(@PathVariable int userid) {
+        //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
+            um.removeUser(userid);
+            return "{ \"error\" : 0 }";
+
+    }
+
+    @RequestMapping(value = "/admin/user/{userid}", method = RequestMethod.POST)
+    public String adminEditUser(@PathVariable int userid, @RequestParam("username") String username, @RequestParam("password") String password,
+                                @RequestParam("email") String email) {
+        //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
+            um.editUser(userid, username, password, email);
+            return "{ \"error\" : 0 }";
+
+    }
+
+    @RequestMapping(value = "/admin/user/add", method = RequestMethod.POST)
+    public String adminAddUser(@RequestParam("username") String username, @RequestParam("password") String password,
+                         @RequestParam("email") String email) {
+        // if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN) {
+            ArrayList<User> users = new ArrayList<>(um.findUsersByUsername(username));
+            if (users.size() >= 1) {
+                return "{ \"error\" : 1," +
+                        "\"user_id\" : -1 }";
+            }
+            User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
+            JsonObject retObj = Json.object().add("user_id", createdUser.getId());
+            return retObj.toString();
+    }
+
+
+
 }

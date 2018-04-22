@@ -21,7 +21,6 @@ public class UserManager {
         ArrayList<User> allUsers = new ArrayList<>();
 
         for(User u : userRepository.findAll()) {
-            System.out.println(u);
             allUsers.add(u);
         }
         return allUsers;
@@ -53,5 +52,19 @@ public class UserManager {
         httpSession.invalidate();
     }
 
+    public void removeUser(int userid) {
+        userRepository.delete(userid);
+    }
+
+    public void editUser(int userid, String username, String password, String email) {
+        User user = userRepository.findOne(userid);
+
+        // If these functions work properly, just setting them is enough to update them in the database
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+
+        userRepository.save(user);
+    }
 
 }
