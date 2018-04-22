@@ -33,12 +33,7 @@ var API_CALLS = [
         response : function(r={}, data={}) {
             return r;
         },
-        dummy : function(data={}) {
-            return {
-                user_id : 0,
-                error : 0,
-            }
-        },
+        adummy : function(data={}) { return { user_id : 0, error : 0, } },
     },
 
     // users
@@ -53,7 +48,7 @@ var API_CALLS = [
         method : "GET",
         url : "admin/user/list/",
         response : (r) => r,
-        dummy : () => {
+        adummy : () => {
             var id = 0;
             return [0,0,0,0].map(() => {
                 return {
@@ -70,6 +65,13 @@ var API_CALLS = [
         url : "admin/user/{id}",
         response : (r) => r,
         //dummy : () => {error : 0},
+    },
+    {
+        name : "deleteuser",
+        method : "DELETE",
+        url : "user/list/{id}",
+        response : (r) => r,
+        dummy : () => {error : 0},
     },
     {
         name : "getusers",
@@ -211,6 +213,12 @@ function handleVotingData(r) {
         a.voting_data.forEach((v) => {
             a.votes[v.political_party] = v.votes;
         });
+        /*
+        if (a.votes.DEM == 0) a.votes.DEM = 100 + Math.floor(Math.random() * 900)
+        if (a.votes.REP == 0) a.votes.REP = 100 + Math.floor(Math.random() * 900)
+        if (a.votes.OTHER == 0) a.votes.OTHER = 10 + Math.floor(Math.random() * 150)
+        a.votes.total = a.votes.DEM + a.votes.REP + a.votes.OTHER;
+        */
     });
     return r;
 }

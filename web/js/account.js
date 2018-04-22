@@ -72,7 +72,7 @@ whenReady(function() {
                 user.email = data.email;
                 user.password = data.password;
                 jset("user", user);
-                //window.location.href = window.location.href;
+                window.location.href = window.location.href;
             });
     }
 
@@ -80,17 +80,92 @@ whenReady(function() {
     if (user.type === 2) {
         $(".admin").addClass("show");
 
+        $(".users .user input").on("keypress", function(e) {
+            var $user = $(this).closest(".user");
+            if (e.keyCode == 13) {
+                if ($(this).parent().hasClass("username")) {
+                    $user.find(".email input").focus();
+                } else {
+                    $user.find(".save").click();
+                }
+            }
+        });
+
+        $(".users .user .delete").click(function() {
+            var $user = $(this).closest(".user");
+            var id = parseInt($user.attr("uid"));
+
+            if (!window.confirm("Are you sure?")) return;
+
+            APICall("deleteuser", {id : id})
+                .then((r) => {
+                    $user.remove();
+                });
+        });
+
+        $(".users .user .add").click(function() {
+            var d = {
+                email : $(".users .user.add .email input").val(),
+                username : $(".users .user.add .username input").val(),
+                password : $(".users .user.add .password input").val(),
+            };
+
+            $(".users .user.add input").val("");
+
+            APICall("signup", d)
+                .then((r) => {
+                    var uid = r.user_id;
+                    if (!uid) return;
+                    d.role = "USER";
+                    d.user_id = uid;
+                    addUser(d);
+                });
+        });
+
+        $(".users .user .edit").click(function() {
+            var $user = $(this).closest(".user");
+            if ($user.hasClass("header")) return;
+
+            $user.addClass("edit");
+            $user.find(".email input").val($user.find(".email .text").html());
+            $user.find(".username input").val($user.find(".username .text").html()).focus();
+        });
+
+        $(".users .user .save").click(function() {
+            var $user = $(this).closest(".user");
+            var id = parseInt($user.attr("uid"));
+            var d = {
+                id : id,
+                username : $user.find(".username input").val(),
+                email : $user.find(".email input").val(),
+                password : $user.attr("pw"),
+            };
+
+            APICall("edituser", d)
+                .then((r) => {
+                    $user.find(".email .text").html(d.email);
+                    $user.find(".username .text").html(d.username);
+                    $user.removeClass("edit");
+                });
+        });
+
         function addUser(user) {
             var $user = $(".users .user.header").clone(true, true).removeClass("header");
-            $(".users").append($user);
+            $user.insertBefore($(".users .user.add"));
+            $user.attr("uid", user.user_id);
+            $user.attr("pw", user.password);
             $user.find(".id").html(user.user_id);
-            $user.find(".email").html(user.email);
-            $user.find(".username").html(user.username);
+            $user.find(".type").html(user.role);
+            $user.find(".email .text").html(user.email);
+            $user.find(".username .text").html(user.username);
         }
 
         APICall("getusers")
             .then((r) => {
-                r.forEach(addUser);
+                r.forEach((u) => {
+                    if (u.user_id == user.id) return;
+                    addUser(u);
+                });
             });
     }
 

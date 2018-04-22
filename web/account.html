@@ -35,7 +35,7 @@
 
 					<div class="account">
 
-						<h1>ACCOUNT PANEL</h1>
+						<h1>MY ACCOUNT</h1>
 
 						<div class="field username">
 							<div class="edit">edit</div>
@@ -54,8 +54,8 @@
 							<div class="label">Password</div>
 							<div class="value">********</div>
 							<div class="input">
-								<input class="old" placeholder="Old Password" />
-								<input class="new" placeholder="New Password" />
+								<input type="password" class="old" placeholder="Old Password" />
+								<input type="password" class="new" placeholder="New Password" />
 								<div class="incorrect"></div>
 							</div>
 						</div>
@@ -65,13 +65,39 @@
 
 					<div class="admin">
 
-						<h1>ADMIN PANEL</h1>
+						<h1>ADMIN MANAGEMENT</h1>
 
 						<div class="users">
 							<div class="user header">
+								<div class="edit clickable">edit</div>
+								<div class="delete clickable">delete</div>
 								<div class="id">ID</div>
-								<div class="username">Username</div>
-								<div class="email">Email</div>
+								<div class="type">Role</div>
+								<div class="username">
+									<div class="text">Username</div>
+									<input />
+								</div>
+								<div class="email">
+									<div class="text">Email</div>
+									<input />
+								</div>
+								<div class="save clickable">Save</div>
+							</div>
+							<div class="user add">
+								<div class="edit">edit</div>
+								<div class="delete">delete</div>
+								<div class="id">ID</div>
+								<div class="type">Role</div>
+								<div class="username">
+									<input placeholder="Username" />
+								</div>
+								<div class="email">
+									<input placeholder="Email" />
+								</div>
+								<div class="password">
+									<input type="password" placeholder="Password" />
+								</div>
+								<div class="add clickable">Add User</div>
 							</div>
 						</div>
 

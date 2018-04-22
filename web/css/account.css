@@ -19,7 +19,7 @@
 
 
 #account .account {
-	margin-top:12px;
+	margin-top:20px;
 }
 #account .account h1 {
 	margin-bottom:15px;
@@ -37,6 +37,7 @@
 	margin-right:14px;
 	cursor: pointer;
 	padding-top:3px;
+	color:#777;
 }
 #account .account .field .edit:hover {
 	text-decoration: underline;
@@ -95,11 +96,11 @@
 
 
 #account .admin {
-	margin-top:32px;
+	margin-top:34px;
 	display: none;
 }
 #account .admin h1 {
-	margin-bottom:15px;
+	margin-bottom:20px;
 }
 #account .admin.show {
 	display: block;
@@ -110,22 +111,90 @@
 #account .admin .users .user {
 	display: block;
 	font-weight: 300;
-	margin-bottom:2px;
+	margin-bottom:5px;
+	font-size:0;
 }
 #account .admin .users .user.header {
-	font-weight: 400;
+	font-weight: 500;
 }
 #account .admin .users .user > * {
 	display: inline-block;
-	vertical-align: top;
-	font-size:16px;
+	vertical-align: middle;
+	font-size:13px;
+	margin-right:10px;
 }
-#account .admin .users .user > .id {
+#account .admin .users .user > .clickable {
+	user-select: none;
+	font-size:13px;
+	color:#777;
+	cursor: pointer;
+}
+#account .admin .users .user.header > .clickable {
+	visibility: hidden;
+}
+#account .admin .users .user > .clickable:hover {
+	text-decoration: underline;
+}
+#account .admin .users .user > .clickable:active {
+	color:#229;
+}
+#account .admin .users .user > .edit {
 	width:30px;
 }
+#account .admin .users .user > .delete {
+	width:45px;
+}
+#account .admin .users .user > .delete:active {
+	color:#922;
+}
+#account .admin .users .user.add > .edit,
+#account .admin .users .user.add > .delete,
+#account .admin .users .user.add > .id,
+#account .admin .users .user.add > .type {
+	visibility: hidden;
+}
+#account .admin .users .user > .id {
+	width:25px;
+}
+#account .admin .users .user > .type {
+	width:60px;
+}
 #account .admin .users .user > .username {
-	width:190px;
+	width:140px;
 }
 #account .admin .users .user > .email {
 	width:300px;
+}
+#account .admin .users .user > * .text {
+	width: 100%;
+}
+#account .admin .users .user > * input {
+	display: none;
+	width: 100%;
+	padding:2px 3px;
+	font-size:12px;
+	font-weight: 300;
+	margin-left:-1px;
+}
+#account .admin .users .user.edit > * .text {
+	display: none;
+}
+#account .admin .users .user.edit > * input,
+#account .admin .users .user.add > * input {
+	display: block;
+}
+#account .admin .users .user > .save {
+	display: none;
+	font-size:12px;
+	cursor: pointer;
+}
+#account .admin .users .user.edit > .save {
+	display: inline-block;
+	width:40px;
+}
+#account .admin .users .user.add .email {
+	width:200px;
+}
+#account .admin .users .user.add .password {
+	width:90px;
 }
