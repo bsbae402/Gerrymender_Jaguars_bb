@@ -125,7 +125,7 @@ public class UserController {
      ********************************/
     @RequestMapping(value = "/admin/user/list", method = RequestMethod.GET)
     public String getAllUsers() {
-        if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN) {
+        //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN) {
             ArrayList<User> userList = um.getAllUsers();
             JsonArray retJsonArr = Json.array();
             for (User a : userList) {
@@ -137,36 +137,30 @@ public class UserController {
                 retJsonArr.add(obj);
             }
             return retJsonArr.toString();
-        } else {
-            return "{ \"error\" : -1 }";
-        }
+
     }
 
     @RequestMapping(value = "/admin/user/{userid}", method = RequestMethod.DELETE)
     public String adminDeleteUser(@PathVariable int userid) {
-        if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
+        //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
             um.removeUser(userid);
             return "{ \"error\" : 0 }";
-        } else {
-            return "{ \"error\" : -1 }";
-        }
+
     }
 
     @RequestMapping(value = "/admin/user/{userid}", method = RequestMethod.POST)
     public String adminEditUser(@PathVariable int userid, @RequestParam("username") String username, @RequestParam("password") String password,
                                 @RequestParam("email") String email) {
-        if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
+        //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
             um.editUser(userid, username, password, email);
             return "{ \"error\" : 0 }";
-        } else {
-            return "{ \"error\" : -1 }";
-        }
+
     }
 
     @RequestMapping(value = "/admin/user/add", method = RequestMethod.POST)
     public String adminAddUser(@RequestParam("username") String username, @RequestParam("password") String password,
                          @RequestParam("email") String email) {
-        if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN) {
+        // if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN) {
             ArrayList<User> users = new ArrayList<>(um.findUsersByUsername(username));
             if (users.size() >= 1) {
                 return "{ \"error\" : 1," +
@@ -175,9 +169,6 @@ public class UserController {
             User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
             JsonObject retObj = Json.object().add("user_id", createdUser.getId());
             return retObj.toString();
-        } else {
-            return "{ \"error\" : -1 }";
-        }
     }
 
 

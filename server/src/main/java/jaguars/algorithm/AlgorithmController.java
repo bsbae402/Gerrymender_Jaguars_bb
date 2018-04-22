@@ -17,6 +17,7 @@ public class AlgorithmController {
     public String startRedistrictAlgorithm(@RequestParam("compactness_weight") double compactnessWeight,
                                           @RequestParam("efficiency_weight") double efficiencyWeight,
                                           @RequestParam("population_threshold") double populationThreshold) {
+        algorithm.updateWeights(compactnessWeight, efficiencyWeight, populationThreshold);
         return "";
     }
 
