@@ -40,6 +40,37 @@ var API_CALLS = [
             }
         },
     },
+
+    // users
+    {
+        name : "getuser",
+        method : "GET",
+        url : "user/list/{id}",
+        response : (r) => r,
+    },
+    {
+        name : "getusers",
+        method : "GET",
+        url : "admin/user/list/",
+        response : (r) => r,
+        dummy : () => {
+            var id = 0;
+            return [0,0,0,0].map(() => {
+                return {
+                    user_id : 2 + (id++),
+                    username : "User " + id,
+                    email : "user" + id + "@gmail.com",
+                }
+            });
+        },
+    },
+    {
+        name : "edituser",
+        method : "POST",
+        url : "admin/user/{id}",
+        response : (r) => r,
+        //dummy : () => {error : 0},
+    },
     {
         name : "getusers",
         method : "GET",
@@ -233,7 +264,14 @@ function handleVotingData(r) {
             } else {
 
                 var URL = CALL.url;
-                // add {} replacement swapping from data urls
+
+                Object.keys(opts.data).forEach((key) => {
+                    var str = "{" + key + "}";
+                    if (URL.indexOf(str) > -1) {
+                        URL = URL.replace(new RegExp(str, "g"), opts.data[key]);
+                        delete opts.data[key];
+                    }
+                });
 
                 $.ajax({
                     url : ENDPOINT + "" + URL,

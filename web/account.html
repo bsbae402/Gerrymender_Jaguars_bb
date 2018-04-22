@@ -28,10 +28,54 @@
 
 		<div id="app">
 
+			<div id="maploading" class="spinner"></div>
+
 			<div class="center" id="account">
 				<div class="container">
 
-					<h1>ACCOUNT PANEL</h1>
+					<div class="account">
+
+						<h1>ACCOUNT PANEL</h1>
+
+						<div class="field username">
+							<div class="edit">edit</div>
+							<div class="label">Username</div>
+							<input class="input" maxlength=20 />
+							<div class="value"></div>
+						</div>
+						<div class="field email">
+							<div class="edit">edit</div>
+							<div class="label">Email</div>
+							<input class="input" maxlength=40 />
+							<div class="value"></div>
+						</div>
+						<div class="field password">
+							<div class="edit">edit</div>
+							<div class="label">Password</div>
+							<div class="value">********</div>
+							<div class="input">
+								<input class="old" placeholder="Old Password" />
+								<input class="new" placeholder="New Password" />
+								<div class="incorrect"></div>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="admin">
+
+						<h1>ADMIN PANEL</h1>
+
+						<div class="users">
+							<div class="user header">
+								<div class="id">ID</div>
+								<div class="username">Username</div>
+								<div class="email">Email</div>
+							</div>
+						</div>
+
+					</div>
 
 				</div>
 			</div>

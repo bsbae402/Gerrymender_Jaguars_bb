@@ -7,10 +7,19 @@
     window.whenReady = function(r) {
         if (ready) {
             var result = r();
-            if (result === false)
+            if (result === false) {
                 $("#loading").removeClass("hide");
+                extracount++;
+            }
         } else
             rs.push(r);
+    }
+
+    var extracount = 0;
+    window.crossOff = function() {
+        extracount--;
+        if (extracount <= 0)
+            $("#loading").addClass("hide");
     }
 
     window.user = {
@@ -37,6 +46,17 @@
             })
         });
 
+        if (user.loggedin) {
+            APICall("getuser", {id : user.id})
+                .then((r) => {
+                    user.username = r.username;
+                    user.type = r.user_type;
+                    user.email = r.email;
+                    crossOff();
+                });
+
+            return false;
+        }
     });
 
     $(function() {

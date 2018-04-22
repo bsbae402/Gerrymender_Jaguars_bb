@@ -33,14 +33,24 @@ whenReady(function() {
 					if (r.error) {
 						$(".login .error").addClass("show");
 					} else {
-						jset("user", {
-							loggedin : true,
-							username : user,
-							id : r.user_id,
-							type : r.user_type,
+
+						APICall("getuser",
+							{
+								id : r.user_id,
+							})
+						.then((r) => {
+							jset("user", {
+								loggedin : true,
+								username : user,
+								email : r.email,
+								password : pass,
+								id : r.user_id,
+								type : r.user_type,
+							});
+
+							window.location.href = "/map.html";
 						});
 
-						window.location.href = "/map.html";
 					}
 				});
 			
