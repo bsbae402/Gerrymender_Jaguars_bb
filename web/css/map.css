@@ -158,6 +158,10 @@
     font-family: "Open Sans";
     font-weight: 300;
 }
+#map .popup .spectrum .text.nodata {
+    width:calc(100% - 12px);
+    text-align: center;
+}
 
 
 #mapbox .maplabel {
@@ -297,6 +301,7 @@
     height:calc(100% - 56px);
     padding:12px 22px 15px;
     overflow-y:auto;
+    overflow-x:hidden;
 }
 
 .sidebox .titletop .link {

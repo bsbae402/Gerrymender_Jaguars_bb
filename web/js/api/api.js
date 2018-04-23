@@ -213,12 +213,13 @@ function handleVotingData(r) {
         a.voting_data.forEach((v) => {
             a.votes[v.political_party] = v.votes;
         });
-        /*
-        if (a.votes.DEM == 0) a.votes.DEM = 100 + Math.floor(Math.random() * 900)
-        if (a.votes.REP == 0) a.votes.REP = 100 + Math.floor(Math.random() * 900)
+        
+        return;
+        if (a.votes.DEM == 0) a.votes.DEM = 10 + Math.floor(Math.random() * 900)
+        if (a.votes.REP == 0) a.votes.REP = 10 + Math.floor(Math.random() * 900)
         if (a.votes.OTHER == 0) a.votes.OTHER = 10 + Math.floor(Math.random() * 150)
         a.votes.total = a.votes.DEM + a.votes.REP + a.votes.OTHER;
-        */
+        
     });
     return r;
 }

@@ -52,3 +52,8 @@ function jset(key, value={}) {
 function commaNumbers(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function getPerc(a, b) {
+    if (b == 0) return 0;
+    return 100 * a / b;
+}

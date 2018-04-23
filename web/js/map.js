@@ -139,7 +139,6 @@ whenReady(function() {
 	});
 
 
-
 	$("#sidebox > .tabs .tab").click(function() {
 		var n = $(this).attr("name");
 		$("#sidebox > .tabs .tab").removeClass("active");
@@ -150,6 +149,77 @@ whenReady(function() {
 	});
 	$("#sidebox > .tabs .tab").first().click();
 
+
+	function genericHover($el, data, opts={}) {
+		var o = $.extend({
+			votes : data.votes,
+			includeRecent : false,
+			includeYearsOfData : false,
+			includeVoting : true,
+			sayAverage : false,
+		}, opts);
+
+		var stuff = [];
+
+		stuff.push(
+			$("<div>").addClass("title").html(data.name + " [" + data.code + "]"),
+			);
+
+		if (o.includeYearsOfData)
+			stuff.push(
+				$("<div>").addClass("info").append(
+					$("<div>").html("Years of Data"),
+					$("<div>").html(data.numOfYears + " year(s)"),
+					),
+				);
+
+		stuff.push(
+			$("<div>").addClass("info").append(
+				$("<div>").html((o.sayAverage ? "Average " : "") + "Population"),
+				$("<div>").html(commaNumbers(data.population)),
+				),
+			$("<div>").addClass("info").append(
+				$("<div>").html((o.sayAverage ? "Average " : "") + "Voters"),
+				$("<div>").html(commaNumbers(data.total_votes) + " (" + getPerc(data.total_votes, data.population).toFixed(2) + "%)"),
+				),
+			);
+
+		if (o.includeRecent)
+			stuff.push(
+				$("<div>").addClass("info").append(
+					$("<div>").html(data.recent.election_year + " Population"),
+					$("<div>").html(commaNumbers(data.recent.population)),
+					),
+				$("<div>").addClass("info").append(
+					$("<div>").html(data.recent.election_year + " Voters"),
+					$("<div>").html(commaNumbers(data.recent.total_votes) + " (" + getPerc(data.recent.total_votes, data.recent.population).toFixed(2) + "%)"),
+					),
+				);
+
+		if (o.includeVoting) {
+			var vtotal = o.votes.DEM + o.votes.REP,
+				vratio = o.votes.DEM / vtotal;
+			if (vtotal > 0) {
+				var absratio = 0.5 - Math.abs(vratio - 0.5),
+					amount = absratio < 0.1 ? "Extremely" : (absratio < 0.2 ? "Very" : (absratio < 0.35 ? "Moderately" : "Slightly")),
+					party = vratio > 0.5 ? "Democratic" : "Republican",
+					text = amount + " " + party;
+			} else {
+				var absratio = 0,
+					text = "No Voting Data Available";
+			}
+			stuff.push(
+				$("<div>").addClass("votepadding"),
+				$("<div>").addClass("spectrum").append(
+					!isNaN(vratio) && $("<div>").addClass("tick").css("left", (vratio * 100) + "%"),
+					$("<div>").addClass("text").addClass(isNaN(vratio) ? "nodata" : "").html(text)
+						.css(vratio <= 0.5 ? "left" : "right", "calc(6px + " + (absratio * 100) + "%)"),
+					),
+				);
+		}
+
+		$el.append(stuff);
+	}
 
 
 	var states;
@@ -174,40 +244,12 @@ whenReady(function() {
 			var state = states.find((state) => state.name == props.NAME);
 			if (!state) return false;
 
-			var vtotal = state.recent.votes.DEM + state.recent.votes.REP,
-				vratio = state.recent.votes.DEM / vtotal;
-			var absratio = 0.5 - Math.abs(vratio - 0.5),
-				amount = absratio < 0.1 ? "Extremely" : (absratio < 0.2 ? "Very" : (absratio < 0.35 ? "Moderately" : "Slightly")),
-				party = vratio > 0.5 ? "Democratic" : "Republican";
-			$el.append(
-				$("<div>").addClass("title").html(state.name + " [" + state.code + "]"),
-				$("<div>").addClass("info").append(
-					$("<div>").html("Years of Data"),
-					$("<div>").html(state.numOfYears + " year(s)"),
-					),
-				$("<div>").addClass("info").append(
-					$("<div>").html("Average Population"),
-					$("<div>").html(commaNumbers(state.population)),
-					),
-				$("<div>").addClass("info").append(
-					$("<div>").html("Average Voters"),
-					$("<div>").html(commaNumbers(state.total_votes) + " (" + (100 * state.total_votes / state.population).toFixed(2) + "%)"),
-					),
-				$("<div>").addClass("info").append(
-					$("<div>").html(state.recent.election_year + " Population"),
-					$("<div>").html(commaNumbers(state.recent.population)),
-					),
-				$("<div>").addClass("info").append(
-					$("<div>").html(state.recent.election_year + " Voters"),
-					$("<div>").html(commaNumbers(state.recent.total_votes) + " (" + (100 * state.recent.total_votes / state.recent.population).toFixed(2) + "%)"),
-					),
-				$("<div>").addClass("votepadding"),
-				$("<div>").addClass("spectrum").append(
-					$("<div>").addClass("tick").css("left", (vratio * 100) + "%"),
-					$("<div>").addClass("text").html(amount + " " + party)
-						.css(vratio <= 0.5 ? "left" : "right", "calc(6px + " + (absratio * 100) + "%)"),
-					),
-				);
+			genericHover($el, state, {
+				votes: state.recent.votes,
+				includeRecent : true,
+				includeYearsOfData : true,
+				sayAverage : true,
+			});
 
 			return true;
 		}
@@ -327,6 +369,15 @@ whenReady(function() {
 		});
 	}
 
+	function hoverDistrict($el, layer, props) {
+		if (!props.active) return false;
+		if (!active.districts) return false;
+		var district = active.districts.find((district) => district.geo_id == props.GEOID10);
+		if (!district) return false;
+
+		genericHover($el, district);
+		return true;
+	}
 	function selectSY(sy, initial=false) {
 		if (active.sy == sy)
 			return;
@@ -356,7 +407,9 @@ whenReady(function() {
 			.then((r) => {
 				map.cleanLayers();
 
-				var districtsLayer = map.addGeoJSON(r, "districts");
+				var districtsLayer = map.addGeoJSON(r, "districts", {
+					hover : hoverDistrict,
+				});
 				active.districtsLayer = districtsLayer;
 
 				map.fitBounds();
@@ -376,6 +429,16 @@ whenReady(function() {
 			});
 	}
 
+
+	function hoverPrecinct($el, layer, props) {
+		if (!props.active) return false;
+		if (!active.precincts) return false;
+		var precinct = active.precincts.find((precinct) => precinct.geo_id == props.GEOID10);
+		if (!precinct) return false;
+
+		genericHover($el, precinct);
+		return true;
+	}
 	function selectDistrict(id, districtLayer) {
 		var district = active.districts.find((d) => d.id == id),
 			sy = active.sy;
@@ -412,6 +475,7 @@ whenReady(function() {
 					.then((r) => {
 						var precinctsLayer = map.addGeoJSON(r, "precincts", {
 							hideIfInvalid : true,
+							hover : hoverPrecinct,
 						});
 						active.precinctsLayer = precinctsLayer;
 

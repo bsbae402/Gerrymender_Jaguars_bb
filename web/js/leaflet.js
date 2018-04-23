@@ -48,7 +48,7 @@ class LeafletMap {
 			y : my + 15,
 		};
 		if (pos.x + w >= maxw - PADDING)
-			pos.x = mx - 2 - w;
+			pos.x = Math.max(15, mx - 2 - w);
 		if (pos.y + h >= maxh - PADDING)
 			pos.y = my - 3 - h;
 		this.hover.$el.css({
@@ -133,6 +133,11 @@ class LeafletMap {
 			return;
 			*/
 
+			layer.setStyle({
+				fillOpacity : 0.3,
+				opacity : 1,
+			})
+
 			if (!data) {
 				props.active = false;
 				if (layerObject.settings.hideIfInvalid)
@@ -147,7 +152,21 @@ class LeafletMap {
 				layer.setStyle({
 					color : buildColor(COLOR.STANDARD),
 					weight : 2
-				})
+				});
+				if (COLOR.FILL === false)
+					layer.setStyle({
+						fillColor : buildColor([0, 0, 0], 0.3),
+					});
+				else if (COLOR.FILL === "political") {
+					var tot = data.votes.DEM + data.votes.REP,
+						rep = data.votes.REP > data.votes.DEM,
+						r = (Math.max(data.votes.REP, data.votes.DEM) / tot - 0.5) * 2;
+					var fill = rep ? [200, 0, 0] : [0, 0, 200];
+					fill = mergeColors([150, 150, 150], fill, r * 0.8 + 0.3);
+					layer.setStyle({
+						fillColor : buildColor(fill, 1),
+					});
+				}
 			}
 		});
 	}
@@ -163,7 +182,8 @@ class LeafletMap {
 	        	if (props.active) {
 	        		props.mouseovered = true;
 		        	layer.setStyle({
-		        		color : buildColor(settings.color.HOVER)
+		        		opacity : 0.6,
+		        		fillOpacity : 0.2,
 		        	})
 		        }
 
@@ -182,7 +202,8 @@ class LeafletMap {
 	        	if (props.mouseovered) {
 	        		props.mouseovered = false;
 		        	layer.setStyle({
-		        		color : buildColor(props.active ? settings.color.STANDARD : settings.color.DISABLED)
+		        		opacity : 1,
+		        		fillOpacity : 0.3,
 		        	})
 		        }
 
@@ -243,22 +264,28 @@ class LeafletMap {
 var COLOR_SCHEME = {
 	STATES : {
 		STANDARD : [0, 0, 90],
-		HOVER : [40, 40, 160],
 		DISABLED : [150, 150, 150],
 	},
 	REGULAR : {
 		STANDARD : [0, 0, 80],
-		HOVER : [70, 70, 190],
+		DISABLED : [150, 150, 150],
+		FILL : "political",
+	},
+	REGULARNOPOLITICAL : {
+		STANDARD : [0, 0, 80],
 		DISABLED : [150, 150, 150],
 	},
 	BACKGROUND : {
 		STANDARD : [140, 190, 250],
-		HOVER : [90, 140, 190],
 		DISABLED : [210, 210, 210],
+		FILL : false,
 	},
 }
 function buildColor(arr, alpha=1) {
-	return "rgba(" + arr.join(",") + ", " + alpha + ")";
+	return "rgba(" + arr.map((a) => Math.round(parseInt(a)).toFixed(0)).join(",") + ", " + alpha + ")";
+}
+function mergeColors(a, b, r=0.5) {
+	return a.map((aa, i) => a[i] + r * (b[i] - a[i]));
 }
 
 
