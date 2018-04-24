@@ -51,35 +51,35 @@ public class Algorithm {
         if(clonedTarget == null) // should not get in here
             return null;
         // get neighbors' geoids
-        ArrayList<String> neighborGeoids = pnm.getNeighborPGeoIds(newDistrictState.getCode(),
-                newDistrictState.getElectionYear(), clonedTarget.getGeoId());
-        // find all neighboring precincts
-        ArrayList<Precinct> neighbors = new ArrayList<>();
-        for(District d : newDistrictState.getDistricts()) {
-            for(Precinct p : d.getPrecincts()) {
-                for(String neighborGeoid : neighborGeoids) {
-                    if(p.getGeoId().equals(neighborGeoid))
-                        neighbors.add(p);
-                }
-            }
-        }
-        District currentAffiliation = clonedTarget.getDistrict();
-        // The list of selectable districts of the target precinct.
-        ArrayList<District> selectableDistricts = new ArrayList<>();
-        for(Precinct neighbor : neighbors) {
-            if(!neighbor.getDistrict().getCode().equals(currentAffiliation.getCode())){
-                selectableDistricts.add(neighbor.getDistrict());
-            }
-        }
-        if(selectableDistricts.size() == 0)
-            return null; // this means that the targetPrecinct is not a border precinct
-
-        // select one random district from the array list.
-        Random rand = new Random();
-        int idx = rand.nextInt(selectableDistricts.size()); // size should be bigger than 0
-        District newAffiliation = selectableDistricts.get(idx);
-        // change the affiliation of the cloned target precinct
-        clonedTarget.setDistrict(newAffiliation);
+//        ArrayList<String> neighborGeoids = pnm.getNeighborPGeoIds(newDistrictState.getCode(),
+//                newDistrictState.getElectionYear(), clonedTarget.getGeoId());
+//        // find all neighboring precincts
+//        ArrayList<Precinct> neighbors = new ArrayList<>();
+//        for(District d : newDistrictState.getDistricts()) {
+//            for(Precinct p : d.getPrecincts()) {
+//                for(String neighborGeoid : neighborGeoids) {
+//                    if(p.getGeoId().equals(neighborGeoid))
+//                        neighbors.add(p);
+//                }
+//            }
+//        }
+//        District currentAffiliation = clonedTarget.getDistrict();
+//        // The list of selectable districts of the target precinct.
+//        ArrayList<District> selectableDistricts = new ArrayList<>();
+//        for(Precinct neighbor : neighbors) {
+//            if(!neighbor.getDistrict().getCode().equals(currentAffiliation.getCode())){
+//                selectableDistricts.add(neighbor.getDistrict());
+//            }
+//        }
+//        if(selectableDistricts.size() == 0)
+//            return null; // this means that the targetPrecinct is not a border precinct
+//
+//        // select one random district from the array list.
+//        Random rand = new Random();
+//        int idx = rand.nextInt(selectableDistricts.size()); // size should be bigger than 0
+//        District newAffiliation = selectableDistricts.get(idx);
+//        // change the affiliation of the cloned target precinct
+//        clonedTarget.setDistrict(newAffiliation);
         return newDistrictState;
     }
 
