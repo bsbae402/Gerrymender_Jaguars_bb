@@ -42,10 +42,18 @@ public class Algorithm {
         return selectableDistricts.get(idx);
     }
 
+    private boolean renewPrecinctCode(Precinct targetPrecinct) {
+//        String later6 = targetPrecinct.getCode().substring(4);
+//        if(later6.length() != 6)
+//            return false;
+//        String districtCode = targetPrecinct.getDistrict().getCode();
+//        targetPrecinct.setCode(districtCode + later6);
+        return true;
+    }
+
     // should call this method after changing the target's affiliation
     private double calculateChangedPerimeter(District district, Precinct targetPrecinct, ArrayList<Precinct> targetNeighbors,
                                              ArrayList<NeighborData> neighborDataList) {
-        // if(district.equals(targetPrecinct.getDistrict()))
         ArrayList<Precinct> contactsOnDistrictSide = new ArrayList<>();
         for(Precinct neighbor : targetNeighbors) {
             if(neighbor.getDistrict().equals(district))
@@ -130,8 +138,10 @@ public class Algorithm {
         // The list of selectable districts of the target precinct.
         ArrayList<District> selectableDistricts = new ArrayList<>();
         for(Precinct neighbor : neighbors) {
-            if(!neighbor.getDistrict().getCode().equals(oldAffiliation.getCode()))
-                selectableDistricts.add(neighbor.getDistrict());
+            District neighborsDistrict = neighbor.getDistrict();
+            if(!neighborsDistrict.getCode().equals(oldAffiliation.getCode())
+                    && !selectableDistricts.contains(neighborsDistrict))
+                selectableDistricts.add(neighborsDistrict);
         }
         if(selectableDistricts.size() == 0)
             return null; // this means that the targetPrecinct is not a border precinct
@@ -139,7 +149,12 @@ public class Algorithm {
         District newAffiliation = getRandomDistrict(selectableDistricts);
         // change the affiliation of the cloned target precinct
         clonedTarget.setDistrict(newAffiliation);
+        newAffiliation.getPrecincts().add(clonedTarget);
         oldAffiliation.getPrecincts().remove(clonedTarget);
+        // update precinct code
+        boolean codeFormatOkay = renewPrecinctCode(clonedTarget);
+        if(!codeFormatOkay)
+            System.out.println("pid: " + targetPrecinct.getId() + " has wrong code format!");
 
         // update area and perimeter of the gaining district(new affiliation)
         newAffiliation.setArea(newAffiliation.getArea() + clonedTarget.getArea());
@@ -147,7 +162,7 @@ public class Algorithm {
                 neighbors, neighborDataList));
 
         // update area and perimeter of the losing district(old affiliation)
-        oldAffiliation.setArea(oldAffiliation.getArea() + clonedTarget.getArea());
+        oldAffiliation.setArea(oldAffiliation.getArea() - clonedTarget.getArea()); ////
         oldAffiliation.setPerimeter(calculateChangedPerimeter(oldAffiliation, clonedTarget,
                 neighbors, neighborDataList));
 
@@ -183,8 +198,10 @@ public class Algorithm {
                     break;
                 }
             }
-            if(!difAffFound)
+            if(!difAffFound) // if all neighbors of the neighbor have same affiliation as the neighbor
                 neighbor.setBorder(false);
+            else
+                neighbor.setBorder(true);
         }
         return newDistrictState;
     }

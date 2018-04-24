@@ -1,6 +1,7 @@
 package jaguars.algorithm;
 
 import jaguars.map.state.State;
+import jaguars.map.state.StateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AlgorithmController {
 
+    @Autowired
+    private StateManager sm;
     @Autowired
     private Algorithm algorithm;
 
@@ -27,5 +30,10 @@ public class AlgorithmController {
         return null;
     }
 
+    @RequestMapping(value = "/algorithm/test", method = RequestMethod.POST)
+    public void testAlgorithmLogic(@RequestParam("state_id") int stateId) {
+        int errno = sm.setSessionStateId(stateId);
+        algorithm.mainLogic(100);
+    }
 
 }

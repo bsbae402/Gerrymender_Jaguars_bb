@@ -1,6 +1,10 @@
 package jaguars.algorithm;
 
 import jaguars.AppConstants;
+import jaguars.data.NeighborData;
+import jaguars.map.district.District;
+
+import java.util.ArrayList;
 
 public final class MeasureCalculator {
 
@@ -28,5 +32,11 @@ public final class MeasureCalculator {
 
     public static double calculateEfficiencyGap(int total, int rep, int dem) {
         return (rep - dem) / total;
+    }
+
+    // neighborDataList is state-level precinct neighbor relation data holder
+    public static int getNumberOfConnectedComponentsInDistrict(District district,
+                                                               ArrayList<NeighborData> neighborDataList) {
+        return 1;
     }
 }
