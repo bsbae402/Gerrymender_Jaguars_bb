@@ -54,7 +54,35 @@ public class PrecinctUpdateQuery {
                         censusPrecinct = p;
                 }
                 // now, update the precinct perimeter
-                censusPrecinct.setPerimeter(gap.area);
+                censusPrecinct.setPerimeter(gap.perimeter);
+                Precinct result = pm.updatePrecinct(censusPrecinct);
+                System.out.println("pid " + result.getId() + " is updated");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void fixPrecinctPerimeters() {
+        int censusYear = 2010;
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precinct_NH_2010.json";
+        Gson gson = new GsonBuilder().create();
+        try {
+            FileReader fileReader = new FileReader(jsonFilePath);
+            Type typeListGAP = new TypeToken<List<GeoidAreaPerimeter>>(){}.getType();
+            List<GeoidAreaPerimeter> gapList = gson.fromJson(fileReader, typeListGAP);
+
+            for(GeoidAreaPerimeter gap : gapList) {
+                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(gap.geoid);
+                // find only one precinct that is on "censusYear"
+                Precinct censusPrecinct = null;
+                for(Precinct p : precinctsOfSameGeoId) {
+                    if(CensusCalculator.getCensusYear(p.getElectionYear()) == censusYear)
+                        censusPrecinct = p;
+                }
+                // now, update the precinct perimeter
+                censusPrecinct.setPerimeter(gap.perimeter);
                 Precinct result = pm.updatePrecinct(censusPrecinct);
                 System.out.println("pid " + result.getId() + " is updated");
             }
