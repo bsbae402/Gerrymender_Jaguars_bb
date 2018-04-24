@@ -28,7 +28,7 @@ public class AppConstants {
 
     // Path json
     public static final String PATH_JSONS = PATH_RESOURCES + "/jsons";
-    public static final String PATH_PRECINCT_NEIGHBORS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbors.json";
+    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbor_relations.json";
 
     // return codes
     public static final int ON_SUCCESS = 0;
