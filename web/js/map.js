@@ -286,7 +286,8 @@ whenReady(function() {
 
 			$(".mapapp").removeClass("loading");
 		}
-		clearPrecincts()
+		clearPrecincts();
+		clearAlgorithm();
 	}
 	function loadStates() {
 		$.get("/data/states.json", function(r) {
@@ -448,6 +449,10 @@ whenReady(function() {
 						map.attachGeoJSONdata(districtsLayer, r);
 
 						$(".mapapp").removeClass("loading");
+
+						if (initial)
+							if (openTab == 1)
+								openRedistrict();
 					});
 
 			});
@@ -474,6 +479,7 @@ whenReady(function() {
 			if (!ds.length) {
 				$(".mapapp").removeClass("loading");
 				active.allPrecincts = true;
+				if (!active.precincts) active.precincts = [];
 				done();
 				return;
 			}
@@ -659,6 +665,8 @@ whenReady(function() {
 					active.precinctsLayer2.show();
 
 				map.fitBoundsActive(active.precinctsLayer2);
+
+				resetAlgorithm();
 			}
 
 			if (!active.precinctsLayer2) {
@@ -683,14 +691,65 @@ whenReady(function() {
 				whendone();
 		});
 	}
+
+	var resetAlgorithm, clearAlgorithm;
 	// algorithm
 	(function() {
 		var updates = [], UPDATE_TIME = 500,
 			lastUpdate = 0,
-			running = false,
+			running = false, isQuerying = false,
 			paused = false, renderTime = 0,
 			totalLoops = 0,
 			aid = -1;
+
+		function hoverRedistrictedPrecinct($el, layer, props) {
+			if (!props.active) return false;
+			if (!active.precincts) return false;
+			var precinct = active.precincts.find((precinct) => precinct.geo_id == props.GEOID10);
+			if (!precinct) return false;
+
+			genericHover($el, precinct);
+			return true;
+		}
+
+		clearAlgorithm = () => {
+			// clean up markers and shit
+		};
+
+		resetAlgorithm = () => {
+			if (!active.districts || !active.districts.length) return;
+			if (!active.districts[0].color) {
+				// no colors yet, generate them
+				var colors = generateColors(active.districts.length);
+				colors.map((c, index) => {
+					active.districts[index].color = c;
+				});
+			}
+
+			active.precincts.forEach((p) => {
+				var d = active.districts.find((d) => d.id == p.district_id);
+				if (!d) return;
+				p.color = d.color;
+			});
+
+			active.precinctsLayer2.applySettings({
+				color : COLOR_SCHEME.CUSTOM,
+				hover : hoverRedistrictedPrecinct,
+			});
+
+			isQuerying = false;
+		};
+
+		function registerChange(change) {
+			var d = active.districts.find((d) => d.id == change.new_district_id),
+				p = active.precincts.find((p) => p.id == change.precinct_id);
+			if (!d || !p) return;
+
+			p.color = d.color;
+			active.precinctsLayer2.update();
+
+			map.addMarkerChange(active.precinctsLayer2, p);
+		}
 
 		function reset() {
 			aid = -1;
@@ -699,28 +758,37 @@ whenReady(function() {
 			$("#credistrict .algorithm .run").removeClass("disabled");
 			$("#credistrict .algresults .progressbar .scrolling").removeClass("stop");
 			$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").addClass("disabled");
+			resetAlgorithm();
 		}
 
 		setInterval(() => {
 			if (running) {
-				if (new Date().getTime() > lastUpdate + UPDATE_TIME) {
-					lastUpdate = new Date().getTime();
-					APICall("getalgorithmupdate", { algorithm_id : aid })
-						.then(function(r) {
-							updates.push(r);
-							if (!r.is_running) {
-								lastUpdate = Infinity;
-							}
-						});
+				if (new Date().getTime() > lastUpdate) {
+					if (isQuerying) {
+						
+					} else {
+						APICall("getalgorithmupdate", { algorithm_id : aid })
+							.then(function(r) {
+								updates.push(r);
+								lastUpdate = new Date().getTime() + UPDATE_TIME * (Math.random() * 0.6 + 0.7);
+								isQuerying = false;
+								if (!r.is_running) {
+									lastUpdate = Infinity;
+								}
+							});
+						isQuerying = true;
+					}
 				}
 
 				if (!paused && updates.length) {
-					if (new Date().getTime() > renderTime + UPDATE_TIME) {
-						renderTime = new Date().getTime();
+					if (new Date().getTime() > renderTime) {
+						renderTime = new Date().getTime() + UPDATE_TIME * (Math.random() * 0.6 + 0.7);
 						var update = updates.shift();
 
-						var changes = update.all_changes
-						console.log(changes);
+						var changes = update.all_changes;
+						changes.forEach((change) => {
+							registerChange(change);
+						});
 
 						var perc = update.loop / totalLoops * 100;
 						$("#credistrict .algresults .progress").css("width", perc + "%");
