@@ -19,10 +19,10 @@ public class AppConstants {
     public static final String PATH_STATE_GEOJSON_OH2010 = PATH_GEOJSONS + "/state_boundaries/state_tl_2010_39_OH.json";
     public static final String PATH_STATE_GEOJSON_NH2010 = PATH_GEOJSONS + "/state_boundaries/state_tl_2010_NH.json";
     public static final String PATH_STATE_GEOJSON_WI2010 = PATH_GEOJSONS + "/state_boundaries/state_tl_2010_WI.json";
-    public static final String PATH_DISTRICT_GEOJSON_OH2010 = PATH_GEOJSONS + "/district_boundaries/district_tl_2010_OH.json";
+    public static final String PATH_DISTRICT_GEOJSON_OH2010 = PATH_GEOJSONS + "/district_boundaries/OH_districts_2011_REVISED.json";
     public static final String PATH_DISTRICT_GEOJSON_NH2010 = PATH_GEOJSONS + "/district_boundaries/district_2010_NH_jaguars.json";
     public static final String PATH_DISTRICT_GEOJSON_WI2010 = PATH_GEOJSONS + "/district_boundaries/district_tl_2010_WI.json";
-    public static final String PATH_PRECINCT_GEOJSON_OH2010 = PATH_GEOJSONS + "/precinct_boundaries/OH_precincts_2010.json";
+    public static final String PATH_PRECINCT_GEOJSON_OH2010 = PATH_GEOJSONS + "/precinct_boundaries/OH_precincts_2010_fixed.json";
     public static final String PATH_PRECINCT_GEOJSON_NH2010 = PATH_GEOJSONS + "/precinct_boundaries/NH_precincts_2010.json";
     public static final String PATH_PRECINCT_GEOJSON_WI2010 = PATH_GEOJSONS + "/precinct_boundaries/WI_precincts_2010.json";
 
