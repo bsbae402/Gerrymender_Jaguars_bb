@@ -68,10 +68,10 @@ var API_CALLS = [
     },
     {
         name : "deleteuser",
-        method : "DELETE",
-        url : "user/list/{id}",
+        method : "POST",
+        url : "admin/user/delete/{id}",
         response : (r) => r,
-        dummy : () => {error : 0},
+        adummy : () => {error : 0},
     },
     {
         name : "getusers",
@@ -143,7 +143,50 @@ var API_CALLS = [
         name : "getprecincts",
         method : "POST",
         url : "precinct/get/bydistrictid",
-        response : (r, data) => handleVotingData(r),
+        response : (r, data) => {
+            var r = handleVotingData(r)
+            r.forEach((d) => d.district_id = data.district_id);
+            return r;
+        },
+    },
+
+    // analytics
+    {
+        name : "analytics",
+        method : "GET",
+        url : "/analytics/{type}",
+        response : (r, data) => r,
+        dummy : (data) => {
+            var m = [];
+            if (data.type == "state") {
+                m = [
+                    ["compactness_score", "double"],
+                    ["efficiency_gap_score", "double"],
+                    ["lowest_district_population", "int"],
+                    ["highest_district_population", "int"],
+                    ["number_of_border_precincts", "int"],
+                ];
+            } else if (data.type == "district") {
+                m = [
+                    ["compactness_score", "double"],
+                    ["efficiency_gap_score", "double"],
+                    ["lowest_precinct_population", "int"],
+                    ["highest_precinct_population", "int"],
+                    ["number_of_precincts", "int"],
+                    ["number_of_border_precincts", "int"],
+                ];
+            } else if (data.type == "precinct") {
+                m = [
+                    ["compactness_score", "double"],
+                    ["efficiency_gap_score", "double"],
+                ];
+            }
+            var r = {};
+            m.forEach((a) => {
+                r[a[0]] = (a[1] == "double" ? (Math.random() * 100) : Math.round((Math.random() * 100)))
+            });
+            return r;
+        },
     },
 
     // algorithm
@@ -166,10 +209,22 @@ var API_CALLS = [
         url : "/algorithm/update",
         response : (r, data) => r,
         dummy : (data={}) => {
-            window.algloop += 3 + Math.floor(Math.random() * 8);
+            var extra = 3 + Math.floor(Math.random() * 8);
+            window.algloop += extra;
+
+            var ps = "33015DERR01,33015DERR02,33015DERR03,33015DERR04,33017DOVE01,33017DOVE02,33017DOVE03,33017DOVE04,33017DOVE05,33017DOVE06,33001LACO01,33001LACO02,33001LACO03,33001LACO04,33001LACO05,33001LACO06,33011MANC01,33011MANC10,33011MANC11,33011MANC12,33011MANC02,33011MANC03,33011MANC04,33011MANC05,33011MANC06,33011MANC07,33011MANC08,33011MANC09,33011NASH01,33015PORT01,33015PORT02,33015PORT03,33015PORT04,33015PORT05,33017ROCH01,33017ROCH02,33017ROCH03,33017ROCH04,33017ROCH05,33017ROCH06,33017SOME01,33017SOME02,33017SOME03,33017SOME04,33017SOME05,33003ALBA01,33001ALTO01,33015AUBU01,33001BARN01,33017BARR01,33003BART01,33011BEDF01,33001BELM01,33015BREN01,33003BROO01,33009CAMP01,33015CAND01,33003CHAT01,33015CHSR01,33003CONW01,33015DANV01,33017DURH01,33015EKIN01,33003EATO01,33003EFFI01,33015EPPI01,33015EXET01,33017FARM01,33003FREE01,33015FREM01,33001GILF01,33001GILM01,33011GOFF01,33015GRND01,33015HMST01,33015HMTN01,33015HAFA01,33003HART01,33013HOOK01,33003JACK01,33015KENS01,33015KING01,33017LEE01,33015LOND01,33017MADB01,33003MADI01,33001MERE01,33011MERR01,33017MIDD01,33017MILT01,33003MOUL01,33015NCAS01,33017NDUR01,33001NEWH01,33015NEWF01,33015NWIN01,33015NMAR01,33015NEWT01,33015NOHA01,33015NOTT01,33003OSSI01,33015PLAI01,33015RAYM01,33017ROLL01,33015RYE01,33001SANB01,33015SNDN01,33003SAND01,33015SEAB01,33015SOHA01,33017STFD01,33015STRM01,33003TAMW01,33001TILT01,33003TUFT01,33003WAKE01,33003WOLF01,33003HALE01,33015ZZZZZZ".split(",");
+            changes = [];
+            for(var i=0;i<extra;i++) {
+                changes.push({
+                    precinct_geoid : ps[Math.floor(Math.random() * ps.length)],
+                    new_district_geoid : "3302", // 2 for district id
+                });
+                break;
+            }
+
             return {
                 is_running : window.algloop < 100,
-                all_changes : [],
+                all_changes : changes,
                 loop : window.algloop,
             }
         },

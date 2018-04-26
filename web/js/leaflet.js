@@ -68,19 +68,39 @@ class LeafletMap {
 		this.allLayers = [];
 	}
 
+	removeLayer(layer) {
+		this.lmap.removeLayer(layer.layer);
+		for(var l in this.layers) {
+			this.layers[l] = this.layers[l].filter((l) => l !== layer);
+		}
+		this.allLayers = this.allLayers.filter((l) => l !== layer);
+	}
+
 	getLayer(name) {
 		return this.allLayers.find((layer) => layer.name == name);
 	}
 
 	addGeoJSON(geojson, name="", settings={}) {
+		var map = this;
+
 		var layerObject = {
 			name : name,
 			data : [],
+			mapToData : null,
 			settings : {
+				hidden : false,
 				color : COLOR_SCHEME.REGULAR,
 				hideIfInvalid : false,
 				hover : () => false,
 			},
+			setData : function(data) {
+				map.attachGeoJSONdata(this, data);
+			},
+			applySettings : function(settings) {
+				map.setGeoJSONsettings(this, settings);
+			},
+			show : function() {this.applySettings({hidden : false})},
+			hide : function() {this.applySettings({hidden : true})},
 		};
 		layerObject.settings = $.extend(layerObject.settings, settings);
 
@@ -106,7 +126,8 @@ class LeafletMap {
 	}
 	attachGeoJSONdata(layerObject, data, mapToData=null) {
 		layerObject.data = data;
-		layerObject.mapToData = mapToData;
+		if (mapToData)
+			layerObject.mapToData = mapToData;
 		this.updateRender(layerObject);
 	}
 	updateRender(layerObject) {
@@ -121,34 +142,27 @@ class LeafletMap {
 				mapFunc = layerObject.mapToData;
 			var data = layerObject.data.find((d) => mapFunc(d, props));
 
-			/*
-			var a = [0, 0, 200], b = [200, 0, 0], c = Math.random();
-			var d = a.map((value, index) => a[index] + (b[index] - a[index]) * c).map(Math.round);
-			console.log(d);
-			layer.setStyle({
-				color : buildColor(d),
-				weight : 1
-			})
-			props.active = true;
-			return;
-			*/
-
 			layer.setStyle({
 				fillOpacity : 0.3,
 				opacity : 1,
 			})
 
-			if (!data) {
+			if (layerObject.settings.hidden) {
+				this.lmap.removeLayer(layer);
+			} else if (!data) {
 				props.active = false;
 				if (layerObject.settings.hideIfInvalid)
 					this.lmap.removeLayer(layer);
-				else
+				else {
+					this.lmap.addLayer(layer);
 					layer.setStyle({
 						color : buildColor(COLOR.DISABLED),
 						weight : 1
-					})
+					});
+				}
 			} else {
 				props.active = true;
+				this.lmap.addLayer(layer);
 				layer.setStyle({
 					color : buildColor(COLOR.STANDARD),
 					weight : 2

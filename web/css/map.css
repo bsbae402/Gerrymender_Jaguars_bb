@@ -299,7 +299,7 @@
 }
 .sidebox .content {
     height:calc(100% - 56px);
-    padding:12px 22px 15px;
+    padding:12px 22px 25px;
     overflow-y:auto;
     overflow-x:hidden;
 }
@@ -375,6 +375,32 @@
 }
 #cview .yearbox .yearselect .population::after { content: " people"; }
 
+
+#cview .analytics {
+    margin-top:0;
+}
+#cview .analytics .fields {
+    font-size:0;
+    margin-top:15px;
+}
+#cview .analytics .field {
+    width: 100%;
+    display: block;
+    font-size: 0;
+    margin-bottom:7px;
+}
+#cview .analytics .field > div {
+    display: inline-block;
+    font-size:14px;
+}
+#cview .analytics .field .left {
+    width: 200px;
+    font-weight: 500;
+}
+#cview .analytics .field .right {
+    width: calc(100% - 200px);
+    font-weight: 300;
+}
 
 
 #cview .infoselects {
@@ -454,6 +480,7 @@
 }
 #cview .info .votes {
     margin-top:7px;
+    margin-bottom:40px;
     font-size:0;
 }
 #cview .info .votes .label {

@@ -50,6 +50,11 @@ whenReady(function() {
 		if (noToggle) return;
 		noToggle = true;
 		openTab = -openTab;
+		if (openTab == 1) {
+			openRedistrict();
+		} else {
+			closeRedistrict();
+		}
 
 		var props = $.extend({}, baseProps);
 		props.complete = () => noToggle = false;
@@ -232,10 +237,22 @@ whenReady(function() {
 		districts : null,
 		district : null,
 		precinctsLayer : null,
+		precinctsLayer2 : null,
 		precinctLayer : null,
 		precincts : null,
+		selectedPrecincts : null,
+		allPrecincts : false,
 		precinct : null,
 	};
+	window.active = active;
+	function addPrecincts(p) {
+		if (!active.precincts)
+			return active.precincts = p;
+		p.forEach((precinct) => {
+			if (active.precincts.find((precinct2) => precinct.id == precinct2.d)) return;
+			active.precincts.push(precinct);
+		});
+	}
 
 	var statesGeoJSON, statesLayer;
 	function loadStatesLoaded() {
@@ -269,6 +286,7 @@ whenReady(function() {
 
 			$(".mapapp").removeClass("loading");
 		}
+		clearPrecincts()
 	}
 	function loadStates() {
 		$.get("/data/states.json", function(r) {
@@ -329,14 +347,20 @@ whenReady(function() {
 		$(this).addClass("active");
 
 		if (show == "syinfo") {
-			if (active.districtsLayer)
+			if (active.districtsLayer) {
 				map.fitBounds(active.districtsLayer);
+				$(".analytics .fields").empty();
+			}
 		} else if (show == "dinfo") {
-			if (active.districtLayer)
+			if (active.districtLayer) {
 				map.fitBounds2(active.districtLayer);
+				$(".analytics .fields").empty();
+			}
 		} else if (show == "pinfo") {
-			if (active.precinctLayer)
+			if (active.precinctLayer) {
 				map.fitBounds2(active.precinctLayer);
+				$(".analytics .fields").empty();
+			}
 		}
 	});
 	function activateTabAndSelect(limit="") {
@@ -439,6 +463,32 @@ whenReady(function() {
 		genericHover($el, precinct);
 		return true;
 	}
+	function loadAllPrecincts(done=()=>{}) {
+		if (active.allPrecincts) return done();
+		if (!active.districts) return;
+
+		$(".mapapp").addClass("loading");
+
+		var ds = active.districts.map((d) => d);
+		function loadNextDistrict() {
+			if (!ds.length) {
+				$(".mapapp").removeClass("loading");
+				active.allPrecincts = true;
+				done();
+				return;
+			}
+			var d = ds.shift();
+			APICall("getprecincts",
+				{
+					district_id : d.id,
+				})
+				.then((r) => {
+					addPrecincts(r);
+					loadNextDistrict();
+				});
+		}
+		loadNextDistrict();
+	}
 	function selectDistrict(id, districtLayer) {
 		var district = active.districts.find((d) => d.id == id),
 			sy = active.sy;
@@ -456,36 +506,74 @@ whenReady(function() {
 		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000000).toFixed(1)) + " km");
 		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
 
-		map.setGeoJSONsettings(active.districtsLayer, {
+		active.districtsLayer.applySettings({
 			color : COLOR_SCHEME.BACKGROUND
 		});
 
+		$(".mapapp").addClass("loading");
 
-		APICall("getprecincts",
-			{
-				district_id : id,
-			})
-			.then((r) => {
-				active.precincts = r;
+		function getPrecincts() {
+			var ps = null;
+			if (active.precincts) {
+				ps = active.precincts.filter((p) => p.district_id == id);
+			}
 
-				APICall("getprecinctsgeojson",
+			function attachData(data) {
+				map.attachGeoJSONdata(active.precinctsLayer, data);
+
+				map.fitBoundsActive(active.precinctsLayer);
+
+				$(".mapapp").removeClass("loading");
+			}
+
+			if (!ps || !ps.length) {
+				APICall("getprecincts",
 					{
-						state_id : active.sy.id,
+						district_id : id,
 					})
 					.then((r) => {
-						var precinctsLayer = map.addGeoJSON(r, "precincts", {
-							hideIfInvalid : true,
-							hover : hoverPrecinct,
-						});
-						active.precinctsLayer = precinctsLayer;
-
-						map.attachGeoJSONdata(precinctsLayer, active.precincts);
-
-						map.fitBounds2(districtLayer);
+						addPrecincts(r);
+						//active.selectedPrecincts = r;
+						attachData(r.map((p) => p));
 					});
-			});
+			} else {
+				attachData(ps);
+			}
+		}
+
+		if (active.precinctsLayer) {
+			getPrecincts();
+		} else {
+			APICall("getprecinctsgeojson",
+				{
+					state_id : active.sy.id,
+				})
+				.then((r) => {
+					var precinctsLayer = map.addGeoJSON(r, "precincts", {
+						hideIfInvalid : true,
+						hover : hoverPrecinct,
+					});
+					active.precinctsLayer = precinctsLayer;
+
+					map.fitBounds2(districtLayer);
+
+					getPrecincts();
+				});
+		}
 	}
 
+	function clearPrecincts() {
+		if (active.precincts) {
+			if (active.precinctsLayer)
+				map.removeLayer(active.precinctsLayer);
+			active.precincts = null;
+			active.selectedPrecincts = null;
+			active.allPrecincts = false;
+			active.precinct = null;
+			active.precinctsLayer = null;
+			active.precinctsLayer2 = null;
+		}
+	}
 	function selectPrecinct(id, precinctLayer) {
 		var precinct = active.precincts.find((d) => d.id == id),
 			sy = active.sy;
@@ -508,6 +596,7 @@ whenReady(function() {
 	}
 
 	map = new LeafletMap();
+	window.map = map;
 
 	map.init("map");
 
@@ -553,6 +642,47 @@ whenReady(function() {
 			});
 		});
 	})();
+	function closeRedistrict() {
+		if (active.precinctsLayer) {
+			active.precinctsLayer.show();
+			map.fitBoundsActive(active.precinctsLayer);
+		}
+		if (active.precinctsLayer2)
+			active.precinctsLayer2.hide();
+	}
+	function openRedistrict() {
+		loadAllPrecincts(() => {
+			function whendone() {
+				if (active.precinctsLayer)
+					active.precinctsLayer.hide();
+				if (active.precinctsLayer2)
+					active.precinctsLayer2.show();
+
+				map.fitBoundsActive(active.precinctsLayer2);
+			}
+
+			if (!active.precinctsLayer2) {
+				$(".mapapp").addClass("loading");
+				APICall("getprecinctsgeojson",
+					{
+						state_id : active.sy.id,
+					})
+					.then((r) => {
+						var precinctsLayer2 = active.precinctsLayer2 = map.addGeoJSON(r, "precincts2", {
+							color : COLOR_SCHEME.REGULARNOPOLITICAL,
+						});
+
+						map.attachGeoJSONdata(precinctsLayer2, active.precincts.map((p) => p));
+
+						map.fitBounds(precinctsLayer2);
+
+						$(".mapapp").removeClass("loading");
+						whendone();
+					});
+			} else
+				whendone();
+		});
+	}
 	// algorithm
 	(function() {
 		var updates = [], UPDATE_TIME = 500,
@@ -588,7 +718,10 @@ whenReady(function() {
 					if (new Date().getTime() > renderTime + UPDATE_TIME) {
 						renderTime = new Date().getTime();
 						var update = updates.shift();
-						// update.all_changes
+
+						var changes = update.all_changes
+						console.log(changes);
+
 						var perc = update.loop / totalLoops * 100;
 						$("#credistrict .algresults .progress").css("width", perc + "%");
 						if (!update.is_running) {
@@ -665,5 +798,55 @@ whenReady(function() {
 	})();
 
 	loadStates();
+
+	var ANALYTIC_MAPPINGS = [
+		["compactness_score", "Compactness Score", 3],
+        ["efficiency_gap_score", "Efficiency Gap Score", 3],
+        ["lowest_district_population", "Lowest District Population", 0],
+        ["highest_district_population", "Highest District Population", 0],
+        ["lowest_precinct_population", "Lowest Precinct Population", 0],
+        ["highest_precinct_population", "Highest Precinct Population", 0],
+        ["number_of_precincts", "Number of Precincts", 0],
+        ["number_of_border_precincts", "Number of Border Precincts", 0],
+	];
+	$(".analytics .button").click(function() {
+		var $an = $(this).closest(".analytics"),
+			$info = $(this).closest(".info");
+
+		var thing = null, data = {};
+		if ($info.hasClass("syinfo")) {
+			thing = active.sy; if (!thing) return;
+			data.type = "state";
+			data.state_id = thing.id;
+		}
+		if ($info.hasClass("dinfo")) {
+			thing = active.district; if (!thing) return;
+			data.type = "district";
+			data.district_id = thing.id;
+		}
+		if ($info.hasClass("pinfo")) {
+			thing = active.precinct; if (!thing) return;
+			data.type = "precinct";
+			data.precinct_id = thing.id;
+		}
+		if (!thing) return;
+
+		APICall("analytics", $.extend({}, data))
+			.then((r) => {
+				var $fields = $an.find(".fields");
+				$fields.empty();
+
+				Object.keys(r).forEach((k) => {
+					var MAP = ANALYTIC_MAPPINGS.find((a) => a[0] == k);
+					if (!MAP) return;
+					var $field = $("<div>").addClass("field");
+					$field.append(
+						$("<div>").addClass("left").html(MAP[1]),
+						$("<div>").addClass("right").html(r[k].toFixed(MAP[2])),
+						);
+					$fields.append($field);
+				})
+			});
+	});
 
 });
