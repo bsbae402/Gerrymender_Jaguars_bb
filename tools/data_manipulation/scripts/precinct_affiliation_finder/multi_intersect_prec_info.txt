@@ -1,0 +1,6299 @@
+precinct 39135135AAO intersects with:
+3908
+3910
+precinct 39135135AAN intersects with:
+3908
+3910
+precinct 39157157AEI intersects with:
+3906
+3907
+precinct 39135135ABE intersects with:
+3908
+3910
+precinct 39157157ADZ intersects with:
+3906
+3907
+precinct 39029029AFC intersects with:
+3906
+3907
+precinct 39135135AAQ intersects with:
+3908
+3910
+precinct 39157157ACR intersects with:
+3906
+3907
+precinct 39157157ADG intersects with:
+3906
+3907
+precinct 39157157ADM intersects with:
+3906
+3907
+precinct 39157157AEJ intersects with:
+3906
+3907
+precinct 39157157ACS intersects with:
+3906
+3907
+precinct 39157157ADN intersects with:
+3906
+3907
+precinct 39029029AFD intersects with:
+3906
+3907
+precinct 39157157ADV intersects with:
+3906
+3907
+precinct 39157157AEP intersects with:
+3906
+3907
+precinct 39157157ADP intersects with:
+3906
+3907
+precinct 39157157AEK intersects with:
+3906
+3907
+precinct 39135135ABP intersects with:
+3908
+3910
+precinct 39029029ADI intersects with:
+3906
+3907
+precinct 39029029ADG intersects with:
+3906
+3907
+3913
+precinct 39135135ABC intersects with:
+3908
+3910
+precinct 39157157ACX intersects with:
+3906
+3907
+precinct 39135135AAR intersects with:
+3908
+3910
+precinct 39157157ACT intersects with:
+3906
+3907
+precinct 39157157AEG intersects with:
+3906
+3907
+precinct 39157157ACP intersects with:
+3906
+3907
+precinct 39063063ABN intersects with:
+3904
+3905
+precinct 39025025ABI intersects with:
+3901
+3902
+precinct 39071071ABG intersects with:
+3902
+3915
+precinct 39025025ABQ intersects with:
+3901
+3902
+precinct 39025025ABU intersects with:
+3901
+3902
+precinct 39071071AAX intersects with:
+3902
+3915
+precinct 39025025ACJ intersects with:
+3901
+3902
+precinct 39025025ACM intersects with:
+3901
+3902
+precinct 39063063ACI intersects with:
+3904
+3905
+precinct 39071071AAF intersects with:
+3902
+3915
+precinct 39063063ABS intersects with:
+3904
+3905
+precinct 39063063ABO intersects with:
+3904
+3905
+precinct 39025025AAA intersects with:
+3901
+3902
+precinct 39063063ACN intersects with:
+3904
+3905
+precinct 39025025ABB intersects with:
+3901
+3902
+precinct 39025025ABM intersects with:
+3901
+3902
+precinct 39025025AGY intersects with:
+3901
+3902
+precinct 39071071AAB intersects with:
+3902
+3915
+precinct 39071071ABO intersects with:
+3902
+3915
+precinct 39071071ABQ intersects with:
+3902
+3915
+precinct 39063063ACR intersects with:
+3904
+3905
+precinct 39071071AAV intersects with:
+3902
+3915
+precinct 39025025AGX intersects with:
+3901
+3902
+3915
+precinct 39071071AAU intersects with:
+3902
+3915
+precinct 39025025AGU intersects with:
+3901
+3902
+precinct 39115115AAC intersects with:
+3906
+3912
+3915
+precinct 39115115AAU intersects with:
+3906
+3915
+precinct 39115115AAB intersects with:
+3912
+3915
+precinct 39115115AAW intersects with:
+3912
+3915
+precinct 39115115AAA intersects with:
+3912
+3915
+precinct 39115115AAL intersects with:
+3906
+3915
+precinct 39115115AAD intersects with:
+3906
+3915
+precinct 39143143ACK intersects with:
+3904
+3905
+precinct 39143143ACY intersects with:
+3904
+3909
+precinct 39143143ACE intersects with:
+3904
+3905
+precinct 39143143ADE intersects with:
+3904
+3905
+precinct 39023023AFN intersects with:
+3908
+3915
+precinct 39009009ACK intersects with:
+3906
+3915
+precinct 39143143ACV intersects with:
+3904
+3905
+precinct 39143143ADC intersects with:
+3904
+3905
+precinct 39105105AAA intersects with:
+3906
+3915
+precinct 39143143ACX intersects with:
+3904
+3909
+precinct 39143143999 intersects with:
+3904
+3909
+precinct 39105105AAX intersects with:
+3906
+3915
+precinct 39023023ADW intersects with:
+3908
+3910
+precinct 39023023AEB intersects with:
+3908
+3915
+precinct 39105105AAN intersects with:
+3906
+3915
+precinct 39023023AEM intersects with:
+3908
+3910
+precinct 39023023AFM intersects with:
+3908
+3915
+precinct 39105105AAE intersects with:
+3906
+3915
+precinct 39023023AEF intersects with:
+3908
+3910
+3915
+precinct 39023023AEK intersects with:
+3908
+3910
+precinct 39023023AEA intersects with:
+3908
+3915
+precinct 39023023AFH intersects with:
+3904
+3908
+precinct 39023023AEU intersects with:
+3904
+3908
+precinct 39023023ADV intersects with:
+3908
+3910
+precinct 39023023ADF intersects with:
+3908
+3910
+precinct 39023023AFL intersects with:
+3904
+3908
+precinct 39023023ADQ intersects with:
+3904
+3908
+precinct 39023023ADS intersects with:
+3904
+3908
+precinct 39023023AEQ intersects with:
+3908
+3910
+precinct 39023023AFD intersects with:
+3904
+3908
+precinct 39023023AFI intersects with:
+3904
+3908
+precinct 39143143ACW intersects with:
+3904
+3905
+precinct 39103103AEY intersects with:
+3907
+3916
+precinct 39103103AAI intersects with:
+3907
+3916
+precinct 39103103AAZ intersects with:
+3907
+3916
+precinct 39103103AEC intersects with:
+3907
+3916
+precinct 39103103AAE intersects with:
+3907
+3916
+precinct 39103103AEF intersects with:
+3907
+3916
+precinct 39103103AFT intersects with:
+3907
+3916
+precinct 39103103AFD intersects with:
+3907
+3916
+precinct 39103103AFZ intersects with:
+3907
+3916
+precinct 39103103AFB intersects with:
+3907
+3916
+precinct 39103103AFR intersects with:
+3907
+3916
+precinct 39103103AFP intersects with:
+3907
+3916
+precinct 39103103AEW intersects with:
+3907
+3916
+precinct 39103103AEU intersects with:
+3907
+3916
+precinct 39103103ADQ intersects with:
+3907
+3916
+precinct 39103103AAK intersects with:
+3907
+3916
+precinct 39103103ACB intersects with:
+3907
+3916
+precinct 39103103AFX intersects with:
+3907
+3916
+precinct 39103103ADF intersects with:
+3911
+3916
+precinct 39103103ADB intersects with:
+3907
+3916
+precinct 39103103ABU intersects with:
+3907
+3916
+precinct 39103103ABC intersects with:
+3907
+3916
+precinct 39103103ACA intersects with:
+3907
+3916
+precinct 39103103AAS intersects with:
+3907
+3916
+precinct 39103103ABZ intersects with:
+3907
+3916
+precinct 39103103ABX intersects with:
+3907
+3916
+precinct 39103103AFA intersects with:
+3907
+3916
+precinct 39103103ADL intersects with:
+3907
+3916
+precinct 39103103AAN intersects with:
+3907
+3916
+precinct 39103103ABE intersects with:
+3907
+3916
+precinct 39103103ABS intersects with:
+3907
+3916
+precinct 39103103AFE intersects with:
+3907
+3916
+precinct 39103103AFO intersects with:
+3907
+3916
+precinct 39103103AAY intersects with:
+3907
+3916
+precinct 39103103AAU intersects with:
+3907
+3916
+precinct 39103103AEH intersects with:
+3907
+3916
+precinct 39103103AEE intersects with:
+3907
+3916
+precinct 39103103AAJ intersects with:
+3907
+3916
+precinct 39103103AAQ intersects with:
+3907
+3916
+precinct 39103103AFY intersects with:
+3907
+3916
+precinct 39103103ABI intersects with:
+3907
+3916
+precinct 39103103ABH intersects with:
+3907
+3916
+precinct 39103103ADI intersects with:
+3911
+3916
+precinct 39103103AFC intersects with:
+3907
+3916
+precinct 39025025ABA intersects with:
+3901
+3902
+precinct 39103103ACY intersects with:
+3907
+3916
+precinct 39103103AEX intersects with:
+3907
+3916
+precinct 39103103ABD intersects with:
+3907
+3916
+precinct 39103103ABA intersects with:
+3907
+3916
+precinct 39103103AER intersects with:
+3907
+3916
+precinct 39103103ADW intersects with:
+3911
+3916
+precinct 39103103AAT intersects with:
+3907
+3916
+precinct 39103103AAP intersects with:
+3907
+3916
+precinct 39103103ADP intersects with:
+3907
+3916
+precinct 39103103ADD intersects with:
+3907
+3916
+precinct 39103103ADC intersects with:
+3907
+3916
+precinct 39103103ACZ intersects with:
+3907
+3916
+precinct 39103103ADK intersects with:
+3907
+3916
+precinct 39103103AAM intersects with:
+3907
+3916
+precinct 39047047ABI intersects with:
+3910
+3915
+precinct 39047047ABM intersects with:
+3910
+3915
+precinct 39047047ABK intersects with:
+3910
+3915
+precinct 39047047AAX intersects with:
+3910
+3915
+precinct 39139139AEF intersects with:
+3907
+3912
+precinct 39101101ACB intersects with:
+3904
+3905
+precinct 39101101ACU intersects with:
+3904
+3912
+precinct 39149149ABS intersects with:
+3904
+3908
+precinct 39015015AAY intersects with:
+3902
+3915
+precinct 39047047ABC intersects with:
+3910
+3915
+precinct 39101101ABZ intersects with:
+3904
+3912
+precinct 39047047AAT intersects with:
+3902
+3915
+precinct 39149149ACN intersects with:
+3904
+3908
+precinct 39047047AAM intersects with:
+3910
+3915
+precinct 39101101ACW intersects with:
+3904
+3912
+precinct 39149149ABD intersects with:
+3904
+3908
+precinct 39117117AAD intersects with:
+3904
+3912
+precinct 39101101ADF intersects with:
+3904
+3912
+precinct 39015015ACL intersects with:
+3902
+3915
+precinct 39101101ACG intersects with:
+3904
+3912
+precinct 39149149ABU intersects with:
+3904
+3908
+precinct 39117117AAH intersects with:
+3907
+3912
+precinct 39101101ACA intersects with:
+3904
+3905
+precinct 39149149ABM intersects with:
+3904
+3908
+precinct 39117117ABD intersects with:
+3907
+3912
+precinct 39117117AAL intersects with:
+3907
+3912
+precinct 39117117ABE intersects with:
+3907
+3912
+precinct 39117117ABH intersects with:
+3904
+3912
+precinct 39101101ABV intersects with:
+3904
+3905
+precinct 39101101ABW intersects with:
+3904
+3912
+precinct 39101101ACS intersects with:
+3904
+3905
+precinct 39101101ACF intersects with:
+3904
+3912
+precinct 39101101ADH intersects with:
+3904
+3905
+precinct 39101101ACZ intersects with:
+3904
+3912
+precinct 39101101ACX intersects with:
+3904
+3912
+precinct 39101101ACK intersects with:
+3904
+3912
+precinct 39149149ABZ intersects with:
+3904
+3908
+precinct 39117117AAY intersects with:
+3904
+3907
+3912
+precinct 39117117AAZ intersects with:
+3904
+3912
+precinct 39101101ACJ intersects with:
+3904
+3912
+precinct 39047047ABG intersects with:
+3910
+3915
+precinct 39047047ABH intersects with:
+3902
+3915
+precinct 39047047ABB intersects with:
+3910
+3915
+precinct 39047047AAU intersects with:
+3910
+3915
+precinct 39043043ADV intersects with:
+3904
+3909
+precinct 39043043ACH intersects with:
+3904
+3909
+precinct 39043043ACG intersects with:
+3904
+3909
+precinct 39043043ACM intersects with:
+3904
+3909
+precinct 39043043ACX intersects with:
+3904
+3909
+precinct 39043043ACW intersects with:
+3904
+3909
+precinct 39043043ADS intersects with:
+3904
+3909
+precinct 39043043ADO intersects with:
+3904
+3909
+precinct 39043043ACR intersects with:
+3904
+3909
+precinct 39043043ACS intersects with:
+3904
+3909
+precinct 39043043ADU intersects with:
+3904
+3909
+precinct 39043043ADA intersects with:
+3904
+3909
+precinct 39043043ADW intersects with:
+3904
+3909
+precinct 39043043ACK intersects with:
+3904
+3909
+precinct 39043043ACQ intersects with:
+3904
+3909
+precinct 39043043ACF intersects with:
+3904
+3909
+precinct 39043043ACI intersects with:
+3904
+3909
+precinct 39085085AEO intersects with:
+3911
+3914
+precinct 39031031AAO intersects with:
+3906
+3907
+precinct 39085085ADG intersects with:
+3911
+3914
+precinct 39147147ACB intersects with:
+3904
+3905
+precinct 39147147AAA intersects with:
+3904
+3905
+precinct 39147147ACU intersects with:
+3904
+3907
+precinct 39147147ACL intersects with:
+3904
+3907
+precinct 39147147AAE intersects with:
+3904
+3905
+precinct 39147147ACG intersects with:
+3904
+3905
+precinct 39085085AFD intersects with:
+3911
+3914
+precinct 39085085AES intersects with:
+3911
+3914
+precinct 39147147AAI intersects with:
+3904
+3905
+precinct 39147147ACR intersects with:
+3904
+3907
+precinct 39147147ABM intersects with:
+3904
+3905
+precinct 39147147ACH intersects with:
+3904
+3905
+precinct 39147147ACQ intersects with:
+3904
+3905
+precinct 39147147ABX intersects with:
+3904
+3905
+precinct 39085007999 intersects with:
+3911
+3914
+precinct 39031031ABP intersects with:
+3906
+3907
+precinct 39031031ABO intersects with:
+3906
+3907
+precinct 39085085ADI intersects with:
+3911
+3914
+precinct 39031031ABK intersects with:
+3906
+3907
+3912
+precinct 39031031ABI intersects with:
+3906
+3907
+precinct 39031031ABE intersects with:
+3906
+3907
+precinct 39053053AAY intersects with:
+3906
+3915
+precinct 39031031AAT intersects with:
+3906
+3907
+precinct 39147147ACP intersects with:
+3904
+3905
+precinct 39021021ABV intersects with:
+3904
+3908
+precinct 39021021ABT intersects with:
+3904
+3908
+precinct 39005005ACD intersects with:
+3907
+3916
+precinct 39005005ABN intersects with:
+3907
+3912
+precinct 39005005ACC intersects with:
+3907
+3916
+precinct 39005005ACM intersects with:
+3907
+3916
+precinct 39021021AAW intersects with:
+3904
+3908
+3915
+precinct 39021021ABF intersects with:
+3904
+3908
+precinct 39019019AAF intersects with:
+3906
+3907
+precinct 39019019AAG intersects with:
+3906
+3907
+precinct 39019019ABD intersects with:
+3906
+3907
+precinct 39019019ABE intersects with:
+3906
+3907
+precinct 39005005ABV intersects with:
+3907
+3916
+precinct 39019019AAE intersects with:
+3906
+3907
+precinct 39019019ABG intersects with:
+3906
+3907
+precinct 39019019ABJ intersects with:
+3906
+3907
+precinct 39005005ACL intersects with:
+3907
+3916
+precinct 39005005ABT intersects with:
+3907
+3916
+precinct 39021021ABB intersects with:
+3904
+3908
+precinct 39021021ABD intersects with:
+3904
+3908
+precinct 39019019AAM intersects with:
+3906
+3907
+precinct 39019019AAL intersects with:
+3906
+3907
+precinct 39021021ACA intersects with:
+3904
+3908
+precinct 39021021ABK intersects with:
+3904
+3908
+precinct 39145145ADW intersects with:
+3902
+3906
+precinct 39145145ADY intersects with:
+3902
+3906
+precinct 39003003AEX intersects with:
+3904
+3905
+precinct 39003003AES intersects with:
+3904
+3905
+precinct 39003003AEQ intersects with:
+3904
+3905
+precinct 39003003AAE intersects with:
+3904
+3905
+precinct 39003003AGN intersects with:
+3904
+3905
+precinct 39003003AEN intersects with:
+3904
+3905
+precinct 39003003AET intersects with:
+3904
+3905
+precinct 39145145AEJ intersects with:
+3902
+3906
+precinct 39145145AEA intersects with:
+3902
+3906
+precinct 39145145ACT intersects with:
+3902
+3906
+precinct 39003003ADT intersects with:
+3904
+3905
+precinct 39145145ADZ intersects with:
+3902
+3906
+precinct 39145145ADF intersects with:
+3902
+3906
+precinct 39145145ADV intersects with:
+3902
+3906
+precinct 39145145ACS intersects with:
+3902
+3906
+precinct 39145145ACM intersects with:
+3902
+3906
+precinct 39145145ACK intersects with:
+3902
+3906
+precinct 39145145ACI intersects with:
+3902
+3906
+precinct 39003003AGI intersects with:
+3904
+3905
+precinct 39145145ABW intersects with:
+3902
+3906
+precinct 39145145AEB intersects with:
+3902
+3906
+precinct 39145145ADU intersects with:
+3902
+3906
+precinct 39145145ADT intersects with:
+3902
+3906
+precinct 39145145ADM intersects with:
+3902
+3906
+precinct 39003003AFL intersects with:
+3904
+3905
+precinct 39145145ABL intersects with:
+3902
+3906
+precinct 39145145ABK intersects with:
+3902
+3906
+precinct 39101101ADJ intersects with:
+3904
+3912
+precinct 39101101ADA intersects with:
+3904
+3912
+precinct 39101101ACY intersects with:
+3904
+3912
+precinct 39003003AFG intersects with:
+3904
+3905
+precinct 39101101ACV intersects with:
+3904
+3912
+precinct 39101101ACH intersects with:
+3904
+3912
+precinct 39101101ABY intersects with:
+3904
+3912
+precinct 39145145ACL intersects with:
+3902
+3906
+precinct 39003003AEY intersects with:
+3904
+3905
+precinct 39145145ABY intersects with:
+3902
+3906
+precinct 39145145ACQ intersects with:
+3902
+3906
+precinct 39145145ABX intersects with:
+3902
+3906
+precinct 39003003AFF intersects with:
+3904
+3905
+precinct 39101101ABX intersects with:
+3904
+3912
+precinct 39107107ABO intersects with:
+3905
+3908
+precinct 39107107ABH intersects with:
+3904
+3905
+3908
+precinct 39107107ABF intersects with:
+3904
+3905
+3908
+precinct 39107107AAM intersects with:
+3905
+3908
+precinct 39107107AAB intersects with:
+3904
+3905
+precinct 39107107AAF intersects with:
+3904
+3905
+precinct 39107107AAS intersects with:
+3904
+3905
+precinct 39107107AAL intersects with:
+3904
+3905
+3908
+precinct 39107107ABL intersects with:
+3904
+3908
+precinct 39107107AAW intersects with:
+3904
+3908
+precinct 39107107AAX intersects with:
+3904
+3908
+precinct 39107107ABS intersects with:
+3905
+3908
+precinct 39107107ABM intersects with:
+3904
+3908
+precinct 39107107ABQ intersects with:
+3904
+3905
+precinct 39107107ABG intersects with:
+3904
+3905
+precinct 39107107AAE intersects with:
+3904
+3905
+precinct 39133133AAZ intersects with:
+3913
+3916
+precinct 39133133AFL intersects with:
+3913
+3916
+precinct 39133133AGK intersects with:
+3913
+3916
+precinct 39133133ACT intersects with:
+3913
+3916
+precinct 39133133TLB intersects with:
+3913
+3916
+precinct 39133133ADE intersects with:
+3913
+3916
+precinct 39133133AGB intersects with:
+3907
+3913
+3916
+precinct 39065065AAT intersects with:
+3904
+3905
+precinct 39133133ADQ intersects with:
+3913
+3916
+precinct 39133133ADH intersects with:
+3906
+3913
+precinct 39133133AEQ intersects with:
+3913
+3916
+precinct 39133133AGF intersects with:
+3913
+3914
+precinct 39133133AFH intersects with:
+3913
+3914
+precinct 39065065AAS intersects with:
+3904
+3905
+precinct 39133133AFB intersects with:
+3913
+3914
+precinct 39065065ABK intersects with:
+3904
+3905
+precinct 39133133AEB intersects with:
+3913
+3914
+precinct 39133133ADU intersects with:
+3913
+3914
+precinct 39151151AJE intersects with:
+3906
+3913
+precinct 39099099APF intersects with:
+3906
+3913
+precinct 39133133AFF intersects with:
+3913
+3916
+precinct 39133133ADY intersects with:
+3913
+3914
+precinct 39133133AFT intersects with:
+3913
+3914
+precinct 39065065AAP intersects with:
+3904
+3905
+precinct 39133133AFG intersects with:
+3913
+3916
+precinct 39133133AFV intersects with:
+3913
+3914
+precinct 39133133AEN intersects with:
+3913
+3914
+precinct 39133133AGR intersects with:
+3913
+3914
+precinct 39133133AAK intersects with:
+3913
+3914
+precinct 39133133AFS intersects with:
+3913
+3914
+precinct 39133133ACN intersects with:
+3913
+3914
+precinct 39133133ACO intersects with:
+3913
+3914
+precinct 39133133ACQ intersects with:
+3907
+3913
+3916
+precinct 39133133AEX intersects with:
+3907
+3913
+3916
+precinct 39133133ACR intersects with:
+3913
+3916
+precinct 39133133AFX intersects with:
+3913
+3916
+precinct 39133133AEL intersects with:
+3913
+3916
+precinct 39065065AAX intersects with:
+3904
+3905
+precinct 39133133AAM intersects with:
+3913
+3914
+precinct 39133133ACI intersects with:
+3913
+3914
+precinct 39133133AEW intersects with:
+3913
+3916
+precinct 39133133ADJ intersects with:
+3913
+3916
+precinct 39133133AEO intersects with:
+3913
+3914
+precinct 39065065ABF intersects with:
+3904
+3905
+precinct 39065065ABL intersects with:
+3904
+3905
+precinct 39133133ACL intersects with:
+3913
+3914
+precinct 39133133AAO intersects with:
+3913
+3914
+precinct 39133133ADK intersects with:
+3913
+3916
+precinct 39133133TLA intersects with:
+3913
+3916
+precinct 39133133AGG intersects with:
+3913
+3914
+precinct 39133133ADM intersects with:
+3913
+3914
+precinct 39133133ACV intersects with:
+3913
+3916
+precinct 39133133ACU intersects with:
+3913
+3916
+precinct 39133133AFM intersects with:
+3913
+3916
+precinct 39133133AEY intersects with:
+3907
+3916
+precinct 39133133AFZ intersects with:
+3907
+3916
+precinct 39065065ABH intersects with:
+3904
+3905
+precinct 39133133AAU intersects with:
+3913
+3914
+precinct 39133133ACX intersects with:
+3913
+3916
+precinct 39133133AFE intersects with:
+3913
+3916
+precinct 39133133AFN intersects with:
+3913
+3916
+precinct 39065065AAQ intersects with:
+3904
+3905
+precinct 39095095AFR intersects with:
+3905
+3909
+precinct 39095095AMR intersects with:
+3905
+3909
+precinct 39095095AMO intersects with:
+3905
+3909
+precinct 39095095AMI intersects with:
+3905
+3909
+precinct 39095095ARM intersects with:
+3905
+3909
+precinct 39095095AMB intersects with:
+3905
+3909
+precinct 39095095AMC intersects with:
+3905
+3909
+precinct 39095095ARR intersects with:
+3905
+3909
+precinct 39095095ATE intersects with:
+3905
+3909
+precinct 39095095AVP intersects with:
+3905
+3909
+precinct 39095095ASE intersects with:
+3905
+3909
+precinct 39095095ARA intersects with:
+3905
+3909
+precinct 39095095AFQ intersects with:
+3905
+3909
+precinct 39095095AMU intersects with:
+3905
+3909
+precinct 39095095AAX intersects with:
+3905
+3909
+precinct 39095095AGH intersects with:
+3905
+3909
+precinct 39095095ADW intersects with:
+3905
+3909
+precinct 39095095AKC intersects with:
+3905
+3909
+precinct 39095095AJX intersects with:
+3905
+3909
+precinct 39095095AJW intersects with:
+3905
+3909
+precinct 39095095AJP intersects with:
+3905
+3909
+precinct 39095095ARS intersects with:
+3905
+3909
+precinct 39095095ABC intersects with:
+3905
+3909
+precinct 39095095AMK intersects with:
+3905
+3909
+precinct 39095095AOW intersects with:
+3905
+3909
+precinct 39095095AFH intersects with:
+3905
+3909
+precinct 39095095AOZ intersects with:
+3905
+3909
+precinct 39095095AOY intersects with:
+3905
+3909
+precinct 39095095AGY intersects with:
+3905
+3909
+precinct 39095095ASG intersects with:
+3905
+3909
+precinct 39095095ASD intersects with:
+3905
+3909
+precinct 39095095ARD intersects with:
+3905
+3909
+precinct 39095095ARG intersects with:
+3905
+3909
+precinct 39095095ABI intersects with:
+3905
+3909
+precinct 39095095ABH intersects with:
+3905
+3909
+precinct 39095095AVC intersects with:
+3905
+3909
+precinct 39095095ABD intersects with:
+3905
+3909
+precinct 39095095ABM intersects with:
+3905
+3909
+precinct 39095095ARU intersects with:
+3905
+3909
+precinct 39095095ANV intersects with:
+3905
+3909
+precinct 39095095AFO intersects with:
+3905
+3909
+precinct 39095095ARB intersects with:
+3905
+3909
+precinct 39095095AQZ intersects with:
+3905
+3909
+precinct 39095095AUH intersects with:
+3905
+3909
+precinct 39095095ASB intersects with:
+3905
+3909
+precinct 39095095AFJ intersects with:
+3905
+3909
+precinct 39095095APL intersects with:
+3905
+3909
+precinct 39095095ARF intersects with:
+3905
+3909
+precinct 39095095AOX intersects with:
+3905
+3909
+precinct 39095095AMT intersects with:
+3905
+3909
+precinct 39095095AGO intersects with:
+3905
+3909
+precinct 39095095AFP intersects with:
+3905
+3909
+precinct 39095095AGX intersects with:
+3905
+3909
+precinct 39095095ADV intersects with:
+3905
+3909
+precinct 39095095ARK intersects with:
+3905
+3909
+precinct 39095095AEE intersects with:
+3905
+3909
+precinct 39095095AED intersects with:
+3905
+3909
+precinct 39095095AEM intersects with:
+3905
+3909
+precinct 39095095ATG intersects with:
+3905
+3909
+precinct 39095095ATF intersects with:
+3905
+3909
+precinct 39095095ANW intersects with:
+3905
+3909
+precinct 39095095APY intersects with:
+3905
+3909
+precinct 39095095APS intersects with:
+3905
+3909
+precinct 39095095ANS intersects with:
+3905
+3909
+precinct 39095095AMP intersects with:
+3905
+3909
+precinct 39095095AHA intersects with:
+3905
+3909
+precinct 39095095AGR intersects with:
+3905
+3909
+precinct 39095095AGZ intersects with:
+3905
+3909
+precinct 39095095AOS intersects with:
+3905
+3909
+precinct 39095095AGN intersects with:
+3905
+3909
+precinct 39095095AFN intersects with:
+3905
+3909
+precinct 39095095AEC intersects with:
+3905
+3909
+precinct 39095095ANF intersects with:
+3905
+3909
+precinct 39061061BAU intersects with:
+3901
+3908
+precinct 39061061BDM intersects with:
+3901
+3902
+precinct 39061061BNN intersects with:
+3901
+3902
+precinct 39061061BNS intersects with:
+3901
+3902
+precinct 39061061ANS intersects with:
+3901
+3902
+precinct 39061061BOT intersects with:
+3901
+3902
+precinct 39061061AXS intersects with:
+3901
+3902
+precinct 39061061ASK intersects with:
+3901
+3902
+precinct 39061061AGH intersects with:
+3901
+3902
+precinct 39061061AFU intersects with:
+3901
+3902
+precinct 39061061BDH intersects with:
+3901
+3902
+precinct 39061061BJA intersects with:
+3901
+3908
+precinct 39061061ADA intersects with:
+3901
+3902
+precinct 39061061ASM intersects with:
+3901
+3902
+precinct 39061061ASQ intersects with:
+3901
+3902
+precinct 39061061AUS intersects with:
+3901
+3902
+precinct 39061061AFS intersects with:
+3901
+3902
+precinct 39113113ATH intersects with:
+3908
+3910
+precinct 39113113AJJ intersects with:
+3908
+3910
+precinct 39113113AJA intersects with:
+3908
+3910
+precinct 39113113AWS intersects with:
+3908
+3910
+precinct 39113113AXZ intersects with:
+3901
+3910
+precinct 39113113ATQ intersects with:
+3901
+3908
+3910
+precinct 39113113AKJ intersects with:
+3908
+3910
+precinct 39037037ABH intersects with:
+3908
+3910
+precinct 39113113ASU intersects with:
+3908
+3910
+precinct 39113113ARN intersects with:
+3908
+3910
+precinct 39113113AVD intersects with:
+3908
+3910
+precinct 39113113AZD intersects with:
+3901
+3910
+precinct 39113113AVF intersects with:
+3908
+3910
+precinct 39113113ATP intersects with:
+3908
+3910
+precinct 39113113AJK intersects with:
+3908
+3910
+precinct 39113113AWQ intersects with:
+3908
+3910
+precinct 39113113AWI intersects with:
+3901
+3910
+precinct 39113113AWT intersects with:
+3908
+3910
+precinct 39113113ATI intersects with:
+3908
+3910
+precinct 39113113ART intersects with:
+3908
+3910
+precinct 39113113AVY intersects with:
+3901
+3910
+precinct 39113113AYD intersects with:
+3901
+3910
+precinct 39113113ABV intersects with:
+3908
+3910
+precinct 39113113ATF intersects with:
+3908
+3910
+precinct 39113113AYL intersects with:
+3901
+3910
+precinct 39113113AJF intersects with:
+3908
+3910
+precinct 39113113AWH intersects with:
+3901
+3910
+precinct 39139139ACV intersects with:
+3907
+3912
+precinct 39139139AFA intersects with:
+3907
+3912
+precinct 39139139AAX intersects with:
+3907
+3912
+precinct 39139139ACQ intersects with:
+3907
+3912
+precinct 39139139AFD intersects with:
+3907
+3912
+precinct 39139139AEV intersects with:
+3907
+3912
+precinct 39139139AFB intersects with:
+3907
+3912
+precinct 39139139AEX intersects with:
+3907
+3912
+precinct 39139139ACR intersects with:
+3907
+3912
+precinct 39139139ADQ intersects with:
+3907
+3912
+precinct 39139139ABF intersects with:
+3907
+3912
+precinct 39139139ADC intersects with:
+3907
+3912
+precinct 39139139ADV intersects with:
+3907
+3912
+precinct 39139139ADD intersects with:
+3907
+3912
+precinct 39139139ADE intersects with:
+3907
+3912
+precinct 39139139ADB intersects with:
+3907
+3912
+precinct 39139139ABN intersects with:
+3907
+3912
+precinct 39139139ADN intersects with:
+3907
+3912
+precinct 39139139AEP intersects with:
+3907
+3912
+precinct 39139139ACL intersects with:
+3907
+3912
+precinct 39139139AET intersects with:
+3907
+3912
+precinct 39139139ACZ intersects with:
+3907
+3912
+precinct 39139139ADT intersects with:
+3904
+3907
+3912
+precinct 39139139ADX intersects with:
+3907
+3912
+precinct 39139139ADA intersects with:
+3907
+3912
+precinct 39139139ABP intersects with:
+3907
+3912
+precinct 39139139ACY intersects with:
+3907
+3912
+precinct 39139139AAA intersects with:
+3907
+3912
+precinct 39139139ABS intersects with:
+3907
+3912
+precinct 39139139ACU intersects with:
+3907
+3912
+precinct 39139139ACW intersects with:
+3907
+3912
+precinct 39139139ADW intersects with:
+3907
+3912
+precinct 39139139ADY intersects with:
+3907
+3912
+precinct 39139139ADU intersects with:
+3904
+3907
+precinct 39139139ADR intersects with:
+3904
+3907
+precinct 39139139AEM intersects with:
+3907
+3912
+precinct 39169169ACJ intersects with:
+3907
+3916
+precinct 39169169ADI intersects with:
+3907
+3916
+precinct 39169169ADH intersects with:
+3907
+3916
+precinct 39169169ADE intersects with:
+3907
+3916
+precinct 39137137ABG intersects with:
+3904
+3905
+precinct 39137137ABK intersects with:
+3904
+3905
+precinct 39169169ABP intersects with:
+3907
+3916
+precinct 39169169ADJ intersects with:
+3907
+3916
+precinct 39169169ABU intersects with:
+3907
+3916
+precinct 39169169ACU intersects with:
+3907
+3916
+precinct 39137137AAH intersects with:
+3904
+3905
+precinct 39169169ACO intersects with:
+3907
+3916
+precinct 39169169ABX intersects with:
+3907
+3916
+precinct 39169169ABZ intersects with:
+3907
+3916
+precinct 39169169ADF intersects with:
+3907
+3916
+precinct 39137137AAG intersects with:
+3904
+3905
+precinct 39137137ABO intersects with:
+3904
+3905
+precinct 39169169ACK intersects with:
+3907
+3916
+precinct 39027027ABA intersects with:
+3902
+3915
+precinct 39027027AAQ intersects with:
+3901
+3915
+precinct 39027027ABI intersects with:
+3901
+3915
+precinct 39027027ABZ intersects with:
+3901
+3915
+precinct 39027027ABX intersects with:
+3910
+3915
+precinct 39027027AAS intersects with:
+3901
+3910
+3915
+precinct 39027027AAY intersects with:
+3902
+3915
+precinct 39027027ABT intersects with:
+3901
+3915
+precinct 39027027ABW intersects with:
+3902
+3915
+precinct 39027027ABC intersects with:
+3910
+3915
+precinct 39027027AAU intersects with:
+3902
+3915
+precinct 39027027ABE intersects with:
+3901
+3902
+3915
+precinct 39027027ACB intersects with:
+3901
+3915
+precinct 39027027ABY intersects with:
+3902
+3915
+precinct 39061061ASS intersects with:
+3901
+3902
+precinct 39061061AFH intersects with:
+3901
+3902
+precinct 39061061BFS intersects with:
+3901
+3902
+precinct 39061061BKM intersects with:
+3901
+3902
+precinct 39061061ACF intersects with:
+3901
+3902
+precinct 39061061AUX intersects with:
+3901
+3902
+precinct 39061061AUQ intersects with:
+3901
+3902
+precinct 39061061AXD intersects with:
+3901
+3902
+precinct 39061061BCU intersects with:
+3901
+3908
+precinct 39061061ASH intersects with:
+3901
+3902
+precinct 39061061AIS intersects with:
+3901
+3902
+precinct 39061061ANT intersects with:
+3901
+3902
+precinct 39061061ANM intersects with:
+3901
+3902
+precinct 39061061ANI intersects with:
+3901
+3902
+precinct 39061061AWI intersects with:
+3901
+3902
+precinct 39061061BMF intersects with:
+3901
+3902
+precinct 39061061BLZ intersects with:
+3901
+3902
+precinct 39061061BLX intersects with:
+3901
+3902
+precinct 39061061ATA intersects with:
+3901
+3902
+precinct 39167167ACM intersects with:
+3906
+3915
+precinct 39061061AVW intersects with:
+3901
+3902
+precinct 39061061AVH intersects with:
+3901
+3902
+precinct 39061061AUW intersects with:
+3901
+3902
+precinct 39061061AUR intersects with:
+3901
+3902
+precinct 39061061ASP intersects with:
+3901
+3902
+precinct 39061061ASG intersects with:
+3901
+3902
+precinct 39061061BOC intersects with:
+3901
+3902
+precinct 39061061ASW intersects with:
+3901
+3902
+precinct 39061061ASV intersects with:
+3901
+3902
+precinct 39061061ASU intersects with:
+3901
+3902
+precinct 39061061AWD intersects with:
+3901
+3902
+precinct 39061061ADG intersects with:
+3901
+3902
+precinct 39061061BFP intersects with:
+3901
+3902
+precinct 39061061BFW intersects with:
+3901
+3902
+precinct 39061061AGR intersects with:
+3901
+3902
+precinct 39061061BBZ intersects with:
+3901
+3902
+precinct 39061061AAM intersects with:
+3901
+3902
+precinct 39061061AJG intersects with:
+3901
+3902
+precinct 39061061ACZ intersects with:
+3901
+3902
+precinct 39061061ANQ intersects with:
+3901
+3902
+precinct 39061061ANO intersects with:
+3901
+3902
+precinct 39167167ACR intersects with:
+3906
+3915
+precinct 39167167ACS intersects with:
+3906
+3915
+precinct 39061061BME intersects with:
+3901
+3902
+precinct 39061061BLW intersects with:
+3901
+3902
+precinct 39061061BLG intersects with:
+3901
+3902
+precinct 39061061AFN intersects with:
+3901
+3902
+precinct 39061061AFK intersects with:
+3901
+3902
+precinct 39061061AFJ intersects with:
+3901
+3902
+precinct 39061061AFI intersects with:
+3901
+3902
+precinct 39061061ANG intersects with:
+3901
+3902
+precinct 39167167ACY intersects with:
+3906
+3915
+precinct 39061061BDR intersects with:
+3901
+3902
+precinct 39061061BBK intersects with:
+3901
+3902
+precinct 39061061AGJ intersects with:
+3901
+3902
+precinct 39061061AGI intersects with:
+3901
+3902
+precinct 39061061BOE intersects with:
+3901
+3902
+precinct 39061061BOB intersects with:
+3901
+3902
+precinct 39061061AXU intersects with:
+3901
+3908
+precinct 39061061AXQ intersects with:
+3901
+3908
+precinct 39061061AOE intersects with:
+3901
+3902
+precinct 39061061BKX intersects with:
+3901
+3908
+precinct 39061061BCE intersects with:
+3901
+3902
+precinct 39061061ASA intersects with:
+3901
+3902
+precinct 39061061ARZ intersects with:
+3901
+3902
+precinct 39061061ARV intersects with:
+3901
+3902
+precinct 39061061AGZ intersects with:
+3901
+3902
+precinct 39061061BJU intersects with:
+3901
+3902
+precinct 39061061BKR intersects with:
+3901
+3902
+precinct 39061061BMI intersects with:
+3901
+3902
+precinct 39061061BMG intersects with:
+3901
+3902
+precinct 39061061AXX intersects with:
+3901
+3902
+precinct 39061061ASR intersects with:
+3901
+3902
+precinct 39061061ARU intersects with:
+3901
+3908
+precinct 39167167ABN intersects with:
+3906
+3915
+precinct 39061061BMQ intersects with:
+3901
+3902
+precinct 39061061AWV intersects with:
+3901
+3908
+precinct 39061061ADI intersects with:
+3901
+3902
+precinct 39061061ADF intersects with:
+3901
+3902
+precinct 39061061BDW intersects with:
+3901
+3908
+precinct 39061061BBH intersects with:
+3901
+3908
+precinct 39061061BNP intersects with:
+3901
+3902
+precinct 39061061BNM intersects with:
+3901
+3902
+precinct 39061061BBN intersects with:
+3901
+3902
+precinct 39061061ASO intersects with:
+3901
+3902
+precinct 39061061ASL intersects with:
+3901
+3902
+precinct 39061061AAF intersects with:
+3901
+3902
+precinct 39061061AOC intersects with:
+3901
+3902
+precinct 39061061BMD intersects with:
+3901
+3902
+precinct 39061061BLD intersects with:
+3901
+3902
+precinct 39061061AWB intersects with:
+3901
+3902
+precinct 39061061ADB intersects with:
+3901
+3902
+precinct 39061061ATO intersects with:
+3901
+3902
+precinct 39061061AST intersects with:
+3901
+3902
+precinct 39061061AFE intersects with:
+3901
+3902
+precinct 39061061BBE intersects with:
+3901
+3902
+precinct 39061061BDA intersects with:
+3901
+3902
+precinct 39061061AAE intersects with:
+3901
+3902
+precinct 39061061AAA intersects with:
+3901
+3902
+precinct 39061061BFR intersects with:
+3901
+3902
+precinct 39061061AMU intersects with:
+3901
+3902
+precinct 39061061AFT intersects with:
+3901
+3902
+precinct 39061061BMJ intersects with:
+3901
+3902
+precinct 39061061BLS intersects with:
+3901
+3902
+precinct 39061061BLK intersects with:
+3901
+3902
+precinct 39061061BOO intersects with:
+3901
+3902
+precinct 39061061BOL intersects with:
+3901
+3902
+precinct 39061061BOA intersects with:
+3901
+3902
+precinct 39061061ANH intersects with:
+3901
+3902
+precinct 39061061AND intersects with:
+3901
+3902
+precinct 39061061AMO intersects with:
+3901
+3902
+precinct 39061061ATN intersects with:
+3901
+3902
+precinct 39061061ATG intersects with:
+3901
+3902
+precinct 39061061AIJ intersects with:
+3901
+3902
+precinct 39061061BPR intersects with:
+3901
+3902
+precinct 39061061BFQ intersects with:
+3901
+3902
+precinct 39061061BFO intersects with:
+3901
+3902
+precinct 39061061ARQ intersects with:
+3901
+3902
+precinct 39061061BDX intersects with:
+3901
+3908
+precinct 39061061BDQ intersects with:
+3901
+3902
+precinct 39061061BKS intersects with:
+3901
+3908
+precinct 39061061AAG intersects with:
+3901
+3902
+precinct 39061061BOS intersects with:
+3901
+3902
+precinct 39061061BOR intersects with:
+3901
+3902
+precinct 39061061BNV intersects with:
+3901
+3902
+precinct 39061061AWX intersects with:
+3901
+3902
+precinct 39061061BLU intersects with:
+3901
+3902
+precinct 39061061AXF intersects with:
+3901
+3902
+precinct 39061061AYL intersects with:
+3901
+3902
+precinct 39061061ARO intersects with:
+3901
+3908
+precinct 39061061ARJ intersects with:
+3901
+3902
+precinct 39061061BLM intersects with:
+3901
+3902
+precinct 39061061BLI intersects with:
+3901
+3902
+precinct 39061061BNI intersects with:
+3901
+3902
+precinct 39061061BCR intersects with:
+3901
+3902
+precinct 39061061ASJ intersects with:
+3901
+3902
+precinct 39061061ASI intersects with:
+3901
+3902
+precinct 39061061AGL intersects with:
+3901
+3902
+precinct 39061061AAB intersects with:
+3901
+3902
+precinct 39061061AUP intersects with:
+3901
+3902
+precinct 39061061BMP intersects with:
+3901
+3902
+precinct 39061061AUM intersects with:
+3901
+3902
+precinct 39061061BBD intersects with:
+3901
+3902
+precinct 39061061BFN intersects with:
+3901
+3902
+precinct 39061061BJL intersects with:
+3901
+3902
+precinct 39061061AAD intersects with:
+3901
+3902
+precinct 39061061BMO intersects with:
+3901
+3908
+precinct 39061061AWT intersects with:
+3901
+3908
+precinct 39061061AXY intersects with:
+3901
+3908
+precinct 39061061BAT intersects with:
+3901
+3902
+precinct 39061061ATF intersects with:
+3901
+3902
+precinct 39061061AIB intersects with:
+3901
+3902
+precinct 39061061ARI intersects with:
+3901
+3902
+precinct 39061061AFD intersects with:
+3901
+3902
+precinct 39061061BJM intersects with:
+3901
+3902
+precinct 39061061BOP intersects with:
+3901
+3902
+precinct 39061061BGD intersects with:
+3901
+3902
+precinct 39061061AMJ intersects with:
+3901
+3902
+precinct 39061061BNQ intersects with:
+3901
+3902
+precinct 39061061BNO intersects with:
+3901
+3902
+precinct 39061061AWE intersects with:
+3901
+3902
+precinct 39061061AGS intersects with:
+3901
+3902
+precinct 39061061AFQ intersects with:
+3901
+3902
+precinct 39061061BLE intersects with:
+3901
+3902
+precinct 39061061BLA intersects with:
+3901
+3902
+precinct 39061061AXR intersects with:
+3901
+3902
+precinct 39061061ATB intersects with:
+3901
+3902
+precinct 39061061AWZ intersects with:
+3901
+3902
+precinct 39061061AWW intersects with:
+3901
+3908
+precinct 39061061ADJ intersects with:
+3901
+3902
+precinct 39061061ADH intersects with:
+3901
+3902
+precinct 39061061AFB intersects with:
+3901
+3902
+precinct 39061061AVI intersects with:
+3901
+3902
+precinct 39061061AOG intersects with:
+3901
+3902
+precinct 39061061ANX intersects with:
+3901
+3902
+precinct 39061061ATD intersects with:
+3901
+3902
+precinct 39099099AJG intersects with:
+3906
+3913
+precinct 39099099AMV intersects with:
+3906
+3913
+precinct 39099099ANA intersects with:
+3906
+3913
+precinct 39099099AMX intersects with:
+3906
+3913
+precinct 39099099APG intersects with:
+3906
+3913
+precinct 39099099AMW intersects with:
+3906
+3913
+precinct 39099099AHL intersects with:
+3906
+3913
+precinct 39099099ANY intersects with:
+3906
+3913
+precinct 39099099AMZ intersects with:
+3906
+3913
+precinct 39099099ATH intersects with:
+3906
+3913
+precinct 39049049AKO intersects with:
+3903
+3915
+precinct 39049049ACC intersects with:
+3903
+3915
+precinct 39049049ADA intersects with:
+3903
+3915
+precinct 39049049AGE intersects with:
+3903
+3915
+precinct 39049049AQX intersects with:
+3903
+3912
+precinct 39049049BJX intersects with:
+3912
+3915
+precinct 39049049AYJ intersects with:
+3903
+3912
+precinct 39049049APN intersects with:
+3912
+3915
+precinct 39049049BJH intersects with:
+3903
+3912
+precinct 39049049ADV intersects with:
+3903
+3912
+precinct 39049049AWT intersects with:
+3903
+3912
+precinct 39049049BFV intersects with:
+3903
+3912
+precinct 39049049BCF intersects with:
+3903
+3912
+precinct 39049049ASQ intersects with:
+3903
+3912
+precinct 39049049AHT intersects with:
+3903
+3915
+precinct 39049049AQB intersects with:
+3903
+3912
+precinct 39049049AEC intersects with:
+3903
+3912
+precinct 39049049AOF intersects with:
+3912
+3915
+precinct 39049049BGR intersects with:
+3903
+3915
+precinct 39049049AUT intersects with:
+3903
+3912
+precinct 39049049AGL intersects with:
+3903
+3912
+precinct 39049049ABY intersects with:
+3903
+3915
+precinct 39049049BAC intersects with:
+3903
+3915
+precinct 39049049AZR intersects with:
+3903
+3912
+precinct 39049049AYS intersects with:
+3912
+3915
+precinct 39049049ATB intersects with:
+3903
+3915
+precinct 39049049AJV intersects with:
+3903
+3912
+precinct 39049049AEO intersects with:
+3903
+3912
+precinct 39049049AGX intersects with:
+3903
+3915
+precinct 39049049AGW intersects with:
+3903
+3915
+precinct 39049049AGF intersects with:
+3903
+3915
+precinct 39049049AGD intersects with:
+3903
+3915
+precinct 39049049AGC intersects with:
+3903
+3915
+precinct 39049049ACD intersects with:
+3903
+3915
+precinct 39049049ABW intersects with:
+3903
+3915
+precinct 39049049AAR intersects with:
+3903
+3915
+precinct 39049049ASA intersects with:
+3903
+3912
+precinct 39049049ARX intersects with:
+3903
+3912
+precinct 39049049BAA intersects with:
+3903
+3915
+precinct 39049049BHQ intersects with:
+3903
+3912
+precinct 39049049BJD intersects with:
+3912
+3915
+precinct 39049049BEA intersects with:
+3903
+3912
+precinct 39049049ASB intersects with:
+3903
+3912
+precinct 39049049ASZ intersects with:
+3903
+3915
+precinct 39049049AZK intersects with:
+3903
+3915
+precinct 39049049AMU intersects with:
+3903
+3915
+precinct 39049049AMR intersects with:
+3903
+3915
+precinct 39049049ADS intersects with:
+3903
+3912
+precinct 39049049ABV intersects with:
+3903
+3915
+precinct 39049049BDY intersects with:
+3903
+3912
+precinct 39049049BDB intersects with:
+3903
+3912
+precinct 39049049ASE intersects with:
+3903
+3912
+precinct 39049049AXZ intersects with:
+3903
+3912
+precinct 39049049AXY intersects with:
+3903
+3912
+precinct 39049049AZV intersects with:
+3903
+3915
+precinct 39049049ATF intersects with:
+3903
+3915
+precinct 39049049BHA intersects with:
+3903
+3915
+precinct 39049049BDI intersects with:
+3903
+3915
+precinct 39049049BHK intersects with:
+3903
+3915
+precinct 39049049APY intersects with:
+3903
+3912
+precinct 39049049APU intersects with:
+3912
+3915
+precinct 39049049APQ intersects with:
+3912
+3915
+precinct 39049049ADQ intersects with:
+3903
+3912
+precinct 39049049ADL intersects with:
+3903
+3912
+precinct 39049049BJG intersects with:
+3903
+3915
+precinct 39049049ANX intersects with:
+3912
+3915
+precinct 39049049AHV intersects with:
+3903
+3915
+precinct 39049049ASN intersects with:
+3903
+3912
+precinct 39049049BDV intersects with:
+3903
+3912
+precinct 39049049AYH intersects with:
+3903
+3912
+precinct 39049049BAQ intersects with:
+3912
+3915
+precinct 39049049ATC intersects with:
+3903
+3915
+precinct 39049049AAT intersects with:
+3903
+3915
+precinct 39049049AAS intersects with:
+3903
+3915
+precinct 39049049AAQ intersects with:
+3903
+3915
+precinct 39049049AJI intersects with:
+3903
+3915
+precinct 39049049AST intersects with:
+3903
+3912
+precinct 39049049AEF intersects with:
+3903
+3912
+precinct 39049049BIA intersects with:
+3903
+3912
+precinct 39049049AYG intersects with:
+3903
+3912
+precinct 39049049ATP intersects with:
+3903
+3915
+precinct 39049049BHJ intersects with:
+3903
+3915
+precinct 39049049BBH intersects with:
+3903
+3915
+precinct 39049049AKM intersects with:
+3903
+3915
+precinct 39049049AIG intersects with:
+3903
+3912
+precinct 39049049AIE intersects with:
+3903
+3912
+precinct 39049049AKY intersects with:
+3903
+3912
+precinct 39049049AGI intersects with:
+3903
+3912
+precinct 39049049AGH intersects with:
+3903
+3912
+precinct 39049049ANE intersects with:
+3912
+3915
+precinct 39049049AND intersects with:
+3912
+3915
+precinct 39049049AUU intersects with:
+3903
+3912
+3915
+precinct 39049049AUR intersects with:
+3903
+3912
+precinct 39049049BJQ intersects with:
+3903
+3915
+precinct 39049049BJP intersects with:
+3903
+3915
+precinct 39049049BBG intersects with:
+3903
+3915
+precinct 39049049AMY intersects with:
+3912
+3915
+precinct 39049049BJL intersects with:
+3903
+3915
+precinct 39049049AIA intersects with:
+3903
+3912
+precinct 39049049AGY intersects with:
+3903
+3915
+precinct 39049049AMX intersects with:
+3912
+3915
+precinct 39049049APO intersects with:
+3912
+3915
+precinct 39049049AYY intersects with:
+3903
+3915
+precinct 39049049AZP intersects with:
+3903
+3915
+precinct 39049049BAF intersects with:
+3903
+3915
+precinct 39049049AYA intersects with:
+3903
+3912
+precinct 39049049ABZ intersects with:
+3903
+3915
+precinct 39049049AHR intersects with:
+3903
+3915
+precinct 39049049ASI intersects with:
+3903
+3912
+precinct 39049049BEK intersects with:
+3903
+3912
+precinct 39049049ANV intersects with:
+3912
+3915
+precinct 39049049ANL intersects with:
+3903
+3912
+precinct 39049049AKL intersects with:
+3903
+3915
+precinct 39049049BJR intersects with:
+3903
+3912
+precinct 39049049AOX intersects with:
+3903
+3915
+precinct 39049049ASG intersects with:
+3903
+3912
+precinct 39049049BDW intersects with:
+3903
+3912
+precinct 39049049ADX intersects with:
+3903
+3912
+precinct 39049049ADC intersects with:
+3903
+3915
+precinct 39049049BGQ intersects with:
+3903
+3915
+precinct 39049049ASW intersects with:
+3903
+3915
+precinct 39049049BJO intersects with:
+3912
+3915
+precinct 39049049ARZ intersects with:
+3903
+3912
+precinct 39049049BGZ intersects with:
+3903
+3915
+precinct 39049049APR intersects with:
+3912
+3915
+precinct 39049049ATU intersects with:
+3912
+3915
+precinct 39049049ADI intersects with:
+3903
+3912
+precinct 39049049APX intersects with:
+3912
+3915
+precinct 39049049BAL intersects with:
+3903
+3912
+3915
+precinct 39049049BAR intersects with:
+3912
+3915
+precinct 39049049BAT intersects with:
+3903
+3912
+precinct 39049049AZY intersects with:
+3903
+3915
+precinct 39049049BJJ intersects with:
+3903
+3915
+precinct 39049049AEB intersects with:
+3903
+3912
+precinct 39049049ANC intersects with:
+3912
+3915
+precinct 39049049BDL intersects with:
+3903
+3912
+precinct 39049049BCJ intersects with:
+3912
+3915
+precinct 39049049ANF intersects with:
+3912
+3915
+precinct 39049049AZG intersects with:
+3903
+3915
+precinct 39049049BHF intersects with:
+3903
+3915
+precinct 39049049BHC intersects with:
+3903
+3915
+precinct 39049049ARW intersects with:
+3903
+3912
+precinct 39049049BBJ intersects with:
+3903
+3915
+precinct 39049049BIW intersects with:
+3903
+3915
+precinct 39049049ABX intersects with:
+3903
+3915
+precinct 39049049AZJ intersects with:
+3903
+3915
+precinct 39049049ADB intersects with:
+3903
+3915
+precinct 39049049BGD intersects with:
+3903
+3915
+precinct 39049049ATD intersects with:
+3903
+3915
+precinct 39049049AXE intersects with:
+3903
+3912
+precinct 39049049AWW intersects with:
+3903
+3912
+precinct 39049049AWV intersects with:
+3903
+3912
+precinct 39049049AFB intersects with:
+3903
+3912
+precinct 39049049BJT intersects with:
+3903
+3915
+precinct 39049049BIY intersects with:
+3903
+3915
+precinct 39049049BIX intersects with:
+3903
+3915
+precinct 39049049AUM intersects with:
+3903
+3912
+precinct 39049049BHE intersects with:
+3903
+3912
+3915
+precinct 39049049BHL intersects with:
+3903
+3915
+precinct 39049049BHW intersects with:
+3903
+3912
+precinct 39049049BIB intersects with:
+3903
+3912
+precinct 39049049ASD intersects with:
+3903
+3912
+precinct 39049049AHZ intersects with:
+3903
+3912
+precinct 39049049BGA intersects with:
+3903
+3915
+precinct 39049049AWU intersects with:
+3903
+3912
+precinct 39049049AYM intersects with:
+3903
+3912
+precinct 39049049BIT intersects with:
+3903
+3915
+precinct 39049049AXD intersects with:
+3903
+3912
+precinct 39049049AYW intersects with:
+3903
+3915
+precinct 39049049AZF intersects with:
+3903
+3915
+precinct 39049049AZL intersects with:
+3903
+3915
+precinct 39049049ATH intersects with:
+3903
+3915
+precinct 39049049BJC intersects with:
+3903
+3915
+precinct 39049049AWZ intersects with:
+3903
+3912
+precinct 39049049AYZ intersects with:
+3903
+3915
+precinct 39049049BJY intersects with:
+3903
+3915
+precinct 39049049ACV intersects with:
+3903
+3915
+precinct 39049049ASU intersects with:
+3903
+3915
+precinct 39049049AZC intersects with:
+3903
+3915
+precinct 39049049AZA intersects with:
+3903
+3915
+precinct 39049049BGC intersects with:
+3903
+3915
+precinct 39049049BCA intersects with:
+3903
+3912
+precinct 39049049BAB intersects with:
+3903
+3915
+precinct 39049049ASC intersects with:
+3903
+3912
+precinct 39049049ASF intersects with:
+3903
+3912
+precinct 39049049ASK intersects with:
+3903
+3912
+precinct 39049049ASP intersects with:
+3903
+3912
+precinct 39049049ACA intersects with:
+3903
+3915
+precinct 39049049ACE intersects with:
+3903
+3915
+precinct 39049049ADE intersects with:
+3903
+3912
+3915
+precinct 39049049AZH intersects with:
+3903
+3915
+precinct 39049049ASV intersects with:
+3903
+3915
+precinct 39049049AID intersects with:
+3903
+3915
+precinct 39049049BEM intersects with:
+3903
+3912
+precinct 39049049AAU intersects with:
+3903
+3915
+precinct 39049049AAO intersects with:
+3903
+3915
+precinct 39049049BHB intersects with:
+3903
+3915
+precinct 39049049BGW intersects with:
+3903
+3915
+precinct 39049049BBC intersects with:
+3903
+3915
+precinct 39049049BJE intersects with:
+3912
+3915
+precinct 39049049ADF intersects with:
+3903
+3912
+3915
+precinct 39049049ABT intersects with:
+3903
+3915
+precinct 39049049AII intersects with:
+3903
+3912
+precinct 39049049BHV intersects with:
+3903
+3912
+precinct 39049049AYN intersects with:
+3903
+3912
+precinct 39049049BBP intersects with:
+3903
+3915
+precinct 39049049ADJ intersects with:
+3903
+3912
+precinct 39049049ALC intersects with:
+3903
+3912
+precinct 39049049BAN intersects with:
+3912
+3915
+precinct 39049049BAU intersects with:
+3903
+3912
+precinct 39049049AHA intersects with:
+3903
+3915
+precinct 39049049BJF intersects with:
+3903
+3915
+precinct 39049049ACU intersects with:
+3903
+3915
+precinct 39049049AQC intersects with:
+3903
+3912
+precinct 39049049ASJ intersects with:
+3903
+3912
+precinct 39049049AMO intersects with:
+3903
+3915
+precinct 39049049AKN intersects with:
+3903
+3915
+precinct 39049049AJK intersects with:
+3903
+3915
+precinct 39049049AEN intersects with:
+3903
+3912
+precinct 39049049ABB intersects with:
+3903
+3915
+precinct 39049049BAV intersects with:
+3903
+3912
+precinct 39049049BIS intersects with:
+3903
+3915
+precinct 39049049ANH intersects with:
+3912
+3915
+precinct 39049049BJM intersects with:
+3903
+3915
+precinct 39049049AIH intersects with:
+3903
+3912
+precinct 39049049BCG intersects with:
+3903
+3915
+precinct 39049049BIV intersects with:
+3903
+3915
+precinct 39049049BIU intersects with:
+3903
+3915
+precinct 39049049AKK intersects with:
+3903
+3915
+precinct 39049049BCV intersects with:
+3903
+3915
+precinct 39049049BDD intersects with:
+3912
+3915
+precinct 39049049BBV intersects with:
+3904
+3912
+3915
+precinct 39049049BGM intersects with:
+3903
+3915
+precinct 39049049APV intersects with:
+3912
+3915
+precinct 39049049BAO intersects with:
+3903
+3915
+precinct 39049049ASH intersects with:
+3903
+3912
+precinct 39049049BFT intersects with:
+3903
+3912
+precinct 39049049AHC intersects with:
+3903
+3915
+precinct 39049049AGJ intersects with:
+3903
+3912
+precinct 39049049AAV intersects with:
+3903
+3915
+precinct 39049049AAP intersects with:
+3903
+3915
+precinct 39049049BFU intersects with:
+3903
+3912
+precinct 39049049APW intersects with:
+3912
+3915
+precinct 39049049APC intersects with:
+3903
+3915
+precinct 39049049BHM intersects with:
+3903
+3912
+precinct 39049049AYV intersects with:
+3903
+3915
+precinct 39049049AYK intersects with:
+3903
+3912
+precinct 39049049AWX intersects with:
+3903
+3912
+precinct 39049049AOG intersects with:
+3912
+3915
+precinct 39049049AVN intersects with:
+3903
+3915
+precinct 39049049AMN intersects with:
+3903
+3915
+precinct 39049049AGV intersects with:
+3903
+3915
+precinct 39049049AEG intersects with:
+3903
+3912
+precinct 39049049ADU intersects with:
+3903
+3912
+precinct 39049049AZX intersects with:
+3903
+3915
+precinct 39049049AZT intersects with:
+3903
+3912
+precinct 39049049AXC intersects with:
+3903
+3912
+precinct 39049049BGT intersects with:
+3903
+3915
+precinct 39049049ARR intersects with:
+3904
+3912
+precinct 39049049BDE intersects with:
+3904
+3912
+precinct 39049049BGP intersects with:
+3903
+3915
+precinct 39049049BJN intersects with:
+3912
+3915
+precinct 39049049AGZ intersects with:
+3903
+3915
+precinct 39049049AHU intersects with:
+3903
+3915
+precinct 39049049AZE intersects with:
+3903
+3915
+precinct 39049049AZS intersects with:
+3903
+3912
+precinct 39049049BBR intersects with:
+3903
+3912
+precinct 39049049AUS intersects with:
+3903
+3915
+precinct 39049049AZO intersects with:
+3903
+3915
+precinct 39049049AZZ intersects with:
+3903
+3915
+precinct 39049049ASR intersects with:
+3903
+3912
+precinct 39049049ARP intersects with:
+3904
+3912
+precinct 39049049AKR intersects with:
+3903
+3915
+precinct 39049049AJT intersects with:
+3903
+3912
+precinct 39049049AQF intersects with:
+3903
+3912
+precinct 39049049ALK intersects with:
+3903
+3912
+precinct 39049049AUX intersects with:
+3903
+3915
+precinct 39049049AYI intersects with:
+3903
+3912
+precinct 39049049ADG intersects with:
+3903
+3912
+precinct 39049049ASO intersects with:
+3903
+3912
+precinct 39049049ASL intersects with:
+3903
+3912
+precinct 39049049BCE intersects with:
+3904
+3912
+precinct 39049049BGS intersects with:
+3903
+3915
+precinct 39049049BGO intersects with:
+3903
+3915
+precinct 39049049BGN intersects with:
+3903
+3915
+precinct 39049049ATX intersects with:
+3912
+3915
+precinct 39049049ASS intersects with:
+3903
+3912
+precinct 39035035CJS intersects with:
+3909
+3911
+3916
+precinct 39035035CMZ intersects with:
+3911
+3914
+precinct 39035035CNM intersects with:
+3911
+3914
+precinct 39035035BZD intersects with:
+3911
+3914
+precinct 39035035BVU intersects with:
+3909
+3916
+precinct 39035035CST intersects with:
+3911
+3914
+precinct 39035035AGR intersects with:
+3909
+3916
+precinct 39035035CFI intersects with:
+3911
+3916
+precinct 39035035ACG intersects with:
+3911
+3914
+precinct 39035035CLP intersects with:
+3909
+3911
+precinct 39035035CSQ intersects with:
+3911
+3914
+precinct 39035035CCW intersects with:
+3909
+3916
+precinct 39035035AAJ intersects with:
+3909
+3916
+precinct 39035035AEC intersects with:
+3909
+3916
+precinct 39035035CMK intersects with:
+3909
+3916
+precinct 39035035CPY intersects with:
+3911
+3914
+3916
+precinct 39035035BGM intersects with:
+3909
+3911
+precinct 39035035CGH intersects with:
+3911
+3916
+precinct 39035035BZT intersects with:
+3911
+3914
+precinct 39035035CCJ intersects with:
+3909
+3916
+precinct 39035035CWA intersects with:
+3907
+3916
+precinct 39035035BYJ intersects with:
+3909
+3911
+precinct 39035035BAJ intersects with:
+3909
+3911
+precinct 39035035BZK intersects with:
+3911
+3914
+precinct 39035035BSJ intersects with:
+3909
+3916
+precinct 39035035BSM intersects with:
+3909
+3916
+precinct 39035035BEY intersects with:
+3909
+3911
+precinct 39035035CTR intersects with:
+3911
+3914
+precinct 39035035AAL intersects with:
+3909
+3916
+precinct 39035035ADX intersects with:
+3909
+3916
+precinct 39035035AHN intersects with:
+3909
+3916
+precinct 39035035AEJ intersects with:
+3909
+3916
+precinct 39035035BHQ intersects with:
+3909
+3916
+precinct 39035035CPS intersects with:
+3911
+3914
+3916
+precinct 39035035CTB intersects with:
+3911
+3914
+precinct 39035035AGW intersects with:
+3909
+3916
+precinct 39035035CQC intersects with:
+3911
+3916
+precinct 39035035DCN intersects with:
+3911
+3914
+precinct 39035035BBB intersects with:
+3909
+3911
+precinct 39035035BFA intersects with:
+3909
+3911
+precinct 39035035DAH intersects with:
+3911
+3914
+precinct 39035035CGK intersects with:
+3911
+3916
+precinct 39035035CTX intersects with:
+3911
+3914
+precinct 39035035AGS intersects with:
+3909
+3916
+precinct 39035035CNA intersects with:
+3911
+3914
+precinct 39035035COY intersects with:
+3909
+3916
+precinct 39035035CGY intersects with:
+3909
+3916
+precinct 39099099ATC intersects with:
+3906
+3913
+precinct 39099099AMY intersects with:
+3906
+3913
+precinct 39099099API intersects with:
+3906
+3913
+precinct 39099099APJ intersects with:
+3906
+3913
+precinct 39035035CNF intersects with:
+3911
+3914
+precinct 39035035CKT intersects with:
+3909
+3916
+precinct 39035035AGO intersects with:
+3909
+3916
+precinct 39035035DAM intersects with:
+3911
+3914
+precinct 39035035ACP intersects with:
+3911
+3914
+precinct 39035035AEH intersects with:
+3909
+3916
+precinct 39035035CZX intersects with:
+3909
+3911
+3914
+precinct 39035035ADK intersects with:
+3909
+3916
+precinct 39035035CMJ intersects with:
+3909
+3916
+precinct 39035035CPN intersects with:
+3911
+3914
+precinct 39035035BQE intersects with:
+3911
+3914
+precinct 39035035CNB intersects with:
+3911
+3914
+precinct 39035035CLO intersects with:
+3909
+3916
+precinct 39035035CLN intersects with:
+3909
+3916
+precinct 39035035ACC intersects with:
+3911
+3914
+precinct 39035035AHO intersects with:
+3909
+3916
+precinct 39035035BJE intersects with:
+3909
+3916
+precinct 39035035BFK intersects with:
+3909
+3911
+precinct 39035035CNK intersects with:
+3911
+3914
+precinct 39035035BBT intersects with:
+3909
+3911
+precinct 39035035BBP intersects with:
+3909
+3911
+precinct 39035035CCT intersects with:
+3909
+3916
+precinct 39035035CIV intersects with:
+3909
+3911
+precinct 39035035BVJ intersects with:
+3911
+3914
+precinct 39035035CTN intersects with:
+3911
+3914
+precinct 39035035DBV intersects with:
+3911
+3914
+precinct 39035035BSK intersects with:
+3909
+3916
+precinct 39035035BRY intersects with:
+3909
+3916
+precinct 39035035ABP intersects with:
+3911
+3914
+precinct 39035035CUH intersects with:
+3911
+3914
+precinct 39035035DCU intersects with:
+3911
+3914
+precinct 39035035CLL intersects with:
+3909
+3916
+precinct 39035035CLH intersects with:
+3909
+3916
+precinct 39035035CKY intersects with:
+3909
+3916
+precinct 39035035CKU intersects with:
+3909
+3916
+precinct 39035035BTG intersects with:
+3911
+3914
+precinct 39035035BZM intersects with:
+3911
+3914
+precinct 39035035AZS intersects with:
+3909
+3911
+precinct 39035035DCK intersects with:
+3911
+3914
+precinct 39035035DFH intersects with:
+3911
+3916
+precinct 39035035AFR intersects with:
+3911
+3916
+precinct 39079079AAJ intersects with:
+3906
+3915
+precinct 39079079ABQ intersects with:
+3902
+3906
+precinct 39035035BYT intersects with:
+3911
+3914
+precinct 39035035CJI intersects with:
+3911
+3916
+precinct 39035035BDV intersects with:
+3909
+3911
+precinct 39035035BDU intersects with:
+3909
+3911
+precinct 39035035CFL intersects with:
+3911
+3916
+precinct 39035035CFJ intersects with:
+3911
+3916
+precinct 39035035CEV intersects with:
+3909
+3916
+precinct 39035035BHY intersects with:
+3909
+3916
+precinct 39035035BRM intersects with:
+3909
+3916
+precinct 39035007999 intersects with:
+3909
+3911
+3914
+precinct 39079079ABP intersects with:
+3902
+3906
+precinct 39079079AAL intersects with:
+3906
+3915
+precinct 39035035BPL intersects with:
+3911
+3914
+precinct 39035035COE intersects with:
+3909
+3916
+precinct 39035035CNR intersects with:
+3911
+3914
+precinct 39035035BQJ intersects with:
+3911
+3914
+precinct 39035035CLV intersects with:
+3909
+3916
+precinct 39035035DAJ intersects with:
+3911
+3914
+precinct 39035035DAI intersects with:
+3911
+3914
+precinct 39035035DBJ intersects with:
+3907
+3916
+precinct 39035035BHR intersects with:
+3909
+3916
+precinct 39035035CBC intersects with:
+3911
+3914
+precinct 39035035BYP intersects with:
+3911
+3914
+precinct 39035035BRN intersects with:
+3909
+3916
+precinct 39035035CMY intersects with:
+3911
+3914
+precinct 39035035CLK intersects with:
+3909
+3916
+precinct 39035035CLZ intersects with:
+3909
+3916
+precinct 39035035BDS intersects with:
+3909
+3911
+precinct 39035035CZQ intersects with:
+3907
+3916
+precinct 39035035CIR intersects with:
+3909
+3911
+precinct 39035035DBI intersects with:
+3907
+3916
+precinct 39035035CKV intersects with:
+3909
+3916
+precinct 39035035AFH intersects with:
+3911
+3914
+precinct 39035035AFG intersects with:
+3911
+3914
+precinct 39079079AAY intersects with:
+3902
+3906
+3915
+precinct 39035035CJV intersects with:
+3911
+3916
+precinct 39035035CJR intersects with:
+3911
+3916
+precinct 39035035CGW intersects with:
+3907
+3916
+precinct 39035035CYF intersects with:
+3909
+3916
+precinct 39035035CHP intersects with:
+3909
+3916
+precinct 39035035CPD intersects with:
+3909
+3916
+precinct 39035035COW intersects with:
+3909
+3916
+precinct 39035035COU intersects with:
+3909
+3916
+precinct 39035035COF intersects with:
+3909
+3916
+precinct 39035035BZL intersects with:
+3911
+3914
+precinct 39035035BZJ intersects with:
+3911
+3914
+precinct 39035035BZB intersects with:
+3911
+3914
+precinct 39035035BYK intersects with:
+3909
+3911
+precinct 39035035BYC intersects with:
+3909
+3911
+precinct 39079079ABN intersects with:
+3906
+3915
+precinct 39079079ABJ intersects with:
+3906
+3915
+precinct 39099099AKB intersects with:
+3906
+3913
+precinct 39099099ANW intersects with:
+3906
+3913
+precinct 39035035BFB intersects with:
+3909
+3911
+precinct 39035035BES intersects with:
+3909
+3911
+precinct 39035035CGQ intersects with:
+3909
+3916
+precinct 39035035CWJ intersects with:
+3907
+3916
+precinct 39035035CWH intersects with:
+3907
+3916
+precinct 39035035CSR intersects with:
+3911
+3914
+precinct 39035035CCK intersects with:
+3909
+3916
+precinct 39035035CCH intersects with:
+3909
+3916
+precinct 39035035AEY intersects with:
+3911
+3913
+3914
+precinct 39099099AII intersects with:
+3906
+3913
+precinct 39099099ALP intersects with:
+3906
+3913
+precinct 39035035BDW intersects with:
+3909
+3911
+precinct 39035035CYR intersects with:
+3909
+3916
+precinct 39035035CVZ intersects with:
+3907
+3916
+precinct 39035035CVY intersects with:
+3907
+3916
+precinct 39035035BBS intersects with:
+3909
+3911
+precinct 39035035BBR intersects with:
+3909
+3911
+precinct 39035035AHL intersects with:
+3909
+3916
+precinct 39035035AHK intersects with:
+3909
+3916
+precinct 39035035CEF intersects with:
+3907
+3916
+precinct 39035035AAW intersects with:
+3909
+3916
+precinct 39035035AEU intersects with:
+3911
+3914
+precinct 39035035AES intersects with:
+3911
+3914
+precinct 39099099ASN intersects with:
+3906
+3913
+precinct 39099099ANV intersects with:
+3906
+3913
+precinct 39035035DBH intersects with:
+3909
+3916
+precinct 39035035CGS intersects with:
+3907
+3916
+precinct 39035035DBG intersects with:
+3907
+3916
+precinct 39035035BAM intersects with:
+3909
+3911
+precinct 39035035BGP intersects with:
+3909
+3911
+precinct 39035035BGL intersects with:
+3909
+3911
+precinct 39035035BBN intersects with:
+3909
+3911
+precinct 39035035CGP intersects with:
+3909
+3916
+precinct 39035035BJO intersects with:
+3909
+3916
+precinct 39035035AAK intersects with:
+3909
+3916
+precinct 39035035AAE intersects with:
+3909
+3916
+precinct 39035035AAC intersects with:
+3909
+3916
+precinct 39035035AAA intersects with:
+3909
+3916
+precinct 39035035BVT intersects with:
+3909
+3916
+precinct 39035035AER intersects with:
+3911
+3914
+precinct 39099099AJQ intersects with:
+3906
+3913
+precinct 39099099AKY intersects with:
+3906
+3913
+precinct 39035035DAZ intersects with:
+3911
+3914
+precinct 39035035CGA intersects with:
+3911
+3916
+precinct 39035035CHG intersects with:
+3909
+3916
+precinct 39035035CGN intersects with:
+3907
+3916
+precinct 39035035DBC intersects with:
+3911
+3914
+precinct 39035035CUB intersects with:
+3911
+3914
+precinct 39035035CZO intersects with:
+3907
+3916
+precinct 39035035CZY intersects with:
+3909
+3911
+precinct 39035035AEK intersects with:
+3909
+3916
+precinct 39035035AEI intersects with:
+3909
+3916
+precinct 39035035AEE intersects with:
+3909
+3916
+precinct 39099099APN intersects with:
+3906
+3913
+precinct 39099099AKN intersects with:
+3906
+3913
+precinct 39035035AZU intersects with:
+3909
+3911
+precinct 39035035AZH intersects with:
+3909
+3911
+precinct 39035035AFL intersects with:
+3911
+3914
+precinct 39035035CJY intersects with:
+3909
+3916
+precinct 39035035CHA intersects with:
+3909
+3916
+precinct 39035035CGX intersects with:
+3909
+3916
+precinct 39035035BQK intersects with:
+3911
+3914
+precinct 39035035AHG intersects with:
+3909
+3916
+precinct 39035035AGP intersects with:
+3909
+3916
+precinct 39035035CNS intersects with:
+3911
+3914
+precinct 39035035CNN intersects with:
+3911
+3914
+precinct 39035035CYT intersects with:
+3907
+3909
+3916
+precinct 39035035AED intersects with:
+3909
+3916
+precinct 39035035BVI intersects with:
+3911
+3914
+precinct 39035035BVH intersects with:
+3911
+3914
+precinct 39099099AON intersects with:
+3906
+3913
+precinct 39035035BDQ intersects with:
+3909
+3911
+precinct 39035035BDC intersects with:
+3909
+3911
+precinct 39035035CTE intersects with:
+3911
+3914
+precinct 39035035CEE intersects with:
+3907
+3916
+precinct 39035035CSH intersects with:
+3911
+3914
+precinct 39035035CSC intersects with:
+3911
+3914
+precinct 39035035CQD intersects with:
+3911
+3914
+precinct 39035035CPW intersects with:
+3911
+3916
+precinct 39035035CPT intersects with:
+3911
+3916
+precinct 39035035BYH intersects with:
+3909
+3911
+precinct 39035035DCP intersects with:
+3911
+3914
+precinct 39035035DAN intersects with:
+3911
+3914
+precinct 39035035ADW intersects with:
+3909
+3916
+precinct 39035035ADV intersects with:
+3909
+3916
+precinct 39035035ADP intersects with:
+3909
+3916
+precinct 39035035ADO intersects with:
+3909
+3916
+precinct 39099099AKJ intersects with:
+3906
+3913
+precinct 39099099ATE intersects with:
+3906
+3913
+precinct 39099099AKP intersects with:
+3906
+3913
+precinct 39099099AOG intersects with:
+3906
+3913
+precinct 39099099AOJ intersects with:
+3906
+3913
+precinct 39035035BRE intersects with:
+3911
+3914
+precinct 39035035DCO intersects with:
+3911
+3914
+precinct 39035035BFL intersects with:
+3909
+3911
+precinct 39035035BBF intersects with:
+3909
+3911
+precinct 39035035BBD intersects with:
+3909
+3911
+precinct 39035035BAL intersects with:
+3909
+3911
+precinct 39035035BUL intersects with:
+3911
+3914
+precinct 39035035CBM intersects with:
+3911
+3914
+precinct 39035035DAK intersects with:
+3911
+3914
+precinct 39099099AJX intersects with:
+3906
+3913
+precinct 39099099AJV intersects with:
+3906
+3913
+precinct 39099099ATB intersects with:
+3906
+3913
+precinct 39099099ALO intersects with:
+3906
+3913
+precinct 39099099ASW intersects with:
+3906
+3913
+precinct 39099099AOQ intersects with:
+3906
+3913
+precinct 39099099APO intersects with:
+3906
+3913
+precinct 39035035BPM intersects with:
+3911
+3914
+precinct 39035035CPI intersects with:
+3909
+3916
+precinct 39035035COC intersects with:
+3909
+3916
+precinct 39035035BFE intersects with:
+3909
+3911
+precinct 39035035BEH intersects with:
+3909
+3911
+precinct 39035035BAG intersects with:
+3909
+3911
+precinct 39035035DAS intersects with:
+3911
+3914
+precinct 39035035BZR intersects with:
+3911
+3914
+precinct 39035035BTV intersects with:
+3911
+3914
+precinct 39099099ANZ intersects with:
+3906
+3913
+precinct 39099099ANG intersects with:
+3906
+3913
+precinct 39057057AHD intersects with:
+3910
+3915
+precinct 39057057AGX intersects with:
+3910
+3915
+precinct 39057057AGZ intersects with:
+3908
+3910
+precinct 39045045AEJ intersects with:
+3903
+3915
+precinct 39057057AHG intersects with:
+3908
+3910
+precinct 39057057AIA intersects with:
+3901
+3910
+3915
+precinct 39057057AHU intersects with:
+3908
+3910
+3915
+precinct 39057057AII intersects with:
+3901
+3910
+precinct 39057057AGK intersects with:
+3908
+3910
+precinct 39057057AHF intersects with:
+3908
+3910
+precinct 39045045ACO intersects with:
+3912
+3915
+precinct 39045045ADM intersects with:
+3903
+3915
+precinct 39045045ACP intersects with:
+3912
+3915
+precinct 39119119ABU intersects with:
+3906
+3907
+3912
+precinct 39119119ADC intersects with:
+3906
+3912
+precinct 39119119ABD intersects with:
+3906
+3912
+precinct 39119119ABA intersects with:
+3912
+3915
+precinct 39119119ACE intersects with:
+3906
+3912
+precinct 39123123ACG intersects with:
+3904
+3905
+precinct 39123123ACJ intersects with:
+3904
+3905
+precinct 39119119ADH intersects with:
+3906
+3912
+precinct 39119119ABQ intersects with:
+3906
+3912
+precinct 39119119ADE intersects with:
+3906
+3912
+precinct 39119119AAD intersects with:
+3906
+3912
+precinct 39119119ABC intersects with:
+3912
+3915
+precinct 39119119ADB intersects with:
+3906
+3912
+precinct 39119119ACZ intersects with:
+3906
+3912
+precinct 39119119ADG intersects with:
+3906
+3912
+precinct 39119119ACV intersects with:
+3906
+3912
+precinct 39119119ACG intersects with:
+3912
+3915
+precinct 39119119ABX intersects with:
+3906
+3912
+precinct 39119119ABE intersects with:
+3906
+3912
+precinct 39119119AAX intersects with:
+3906
+3907
+precinct 39075075AAR intersects with:
+3907
+3916
+precinct 39075075AAP intersects with:
+3907
+3916
+precinct 39075075AAW intersects with:
+3907
+3916
+precinct 39075075AAY intersects with:
+3907
+3916
+precinct 39075075AAU intersects with:
+3907
+3916
+precinct 39119119ACL intersects with:
+3906
+3912
+precinct 39123123AAT intersects with:
+3904
+3905
+3909
+precinct 39119119ACC intersects with:
+3906
+3912
+precinct 39123123ZZZ intersects with:
+3904
+3909
+precinct 39119119ACA intersects with:
+3906
+3912
+3915
+precinct 39119119ACD intersects with:
+3906
+3912
+precinct 39123123AAP intersects with:
+3905
+3909
+precinct 39119119ACM intersects with:
+3906
+3912
+precinct 39123123AAM intersects with:
+3905
+3909
+precinct 39123123AAW intersects with:
+3905
+3909
+precinct 39119119ACF intersects with:
+3912
+3915
+precinct 39119119ABR intersects with:
+3906
+3912
+precinct 39119119ACW intersects with:
+3906
+3912
+precinct 39119119ABS intersects with:
+3912
+3915
+precinct 39119119ABG intersects with:
+3906
+3912
+precinct 39123123ACS intersects with:
+3904
+3905
+3909
+precinct 39123123ABH intersects with:
+3904
+3905
+precinct 39123123ACE intersects with:
+3904
+3905
+precinct 39123123ACU intersects with:
+3905
+3909
+precinct 39119119ABZ intersects with:
+3906
+3907
+precinct 39119119ABB intersects with:
+3906
+3907
+precinct 39123123AAY intersects with:
+3905
+3909
+precinct 39123123AAZ intersects with:
+3905
+3909
+precinct 39119119ACO intersects with:
+3906
+3912
+precinct 39119119AAC intersects with:
+3906
+3912
+precinct 39119119ABN intersects with:
+3912
+3915
+precinct 39119119AAY intersects with:
+3912
+3915
+precinct 39119119ACB intersects with:
+3906
+3907
+precinct 39037037ABV intersects with:
+3904
+3908
+precinct 39037037ABL intersects with:
+3904
+3908
+precinct 39011011AAY intersects with:
+3904
+3908
+precinct 39011011ABK intersects with:
+3904
+3905
+precinct 39011011ABF intersects with:
+3904
+3905
+precinct 39011011AAX intersects with:
+3904
+3905
+precinct 39009009ABX intersects with:
+3906
+3915
+precinct 39097097AAO intersects with:
+3904
+3912
+3915
+precinct 39009009ABY intersects with:
+3906
+3915
+precinct 39097097AAP intersects with:
+3904
+3915
+precinct 39009009ABR intersects with:
+3906
+3915
+precinct 39009009ABO intersects with:
+3906
+3915
+precinct 39097097ABN intersects with:
+3904
+3908
+3915
+precinct 39097097ABK intersects with:
+3910
+3915
+precinct 39097097ABD intersects with:
+3908
+3915
+precinct 39097097ABG intersects with:
+3910
+3915
+precinct 39097097ABE intersects with:
+3904
+3915
+precinct 39097097ABP intersects with:
+3908
+3910
+3915
+precinct 39009009ABZ intersects with:
+3906
+3915
+precinct 39009009ACA intersects with:
+3906
+3915
+precinct 39009009ABF intersects with:
+3906
+3915
+precinct 39097097AAM intersects with:
+3912
+3915
+precinct 39093093AIE intersects with:
+3904
+3909
+precinct 39093093AEW intersects with:
+3904
+3909
+precinct 39093093AKI intersects with:
+3904
+3909
+precinct 39093093AER intersects with:
+3904
+3909
+precinct 39093093AFG intersects with:
+3904
+3909
+precinct 39093093AJB intersects with:
+3907
+3916
+precinct 39093093AJE intersects with:
+3907
+3916
+precinct 39109109ACV intersects with:
+3908
+3910
+precinct 39093093AAM intersects with:
+3904
+3909
+precinct 39093093AEM intersects with:
+3904
+3909
+precinct 39093093ABP intersects with:
+3904
+3907
+precinct 39093093ADJ intersects with:
+3904
+3907
+precinct 39093093AFF intersects with:
+3904
+3909
+precinct 39093093AFB intersects with:
+3904
+3909
+precinct 39093093AFE intersects with:
+3904
+3909
+precinct 39093093AFD intersects with:
+3904
+3909
+precinct 39093093AJT intersects with:
+3904
+3907
+precinct 39093093AJJ intersects with:
+3904
+3907
+precinct 39093093AKK intersects with:
+3904
+3909
+precinct 39093093AJR intersects with:
+3904
+3907
+precinct 39093093AEQ intersects with:
+3904
+3909
+precinct 39093093AAR intersects with:
+3904
+3907
+3909
+precinct 39093093AFH intersects with:
+3904
+3909
+precinct 39093093AFI intersects with:
+3904
+3909
+precinct 39093093AJP intersects with:
+3904
+3907
+precinct 39093093AJQ intersects with:
+3904
+3907
+precinct 39093093AAQ intersects with:
+3907
+3909
+3916
+precinct 39093093AAU intersects with:
+3907
+3916
+precinct 39093093ABS intersects with:
+3904
+3907
+precinct 39093093ABD intersects with:
+3907
+3909
+precinct 39093093ACJ intersects with:
+3904
+3907
+precinct 39093093AJY intersects with:
+3904
+3907
+precinct 39093093AAV intersects with:
+3907
+3916
+precinct 39093093AHF intersects with:
+3907
+3916
+precinct 39093093AGZ intersects with:
+3907
+3916
+precinct 39093093AHA intersects with:
+3907
+3916
+precinct 39093093AJH intersects with:
+3904
+3907
+precinct 39093093ABL intersects with:
+3907
+3909
+precinct 39093093AJL intersects with:
+3904
+3909
+precinct 39093093AIQ intersects with:
+3904
+3907
+precinct 39093093AHE intersects with:
+3907
+3916
+precinct 39093093AJF intersects with:
+3904
+3907
+precinct 39109109ABR intersects with:
+3908
+3910
+precinct 39109109ACF intersects with:
+3908
+3910
+precinct 39093093AKD intersects with:
+3904
+3907
+precinct 39109109ABT intersects with:
+3904
+3908
+precinct 39093093AFU intersects with:
+3904
+3909
+precinct 39093093AIR intersects with:
+3904
+3907
+precinct 39093093AHP intersects with:
+3904
+3909
+precinct 39109109ABQ intersects with:
+3908
+3910
+precinct 39093093ADK intersects with:
+3904
+3907
+precinct 39093093ADL intersects with:
+3904
+3907
+precinct 39093093ADM intersects with:
+3904
+3907
+precinct 39093093AHT intersects with:
+3904
+3909
+precinct 39093093AHR intersects with:
+3904
+3909
+precinct 39093093AHS intersects with:
+3904
+3909
+precinct 39093093AHU intersects with:
+3904
+3909
+precinct 39093093AKH intersects with:
+3904
+3909
+precinct 39093093ALE intersects with:
+3904
+3907
+3909
+precinct 39093093AKL intersects with:
+3904
+3907
+3909
+precinct 39093093AAO intersects with:
+3904
+3907
+precinct 39093093AKM intersects with:
+3904
+3907
+precinct 39093093AKY intersects with:
+3904
+3907
+precinct 39093093ADQ intersects with:
+3904
+3909
+precinct 39093093AIN intersects with:
+3904
+3909
+precinct 39093093AIG intersects with:
+3904
+3909
+precinct 39093093AGO intersects with:
+3904
+3907
+precinct 39093093AIM intersects with:
+3904
+3907
+precinct 39093093AIO intersects with:
+3904
+3907
+precinct 39093093AGN intersects with:
+3904
+3907
+precinct 39093093AAC intersects with:
+3904
+3909
+precinct 39093093AHV intersects with:
+3904
+3909
+precinct 39093093AKN intersects with:
+3904
+3907
+precinct 39093093AJV intersects with:
+3904
+3909
+precinct 39093093AIT intersects with:
+3904
+3907
+precinct 39093093AIV intersects with:
+3904
+3907
+precinct 39093093AJZ intersects with:
+3904
+3907
+precinct 39093093AIW intersects with:
+3904
+3907
+precinct 39109109ABS intersects with:
+3908
+3910
+precinct 39093093AFZ intersects with:
+3904
+3909
+precinct 39093093AAK intersects with:
+3904
+3909
+precinct 39093093AJI intersects with:
+3904
+3907
+precinct 39093093AIZ intersects with:
+3907
+3916
+precinct 39093093AJC intersects with:
+3907
+3916
+precinct 39077077ABK intersects with:
+3904
+3907
+precinct 39077077ABS intersects with:
+3904
+3907
+precinct 39077077ACP intersects with:
+3904
+3907
+precinct 39077077ACE intersects with:
+3904
+3907
+precinct 39059059ACA intersects with:
+3906
+3907
+precinct 39059059ACP intersects with:
+3906
+3912
+precinct 39077077ACN intersects with:
+3904
+3907
+precinct 39077077ACL intersects with:
+3904
+3907
+precinct 39091091ABQ intersects with:
+3904
+3905
+precinct 39091091ABM intersects with:
+3904
+3905
+precinct 39077077ABT intersects with:
+3904
+3907
+precinct 39059059ABR intersects with:
+3906
+3907
+precinct 39077077ACD intersects with:
+3904
+3907
+precinct 39077077ACH intersects with:
+3904
+3907
+precinct 39091091ABL intersects with:
+3904
+3905
+precinct 39059059ACG intersects with:
+3906
+3912
+precinct 39077077ACG intersects with:
+3904
+3907
+precinct 39077077ABV intersects with:
+3904
+3907
+precinct 39077077ABJ intersects with:
+3904
+3907
+precinct 39077077ABI intersects with:
+3904
+3907
+precinct 39077077ACF intersects with:
+3904
+3907
+precinct 39091091AAR intersects with:
+3904
+3905
+precinct 39109109ACC intersects with:
+3908
+3910
+precinct 39109109ACH intersects with:
+3904
+3908
+precinct 39109109ACI intersects with:
+3904
+3908
+precinct 39109109ACB intersects with:
+3904
+3908
+precinct 39159159AAY intersects with:
+3904
+3912
+precinct 39159159ABK intersects with:
+3904
+3912
+precinct 39109109ACP intersects with:
+3904
+3908
+precinct 39109109ADA intersects with:
+3904
+3908
+precinct 39109109ACS intersects with:
+3908
+3910
+precinct 39159159AAZ intersects with:
+3904
+3912
+precinct 39159159AAO intersects with:
+3904
+3912
+precinct 39109109ACW intersects with:
+3908
+3910
+precinct 39159159AAP intersects with:
+3904
+3912
+precinct 39159159ABG intersects with:
+3904
+3912
+precinct 39159159AAW intersects with:
+3904
+3915
+precinct 39159159ABS intersects with:
+3904
+3915
+precinct 39159159ABF intersects with:
+3904
+3915
+precinct 39159159AAX intersects with:
+3904
+3912
+precinct 39159159ABT intersects with:
+3904
+3905
+precinct 39109109ACG intersects with:
+3908
+3910
+precinct 39109109ACD intersects with:
+3908
+3910
+precinct 39159159ABC intersects with:
+3904
+3912
+precinct 39159159ABB intersects with:
+3904
+3912
+3915
+precinct 39159159ABD intersects with:
+3904
+3912
+precinct 39159159ABY intersects with:
+3904
+3912
+precinct 39159159ABX intersects with:
+3904
+3912
+precinct 39159159ABE intersects with:
+3904
+3915
+precinct 39131131AAK intersects with:
+3902
+3906
+precinct 39131131AAL intersects with:
+3902
+3906
+precinct 39131131AAT intersects with:
+3902
+3906
+precinct 39131131AAW intersects with:
+3902
+3906
+precinct 39131131AAN intersects with:
+3902
+3906
+precinct 39131131AAH intersects with:
+3902
+3906
+precinct 39017017AJV intersects with:
+3901
+3908
+precinct 39017017AHV intersects with:
+3901
+3908
+precinct 39017017AGZ intersects with:
+3901
+3908
+precinct 39017017AAB intersects with:
+3901
+3908
+precinct 39017017ABD intersects with:
+3901
+3908
+precinct 39017017AEI intersects with:
+3901
+3908
+precinct 39017017AEH intersects with:
+3901
+3908
+precinct 39017017AHC intersects with:
+3908
+3910
+precinct 39017017AEO intersects with:
+3901
+3908
+precinct 39017017AHN intersects with:
+3901
+3908
+precinct 39017017AIX intersects with:
+3901
+3908
+precinct 39017017ADY intersects with:
+3901
+3908
+precinct 39017017AJW intersects with:
+3901
+3908
+precinct 39017017AJU intersects with:
+3901
+3908
+precinct 39017017ABO intersects with:
+3901
+3908
+precinct 39017017AAI intersects with:
+3901
+3908
+precinct 39017017AIK intersects with:
+3901
+3908
+precinct 39017017AAH intersects with:
+3901
+3908
+precinct 39017017AKI intersects with:
+3901
+3908
+precinct 39017017ALU intersects with:
+3901
+3908
+precinct 39017017ALT intersects with:
+3901
+3908
+precinct 39017017ADK intersects with:
+3901
+3908
+precinct 39017017AKP intersects with:
+3901
+3908
+precinct 39017017AHA intersects with:
+3901
+3908
+3910
+precinct 39017017AHM intersects with:
+3901
+3908
+precinct 39017017AKJ intersects with:
+3901
+3908
+precinct 39017017AIS intersects with:
+3901
+3908
+precinct 39017017AIN intersects with:
+3901
+3908
+precinct 39017017AHZ intersects with:
+3901
+3908
+precinct 39017017ADM intersects with:
+3901
+3908
+precinct 39017017AEG intersects with:
+3901
+3908
+precinct 39017017AER intersects with:
+3901
+3908
+precinct 39017017AJX intersects with:
+3901
+3908
+precinct 39017017AJM intersects with:
+3901
+3908
+precinct 39017017ADJ intersects with:
+3901
+3908
+precinct 39017017AIL intersects with:
+3901
+3908
+precinct 39017017AJF intersects with:
+3901
+3908
+precinct 39017017ABA intersects with:
+3901
+3908
+precinct 39017017AKW intersects with:
+3901
+3908
+precinct 39017017AHE intersects with:
+3908
+3910
+precinct 39017017AHJ intersects with:
+3901
+3908
+precinct 39017017ALW intersects with:
+3901
+3908
+precinct 39017017AAY intersects with:
+3901
+3908
+precinct 39045045AEV intersects with:
+3903
+3915
+precinct 39045045ADY intersects with:
+3912
+3915
+precinct 39045045ADO intersects with:
+3912
+3915
+precinct 39045045ADS intersects with:
+3912
+3915
+precinct 39045045AEQ intersects with:
+3903
+3915
+precinct 39045045ACQ intersects with:
+3912
+3915
+precinct 39045045AER intersects with:
+3903
+3915
+precinct 39045045AEL intersects with:
+3903
+3915
+precinct 39161161AAE intersects with:
+3904
+3905
+precinct 39045045AED intersects with:
+3912
+3915
+precinct 39161161AAC intersects with:
+3904
+3905
+precinct 39161161AAB intersects with:
+3904
+3905
+precinct 39161161AAA intersects with:
+3904
+3905
+precinct 39161161AAD intersects with:
+3904
+3905
+precinct 39045045AEF intersects with:
+3912
+3915
+precinct 39161161ABJ intersects with:
+3904
+3905
+precinct 39161161AAX intersects with:
+3904
+3905
+precinct 39161161ABK intersects with:
+3904
+3905
+precinct 39045045ADK intersects with:
+3903
+3912
+3915
+precinct 39175175ABE intersects with:
+3904
+3905
+precinct 39175175AAK intersects with:
+3904
+3905
+precinct 39175175AAV intersects with:
+3904
+3905
+precinct 39175175ABM intersects with:
+3904
+3905
+precinct 39175175AAO intersects with:
+3904
+3905
+precinct 39175175ABJ intersects with:
+3904
+3905
+precinct 39175175AAY intersects with:
+3904
+3905
+precinct 39165165ADO intersects with:
+3901
+3902
+precinct 39165165AAH intersects with:
+3901
+3908
+precinct 39165165AED intersects with:
+3901
+3908
+precinct 39165165AEP intersects with:
+3901
+3910
+precinct 39165165AGO intersects with:
+3901
+3908
+precinct 39165165AEN intersects with:
+3901
+3910
+precinct 39165165ABP intersects with:
+3901
+3910
+precinct 39165165ACP intersects with:
+3901
+3908
+precinct 39165165ADD intersects with:
+3901
+3902
+precinct 39165165AEX intersects with:
+3901
+3910
+precinct 39165165ADQ intersects with:
+3901
+3915
+precinct 39165165ADN intersects with:
+3901
+3902
+3915
+precinct 39165165AFX intersects with:
+3901
+3910
+precinct 39165165AFA intersects with:
+3901
+3910
+precinct 39165165ACW intersects with:
+3901
+3908
+precinct 39165165ACM intersects with:
+3901
+3910
+precinct 39165165ACV intersects with:
+3901
+3908
+precinct 39165165ADA intersects with:
+3901
+3910
+precinct 39165165ACE intersects with:
+3901
+3908
+precinct 39165165ACH intersects with:
+3901
+3908
+precinct 39165165ABJ intersects with:
+3901
+3910
+precinct 39165165ACQ intersects with:
+3901
+3908
+precinct 39165165AFT intersects with:
+3901
+3908
+precinct 39165165AFS intersects with:
+3901
+3908
+precinct 39165165AFN intersects with:
+3901
+3910
+precinct 39165165AGD intersects with:
+3901
+3908
+precinct 39165165AFL intersects with:
+3901
+3908
+precinct 39165165AAX intersects with:
+3901
+3908
+precinct 39165165ADI intersects with:
+3901
+3902
+precinct 39165165AEM intersects with:
+3901
+3910
+3915
+precinct 39165165ABF intersects with:
+3901
+3908
+precinct 39165165AEC intersects with:
+3901
+3908
+precinct 39165165AEL intersects with:
+3901
+3915
+precinct 39165165ADP intersects with:
+3901
+3915
+precinct 39165165ACO intersects with:
+3901
+3908
+3910
+precinct 39165165ACG intersects with:
+3901
+3908
+precinct 39165165ABE intersects with:
+3901
+3908
+precinct 39165165AGP intersects with:
+3901
+3915
+precinct 39165165ADM intersects with:
+3901
+3915
+precinct 39165165AEK intersects with:
+3901
+3915
+precinct 39165165ACY intersects with:
+3901
+3908
+precinct 39155155AHR intersects with:
+3913
+3914
+precinct 39173173ACY intersects with:
+3904
+3905
+precinct 39173173AAT intersects with:
+3904
+3905
+precinct 39173173ADZ intersects with:
+3905
+3909
+precinct 39155155AGG intersects with:
+3913
+3914
+precinct 39173173ADP intersects with:
+3904
+3905
+precinct 39173173ADW intersects with:
+3905
+3909
+precinct 39155155AGF intersects with:
+3913
+3914
+precinct 39155155AKX intersects with:
+3913
+3914
+precinct 39155155AGB intersects with:
+3913
+3914
+precinct 39155155AFV intersects with:
+3913
+3914
+precinct 39155155AGL intersects with:
+3913
+3914
+precinct 39155155AJS intersects with:
+3913
+3914
+precinct 39155155AFR intersects with:
+3913
+3914
+precinct 39155155AJK intersects with:
+3913
+3914
+precinct 39155155AES intersects with:
+3913
+3914
+precinct 39155155AKQ intersects with:
+3913
+3914
+precinct 39155155AGJ intersects with:
+3913
+3914
+precinct 39155155AJN intersects with:
+3913
+3914
+precinct 39155155AEW intersects with:
+3913
+3914
+precinct 39155155AJQ intersects with:
+3913
+3914
+precinct 39155155AFC intersects with:
+3913
+3914
+precinct 39155155AJL intersects with:
+3913
+3914
+precinct 39173173ABS intersects with:
+3904
+3905
+precinct 39173173ACU intersects with:
+3904
+3905
+precinct 39155155AEV intersects with:
+3913
+3914
+precinct 39155155AJM intersects with:
+3913
+3914
+precinct 39155155AIU intersects with:
+3913
+3914
+precinct 39155155AIT intersects with:
+3913
+3914
+precinct 39173173ADQ intersects with:
+3904
+3905
+precinct 39155155AEQ intersects with:
+3913
+3914
+precinct 39173173ACW intersects with:
+3904
+3905
+precinct 39155155AGC intersects with:
+3913
+3914
+precinct 39155155AGK intersects with:
+3913
+3914
+precinct 39155155AJI intersects with:
+3913
+3914
+precinct 39155155AGE intersects with:
+3913
+3914
+precinct 39173173ACZ intersects with:
+3904
+3905
+precinct 39083083ABK intersects with:
+3907
+3912
+precinct 39089089AFM intersects with:
+3907
+3912
+precinct 39083083ABI intersects with:
+3907
+3912
+precinct 39083083ABN intersects with:
+3907
+3912
+precinct 39083083AAO intersects with:
+3907
+3912
+precinct 39083083ABQ intersects with:
+3907
+3912
+precinct 39083083AAQ intersects with:
+3907
+3912
+precinct 39083083AAS intersects with:
+3907
+3912
+precinct 39163163AAM intersects with:
+3906
+3915
+precinct 39083083ABF intersects with:
+3907
+3912
+precinct 39163163AAB intersects with:
+3906
+3915
+precinct 39083083ACD intersects with:
+3907
+3912
+precinct 39163163AAK intersects with:
+3902
+3906
+3915
+precinct 39163163AAQ intersects with:
+3906
+3915
+precinct 39083083ABA intersects with:
+3907
+3912
+precinct 39083083ACB intersects with:
+3907
+3912
+precinct 39163163AAP intersects with:
+3906
+3915
+precinct 39163163AAS intersects with:
+3906
+3915
+precinct 39163163AAU intersects with:
+3906
+3915
+precinct 39089089AFL intersects with:
+3907
+3912
+precinct 39151151AKW intersects with:
+3907
+3916
+precinct 39151151AKV intersects with:
+3907
+3916
+precinct 39151151AKR intersects with:
+3907
+3916
+precinct 39151151AMR intersects with:
+3907
+3916
+precinct 39151151AJL intersects with:
+3907
+3916
+precinct 39151151ANK intersects with:
+3907
+3916
+precinct 39151151ADX intersects with:
+3907
+3916
+precinct 39151151ADT intersects with:
+3907
+3916
+precinct 39151151AMN intersects with:
+3907
+3916
+precinct 39151151AAP intersects with:
+3907
+3913
+precinct 39151151AAH intersects with:
+3906
+3913
+precinct 39151151ALR intersects with:
+3907
+3916
+precinct 39151151ALQ intersects with:
+3907
+3916
+precinct 39151151AAD intersects with:
+3906
+3913
+precinct 39151151ALF intersects with:
+3907
+3916
+precinct 39151151ABY intersects with:
+3907
+3916
+precinct 39151151AJC intersects with:
+3907
+3913
+precinct 39151151AAK intersects with:
+3906
+3913
+precinct 39151151ABZ intersects with:
+3907
+3916
+precinct 39151151AOI intersects with:
+3907
+3913
+precinct 39151151AMW intersects with:
+3907
+3916
+precinct 39151151ALH intersects with:
+3907
+3916
+precinct 39151151AKX intersects with:
+3907
+3916
+precinct 39151151AKS intersects with:
+3907
+3916
+precinct 39151151AOJ intersects with:
+3906
+3907
+3913
+precinct 39151151AOH intersects with:
+3906
+3907
+precinct 39151151AOG intersects with:
+3907
+3913
+precinct 39151151AIO intersects with:
+3907
+3913
+3916
+precinct 39151151ADC intersects with:
+3907
+3916
+precinct 39151151AOB intersects with:
+3907
+3916
+precinct 39151151AJK intersects with:
+3907
+3913
+3916
+precinct 39151151AKF intersects with:
+3906
+3907
+precinct 39151151ALP intersects with:
+3907
+3916
+precinct 39151151ANL intersects with:
+3906
+3907
+precinct 39151151AKL intersects with:
+3906
+3907
+precinct 39151151ALK intersects with:
+3907
+3916
+precinct 39151151ALO intersects with:
+3907
+3916
+precinct 39151151ANP intersects with:
+3907
+3916
+precinct 39151151AJD intersects with:
+3907
+3913
+precinct 39151151AIP intersects with:
+3907
+3916
+precinct 39151151AKK intersects with:
+3906
+3907
+precinct 39151151ANZ intersects with:
+3907
+3916
+precinct 39151151ANX intersects with:
+3907
+3916
+precinct 39151151ABO intersects with:
+3907
+3916
+precinct 39151151AKG intersects with:
+3906
+3907
+precinct 39151151ANQ intersects with:
+3907
+3916
+precinct 39151151AKU intersects with:
+3907
+3916
+precinct 39151151AKP intersects with:
+3907
+3916
+precinct 39151151AKB intersects with:
+3906
+3907
+precinct 39151151ANN intersects with:
+3906
+3907
+precinct 39151151ANM intersects with:
+3906
+3907
+precinct 39151151AHA intersects with:
+3907
+3916
+precinct 39151151AFF intersects with:
+3907
+3916
+precinct 39151151ABN intersects with:
+3907
+3916
+precinct 39151151AIE intersects with:
+3907
+3916
+precinct 39151151ALG intersects with:
+3907
+3916
+precinct 39151151ALA intersects with:
+3907
+3916
+precinct 39151151ANC intersects with:
+3907
+3916
+precinct 39127127AAO intersects with:
+3912
+3915
+precinct 39127127AAM intersects with:
+3912
+3915
+precinct 39127127AAC intersects with:
+3912
+3915
+precinct 39127127AAI intersects with:
+3912
+3915
+precinct 39127127AAH intersects with:
+3912
+3915
+precinct 39127127ABI intersects with:
+3912
+3915
+precinct 39127127AAS intersects with:
+3912
+3915
+precinct 39127127ABT intersects with:
+3912
+3915
+precinct 39151151AGX intersects with:
+3907
+3916
+precinct 39151151AGV intersects with:
+3907
+3916
+precinct 39151151AFY intersects with:
+3907
+3916
+precinct 39151151AOV intersects with:
+3907
+3916
+precinct 39151151AIK intersects with:
+3907
+3916
+precinct 39151151AFS intersects with:
+3907
+3916
+precinct 39151151AMF intersects with:
+3907
+3916
+precinct 39151151AFK intersects with:
+3907
+3916
+precinct 39151151AFI intersects with:
+3907
+3916
+precinct 39151151AFE intersects with:
+3907
+3916
+precinct 39151151AFD intersects with:
+3907
+3916
+precinct 39151151AOU intersects with:
+3907
+3916
+precinct 39151151AHD intersects with:
+3907
+3916
+precinct 39151151AFA intersects with:
+3907
+3916
+precinct 39151151AEZ intersects with:
+3907
+3916
+precinct 39151151AMC intersects with:
+3907
+3916
+precinct 39151151AIC intersects with:
+3907
+3916
+precinct 39151151AHZ intersects with:
+3907
+3916
+precinct 39151151AHQ intersects with:
+3907
+3916
+precinct 39151151ANJ intersects with:
+3907
+3916
+precinct 39151151AAN intersects with:
+3907
+3913
+precinct 39151151AHO intersects with:
+3907
+3916
+precinct 39151151ACA intersects with:
+3907
+3916
+precinct 39151151AAJ intersects with:
+3907
+3913
+precinct 39151151AGL intersects with:
+3907
+3916
+precinct 39151151AGH intersects with:
+3907
+3916
+precinct 39151151AIJ intersects with:
+3907
+3916
+precinct 39151151ANF intersects with:
+3907
+3916
+precinct 39151151ALL intersects with:
+3907
+3916
+precinct 39151151ABG intersects with:
+3907
+3916
+precinct 39151151AIH intersects with:
+3907
+3916
+precinct 39151151AID intersects with:
+3907
+3916
+precinct 39151151AHM intersects with:
+3907
+3916
+precinct 39151151AHC intersects with:
+3907
+3916
+precinct 39151151AHS intersects with:
+3907
+3916
+precinct 39151151AMS intersects with:
+3907
+3916
+precinct 39151151AMO intersects with:
+3907
+3916
+precinct 39151151AAM intersects with:
+3906
+3907
+3913
+precinct 39153153APR intersects with:
+3913
+3914
+precinct 39153153ARF intersects with:
+3911
+3913
+precinct 39153153AXS intersects with:
+3913
+3914
+precinct 39153153AJN intersects with:
+3913
+3916
+precinct 39153153AIN intersects with:
+3911
+3913
+precinct 39153153AFE intersects with:
+3911
+3913
+precinct 39153153ACW intersects with:
+3911
+3913
+precinct 39153153ACG intersects with:
+3911
+3913
+precinct 39153153ALQ intersects with:
+3913
+3914
+precinct 39153153AKZ intersects with:
+3913
+3914
+precinct 39153153AUD intersects with:
+3913
+3914
+precinct 39153153ANK intersects with:
+3911
+3914
+precinct 39153153ATW intersects with:
+3913
+3914
+precinct 39153153ABY intersects with:
+3911
+3913
+precinct 39153153ABV intersects with:
+3911
+3913
+precinct 39153153AAC intersects with:
+3911
+3913
+precinct 39153153AAA intersects with:
+3911
+3913
+precinct 39153153AGJ intersects with:
+3911
+3913
+precinct 39153153AAH intersects with:
+3913
+3914
+precinct 39153153AAL intersects with:
+3911
+3913
+3914
+precinct 39153153AAO intersects with:
+3913
+3914
+precinct 39153153ADN intersects with:
+3911
+3913
+precinct 39153153ADU intersects with:
+3911
+3913
+precinct 39153153APM intersects with:
+3913
+3914
+precinct 39153153AQF intersects with:
+3913
+3916
+precinct 39153153AIJ intersects with:
+3911
+3913
+precinct 39153153AHV intersects with:
+3911
+3913
+precinct 39153153ABG intersects with:
+3911
+3913
+precinct 39153153ASM intersects with:
+3913
+3916
+precinct 39153153ASL intersects with:
+3913
+3916
+precinct 39153153AKV intersects with:
+3913
+3914
+precinct 39153153AKC intersects with:
+3913
+3916
+precinct 39153153AMH intersects with:
+3913
+3914
+precinct 39153153AMD intersects with:
+3913
+3914
+precinct 39153153ABN intersects with:
+3911
+3913
+precinct 39153153AIP intersects with:
+3911
+3913
+precinct 39153153AIO intersects with:
+3911
+3913
+precinct 39153153AFT intersects with:
+3911
+3913
+precinct 39153153AFQ intersects with:
+3911
+3913
+precinct 39153153AFP intersects with:
+3911
+3913
+precinct 39153153AGP intersects with:
+3911
+3913
+precinct 39153153AMK intersects with:
+3913
+3914
+precinct 39153153APX intersects with:
+3913
+3914
+precinct 39153153AAN intersects with:
+3911
+3913
+precinct 39153153AAF intersects with:
+3911
+3913
+precinct 39153153ARR intersects with:
+3913
+3914
+precinct 39153153AJX intersects with:
+3913
+3916
+precinct 39153153AJD intersects with:
+3913
+3916
+precinct 39153153AIR intersects with:
+3911
+3913
+precinct 39153153AIM intersects with:
+3911
+3913
+precinct 39153153AMM intersects with:
+3913
+3914
+precinct 39153153AIH intersects with:
+3911
+3913
+precinct 39153153ALN intersects with:
+3913
+3914
+precinct 39153153AIK intersects with:
+3911
+3913
+precinct 39153153ACP intersects with:
+3911
+3913
+precinct 39153153ACN intersects with:
+3911
+3913
+precinct 39153153AFL intersects with:
+3911
+3913
+precinct 39153153AMO intersects with:
+3913
+3914
+precinct 39153153ANA intersects with:
+3911
+3913
+precinct 39153153AOT intersects with:
+3913
+3914
+precinct 39153153AXR intersects with:
+3913
+3914
+precinct 39153153AVM intersects with:
+3913
+3916
+precinct 39153153AVI intersects with:
+3913
+3916
+precinct 39153153AEK intersects with:
+3911
+3913
+precinct 39153153AII intersects with:
+3911
+3913
+precinct 39153153AFJ intersects with:
+3911
+3913
+precinct 39153153AJC intersects with:
+3911
+3913
+3916
+precinct 39153153AIQ intersects with:
+3911
+3913
+precinct 39153153ABJ intersects with:
+3911
+3913
+precinct 39153153ACF intersects with:
+3911
+3913
+precinct 39153153AYE intersects with:
+3913
+3916
+precinct 39153153AOC intersects with:
+3913
+3916
+precinct 39153153AOQ intersects with:
+3913
+3914
+precinct 39153153AXO intersects with:
+3913
+3914
+precinct 39153153AXG intersects with:
+3913
+3914
+precinct 39153153ARB intersects with:
+3911
+3916
+precinct 39153153AHQ intersects with:
+3911
+3913
+precinct 39153153AMU intersects with:
+3911
+3916
+precinct 39153153ARO intersects with:
+3913
+3914
+precinct 39153153ABH intersects with:
+3911
+3913
+precinct 39153153AIG intersects with:
+3911
+3913
+3916
+precinct 39153153AUQ intersects with:
+3911
+3914
+precinct 39153153AWT intersects with:
+3913
+3916
+precinct 39153153AHK intersects with:
+3911
+3913
+3916
+precinct 39153153ASF intersects with:
+3911
+3916
+precinct 39153153ASI intersects with:
+3911
+3913
+precinct 39153153AHC intersects with:
+3911
+3913
+precinct 39153153AGY intersects with:
+3911
+3913
+precinct 39153153AJL intersects with:
+3913
+3916
+precinct 39153153ASK intersects with:
+3913
+3916
+precinct 39153153ATL intersects with:
+3913
+3916
+precinct 39153153AIF intersects with:
+3911
+3913
+precinct 39153153ADX intersects with:
+3911
+3913
+precinct 39153153AEU intersects with:
+3913
+3916
+precinct 39153153ARI intersects with:
+3911
+3916
+precinct 39153153AFR intersects with:
+3911
+3913
+precinct 39153153AHA intersects with:
+3911
+3913
+precinct 39153153AYH intersects with:
+3911
+3916
+precinct 39153153AGQ intersects with:
+3911
+3913
+precinct 39153153AGH intersects with:
+3911
+3913
+precinct 39153153ARZ intersects with:
+3911
+3916
+precinct 39153153AXT intersects with:
+3913
+3914
+precinct 39153153AXP intersects with:
+3913
+3914
+precinct 39153153ADT intersects with:
+3911
+3913
+precinct 39153153ABF intersects with:
+3911
+3913
+precinct 39153153AUL intersects with:
+3911
+3913
+3914
+3916
+precinct 39153153ARA intersects with:
+3911
+3913
+precinct 39153153ALW intersects with:
+3913
+3914
+precinct 39153153ANY intersects with:
+3913
+3916
+precinct 39153153AMW intersects with:
+3911
+3916
+precinct 39153153ADV intersects with:
+3911
+3913
+precinct 39153153AFF intersects with:
+3911
+3913
+precinct 39153153ASO intersects with:
+3911
+3913
+3916
+precinct 39153153ATP intersects with:
+3913
+3916
+precinct 39153153ATK intersects with:
+3913
+3916
+precinct 39153153ABE intersects with:
+3911
+3913
+precinct 39153153ABC intersects with:
+3911
+3913
+precinct 39153153AHS intersects with:
+3911
+3913
+precinct 39153153ARP intersects with:
+3911
+3913
+3914
+precinct 39153153AMS intersects with:
+3911
+3916
+precinct 39153153ADR intersects with:
+3911
+3913
+precinct 39153153ADE intersects with:
+3911
+3913
+precinct 39153153ACX intersects with:
+3911
+3913
+precinct 39153153AWY intersects with:
+3913
+3916
+precinct 39153153AVT intersects with:
+3913
+3916
+precinct 39153153AHO intersects with:
+3911
+3913
+precinct 39153153ADS intersects with:
+3911
+3913
+precinct 39153153AUU intersects with:
+3913
+3914
+precinct 39153153AVH intersects with:
+3913
+3916
+precinct 39153153ABX intersects with:
+3911
+3913
+precinct 39153153AOJ intersects with:
+3913
+3914
+precinct 39153153AOB intersects with:
+3913
+3916
+precinct 39153153AKG intersects with:
+3913
+3914
+precinct 39153153ANC intersects with:
+3911
+3913
+precinct 39153153AMF intersects with:
+3913
+3914
+precinct 39153153AVD intersects with:
+3913
+3914
+precinct 39153153ARH intersects with:
+3911
+3913
+3916
+precinct 39153153AGU intersects with:
+3911
+3913
+precinct 39153153ARV intersects with:
+3911
+3916
+precinct 39153153ARE intersects with:
+3911
+3916
+precinct 39153153AVE intersects with:
+3913
+3914
+precinct 39153153AVL intersects with:
+3913
+3916
+precinct 39153153ADQ intersects with:
+3911
+3913
+precinct 39153153ADP intersects with:
+3911
+3913
+precinct 39153153ABM intersects with:
+3911
+3913
+precinct 39153153AVU intersects with:
+3913
+3916
+precinct 39153153ALV intersects with:
+3913
+3914
+precinct 39153153AGS intersects with:
+3911
+3913
+precinct 39153153AGL intersects with:
+3911
+3913
+3916
+precinct 39153153APG intersects with:
+3913
+3914
+precinct 39153153AAP intersects with:
+3911
+3913
+precinct 39153153AHL intersects with:
+3911
+3913
+precinct 39153153AVR intersects with:
+3913
+3916
+precinct 39153153ANT intersects with:
+3913
+3916
+precinct 39153153ANS intersects with:
+3911
+3916
+precinct 39153153AML intersects with:
+3913
+3914
+precinct 39153153AMG intersects with:
+3913
+3914
+precinct 39153153AHD intersects with:
+3911
+3913
+precinct 39153153AGN intersects with:
+3911
+3913
+precinct 39153153AOS intersects with:
+3913
+3914
+precinct 39153153AVO intersects with:
+3913
+3916
+precinct 39153153AOI intersects with:
+3913
+3914
+precinct 39153153ARK intersects with:
+3911
+3913
+precinct 39153153AQL intersects with:
+3911
+3914
+precinct 39153153ATG intersects with:
+3913
+3916
+precinct 39153153ALB intersects with:
+3913
+3914
+precinct 39153153AUM intersects with:
+3911
+3914
+3916
+precinct 39153153ASH intersects with:
+3911
+3916
+precinct 39153153ADA intersects with:
+3911
+3913
+precinct 39153153AAM intersects with:
+3911
+3913
+precinct 39153153ASV intersects with:
+3913
+3916
+precinct 39153153ALP intersects with:
+3913
+3914
+precinct 39153153ALO intersects with:
+3913
+3914
+precinct 39153153ASQ intersects with:
+3913
+3916
+precinct 39153153ASJ intersects with:
+3913
+3916
+precinct 39153153AAG intersects with:
+3913
+3914
+precinct 39153153AQC intersects with:
+3913
+3916
+precinct 39153153AKX intersects with:
+3913
+3914
+precinct 39153153ATO intersects with:
+3913
+3916
+precinct 39153153ATN intersects with:
+3913
+3916
+precinct 39153153ARY intersects with:
+3911
+3916
+precinct 39153153AKA intersects with:
+3913
+3916
+precinct 39153153ALZ intersects with:
+3913
+3914
+precinct 39153153ATR intersects with:
+3913
+3914
+precinct 39153153AMN intersects with:
+3911
+3913
+3914
+precinct 39153153AMJ intersects with:
+3913
+3914
+precinct 39153153AME intersects with:
+3913
+3914
+precinct 39153153AGT intersects with:
+3911
+3913
+precinct 39153153AGR intersects with:
+3911
+3913
+precinct 39153153ACY intersects with:
+3911
+3913
+precinct 39153153ATV intersects with:
+3913
+3914
+precinct 39153153AKB intersects with:
+3913
+3916
+precinct 39153153AJT intersects with:
+3913
+3916
+precinct 39153153AGD intersects with:
+3911
+3913
+precinct 39153153AFN intersects with:
+3911
+3913
+precinct 39153153ADY intersects with:
+3911
+3913
+precinct 39153153ANU intersects with:
+3913
+3916
+precinct 39153153AEN intersects with:
+3911
+3913
+precinct 39153153ACV intersects with:
+3911
+3916
+precinct 39153153ACU intersects with:
+3911
+3916
+precinct 39129129ABK intersects with:
+3910
+3915
+precinct 39129129ABG intersects with:
+3910
+3915
+precinct 39121121AAB intersects with:
+3906
+3912
+3915
+precinct 39121121AAJ intersects with:
+3906
+3915
+precinct 39121121AAY intersects with:
+3906
+3915
+precinct 39141141ACA intersects with:
+3902
+3906
+3915
+precinct 39141141ABF intersects with:
+3902
+3915
+precinct 39141141ABN intersects with:
+3902
+3915
+precinct 39141141ABE intersects with:
+3902
+3915
+precinct 39141141ABQ intersects with:
+3902
+3915
+precinct 39141141ACG intersects with:
+3902
+3915
+precinct 39141141ACT intersects with:
+3902
+3915
+precinct 39141141ACD intersects with:
+3902
+3915
+precinct 39141141ACU intersects with:
+3902
+3915
+precinct 39141141ACN intersects with:
+3902
+3915
+precinct 39141141ACL intersects with:
+3902
+3915
+precinct 39141141ACW intersects with:
+3902
+3915
+precinct 39141141ACJ intersects with:
+3902
+3915
+precinct 39141141ACR intersects with:
+3902
+3915
+precinct 39141141ACC intersects with:
+3902
+3915
+precinct 39141141ACQ intersects with:
+3902
+3915
+precinct 39141141AAP intersects with:
+3902
+3915
+precinct 39141141ACS intersects with:
+3902
+3915
+precinct 39141141ACO intersects with:
+3902
+3915
+precinct 39141141ACP intersects with:
+3902
+3915
+precinct 39141141ACM intersects with:
+3902
+3915
+precinct 39141141ACB intersects with:
+3902
+3915
+precinct 39089089AFS intersects with:
+3903
+3912
+precinct 39089089ACS intersects with:
+3907
+3912
+precinct 39089089ADF intersects with:
+3906
+3912
+precinct 39089089ACJ intersects with:
+3907
+3912
+precinct 39089089ACQ intersects with:
+3912
+3915
+precinct 39089089ACK intersects with:
+3912
+3915
+precinct 39089089AFJ intersects with:
+3912
+3915
+precinct 39089089ADV intersects with:
+3912
+3915
+precinct 39089089ADM intersects with:
+3907
+3912
+precinct 39089089ACL intersects with:
+3907
+3912
+precinct 39089089AFF intersects with:
+3912
+3915
+precinct 39089089AEU intersects with:
+3903
+3912
+precinct 39033033ACL intersects with:
+3904
+3905
+precinct 39089089AFA intersects with:
+3906
+3912
+precinct 39089089ACO intersects with:
+3912
+3915
+precinct 39089089AES intersects with:
+3903
+3912
+precinct 39089089ADU intersects with:
+3912
+3915
+precinct 39033033ACM intersects with:
+3904
+3905
+precinct 39089089AFX intersects with:
+3903
+3912
+precinct 39033033ABX intersects with:
+3904
+3905
+precinct 39033033ACR intersects with:
+3904
+3912
+precinct 39033033ACN intersects with:
+3904
+3907
+precinct 39089089ACM intersects with:
+3907
+3912
+precinct 39033033ABR intersects with:
+3904
+3907
+precinct 39033033ABU intersects with:
+3904
+3907
+precinct 39089089AFR intersects with:
+3903
+3912
+precinct 39033033ACJ intersects with:
+3904
+3912
+precinct 39033033ABI intersects with:
+3904
+3912
+precinct 39089089AFT intersects with:
+3903
+3912
+3915
+precinct 39033033ACG intersects with:
+3904
+3907
+3912
+precinct 39033033AAW intersects with:
+3904
+3907
+precinct 39033033ABF intersects with:
+3904
+3907
+precinct 39033033AAV intersects with:
+3904
+3907
+precinct 39033033ACA intersects with:
+3904
+3907
+precinct 39089089ADE intersects with:
+3906
+3912
+precinct 39041041ADM intersects with:
+3907
+3912
+precinct 39041041AEO intersects with:
+3904
+3912
+precinct 39041041ADR intersects with:
+3904
+3912
+precinct 39041041ABT intersects with:
+3904
+3912
+precinct 39041041ADT intersects with:
+3904
+3912
+precinct 39041041ADS intersects with:
+3904
+3912
+precinct 39041041ABS intersects with:
+3904
+3912
+precinct 39041041ADN intersects with:
+3907
+3912
+precinct 39041041AEV intersects with:
+3903
+3912
