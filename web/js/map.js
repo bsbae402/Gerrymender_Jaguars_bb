@@ -158,10 +158,13 @@ whenReady(function() {
 	function genericHover($el, data, opts={}) {
 		var o = $.extend({
 			votes : data.votes,
+			includeGeneric : true,
 			includeRecent : false,
 			includeYearsOfData : false,
 			includeVoting : true,
 			sayAverage : false,
+			district : null,
+			newDistrict : null,
 		}, opts);
 
 		var stuff = [];
@@ -178,16 +181,17 @@ whenReady(function() {
 					),
 				);
 
-		stuff.push(
-			$("<div>").addClass("info").append(
-				$("<div>").html((o.sayAverage ? "Average " : "") + "Population"),
-				$("<div>").html(commaNumbers(data.population)),
-				),
-			$("<div>").addClass("info").append(
-				$("<div>").html((o.sayAverage ? "Average " : "") + "Voters"),
-				$("<div>").html(commaNumbers(data.total_votes) + " (" + getPerc(data.total_votes, data.population).toFixed(2) + "%)"),
-				),
-			);
+		if (o.includeGeneric)
+			stuff.push(
+				$("<div>").addClass("info").append(
+					$("<div>").html((o.sayAverage ? "Average " : "") + "Population"),
+					$("<div>").html(commaNumbers(data.population)),
+					),
+				$("<div>").addClass("info").append(
+					$("<div>").html((o.sayAverage ? "Average " : "") + "Voters"),
+					$("<div>").html(commaNumbers(data.total_votes) + " (" + getPerc(data.total_votes, data.population).toFixed(2) + "%)"),
+					),
+				);
 
 		if (o.includeRecent)
 			stuff.push(
@@ -198,6 +202,21 @@ whenReady(function() {
 				$("<div>").addClass("info").append(
 					$("<div>").html(data.recent.election_year + " Voters"),
 					$("<div>").html(commaNumbers(data.recent.total_votes) + " (" + getPerc(data.recent.total_votes, data.recent.population).toFixed(2) + "%)"),
+					),
+				);
+
+		if (o.district)
+			stuff.push(
+				$("<div>").addClass("info").append(
+					$("<div>").html("District"),
+					$("<div>").html(o.district.name),
+					),
+				);
+		if (o.newDistrict)
+			stuff.push(
+				$("<div>").addClass("info").append(
+					$("<div>").html("New District"),
+					$("<div>").html(o.newDistrict.name),
 					),
 				);
 
@@ -655,8 +674,11 @@ whenReady(function() {
 		}
 		if (active.precinctsLayer2)
 			active.precinctsLayer2.hide();
+		resetAlgorithm();
 	}
 	function openRedistrict() {
+		clearAlgorithm();
+
 		loadAllPrecincts(() => {
 			function whendone() {
 				if (active.precinctsLayer)
@@ -700,7 +722,8 @@ whenReady(function() {
 			running = false, isQuerying = false,
 			paused = false, renderTime = 0,
 			totalLoops = 0,
-			aid = -1;
+			aid = -1,
+			markers = [];
 
 		function hoverRedistrictedPrecinct($el, layer, props) {
 			if (!props.active) return false;
@@ -708,12 +731,16 @@ whenReady(function() {
 			var precinct = active.precincts.find((precinct) => precinct.geo_id == props.GEOID10);
 			if (!precinct) return false;
 
-			genericHover($el, precinct);
+			var o = {};
+			o.district = active.districts.find((d) => d.id == precinct.district_id);
+			o.newDistrict = active.districts.find((d) => d.id == precinct.new_district_id);
+
+			genericHover($el, precinct, o);
 			return true;
 		}
 
 		clearAlgorithm = () => {
-			// clean up markers and shit
+			reset();
 		};
 
 		resetAlgorithm = () => {
@@ -726,30 +753,24 @@ whenReady(function() {
 				});
 			}
 
+			if (!active.precincts) return;
 			active.precincts.forEach((p) => {
 				var d = active.districts.find((d) => d.id == p.district_id);
 				if (!d) return;
 				p.color = d.color;
+				if (p.new_district_id) delete p.new_district_id;
 			});
 
+			map.removeMarkerChange();
+			markers = [];
 			active.precinctsLayer2.applySettings({
 				color : COLOR_SCHEME.CUSTOM,
 				hover : hoverRedistrictedPrecinct,
 			});
 
 			isQuerying = false;
+			running = false;
 		};
-
-		function registerChange(change) {
-			var d = active.districts.find((d) => d.id == change.new_district_id),
-				p = active.precincts.find((p) => p.id == change.precinct_id);
-			if (!d || !p) return;
-
-			p.color = d.color;
-			active.precinctsLayer2.update();
-
-			map.addMarkerChange(active.precinctsLayer2, p);
-		}
 
 		function reset() {
 			aid = -1;
@@ -757,8 +778,55 @@ whenReady(function() {
 			$("#credistrict .algorithm .pause").html("Pause algorithm");
 			$("#credistrict .algorithm .run").removeClass("disabled");
 			$("#credistrict .algresults .progressbar .scrolling").removeClass("stop");
-			$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").addClass("disabled");
+			$("#credistrict .algorithm .pause, #credistrict .algorithm .stop, #credistrict .algorithm .reset").addClass("disabled");
+			
 			resetAlgorithm();
+
+			$("#credistrict .changes .change").not(".dummy").remove();
+		}
+
+		$("#credistrict .changes .change").on("mouseover", function() {
+			var id = parseInt($(this).attr("mid")); if (isNaN(id)) return;
+			var marker = markers.find((m) => m.id == id);
+			if (marker)
+				marker.show();
+		}).on("mouseout", function() {
+			var id = parseInt($(this).attr("mid")); if (isNaN(id)) return;
+			var marker = markers.find((m) => m.id == id);
+			if (marker)
+				marker.hide();
+		}).on("click", function() {
+			var id = parseInt($(this).attr("pid")); if (isNaN(id)) return;
+			var precinct = active.precincts.find((p) => p.id == id);
+			if (precinct) {
+				var layer = active.precinctsLayer2.findGID(precinct.geo_id);
+				if (layer)
+					map.fitBounds2(layer);
+			}
+		});
+
+		function registerChange(change) {
+			var d = active.districts.find((d) => d.id == change.new_district_id),
+				p = active.precincts.find((p) => p.id == change.precinct_id),
+				doriginal = active.districts.find((d) => d.id == p.district_id);
+			if (!d || !p) return;
+
+			p.color = d.color;
+			p.new_district_id = d.id;
+			active.precinctsLayer2.update();
+			var marker = map.addMarkerChange(active.precinctsLayer2, p);
+
+			if (marker) {
+				markers.push(marker);
+				marker.id = markers.length;
+				var $change = $("#credistrict .changes .change.dummy").clone(true, true).removeClass("dummy");
+				$change.attr("mid", marker.id);
+				$change.attr("pid", p.id);
+				$change.find(".precinct").html(p.name);
+				$change.find(".district1").html(doriginal.name);
+				$change.find(".district2").html(d.name);
+				$("#credistrict .changes").append($change);
+			}
 		}
 
 		setInterval(() => {
@@ -770,7 +838,7 @@ whenReady(function() {
 						APICall("getalgorithmupdate", { algorithm_id : aid })
 							.then(function(r) {
 								updates.push(r);
-								lastUpdate = new Date().getTime() + UPDATE_TIME * (Math.random() * 0.6 + 0.7);
+								lastUpdate = new Date().getTime() + UPDATE_TIME * 0.8;
 								isQuerying = false;
 								if (!r.is_running) {
 									lastUpdate = Infinity;
@@ -782,7 +850,7 @@ whenReady(function() {
 
 				if (!paused && updates.length) {
 					if (new Date().getTime() > renderTime) {
-						renderTime = new Date().getTime() + UPDATE_TIME * (Math.random() * 0.6 + 0.7);
+						renderTime = new Date().getTime() + UPDATE_TIME * (Math.random() * 1 + 0.75);
 						var update = updates.shift();
 
 						var changes = update.all_changes;
@@ -808,7 +876,7 @@ whenReady(function() {
 				);
 		}
 
-		$("#credistrict .algresults .reset").click(function() {
+		$("#credistrict .algorithm .reset").click(function() {
 			running = false;
 			reset();
 		});
@@ -858,7 +926,7 @@ whenReady(function() {
 					lastUpdate = 0;
 					renderTime = 0;
 
-					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").removeClass("disabled");
+					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop, #credistrict .algorithm .reset").removeClass("disabled");
 					$("#credistrict .algresults .progress").css("width", 0);
 					$("#credistrict .algresults").addClass("show");
 				});

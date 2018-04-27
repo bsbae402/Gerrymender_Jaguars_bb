@@ -210,15 +210,21 @@ var API_CALLS = [
         url : "/algorithm/update",
         response : (r, data) => r,
         dummy : (data={}) => {
-            var extra = 3 + Math.floor(Math.random() * 8);
+            var extra = 2 + Math.floor(Math.random() * 5);
             window.algloop += extra;
 
             changes = [];
             for(var i=0;i<extra;i++) {
-                changes.push({
-                    precinct_id : Math.ceil(Math.random() * 119),
-                    new_district_id : 2,
-                });
+                if (Math.random() < 0.5)
+                    changes.push({
+                        precinct_id : Math.ceil(Math.random() * 119),
+                        new_district_id : 2,
+                    });
+                else
+                    changes.push({
+                        precinct_id : 119 + Math.ceil(Math.random() * 150),
+                        new_district_id : 1,
+                    });
             }
 
             return {
