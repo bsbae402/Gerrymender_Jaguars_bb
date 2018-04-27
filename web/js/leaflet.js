@@ -77,6 +77,9 @@ class LeafletMap {
 		this.allLayers = [];
 	}
 
+	removeLayers(layers) {
+		layers.forEach((layer) => this.removeLayer(layer));
+	}
 	removeLayer(layer) {
 		this.lmap.removeLayer(layer.layer);
 		for(var l in this.layers) {
@@ -111,6 +114,16 @@ class LeafletMap {
 			update : function() {this.applySettings()},
 			show : function() {this.applySettings({hidden : false})},
 			hide : function() {this.applySettings({hidden : true})},
+			find : function(func) {
+				var l = null;
+				this.layer.eachLayer((layer) => {
+					if (func(layer, layer.feature.properties)) l = layer;
+				})
+				return l;
+			},
+			findGID : function(gid) {
+				return this.find((l, p) => p.GEOID10 == gid);
+			},
 		};
 		layerObject.settings = $.extend(layerObject.settings, settings);
 
@@ -261,6 +274,9 @@ class LeafletMap {
 		}
 	}
 
+	removeMarkerChange() {
+		this.removeLayers(this.layers.changes);
+	}
 	addMarkerChange(layerObject, dataObject) {
 		var mapFunc = (d, props) => d.geo_id == props.GEOID10;
 		if (layerObject.mapToData)
@@ -283,11 +299,15 @@ class LeafletMap {
 					$marker.removeClass("show");
 				},
 			};
+			marker.layer = lmarker;
 			lmarker.addTo(this.lmap);
 		});
 		if (marker) {
 			setTimeout(() => marker.show(), 10);
 			setTimeout(() => marker.hide(), 1010);
+
+			this.layers.changes.push(marker);
+			this.allLayers.push(marker);
 			return marker;
 		}
 	}

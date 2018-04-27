@@ -45,7 +45,8 @@
 				</div>
 
 				<div class="maplabel maplabelstatic centertop selectstatelabel">Select a State</div>
-				<div class="maplabel switchregion">Switch State</div>
+				<div class="maplabel maplbutton switchregion">Switch State</div>
+				<div class="maplabel maplbutton resetview">Reset View</div>
 
 				<div class="selectregion t3">
 					<h1>Select a State</h1>
@@ -218,28 +219,48 @@
 				<div class="content">
 
 					<div class="constraint">
-						<div class="label">Compactness Weight: <span></span></div>
+						<div class="label">
+							Compactness Weight: <span></span>
+							<div class="reset">reset</div>
+						</div>
 						<div class="slider cw" slider="cw"></div>
 					</div>
 					<div class="constraint">
-						<div class="label">Efficiency Weight: <span></span></div>
+						<div class="label">
+							Efficiency Weight: <span></span>
+							<div class="reset">reset</div>
+						</div>
 						<div class="slider ew" slider="ew"></div>
 					</div>
 					<div class="constraint">
-						<div class="label">Population Threshold: <span></span></div>
+						<div class="label">
+							Population Threshold: <span></span>
+							<div class="reset">reset</div>
+						</div>
 						<div class="slider pt" slider="pt"></div>
 					</div>
 					<div class="algorithm">
 						<div class="button run">Run algorithm</div>
 						<div class="button pause disabled">Pause algorithm</div>
 						<div class="button stop disabled">Stop algorithm</div>
+						<div class="button reset disabled">Reset</div>
 					</div>
 					<div class="algresults">
 						<div class="progressbar">
 							<div class="scrolling"></div>
 							<div class="progress t2"></div>
 						</div>
-						<div class="button reset">Reset</div>
+						<div class="changes">
+							<div class="change dummy">
+								<div class="mainline">
+									<div class="precinct">Precinct</div>
+									moved to
+									<div class="district district2">District</div>
+									from
+									<div class="district district1">District</div>
+								</div>
+							</div>
+						</div>
 					</div>
 
 				</div>

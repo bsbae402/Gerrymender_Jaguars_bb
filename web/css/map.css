@@ -129,7 +129,7 @@
 }
 #map .popup .info div:last-child {
     font-weight:300;
-    width:100px;
+    min-width:100px;
 }
 #map .popup .votepadding {
     height:16px;
@@ -198,7 +198,11 @@
     top:11px;
     right:8px;
 }
-#mapbox.fullstates .switchregion {
+#mapbox .resetview {
+    top:53px;
+    right:8px;
+}
+#mapbox.fullstates .maplbutton {
     display: none;
 }
 #mapbox .selectstatelabel {
@@ -207,10 +211,10 @@
 #mapbox.fullstates .selectstatelabel {
     display: block;
 }
-#mapbox .switchregion:hover {
+#mapbox .maplbutton:hover {
     background:#f4f4f4;
 }
-#mapbox .switchregion:active {
+#mapbox .maplbutton:active {
     background:#f4f4f4;
 }
 #mapbox .selectregion {
@@ -570,14 +574,24 @@
 #credistrict .constraint {
     margin-bottom:9px;
 }
-#credistrict .label {
+#credistrict .constraint .label {
+    position: relative;
+    width:100%;
     display: inline-block;
     font-size:13px;
 }
-#credistrict .label span {
+#credistrict .constraint .label span {
     font-weight: 600;
 }
-#credistrict .slider {
+#credistrict .constraint .label .reset {
+    position: absolute;
+    right:0;
+    top:0;
+    cursor: pointer;
+    color:#666;
+}
+#credistrict .constraint .label .reset:hover { text-decoration: underline; }
+#credistrict .constraint .slider {
     display: block;
     width: 100%;
     margin-top:5px;
@@ -646,8 +660,40 @@
     border-bottom:30px solid #aaa;
     border-left:30px solid transparent;
 }
-#credistrict .algresults .reset {
+#credistrict .changes {
     margin-top:15px;
+    height:calc(100% - 270px);
+    min-height:140px;
+    overflow-y:scroll;
+}
+#credistrict .changes .change.dummy {
+    display: none;
+}
+#credistrict .changes .change {
+    width:100%;
+    cursor:pointer;
+    padding:5px 7px;
+    transition: all 0.2s ease-out !important;
+}
+#credistrict .changes .change:hover {
+    background:rgba(200, 200, 200, 0.6);
+}
+#credistrict .changes .change .mainline {
+    font-size:10px;
+    line-height:10px;
+    font-weight:300;
+}
+#credistrict .changes .change .mainline > div {
+    display: inline-block;
+}
+#credistrict .changes .change .mainline .precinct {
+    font-weight:700;
+}
+#credistrict .changes .change .mainline .district1 {
+    color:#444;
+}
+#credistrict .changes .change .mainline .district2 {
+    font-weight:600;
 }
 
 
