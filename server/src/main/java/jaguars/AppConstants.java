@@ -24,7 +24,7 @@ public class AppConstants {
     public static final String PATH_DISTRICT_GEOJSON_WI2010 = PATH_GEOJSONS + "/district_boundaries/WI_district_2011_jaguars.json";
     public static final String PATH_PRECINCT_GEOJSON_OH2010 = PATH_GEOJSONS + "/precinct_boundaries/OH_precincts_2010_fixed.json";
     public static final String PATH_PRECINCT_GEOJSON_NH2010 = PATH_GEOJSONS + "/precinct_boundaries/NH_precincts_2010.json";
-    public static final String PATH_PRECINCT_GEOJSON_WI2010 = PATH_GEOJSONS + "/precinct_boundaries/WI_wards_2010_simp80_jaguars.json";
+    public static final String PATH_PRECINCT_GEOJSON_WI2010 = PATH_GEOJSONS + "/precinct_boundaries/WI_wards_2010_jaguars.json";
 
     // Path json
     public static final String PATH_JSONS = PATH_RESOURCES + "/jsons";
