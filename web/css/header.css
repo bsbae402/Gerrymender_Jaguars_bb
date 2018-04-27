@@ -152,8 +152,9 @@ header.custom .right {
 }
 header.custom .right .link {
     color:#e6eeff;
-    font-size:22px;
-    font-weight:500;
+    font-size:20px;
+    font-weight:400;
+    padding-left:28px;
 }
 header.custom .right .link:hover {
     color:#bdf;
@@ -162,6 +163,7 @@ header.custom .right .vbar {
     width:2px;
     background:#e6eeff;
     height:25%;
+    margin-left:28px;
 }
 
 

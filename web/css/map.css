@@ -574,14 +574,24 @@
 #credistrict .constraint {
     margin-bottom:9px;
 }
-#credistrict .label {
+#credistrict .constraint .label {
+    position: relative;
+    width:100%;
     display: inline-block;
     font-size:13px;
 }
-#credistrict .label span {
+#credistrict .constraint .label span {
     font-weight: 600;
 }
-#credistrict .slider {
+#credistrict .constraint .label .reset {
+    position: absolute;
+    right:0;
+    top:0;
+    cursor: pointer;
+    color:#666;
+}
+#credistrict .constraint .label .reset:hover { text-decoration: underline; }
+#credistrict .constraint .slider {
     display: block;
     width: 100%;
     margin-top:5px;

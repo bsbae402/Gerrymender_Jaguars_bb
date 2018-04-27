@@ -48,6 +48,10 @@ whenReady(function() {
 	}
 	function toggleTabs() {
 		if (noToggle) return;
+
+		if (openTab == -1 && (!user || !user.loggedin))
+			return alert("Please log in or sign up to redistrict the map");
+
 		noToggle = true;
 		openTab = -openTab;
 		if (openTab == 1) {
@@ -645,8 +649,8 @@ whenReady(function() {
 		}
 	}
 
-	// Redistricting
-	//$("#cview .titletop .link:last-child").click();
+
+	// sliders
 	var sliders = {
 		cw : [0, 1, 0.5],
 		ew : [0, 1, 0.5],
@@ -671,7 +675,14 @@ whenReady(function() {
 				o[3].change(1 - v, false);
 			});
 		});
+		$("#credistrict .constraint .reset").click(function() {
+			var s = $(this).closest(".constraint").find(".slider").attr("slider");
+			var slider = sliders[s][3];
+			slider.change((sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]))
+		});
 	})();
+
+	// Redistricting
 	function closeRedistrict() {
 		if (active.precinctsLayer) {
 			active.precinctsLayer.show();

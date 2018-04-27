@@ -258,6 +258,15 @@ var API_CALLS = [
         response : (r, data) => r,
     },
 
+    // misc
+    {
+        name : "contact",
+        method : "POST",
+        url : "contact",
+        response : (r, data) => r,
+        dummy : () => {return {ok : true};},
+    },
+
 ];
 
 
