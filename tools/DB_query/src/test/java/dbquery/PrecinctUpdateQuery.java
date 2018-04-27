@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import jaguarsdbtools.AppConstants;
 import jaguarsdbtools.JaguarsDBQuery;
+import jaguarsdbtools.map.district.District;
+import jaguarsdbtools.map.district.DistrictManager;
 import jaguarsdbtools.map.precinct.Precinct;
 import jaguarsdbtools.map.precinct.PrecinctManager;
 import jaguarsdbtools.util.CensusCalculator;
@@ -33,38 +35,12 @@ public class PrecinctUpdateQuery {
         }
     }
     @Autowired
+    private DistrictManager dm;
+    @Autowired
     private PrecinctManager pm;
 
     @Test
-    public void AddPrecinctPerimeters() {
-        int censusYear = 2010;
-        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precinct_NH_2010.json";
-        Gson gson = new GsonBuilder().create();
-        try {
-            FileReader fileReader = new FileReader(jsonFilePath);
-            Type typeListGAP = new TypeToken<List<GeoidAreaPerimeter>>(){}.getType();
-            List<GeoidAreaPerimeter> gapList = gson.fromJson(fileReader, typeListGAP);
-
-            for(GeoidAreaPerimeter gap : gapList) {
-                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(gap.geoid);
-                // find only one precinct that is from "censusYear"
-                Precinct censusPrecinct = null;
-                for(Precinct p : precinctsOfSameGeoId) {
-                    if(CensusCalculator.getCensusYear(p.getElectionYear()) == censusYear)
-                        censusPrecinct = p;
-                }
-                // now, update the precinct perimeter
-                censusPrecinct.setPerimeter(gap.perimeter);
-                Precinct result = pm.updatePrecinct(censusPrecinct);
-                System.out.println("pid " + result.getId() + " is updated");
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void fixPrecinctPerimeters() {
+    public void updatePrecinctPerimeters() {
         int censusYear = 2010;
         String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precinct_NH_2010.json";
         Gson gson = new GsonBuilder().create();
@@ -88,6 +64,22 @@ public class PrecinctUpdateQuery {
             }
         } catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    // Assumption: precinct codes are currently VTDST10.
+    // This will change them to districtCode + VTDST10
+    @Test
+    public void addPrecinctCodePrefix() {
+        int stateId = 2; // going to update all the state's precincts codes
+        List<District> districts = dm.getDistricts(stateId);
+        for(District d : districts) {
+            List<Precinct> precincts = pm.getPrecinctsByDistrictId(d.getId());
+            for(Precinct p : precincts) {
+                String newPCode = d.getCode() + p.getCode();
+                p.setCode(newPCode);
+                pm.updatePrecinct(p);
+            }
         }
     }
 }
