@@ -326,6 +326,11 @@ whenReady(function() {
 		loadStatesLoaded();
 	});
 
+	$("#mapbox .resetview").click(() => {
+		if (active.districtsLayer)
+			map.fitBounds(active.districtsLayer);
+	});
+
 	function selectState(state) {
 		showSides();
 

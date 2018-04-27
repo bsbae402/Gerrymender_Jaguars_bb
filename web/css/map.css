@@ -198,7 +198,11 @@
     top:11px;
     right:8px;
 }
-#mapbox.fullstates .switchregion {
+#mapbox .resetview {
+    top:53px;
+    right:8px;
+}
+#mapbox.fullstates .maplbutton {
     display: none;
 }
 #mapbox .selectstatelabel {
@@ -207,10 +211,10 @@
 #mapbox.fullstates .selectstatelabel {
     display: block;
 }
-#mapbox .switchregion:hover {
+#mapbox .maplbutton:hover {
     background:#f4f4f4;
 }
-#mapbox .switchregion:active {
+#mapbox .maplbutton:active {
     background:#f4f4f4;
 }
 #mapbox .selectregion {
