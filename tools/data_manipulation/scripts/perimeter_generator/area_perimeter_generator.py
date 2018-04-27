@@ -4,9 +4,11 @@ from functools import partial
 import pyproj
 import json
 
-fname = "state_tl_2010_NH.json"
+fname = "OH_districts_2011_REVISED.json"
+# fname = "state_tl_2010_NH.json"
 # fname = "district_tl_2010_NH.json"
 # fname = "NH_precincts.json"
+
 gdf = geopandas.read_file(fname)
 print(gdf)
 
@@ -32,5 +34,5 @@ for i in range(0, len(gdf.geometry)):
     geoid_area_perimeter['perimeter'] = projected.length
     jsonObjList.append(geoid_area_perimeter)
 
-with open('area_perimeter_state_NH_2010.json', 'w') as outfile:
+with open('area_perimeter_district_OH_2011.json', 'w') as outfile:
     json.dump(jsonObjList, outfile)
