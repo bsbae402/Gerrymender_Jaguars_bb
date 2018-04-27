@@ -7,6 +7,7 @@ class LeafletMap {
 
 		this.layers = {
 			geojsons : [],
+			changes : [],
 		};
 
 		this.onClick = () => {};
@@ -31,6 +32,14 @@ class LeafletMap {
 		this.hover.$el = $("<div>").addClass("popup hide");
 		this.$map.append(this.hover.$el);
 		this.$map.mousemove((e) => this.hoverMousemove(e));
+
+		this.changeIcon = new L.Icon({
+			iconUrl : "img/marker3.png",
+			iconSize : [16, 50],
+			iconAnchor : [8, 50],
+			popupAnchor:  [0, 0],
+			className : "changemarker",
+		});
 	}
 
 	resize() {
@@ -96,9 +105,10 @@ class LeafletMap {
 			setData : function(data) {
 				map.attachGeoJSONdata(this, data);
 			},
-			applySettings : function(settings) {
+			applySettings : function(settings={}) {
 				map.setGeoJSONsettings(this, settings);
 			},
+			update : function() {this.applySettings()},
 			show : function() {this.applySettings({hidden : false})},
 			hide : function() {this.applySettings({hidden : true})},
 		};
@@ -163,23 +173,32 @@ class LeafletMap {
 			} else {
 				props.active = true;
 				this.lmap.addLayer(layer);
-				layer.setStyle({
-					color : buildColor(COLOR.STANDARD),
-					weight : 2
-				});
-				if (COLOR.FILL === false)
+
+				if (COLOR.FILL == "custom") {
 					layer.setStyle({
-						fillColor : buildColor([0, 0, 0], 0.3),
+						color : buildColor(data.color),
+						fillColor : buildColor(data.color),
+						weight : 1
 					});
-				else if (COLOR.FILL === "political") {
-					var tot = data.votes.DEM + data.votes.REP,
-						rep = data.votes.REP > data.votes.DEM,
-						r = (Math.max(data.votes.REP, data.votes.DEM) / tot - 0.5) * 2;
-					var fill = rep ? [200, 0, 0] : [0, 0, 200];
-					fill = mergeColors([150, 150, 150], fill, r * 0.8 + 0.3);
+				} else {
 					layer.setStyle({
-						fillColor : buildColor(fill, 1),
+						color : buildColor(COLOR.STANDARD),
+						weight : 2
 					});
+					if (COLOR.FILL === false)
+						layer.setStyle({
+							fillColor : buildColor([0, 0, 0], 0.3),
+						});
+					else if (COLOR.FILL === "political") {
+						var tot = data.votes.DEM + data.votes.REP,
+							rep = data.votes.REP > data.votes.DEM,
+							r = (Math.max(data.votes.REP, data.votes.DEM) / tot - 0.5) * 2;
+						var fill = rep ? [200, 0, 0] : [0, 0, 200];
+						fill = mergeColors([150, 150, 150], fill, r * 0.8 + 0.3);
+						layer.setStyle({
+							fillColor : buildColor(fill, 1),
+						});
+					}
 				}
 			}
 		});
@@ -197,7 +216,7 @@ class LeafletMap {
 	        		props.mouseovered = true;
 		        	layer.setStyle({
 		        		opacity : 0.6,
-		        		fillOpacity : 0.2,
+		        		fillOpacity : 0.55,
 		        	})
 		        }
 
@@ -242,6 +261,37 @@ class LeafletMap {
 		}
 	}
 
+	addMarkerChange(layerObject, dataObject) {
+		var mapFunc = (d, props) => d.geo_id == props.GEOID10;
+		if (layerObject.mapToData)
+			mapFunc = layerObject.mapToData;
+		
+		var marker;
+		layerObject.layer.eachLayer((layer) => {
+			if (!mapFunc(dataObject, layer.feature.properties)) return;
+			var center = layer.getBounds().getCenter();
+
+			var lmarker = L.marker(center, {icon : this.changeIcon});
+			marker = {
+				marker : lmarker,
+				show : function() {
+					var $marker = $(this.marker.getElement());
+					$marker.addClass("show");
+				},
+				hide : function() {
+					var $marker = $(this.marker.getElement());
+					$marker.removeClass("show");
+				},
+			};
+			lmarker.addTo(this.lmap);
+		});
+		if (marker) {
+			setTimeout(() => marker.show(), 10);
+			setTimeout(() => marker.hide(), 1010);
+			return marker;
+		}
+	}
+
 	fitBounds2(layer) {
 		var bounds = layer.getBounds();
 		this.lmap.fitBounds(bounds);
@@ -266,10 +316,12 @@ class LeafletMap {
 			var layers = layer.layer;
 			var arrLayers = [];
 			layers.eachLayer((layer) => layer.feature.properties.active ? arrLayers.push(layer) : null);
-			var bounds = (new L.featureGroup(arrLayers)).getBounds();
-			this.lmap.fitBounds(bounds, {
-				paddingTopLeft:L.point(left, top)
-			});
+			if (arrLayers.length) {
+				var bounds = (new L.featureGroup(arrLayers)).getBounds();
+				this.lmap.fitBounds(bounds, {
+					paddingTopLeft:L.point(left, top)
+				});
+			}
 		}
 	}
 
@@ -288,6 +340,11 @@ var COLOR_SCHEME = {
 	REGULARNOPOLITICAL : {
 		STANDARD : [0, 0, 80],
 		DISABLED : [150, 150, 150],
+	},
+	CUSTOM : {
+		STANDARD : [0, 0, 80],
+		DISABLED : [150, 150, 150],
+		FILL : "custom",
 	},
 	BACKGROUND : {
 		STANDARD : [140, 190, 250],
