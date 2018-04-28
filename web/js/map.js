@@ -650,6 +650,16 @@ whenReady(function() {
 	}
 
 
+	// Redistrict tabs
+	$("#credistrict .tabs .tab").click(function() {
+		if ($(this).hasClass("active")) return;
+		$("#credistrict .tabs .tab.active").removeClass("active");
+		$(this).addClass("active");
+		var tab = $(this).attr("tab");
+		$("#credistrict .rcontainers .rcontainer.show").removeClass("show");
+		$("#credistrict .rcontainers .rcontainer."+tab).addClass("show");
+	});
+
 	// sliders
 	var sliders = {
 		cw : [0, 1, 0.5],
@@ -684,6 +694,7 @@ whenReady(function() {
 
 	// Redistricting
 	function closeRedistrict() {
+		active.districtsLayer.show();
 		if (active.precinctsLayer) {
 			active.precinctsLayer.show();
 			map.fitBoundsActive(active.precinctsLayer);
@@ -693,16 +704,40 @@ whenReady(function() {
 		resetAlgorithm();
 	}
 	function openRedistrict() {
+		active.districtsLayer.hide();
+
 		clearAlgorithm();
+		$("#credistrict .colors .color").not(".dummy").remove();
 
 		loadAllPrecincts(() => {
 			function whendone() {
 				if (active.precinctsLayer)
 					active.precinctsLayer.hide();
-				if (active.precinctsLayer2)
+				if (active.precinctsLayer2) {
 					active.precinctsLayer2.show();
+					map.fitBoundsActive(active.precinctsLayer2);
+				}
 
-				map.fitBoundsActive(active.precinctsLayer2);
+				if (!active.districts[0].color) {
+					// no colors yet, generate them
+					var colors = generateColors(active.districts.length);
+					colors.map((c, index) => {
+						active.districts[index].color = c;
+						active.districts[index].color_original = c.map((a) => a);
+					});
+				}
+
+				active.districts.forEach((district) => {
+					var $color = $("#credistrict .colors .color.dummy").clone(true, true).removeClass("dummy");
+					$color.attr("district_id", district.id);
+					$color.find(".name").html(district.name);
+					$color.find(".c").css("background", buildColor(district.color));
+					$("#credistrict .colors").append($color);
+
+					var cp = new CP($color.find(".c")[0]);
+					cp.set("rgb(" + district.color.join(",") + ")");
+					cp.on("change", (color) => changeDColor($color, color));
+				});
 
 				resetAlgorithm();
 			}
@@ -728,6 +763,29 @@ whenReady(function() {
 			} else
 				whendone();
 		});
+	}
+	$("#credistrict .colors .color.dummy .reset").click(function() {
+		var id = parseInt($(this).closest(".color").attr("district_id"));
+		var district = active.districts.find((d) => d.id == id);
+		if (!district) return;
+
+		$(this).closest(".color").find(".c").css("background", buildColor(district.color_original));
+		district.color[0] = district.color_original[0];
+		district.color[1] = district.color_original[1];
+		district.color[2] = district.color_original[2];
+		active.precinctsLayer2.update();
+	});
+	function changeDColor($el, color) {
+		var rgb = CP.HEX2RGB(color);
+		$el.find(".c").css("background", buildColor(rgb));
+		var id = parseInt($el.attr("district_id"));
+		var district = active.districts.find((d) => d.id == id);
+		if (!district) return;
+
+		district.color[0] = rgb[0];
+		district.color[1] = rgb[1];
+		district.color[2] = rgb[2];
+		active.precinctsLayer2.update();
 	}
 
 	var resetAlgorithm, clearAlgorithm;
@@ -761,13 +819,6 @@ whenReady(function() {
 
 		resetAlgorithm = () => {
 			if (!active.districts || !active.districts.length) return;
-			if (!active.districts[0].color) {
-				// no colors yet, generate them
-				var colors = generateColors(active.districts.length);
-				colors.map((c, index) => {
-					active.districts[index].color = c;
-				});
-			}
 
 			if (!active.precincts) return;
 			active.precincts.forEach((p) => {

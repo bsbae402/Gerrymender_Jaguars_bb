@@ -14,6 +14,7 @@
 
 		<!-- All Pages -->
 		<script src="js/vendor/jmin.js"></script>
+		<script src="js/vendor/color-picker.min.js"></script>
 		<script src="js/util.js"></script>
 		<script src="js/script.js"></script>
 		<script src="js/api/api.js"></script>
@@ -218,49 +219,77 @@
 
 				<div class="content">
 
-					<div class="constraint">
-						<div class="label">
-							Compactness Weight: <span></span>
-							<div class="reset">reset</div>
-						</div>
-						<div class="slider cw" slider="cw"></div>
+					<div class="tabs">
+						<div tab="opt" class="tab active">Options</div>
+						<div tab="alg" class="tab">Algorithm</div>
 					</div>
-					<div class="constraint">
-						<div class="label">
-							Efficiency Weight: <span></span>
-							<div class="reset">reset</div>
-						</div>
-						<div class="slider ew" slider="ew"></div>
-					</div>
-					<div class="constraint">
-						<div class="label">
-							Population Threshold: <span></span>
-							<div class="reset">reset</div>
-						</div>
-						<div class="slider pt" slider="pt"></div>
-					</div>
-					<div class="algorithm">
-						<div class="button run">Run algorithm</div>
-						<div class="button pause disabled">Pause algorithm</div>
-						<div class="button stop disabled">Stop algorithm</div>
-						<div class="button reset disabled">Reset</div>
-					</div>
-					<div class="algresults">
-						<div class="progressbar">
-							<div class="scrolling"></div>
-							<div class="progress t2"></div>
-						</div>
-						<div class="changes">
-							<div class="change dummy">
-								<div class="mainline">
-									<div class="precinct">Precinct</div>
-									moved to
-									<div class="district district2">District</div>
-									from
-									<div class="district district1">District</div>
+
+					<div class="rcontainers">
+
+						<div class="opt rcontainer show">
+
+							<div class="constraints">
+								<div class="constraint">
+									<div class="label">
+										Compactness Weight: <span></span>
+										<div class="reset">reset</div>
+									</div>
+									<div class="slider cw" slider="cw"></div>
+								</div>
+								<div class="constraint">
+									<div class="label">
+										Efficiency Weight: <span></span>
+										<div class="reset">reset</div>
+									</div>
+									<div class="slider ew" slider="ew"></div>
+								</div>
+								<div class="constraint">
+									<div class="label">
+										Population Threshold: <span></span>
+										<div class="reset">reset</div>
+									</div>
+									<div class="slider pt" slider="pt"></div>
 								</div>
 							</div>
+
+							<div class="colors">
+								<div class="color dummy">
+									<div class="c"></div>
+									<div class="reset">reset</div>
+									<div class="name">Dummy</div>
+								</div>
+							</div>
+
 						</div>
+
+						<div class="alg rcontainer">
+
+							<div class="algorithm">
+								<div class="button run">Run algorithm</div>
+								<div class="button pause disabled">Pause algorithm</div>
+								<div class="button stop disabled">Stop algorithm</div>
+								<div class="button reset disabled">Reset</div>
+							</div>
+							<div class="algresults">
+								<div class="progressbar">
+									<div class="scrolling"></div>
+									<div class="progress t2"></div>
+								</div>
+								<div class="changes">
+									<div class="change dummy">
+										<div class="mainline">
+											<div class="precinct">Precinct</div>
+											moved to
+											<div class="district district2">District</div>
+											from
+											<div class="district district1">District</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
 					</div>
 
 				</div>

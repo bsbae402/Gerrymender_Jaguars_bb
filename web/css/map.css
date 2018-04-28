@@ -316,7 +316,7 @@
 }
 .sidebox .content {
     height:calc(100% - 56px);
-    padding:12px 22px 25px;
+    padding:12px 22px 15px;
     overflow-y:auto;
     overflow-x:hidden;
 }
@@ -570,6 +570,55 @@
 #cview .info .votes .bar [OTHER] .hover div { background:#777; }
 
 
+#credistrict .tabs {
+    width: calc(100% - 60px);
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.14);
+    height:28px;
+}
+#credistrict .rcontainers {
+    width:100%;
+    height:calc(100% - 28px);
+}
+#credistrict .rcontainer {
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    display: none;
+    padding:15px 0;
+}
+#credistrict .rcontainer.show {
+    display:block;
+}
+#credistrict .tabs .tab {
+    display: inline-block;
+    margin-left:3px;
+    margin-right:20px;
+    color:#000;
+    cursor:pointer;
+    position: relative;
+    font-weight: 300;
+    font-family: Raleway;
+}
+#credistrict .tabs .tab.active {
+    color:#007;
+}
+#credistrict .tabs .tab::after {
+    content:" ";
+    font-size: 0;
+    position: absolute;
+    left:0;
+    width:100%;
+    height:1px;
+    background:rgba(0, 0, 100, 0.5);
+    transition: all 0.2s ease-out;
+    opacity:0;
+    bottom:-4px;
+}
+#credistrict .tabs .tab.active::after {
+    opacity:1;
+    bottom:0px;
+}
 
 #credistrict .constraint {
     margin-bottom:9px;
@@ -594,10 +643,52 @@
 #credistrict .constraint .slider {
     display: block;
     width: 100%;
-    margin-top:5px;
+    margin-top:1px;
 }
+#credistrict .colors {
+    height:200px;
+    overflow-y:auto;
+}
+#credistrict .colors .color.dummy {
+    display: none;
+}
+#credistrict .colors .color {
+    width:100%;
+    font-size:0;
+    padding:3px 0;
+}
+#credistrict .colors .reset {
+    display: inline-block;
+    vertical-align: middle;
+    font-size:11px;
+    margin-right:10px;
+    cursor:pointer;
+    color:#666;
+}
+#credistrict .colors .reset:hover {
+    text-decoration: underline;
+}
+#credistrict .colors .c {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left:2px;
+    margin-right:12px;
+    width:20px;
+    height:20px;
+    cursor:pointer;
+}
+#credistrict .colors .c:hover {
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.16);
+}
+#credistrict .colors .name {
+    display: inline-block;
+    vertical-align: middle;
+    font-size:14px;
+    font-weight:400;
+}
+
 #credistrict .algorithm {
-    padding-top: 8px;
+    padding-top: 1px;
 }
 #credistrict .button {
     font-size:13px;
