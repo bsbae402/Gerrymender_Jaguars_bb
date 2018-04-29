@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Service
 public class CalculationManager {
 
-    private double getCompactnessMeasure(District district){
+    public double getCompactnessMeasure(District district){
         double area = district.getArea();
         double perimeter = district.getPerimeter();
         double[] measures = {MeasureCalculator.calculateCompactnessPP(area, perimeter),
@@ -19,7 +19,7 @@ public class CalculationManager {
         return (measures[0] + measures[1]) / 2;
     }
 
-    private double getEfficiencyGap(State state) {
+    public double getEfficiencyGap(State state) {
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
         int demWasted = 0;
         int repWasted = 0;
