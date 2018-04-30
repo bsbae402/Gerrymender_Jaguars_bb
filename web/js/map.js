@@ -1041,7 +1041,7 @@ whenReady(function() {
 					if (isQuerying) {
 						
 					} else {
-						APICall("getalgorithmupdate", { algorithm_id : aid })
+						APICall("getalgorithmupdate", { loop_count : 100, })
 							.then(function(r) {
 								updates.push(r);
 								lastUpdate = new Date().getTime() + UPDATE_TIME * 0.8;

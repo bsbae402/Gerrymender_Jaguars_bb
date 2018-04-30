@@ -154,7 +154,7 @@ var API_CALLS = [
     {
         name : "analytics",
         method : "GET",
-        url : "/analytics/{type}",
+        url : "analytics/{type}",
         response : (r, data) => r,
         dummy : (data) => {
             var m = [];
@@ -193,9 +193,9 @@ var API_CALLS = [
     {
         name : "startalgorithm",
         method : "POST",
-        url : "/algorithm/start",
+        url : "algorithm/start",
         response : (r, data) => r,
-        dummy : () => {
+        adummy : () => {
             window.algloop = 0;
             window.alglooptotal = 100;
             return {
@@ -212,9 +212,9 @@ var API_CALLS = [
     {
         name : "getalgorithmupdate",
         method : "POST",
-        url : "/algorithm/update",
+        url : "algorithm/update",
         response : (r, data) => r,
-        dummy : (data={}) => {
+        adummy : (data={}) => {
             var extra = 2 + Math.floor(Math.random() * 5);
             window.algloop += extra;
 
@@ -244,7 +244,7 @@ var API_CALLS = [
     {
         name : "stopalgorithm",
         method : "POST",
-        url : "/algorithm/stop",
+        url : "algorithm/stop",
         response : (r, data) => r,
         dummy : () => {
             is_running : false
