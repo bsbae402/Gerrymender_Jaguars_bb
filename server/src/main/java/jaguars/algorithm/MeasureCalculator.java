@@ -2,9 +2,14 @@ package jaguars.algorithm;
 
 import jaguars.AppConstants;
 import jaguars.data.NeighborData;
+import jaguars.data.PrecinctNeighborRelation;
 import jaguars.map.district.District;
+import jaguars.map.precinct.Precinct;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class MeasureCalculator {
 
@@ -35,8 +40,13 @@ public final class MeasureCalculator {
     }
 
     // neighborDataList is state-level precinct neighbor relation data holder
-    public static int getNumberOfConnectedComponentsInDistrict(District district,
-                                                               ArrayList<NeighborData> neighborDataList) {
-        return 1;
+    public static ArrayList<Set<Precinct>> getConnectedComponentsInDistrict(
+            District district,
+            HashMap<String, PrecinctNeighborRelation> precinctNeighborRelationMap) {
+        // stubbed
+        Set<Precinct> oneset = new HashSet<>();
+        ArrayList<Set<Precinct>> listSizeOne = new ArrayList<>();
+        listSizeOne.add(oneset);
+        return listSizeOne;
     }
 }
