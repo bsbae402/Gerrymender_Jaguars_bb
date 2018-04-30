@@ -392,15 +392,23 @@ whenReady(function() {
 			}
 		}
 	});
-	function activateTabAndSelect(limit="") {
+	function activateTabAndSelect(limit="", disableafters=false) {
 		var last = $("#cview .infoselect.ok").last();
-		if (last.attr("info") == "pinfo") return;
+		if (last.attr("info") != "pinfo") {
+			last = last.next();
+			if (limit && limit != last.attr("info")) return;
 
-		last = last.next();
-		if (limit && limit != last.attr("info")) return;
-
-		last.addClass("ok");
-		last.click();
+			last.addClass("ok");
+			last.click();
+		}
+		$("#cview .infoselect[info='" + limit + "']").click();
+		if (disableafters) {
+			var stuff = $("#cview .infoselect[info='" + limit + "']").next();
+			while (stuff.length && stuff.hasClass("infoselect")) {
+				stuff.removeClass("ok active");
+				stuff = stuff.next();
+			}
+		}
 	}
 	function unactivateTabs() {
 		$("#cview .infos .info").removeClass("ok active");
@@ -523,14 +531,21 @@ whenReady(function() {
 		}
 		loadNextDistrict();
 	}
-	function selectDistrict(id, districtLayer) {
+	function selectDistrict(id) {
 		var district = active.districts.find((d) => d.id == id),
 			sy = active.sy;
 		if (!district) return;
 		active.district = district;
+
+		var districtLayer = null;
+		active.districtsLayer.layer.eachLayer((layer) => {
+			if (layer.feature.properties.GEOID10 == district.geo_id)
+				districtLayer = layer;
+		});
+		if (!districtLayer) return;
 		active.districtLayer = districtLayer;
 
-		activateTabAndSelect("dinfo");
+		activateTabAndSelect("dinfo", true);
 		
 		$("#cview .dinfo .statename .right").html(sy.name);
 		$("#cview .dinfo .year .right").html(sy.election_year);
@@ -608,11 +623,18 @@ whenReady(function() {
 			active.precinctsLayer2 = null;
 		}
 	}
-	function selectPrecinct(id, precinctLayer) {
+	function selectPrecinct(id) {
 		var precinct = active.precincts.find((d) => d.id == id),
 			sy = active.sy;
 		if (!precinct) return;
 		active.precinct = precinct;
+
+		var precinctLayer = null;
+		active.precinctsLayer.layer.eachLayer((layer) => {
+			if (layer.feature.properties.GEOID10 == precinct.geo_id)
+				precinctLayer = layer;
+		});
+		if (!precinctLayer) return;
 		active.precinctLayer = precinctLayer;
 
 		activateTabAndSelect("pinfo");
@@ -629,6 +651,8 @@ whenReady(function() {
 		map.fitBounds2(precinctLayer);
 	}
 
+
+	// initiate leaflet map
 	map = new LeafletMap();
 	window.map = map;
 
@@ -636,10 +660,10 @@ whenReady(function() {
 
 	map.onClick = function(layerObject, data, props, layer) {
 		if (layerObject.name == "districts") {
-			selectDistrict(data.id, layer);
+			selectDistrict(data.id);
 		}
 		if (layerObject.name == "precincts") {
-			selectPrecinct(data.id, layer);
+			selectPrecinct(data.id);
 		}
 		if (layerObject.name == "states") {
 			states.forEach((state) => {
@@ -647,7 +671,118 @@ whenReady(function() {
 					selectState(state);
 			})
 		}
-	}
+	};
+
+
+
+	// Search bar
+	(function() {
+		var blurTimeout = null,
+			possibles = [];
+
+		function clickState(obj) {
+			var state = states.find((state) => state.name == obj.name_);
+			if (!state) return;
+			selectState(state);
+		}
+
+		function getPossibles() {
+			var arr = [];
+			if (states) {
+				states.forEach((state) => {
+					arr.push({
+						obj : {
+							name : state.name,
+							type : "State",
+						},
+						click : clickState,
+					})
+				});
+			}
+			if (active.districts) {
+				active.districts.forEach((district) => {
+					arr.push({
+						obj : {
+							name : district.name,
+							type : "District",
+						},
+						click : () => selectDistrict(district.id),
+					})
+				});
+			}
+			if (active.precincts) {
+				active.precincts.forEach((precinct) => {
+					if (precinct.district_id != active.district.id) return;
+					arr.push({
+						obj : {
+							name : precinct.name,
+							type : "Precinct",
+						},
+						click : () => selectPrecinct(precinct.id),
+					})
+				});
+			}
+			return arr;
+		}
+
+		$("#mapbox .search input").on("focus", function() {
+			$("#mapbox .search").addClass("focused");
+			possibles = getPossibles();
+			getResults();
+		}).on("blur", function() {
+			if (blurTimeout)
+				blurTimeout = clearTimeout(blurTimeout);
+			blurTimeout = setTimeout(function() {
+				$("#mapbox .search").removeClass("focused");
+			}, 100);
+		}).on("change keyup", function(e) {
+			getResults();
+		});
+
+		var SEARCHES = ["name"];
+		function getResults() {
+			$("#mapbox .search .results").empty().removeClass("empty blank");
+			var s = $("#mapbox .search input").val().trim(),
+				re = new RegExp(s, 'ig');
+			if (s == "") {
+				$("#mapbox .search .results").addClass("blank");
+				return;
+			}
+
+			var results = possibles.map((p) => {
+				var found = false, p2 = $.extend(true, {}, p);
+
+				SEARCHES.forEach((SEARCH) => {
+					if (!p2.obj.hasOwnProperty(SEARCH)) return;
+					p2.obj[SEARCH + "_"] = p2.obj[SEARCH];
+					if (p2.obj[SEARCH].match(re)) {
+						found = true;
+						p2.obj[SEARCH] = p2.obj[SEARCH].replace(re, (match) => "<match>" + match + "</match>");
+					}
+				});
+
+				if (!found)
+					return false;
+				return p2;
+			});
+			results = results.filter((r) => r !== false);
+
+			if (results.length == 0) {
+				$("#mapbox .search .results").addClass("empty");
+				return;
+			}
+			results.forEach((result) => {
+				var $result = $("<div>").addClass("result");
+				$result.append(
+					$("<div>").addClass("name").html(result.obj.name),
+					$("<div>").addClass("type").html(result.obj.type),
+					);
+				$result.on("mousedown", (e) => result.click(result.obj));
+				$("#mapbox .search .results").append($result);
+			});
+		}
+	})();
+
 
 
 	// Redistrict tabs
@@ -718,27 +853,28 @@ whenReady(function() {
 					map.fitBoundsActive(active.precinctsLayer2);
 				}
 
-				if (!active.districts[0].color) {
-					// no colors yet, generate them
-					var colors = generateColors(active.districts.length);
-					colors.map((c, index) => {
-						active.districts[index].color = c;
-						active.districts[index].color_original = c.map((a) => a);
+				if (active.districts && active.districts.length) {
+					if (!active.districts[0].color) {
+						// no colors yet, generate them
+						var colors = generateColors(active.districts.length);
+						colors.map((c, index) => {
+							active.districts[index].color = c;
+							active.districts[index].color_original = c.map((a) => a);
+						});
+					}
+
+					active.districts.forEach((district) => {
+						var $color = $("#credistrict .colors .color.dummy").clone(true, true).removeClass("dummy");
+						$color.attr("district_id", district.id);
+						$color.find(".name").html(district.name);
+						$color.find(".c").css("background", buildColor(district.color));
+						$("#credistrict .colors").append($color);
+
+						var cp = new CP($color.find(".c")[0]);
+						cp.set("rgb(" + district.color.join(",") + ")");
+						cp.on("change", (color) => changeDColor($color, color));
 					});
 				}
-
-				active.districts.forEach((district) => {
-					var $color = $("#credistrict .colors .color.dummy").clone(true, true).removeClass("dummy");
-					$color.attr("district_id", district.id);
-					$color.find(".name").html(district.name);
-					$color.find(".c").css("background", buildColor(district.color));
-					$("#credistrict .colors").append($color);
-
-					var cp = new CP($color.find(".c")[0]);
-					cp.set("rgb(" + district.color.join(",") + ")");
-					cp.on("change", (color) => changeDColor($color, color));
-				});
-
 				resetAlgorithm();
 			}
 
@@ -830,10 +966,11 @@ whenReady(function() {
 
 			map.removeMarkerChange();
 			markers = [];
-			active.precinctsLayer2.applySettings({
-				color : COLOR_SCHEME.CUSTOM,
-				hover : hoverRedistrictedPrecinct,
-			});
+			if (active.precinctsLayer2)
+				active.precinctsLayer2.applySettings({
+					color : COLOR_SCHEME.CUSTOM,
+					hover : hoverRedistrictedPrecinct,
+				});
 
 			isQuerying = false;
 			running = false;
@@ -892,6 +1029,8 @@ whenReady(function() {
 				$change.find(".precinct").html(p.name);
 				$change.find(".district1").html(doriginal.name);
 				$change.find(".district2").html(d.name);
+				$change.find(".compactness1").html(change.old_district_compactness.toFixed(4));
+				$change.find(".compactness2").html(change.new_district_compactness.toFixed(4));
 				$("#credistrict .changes").append($change);
 			}
 		}

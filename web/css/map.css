@@ -217,51 +217,118 @@
 #mapbox .maplbutton:active {
     background:#f4f4f4;
 }
-#mapbox .selectregion {
+#mapbox .search {
     position: absolute;
     z-index:11;
-    left:0;
-    top:100%;
-    width:100%;
-    height: 100%;
-    background:rgba(255,255,255,0.75);
+    bottom:11px;
+    right:11px;
+    width:250px;
+    text-align: right;
+}
+#mapbox .search input {
+    width:50%;
+    font-family: "Open Sans";
+    font-weight:400;
+    padding:5px 30px 6px 7px;
+    font-size:13px;
     color:#000;
-    font-family:"Open Sans";
-    padding:20px 25px;
-    user-select: none;
+    background:#fff;
+    border:2px solid rgba(0,0,0,0.2);
 }
-#mapbox .selectregion.show {
-    top:0%;
+#mapbox .search.focused input {
+    width:100%
 }
-#mapbox .selectregion h1 {
-    font-size:30px;
-    display: block;
-    text-align: left;
-    margin-right:90px;
-    padding-bottom:7px;
-    border-bottom:1px solid #000;
+#mapbox .search input:focus {
+    outline:none;
+    border-color:rgba(30, 70, 150, 0.6);
 }
-#mapbox .selectregion .regions {
-    padding-top:10px;
+#mapbox.fullstates .search {
+    display: none;
 }
-#mapbox .selectregion .region {
-    font-size:20px;
-    cursor:pointer;
-    margin:10px;
-    user-select: none;
-}
-#mapbox .selectregion .region:hover { color:#ccc; }
-#mapbox .selectregion .region:active { color:#999; }
-#mapbox .selectregion .x {
+#mapbox .search .icon {
     position: absolute;
-    top:15px;
-    right:25px;
-    font-size:30px;
-    cursor: pointer;
-    user-select: none;
+    right:8px;
+    bottom:9px;
+    width:15px;
+    height:15px;
+    background-image: url("/img/search.png");
+    background-size: cover;
 }
-#mapbox .selectregion .x:hover { color:#ccc; }
-#mapbox .selectregion .x:active { color:#999; }
+#mapbox .search .results2 {
+    position: absolute;
+    bottom:100%;
+    right:0;
+    width:50%;
+    height:0px;
+    overflow: hidden;
+    border:2px solid rgba(30, 70, 150, 0.0);
+    border-bottom: none;
+}
+#mapbox .search.focused .results2 {
+    width:100%;
+    height:calc(24px * 8 + 2px);
+    border-color:rgba(30, 70, 150, 0.5);
+}
+#mapbox .search .results {
+    width:calc(250px - 2px * 2);
+    min-height:100%;
+    background:#fff;
+    text-align: center;
+}
+#mapbox .search .results .result {
+    position: relative;
+    width:100%;
+    height:24px;
+    font-size:0;
+    text-align: left;
+    padding:5px 5px 0 6px;
+    border-bottom:1px solid rgba(0,0,0,0.2);
+    cursor:pointer;
+}
+#mapbox .search .results .result .name {
+    display: inline-block;
+    font-size:12.5px;
+    font-weight:300;
+    width:calc(100% - 50px);
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+}
+#mapbox .search .results .result .type {
+    position: absolute;
+    right:5px;
+    bottom:4px;
+    font-size:11px;
+    font-weight:300;
+    color:#666;
+}
+#mapbox .search .results .result match {
+    font-weight:600;
+}
+#mapbox .search .results .result:hover {
+    background:#eee;
+}
+#mapbox .search .results .result:nth-child(8) {
+    border-bottom:none;
+}
+#mapbox .search .results::after {
+    display: none;
+    text-align: center;
+    padding-top:25px;
+    color:#888;
+    font-size:11px;
+    font-weight:300;
+    border-bottom:1px solid rgba(150, 150, 150, 0.6);
+}
+#mapbox .search .results.blank::after {
+    display: inline-block;
+    content:"Enter something in the search box";
+}
+#mapbox .search .results.empty::after {
+    display: inline-block;
+    content:"No results found";
+}
+
 
 
 #map .leaflet-control-attribution {
@@ -585,7 +652,7 @@
     overflow-x:hidden;
     overflow-y:auto;
     display: none;
-    padding:15px 0;
+    padding:15px 0 0;
 }
 #credistrict .rcontainer.show {
     display:block;
@@ -697,6 +764,8 @@
 #credistrict .algresults {
     display: none;
     margin-top:15px;
+    height:calc(100% - 50px);
+    overflow-y:auto;
 }
 #credistrict .algresults.show {
     display: block;
@@ -753,7 +822,7 @@
 }
 #credistrict .changes {
     margin-top:15px;
-    height:calc(100% - 270px);
+    height:calc(100% - 45px - 15px - 220px);
     min-height:140px;
     overflow-y:scroll;
 }
@@ -785,6 +854,22 @@
 }
 #credistrict .changes .change .mainline .district2 {
     font-weight:600;
+}
+#credistrict .changes .change .subline {
+    margin: 2px 0 0 10px;
+    font-size:10px;
+    font-weight:300;
+    color:#666;
+}
+#credistrict .changes .change .subline > div {
+    display: inline-block;
+}
+#credistrict .changes .change .subline .compactness2 {
+    color:#111;
+}
+#credistrict .updates {
+    margin-top:15px;
+    height:220px;
 }
 
 

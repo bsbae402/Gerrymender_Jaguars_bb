@@ -201,6 +201,11 @@ var API_CALLS = [
             return {
                 algorithm_id : 0,
                 loops : window.alglooptotal,
+                init_state_efficiency_gap : 0.5,
+                init_district_compactness_list : [
+                    {district_id : 1, compactness : 0,},
+                    {district_id : 2, compactness : 0,},
+                ],
             }
         },
     },
@@ -225,6 +230,8 @@ var API_CALLS = [
                         precinct_id : 119 + Math.ceil(Math.random() * 150),
                         new_district_id : 1,
                     });
+                changes[changes.length - 1].old_district_compactness = Math.random();
+                changes[changes.length - 1].new_district_compactness = Math.random();
             }
 
             return {
