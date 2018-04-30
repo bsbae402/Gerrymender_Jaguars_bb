@@ -1,7 +1,10 @@
 package jaguars.algorithm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AlgorithmAction {
     private int precinctId;
     @JsonIgnore
