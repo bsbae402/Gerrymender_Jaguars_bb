@@ -1,12 +1,17 @@
 package jaguars.algorithm;
 
 import jaguars.AppConstants;
+import jaguars.data.NeighborData;
+import jaguars.data.PrecinctNeighborRelation;
 import jaguars.data.vd_district.VotingDataDistrict;
 import jaguars.map.district.District;
+import jaguars.map.precinct.Precinct;
 import jaguars.map.state.State;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 @Service
 public class CalculationManager {
@@ -71,5 +76,15 @@ public class CalculationManager {
             i++;
         }
         return MeasureCalculator.calculatePopThreshold(state.getPopulation(), districtPops);
+    }
+
+    public boolean isAllPrecinctsConnected(District district,
+                                           HashMap<String, PrecinctNeighborRelation> precinctNeighborRelationMap) {
+        ArrayList<Set<Precinct>> connectedComponentList
+                = MeasureCalculator.getConnectedComponentsInDistrict(district, precinctNeighborRelationMap);
+        if(connectedComponentList.size() > 1)
+            return false;
+        else
+            return true;
     }
 }

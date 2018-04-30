@@ -10,10 +10,13 @@ import jaguars.map.district.District;
 import jaguars.map.precinct.Precinct;
 import jaguars.map.state.State;
 import jaguars.map.state.StateManager;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 @Service
@@ -24,6 +27,8 @@ public class Algorithm {
     private CalculationManager cm;
     @Autowired
     private PrecinctNeighborManager pnm;
+    @Autowired
+    private HttpSession session;
 
     private Precinct getRandomPrecinct(ArrayList<Precinct> borderPrecincts) {
         Random rand = new Random();
@@ -39,11 +44,11 @@ public class Algorithm {
     }
 
     private boolean renewPrecinctCode(Precinct targetPrecinct) {
-//        String later6 = targetPrecinct.getCode().substring(4);
-//        if(later6.length() != 6)
-//            return false;
-//        String districtCode = targetPrecinct.getDistrict().getCode();
-//        targetPrecinct.setCode(districtCode + later6);
+        String later6 = targetPrecinct.getCode().substring(4);
+        if(later6.length() != 6)
+            return false;
+        String districtCode = targetPrecinct.getDistrict().getCode();
+        targetPrecinct.setCode(districtCode + later6);
         return true;
     }
 
@@ -196,28 +201,80 @@ public class Algorithm {
         return newDistrictState;
     }
 
-    public ArrayList<Precinct> mainLogic(int iterations) {
-        ArrayList<Precinct> changedPrecincts = new ArrayList<>();
-        int sessionStateId = sm.getSessionsStateId();
-        State oldState = sm.cloneState(sm.getState(sessionStateId));
+    public ArrayList<AlgorithmAction> mainLogic(int iterations) {
+        State algoState = (State)session.getAttribute("algo_state");
+        //Hibernate.initialize(algoState.getVotingDataStates());
+        if(algoState == null)
+            return null;
+
+        ArrayList<AlgorithmAction> algoActionList = new ArrayList<>();
+        State oldState = sm.cloneState(algoState);
         int loopSteps = 0;
         while(loopSteps < iterations) {
-            Precinct targetPrecinctOld = getRandomPrecinct(oldState.getBorderPrecincts());
-            State newState = generateNewDistrictBoundaries(targetPrecinctOld, oldState);
+            Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+            State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState);
             if(cm.getPopulationThres(newState)) {
                 loopSteps++;
                 continue;
             }
-            double oldScore = cm.objectiveFunction(oldState);
-            double newScore = cm.objectiveFunction(newState);
-            if (newScore < oldScore){
+            District oldAffDistrictOfNew = newState.getDistrictByDistrictCode(targetPrecinctOfOld.getDistrict().getCode());
+            HashMap<String,  PrecinctNeighborRelation> precinctNeighborRelationMap
+                    = pnm.getPrecinctNeighborRelationMap(newState.getCode(), newState.getElectionYear());
+            if(!cm.isAllPrecinctsConnected(oldAffDistrictOfNew, precinctNeighborRelationMap)) {
                 loopSteps++;
                 continue;
             }
-            changedPrecincts.add(newState.getPrecinctByPrecinctCode(targetPrecinctOld.getCode()));
+
+            double oldScore = cm.objectiveFunction(oldState);
+            double newScore = cm.objectiveFunction(newState);
+            if(newScore < oldScore){
+                loopSteps++;
+                continue;
+            }
+            // here, new state is qualified to be a move action
+
+            Precinct targetPrecinctOfNew = newState.getPrecinctByPgeoid(targetPrecinctOfOld.getGeoId());
+            // new affiliation of targetPrecinctOfNew has 0 as district_id
+            District newAffDistrictOfNew = targetPrecinctOfNew.getDistrict();
+            State originState = (State)session.getAttribute("algo_state_origin");
+            Precinct originTargetPrecinct = originState.getPrecinctByPgeoid(targetPrecinctOfOld.getGeoId());
+            District originOldAff = originState.getDistrictByDistrictCode(oldAffDistrictOfNew.getCode());
+            District originNewAff = originState.getDistrictByDistrictCode(newAffDistrictOfNew.getCode());
+            AlgorithmAction algoAct = new AlgorithmAction(originTargetPrecinct.getId(),
+                    originOldAff.getId(),
+                    originNewAff.getId(),
+                    cm.getCompactnessMeasure(newAffDistrictOfNew),
+                    cm.getCompactnessMeasure(oldAffDistrictOfNew),
+                    cm.getEfficiencyGap(newState));
+            // AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId, double newDistrictCompactness, double oldDistrictCompactness, double stateWideEfficiencyGap)
+            algoActionList.add(algoAct);
             oldState = newState;
-            loopSteps = 0;
+            loopSteps++;
         }
-        return changedPrecincts;
+        // the procedure has been through the designated steps.
+        session.setAttribute("algo_state", oldState);
+
+        return algoActionList;
+//        int sessionStateId = sm.getSessionsStateId();
+//        State oldState = sm.cloneState(sm.getState(sessionStateId));
+//        int loopSteps = 0;
+//        while(loopSteps < iterations) {
+//            Precinct targetPrecinctOld = getRandomPrecinct(oldState.getBorderPrecincts());
+//            State newState = generateNewDistrictBoundaries(targetPrecinctOld, oldState);
+//            if(cm.getPopulationThres(newState)) {
+//                loopSteps++;
+//                continue;
+//            }
+//            double oldScore = cm.objectiveFunction(oldState);
+//            double newScore = cm.objectiveFunction(newState);
+//            if (newScore < oldScore){
+//                loopSteps++;
+//                continue;
+//            }
+//            changedPrecincts.add(newState.getPrecinctByPrecinctCode(targetPrecinctOld.getCode()));
+//            oldState = newState;
+//            loopSteps = 0;
+//        }
+//        return changedPrecincts;
     }
 }

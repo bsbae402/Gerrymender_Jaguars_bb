@@ -72,6 +72,12 @@ public class PrecinctNeighborManager {
         PrecinctNeighborRelation pnr = precinctNeighborTable.get(precinctGeoId);
         return pnr.getNeighborDataList();
     }
+
+    public HashMap<String, PrecinctNeighborRelation> getPrecinctNeighborRelationMap(String stateCode, int electionYear) {
+        int censusYear = CensusCalculator.getCensusYear(electionYear);
+        String stateCensus = stateCode + censusYear;
+        return stateCensusToNeighborTable.get(stateCensus);
+    }
 }
 
 //[

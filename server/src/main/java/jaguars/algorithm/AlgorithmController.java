@@ -34,7 +34,8 @@ public class AlgorithmController {
                                            @RequestParam("efficiency_weight") double efficiencyWeight,
                                            @RequestParam("population_threshold") double populationThreshold) {
         State algoState = sm.getState(stateId);
-        session.setAttribute("algo_state", algoState);
+        session.setAttribute("algo_state_origin", algoState); // will be same throughout the algorithm
+        session.setAttribute("algo_state", algoState); // will continuously change for each update
         session.setAttribute("compactness_weight", compactnessWeight);
         session.setAttribute("efficiency_weight", efficiencyWeight);
         session.setAttribute("population_threshold", populationThreshold);
@@ -64,18 +65,13 @@ public class AlgorithmController {
     }
 
     @RequestMapping(value = "/algorithm/update", method = RequestMethod.POST)
-    public State stopRedistrictAlgorithm(@RequestParam("loop_count") int loopCount) {
-
-        return null;
+    public ArrayList<AlgorithmAction> updateRedistrictAlgorithm(@RequestParam("loop_count") int loopCount) {
+        return algorithm.mainLogic(loopCount);
     }
 
-    class AlgoStateChange {
-
-    }
     @RequestMapping(value = "sample/algorithm/update", method = RequestMethod.POST)
-    public ArrayList<AlgoStateChange> updateSample(@RequestParam("loop_count") int loopCount) {
-
-        return null;
+    public ArrayList<AlgorithmAction> updateSample(@RequestParam("loop_count") int loopCount) {
+        return algorithm.mainLogic(loopCount);
     }
 
     @RequestMapping(value = "/algorithm/test", method = RequestMethod.POST)

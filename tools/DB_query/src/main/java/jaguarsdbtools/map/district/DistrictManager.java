@@ -37,4 +37,8 @@ public class DistrictManager {
     public List<District> getAdjacentDistrictsOfPrecinct(Precinct target) {
         return null;
     }
+
+    public District updateDistrict(District district) {
+        return districtRepository.save(district);
+    }
 }
