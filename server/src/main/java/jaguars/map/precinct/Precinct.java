@@ -39,12 +39,12 @@ public class Precinct {
 
     @JsonIgnore
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "district_id")
     private District district;
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "precinct", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "precinct", fetch = FetchType.LAZY)
     private Set<VotingDataPrecinct> votingDataPrecincts = new HashSet<>();
 
     public Precinct() {}

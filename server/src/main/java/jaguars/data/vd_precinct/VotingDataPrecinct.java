@@ -23,7 +23,7 @@ public class VotingDataPrecinct {
 
     @JsonIgnore
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "precinct_id")
     private Precinct precinct;
 
