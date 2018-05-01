@@ -31,4 +31,7 @@ public class VotingDataDistrictManager {
         return vddr.findByDistrict(district);
     }
 
+    public VotingDataDistrict saveVotingDataDistrict(VotingDataDistrict vdd) {
+        return vddr.save(vdd);
+    }
 }

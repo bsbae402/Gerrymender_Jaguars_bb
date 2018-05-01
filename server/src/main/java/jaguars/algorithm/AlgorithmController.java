@@ -2,6 +2,8 @@ package jaguars.algorithm;
 
 import com.google.gson.*;
 import jaguars.AppConstants;
+import jaguars.data.global_storage.AlgorithmGlobalStorage;
+import jaguars.data.global_storage.AlgorithmInstance;
 import jaguars.map.district.District;
 import jaguars.map.state.State;
 import jaguars.map.state.StateManager;
@@ -13,12 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @RestController
 public class AlgorithmController {
 
+    @Autowired
+    private AlgorithmGlobalStorage ags;
     @Autowired
     private StateManager sm;
     @Autowired
@@ -33,12 +36,11 @@ public class AlgorithmController {
                                            @RequestParam("compactness_weight") double compactnessWeight,
                                            @RequestParam("efficiency_weight") double efficiencyWeight,
                                            @RequestParam("population_threshold") double populationThreshold) {
-        State algoState = sm.getState(stateId);
-        session.setAttribute("algo_state_origin", algoState); // will be same throughout the algorithm
-        session.setAttribute("algo_state", algoState); // will continuously change for each update
-        session.setAttribute("compactness_weight", compactnessWeight);
-        session.setAttribute("efficiency_weight", efficiencyWeight);
-        session.setAttribute("population_threshold", populationThreshold);
+        State stateOrigin = sm.getState(stateId);
+        State algoState = sm.cloneState(stateOrigin);
+        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
+                efficiencyWeight, populationThreshold);
+        Integer hashint = ags.registerAlgorithmInstance(ai);
 
         Set<District> districts = algoState.getDistricts();
         JsonArray initDistCompactList = new JsonArray();
@@ -60,36 +62,39 @@ public class AlgorithmController {
         retObj.addProperty("loops", AppConstants.MAX_LOOP_STEPS);
         retObj.add("init_district_compactness_list", initDistCompactList);
         retObj.addProperty("init_state_efficiency_gap", initStateEffGap);
+        retObj.addProperty("algorithm_id", hashint);
 
         return retObj.toString();
     }
 
     @RequestMapping(value = "/algorithm/update", method = RequestMethod.POST)
-    public ArrayList<AlgorithmAction> updateRedistrictAlgorithm(@RequestParam("loop_count") int loopCount) {
-        return algorithm.mainLogic(loopCount);
+    public ArrayList<AlgorithmAction> updateRedistrictAlgorithm(
+            @RequestParam("algorithm_id") int hashint,
+            @RequestParam("loop_count") int loopCount) {
+        //// TODO: We are not actually using the given weights, it seems
+        //// TODO: We are not checking connected components yet
+        AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
+        return algorithm.mainLogic(loopCount, ai);
     }
 
-    @RequestMapping(value = "sample/algorithm/update", method = RequestMethod.POST)
-    public ArrayList<AlgorithmAction> updateSample(@RequestParam("loop_count") int loopCount) {
-        return algorithm.mainLogic(loopCount);
+    @RequestMapping(value = "algorithm/storage/register", method = RequestMethod.POST)
+    public String storageRegister(@RequestParam("state_id") int stateId,
+                                  @RequestParam("compactness_weight") double compactnessWeight,
+                                  @RequestParam("efficiency_weight") double efficiencyWeight,
+                                  @RequestParam("population_threshold") double populationThreshold) {
+        State stateOrigin = sm.getState(stateId);
+        State algoState = sm.cloneState(stateOrigin);
+        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
+                efficiencyWeight, populationThreshold);
+        Integer hashint = ags.registerAlgorithmInstance(ai);
+        JsonObject retObj = new JsonObject();
+        retObj.addProperty("algorithm_id", hashint);
+        return retObj.toString();
     }
 
-    @RequestMapping(value = "/algorithm/test", method = RequestMethod.POST)
-    public void testAlgorithmLogic(@RequestParam("state_id") int stateId) {
-        int errno = sm.setSessionStateId(stateId);
-        algorithm.mainLogic(100);
+    @RequestMapping(value = "algorithm/storage/get", method = RequestMethod.POST)
+    public AlgorithmInstance storageGet(@RequestParam("algorithm_id") int hashint) {
+        AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
+        return ai;
     }
-
-    @RequestMapping(value = "algorithm/store/session/state", method = RequestMethod.POST)
-    public void storeSessionState(@RequestParam("state_id") int stateId) {
-         State state = sm.getState(stateId);
-         session.setAttribute("algo_state", state);
-    }
-
-    @RequestMapping(value = "algorithm/get/session/state", method = RequestMethod.GET)
-    public State getSessionState() {
-        State state = (State)session.getAttribute("algo_state");
-        return state;
-    }
-
 }
