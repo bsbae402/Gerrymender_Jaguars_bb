@@ -1,7 +1,6 @@
 package jaguars.algorithm;
 
 import jaguars.AppConstants;
-import jaguars.data.NeighborData;
 import jaguars.data.PrecinctNeighborRelation;
 import jaguars.map.district.District;
 import jaguars.map.precinct.Precinct;
