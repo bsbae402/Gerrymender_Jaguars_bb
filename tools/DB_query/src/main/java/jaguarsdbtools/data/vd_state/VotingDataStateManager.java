@@ -18,4 +18,8 @@ public class VotingDataStateManager {
         }
         return votingDataStateList;
     }
+
+    public VotingDataState saveVotingDataState(VotingDataState vds) {
+        return vdsr.save(vds);
+    }
 }
