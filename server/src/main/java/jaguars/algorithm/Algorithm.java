@@ -13,7 +13,6 @@ import jaguars.map.state.StateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -171,6 +170,19 @@ public class Algorithm {
         oldAffiliation.setPopulation(oldAffiliation.getPopulation() - clonedTarget.getPopulation());
         updateChangedDistrictVotingData(oldAffiliation, clonedTarget);
 
+        // [THIS SHOULD NOT BE TRUE IF CONNECTED COMPONENT CONSTRAINT CHECK IS COMPLETE]
+        // check if the target is border or not
+        // -> if target was previously isolated by the old affiliation, (previously island)
+        // it now should not be the border anymore with the new affiliation.
+        boolean difAffFound = false;
+        for(Precinct nei : neighbors) {
+            if(!nei.getDistrict().equals(newAffiliation)) {
+                difAffFound = true;
+                break;
+            }
+        }
+        clonedTarget.setBorder(difAffFound);
+
         // update the borderness of neighboring precincts of the target.
         for(Precinct neighbor : neighbors) {
             // if target's affiliation and neighbor's affiliation are different,
@@ -187,18 +199,14 @@ public class Algorithm {
             ArrayList<Precinct> neighborsNeighbors = extractPrecinctsByNeighborDataList(
                     neighborsNeighborsDataList, clonedPrecincts);
 
-            boolean difAffFound = false; // set if different affiliation is found around the neighbor
+            difAffFound = false; // set if different affiliation is found around the neighbor
             for(Precinct p : neighborsNeighbors) {
                 if(!p.getDistrict().equals(neighbor.getDistrict())) {
-                    neighbor.setBorder(true);
                     difAffFound = true;
                     break;
                 }
             }
-            if(!difAffFound) // if all neighbors of the neighbor have same affiliation as the neighbor
-                neighbor.setBorder(false);
-            else
-                neighbor.setBorder(true);
+            neighbor.setBorder(difAffFound);
         }
         return newDistrictState;
     }

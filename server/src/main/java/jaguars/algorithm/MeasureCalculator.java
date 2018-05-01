@@ -35,7 +35,7 @@ public final class MeasureCalculator {
     }
 
     public static double calculateEfficiencyGap(int total, int rep, int dem) {
-        return (rep - dem) / total;
+        return (rep*1.0 - dem*1.0) / total*1.0;
     }
 
     // neighborDataList is state-level precinct neighbor relation data holder
