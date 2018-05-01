@@ -230,7 +230,7 @@ public class Algorithm {
             Precinct targetPrecinctOfNew = newState.getPrecinctByPgeoid(targetPrecinctOfOld.getGeoId());
             // new affiliation of targetPrecinctOfNew has 0 as district_id
             District newAffDistrictOfNew = targetPrecinctOfNew.getDistrict();
-            State originState = ai.getAlgorithmState();
+            State originState = ai.getStateOrigin();
             Precinct originTargetPrecinct = originState.getPrecinctByPgeoid(targetPrecinctOfOld.getGeoId());
             District originOldAff = originState.getDistrictByDistrictCode(oldAffDistrictOfNew.getCode());
             District originNewAff = originState.getDistrictByDistrictCode(newAffDistrictOfNew.getCode());
