@@ -116,8 +116,11 @@ public class Algorithm {
             if(targetPrecinct.getCode().equals(p.getCode()))
                 clonedTarget = p;
         }
-        if(clonedTarget == null) // should not get in here
+        if(clonedTarget == null) {
+            System.out.println("clonedTarget is null!!");
+            // should not get in here
             return null;
+        }
 
         ArrayList<NeighborData> neighborDataList = pnm.getNeighborDataOfPGeoId(newDistrictState.getCode(),
                 newDistrictState.getElectionYear(), clonedTarget.getGeoId());
@@ -133,8 +136,12 @@ public class Algorithm {
                     && !selectableDistricts.contains(neighborsDistrict))
                 selectableDistricts.add(neighborsDistrict);
         }
-        if(selectableDistricts.size() == 0)
-            return null; // this means that the targetPrecinct is not a border precinct
+        if(selectableDistricts.size() == 0) {
+            // this means that the targetPrecinct is not a border precinct
+            System.out.println("There are no selectable districts! -> target precinct is not border!");
+            System.out.println("target precinct: " + targetPrecinct.getName());
+            return null;
+        }
 
         District newAffiliation = getRandomDistrict(selectableDistricts);
         // change the affiliation of the cloned target precinct
@@ -207,6 +214,13 @@ public class Algorithm {
         while(loopSteps < iterations) {
             Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
             State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState);
+
+            /* DELETE THIS AFTER IMPLEMENTING CONNECTED COMPONENTS CONSTRAINT ALGO */
+            if(newState == null) {
+                loopSteps++;
+                continue;
+            }
+
             if(cm.getPopulationThres(newState)) {
                 loopSteps++;
                 continue;
