@@ -68,13 +68,22 @@ public class AlgorithmController {
     }
 
     @RequestMapping(value = "/algorithm/update", method = RequestMethod.POST)
-    public ArrayList<AlgorithmAction> updateRedistrictAlgorithm(
+    public String updateRedistrictAlgorithm(
             @RequestParam("algorithm_id") int hashint,
             @RequestParam("loop_count") int loopCount) {
         //// TODO: We are not actually using the given weights, it seems
         //// TODO: We are not checking connected components yet
         AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
-        return algorithm.mainLogic(loopCount, ai);
+        ArrayList<AlgorithmAction> algorithmActions = algorithm.mainLogic(loopCount, ai);
+
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .setPrettyPrinting().create();
+
+        JsonElement allChangesElem = gson.toJsonTree(algorithmActions);
+        JsonObject retObj = new JsonObject();
+        retObj.add("all_changes", allChangesElem);
+
+        return retObj.toString();
     }
 
     @RequestMapping(value = "algorithm/storage/register", method = RequestMethod.POST)
