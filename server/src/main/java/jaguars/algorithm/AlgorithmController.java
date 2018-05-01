@@ -77,6 +77,7 @@ public class AlgorithmController {
         ArrayList<AlgorithmAction> algorithmActions = algorithm.mainLogic(loopCount, ai);
 
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .excludeFieldsWithoutExposeAnnotation()
                 .setPrettyPrinting().create();
 
         JsonElement allChangesElem = gson.toJsonTree(algorithmActions);

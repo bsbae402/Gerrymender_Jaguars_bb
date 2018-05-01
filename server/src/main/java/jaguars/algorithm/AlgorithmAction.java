@@ -3,15 +3,22 @@ package jaguars.algorithm;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.google.gson.annotations.Expose;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AlgorithmAction {
+    @Expose
     private int precinctId;
     @JsonIgnore
+    @Expose(serialize = false)
     private int oldDistrictId;
+    @Expose
     private int newDistrictId;
+    @Expose
     private double newDistrictCompactness;
+    @Expose
     private double oldDistrictCompactness;
+    @Expose
     private double stateWideEfficiencyGap;
 
     public AlgorithmAction() {
