@@ -931,7 +931,7 @@ whenReady(function() {
 			lastUpdate = 0,
 			running = false, isQuerying = false,
 			paused = false, renderTime = 0,
-			totalLoops = 0,
+			totalLoops = 0, loopCount = 0,
 			aid = -1,
 			markers = [];
 
@@ -1011,9 +1011,9 @@ whenReady(function() {
 
 		function registerChange(change) {
 			var d = active.districts.find((d) => d.id == change.new_district_id),
-				p = active.precincts.find((p) => p.id == change.precinct_id),
-				doriginal = active.districts.find((d) => d.id == p.district_id);
+				p = active.precincts.find((p) => p.id == change.precinct_id);
 			if (!d || !p) return;
+			var doriginal = active.districts.find((d) => d.id == p.district_id);
 
 			p.color = d.color;
 			p.new_district_id = d.id;
@@ -1041,12 +1041,17 @@ whenReady(function() {
 					if (isQuerying) {
 						
 					} else {
-						APICall("getalgorithmupdate", { loop_count : 100, })
+
+						var iterate = 25;
+						loopCount += iterate;
+
+						APICall("getalgorithmupdate", { algorithm_id : aid, loop_count : iterate, })
 							.then(function(r) {
 								updates.push(r);
+								r.loop = loopCount;
 								lastUpdate = new Date().getTime() + UPDATE_TIME * 0.8;
 								isQuerying = false;
-								if (!r.is_running) {
+								if (loopCount >= totalLoops) {
 									lastUpdate = Infinity;
 								}
 							});
@@ -1129,6 +1134,8 @@ whenReady(function() {
 					paused = false;
 					aid = r.algorithm_id;
 					totalLoops = r.loops;
+					totalLoops = 500;
+					loopCount = 0;
 					lastUpdate = 0;
 					renderTime = 0;
 
