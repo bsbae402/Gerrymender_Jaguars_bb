@@ -68,8 +68,8 @@ var API_CALLS = [
     },
     {
         name : "deleteuser",
-        method : "POST",
-        url : "admin/user/delete/{id}",
+        method : "GET",
+        url : "admin/user/{id}/delete",
         response : (r) => r,
         adummy : () => {error : 0},
     },

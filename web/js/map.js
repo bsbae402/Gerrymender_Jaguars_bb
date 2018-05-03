@@ -931,6 +931,7 @@ whenReady(function() {
 			lastUpdate = 0,
 			running = false, isQuerying = false,
 			paused = false, renderTime = 0,
+			TOTAL_LOOPS = 500, LOOP_ITERATE = 25,
 			totalLoops = 0, loopCount = 0,
 			aid = -1,
 			markers = [];
@@ -1042,7 +1043,7 @@ whenReady(function() {
 						
 					} else {
 
-						var iterate = 25;
+						var iterate = LOOP_ITERATE;
 						loopCount += iterate;
 
 						APICall("getalgorithmupdate", { algorithm_id : aid, loop_count : iterate, })
@@ -1134,7 +1135,7 @@ whenReady(function() {
 					paused = false;
 					aid = r.algorithm_id;
 					totalLoops = r.loops;
-					totalLoops = 500;
+					totalLoops = TOTAL_LOOPS;
 					loopCount = 0;
 					lastUpdate = 0;
 					renderTime = 0;
