@@ -140,7 +140,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/admin/user/{userid}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/{userid}/delete", method = RequestMethod.GET)
     public String adminDeleteUser(@PathVariable int userid) {
         //if (um.getSessionState() != null && um.getSessionState().getRole() == UserRole.ADMIN){
         um.removeUser(userid);
