@@ -15,6 +15,44 @@ import java.util.Set;
 @Service
 public class CalculationManager {
 
+    public District findLowestDistrictPop(State state) {
+        ArrayList<District> districts = new ArrayList<>(state.getDistricts());
+        int min = Integer.MAX_VALUE;
+        District retDis = new District();
+
+        for (District d : districts) {
+            if (d.getPopulation() < min) {
+                retDis = d;
+                min = d.getPopulation();
+            }
+        }
+        return retDis;
+    }
+
+    public District findHighestDistrictPop(State state) {
+        ArrayList<District> districts = new ArrayList<>(state.getDistricts());
+        int max = Integer.MIN_VALUE;
+        District retDis = new District();
+
+        for (District d : districts) {
+            if (d.getPopulation() > max) {
+                retDis = d;
+                max = d.getPopulation();
+            }
+        }
+        return retDis;
+    }
+
+    public double getStateAverageCompactness(State state) {
+        ArrayList<District> districts = new ArrayList<>(state.getDistricts());
+        double sum = 0;
+
+        for (District d : districts) {
+            sum += getCompactnessMeasure(d);
+        }
+        return sum / districts.size();
+    }
+
     public double getCompactnessMeasure(District district){
         double area = district.getArea();
         double perimeter = district.getPerimeter();
