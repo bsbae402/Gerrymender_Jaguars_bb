@@ -214,4 +214,12 @@ public class State {
         }
         return null;
     }
+
+    public District getDistrictByDgeoid(String dgeoid) {
+        for(District d : districts) {
+            if(d.getGeoId().equals(dgeoid))
+                return d;
+        }
+        return null;
+    }
 }
