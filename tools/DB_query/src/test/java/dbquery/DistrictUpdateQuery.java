@@ -64,6 +64,7 @@ public class DistrictUpdateQuery {
 
         Gson gson = new GsonBuilder().create();
         State state = sm.getState(stateId);
+        List<District> districtsOfState = dm.getDistrictsByState(state);
 
         try {
             FileReader fileReader = new FileReader(jsonFilePath);
@@ -71,10 +72,15 @@ public class DistrictUpdateQuery {
             List<GeoidAreaPerimeter> gapList = gson.fromJson(fileReader, typeListGAP);
 
             for(GeoidAreaPerimeter gap : gapList) {
-                District districtsOfGeoid = state.getDistrictByDgeoid(gap.geoid);
-                districtsOfGeoid.setArea(gap.area);
-                districtsOfGeoid.setPerimeter(gap.perimeter);
-                dm.updateDistrict(districtsOfGeoid);
+                // District districtsOfGeoid = state.getDistrictByDgeoid(gap.geoid); <- this oneToMany fetching thing seems to drag the performance
+                for(District d : districtsOfState) {
+                    if(d.getGeoId().equals(gap.geoid)) {
+                        d.setArea(gap.area);
+                        d.setPerimeter(gap.perimeter);
+                        dm.updateDistrict(d);
+                        break;
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

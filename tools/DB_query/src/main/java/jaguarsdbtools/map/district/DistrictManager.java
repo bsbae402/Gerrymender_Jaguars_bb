@@ -41,4 +41,12 @@ public class DistrictManager {
     public District updateDistrict(District district) {
         return districtRepository.save(district);
     }
+
+    public List<District> getDistrictsByGeoId(String geoId) {
+        return districtRepository.findByGeoId(geoId);
+    }
+
+    public List<District> getDistrictsByState(State state) {
+        return districtRepository.findByState(state);
+    }
 }
