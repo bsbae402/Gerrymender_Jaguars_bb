@@ -365,14 +365,21 @@ function handleVotingData(r) {
                     success : function(r) {
 
                         try {
-
                             r = JSON.parse(r);
-                            if (typeof CALL.response == "function")
-                                r = CALL.response(r, opts.data);
-
                         } catch (e) {
-                            reject("Couldn't parse response for API call ["+opts.name+"]");
+
+                            try {
+                                r = r.replace(/NaN/g, "null");
+                                r = JSON.parse(r);
+                            } catch (e) {
+                                reject("Couldn't parse response for API call ["+opts.name+"]");
+                                return;
+                            }
+
                         }
+
+                        if (typeof CALL.response == "function")
+                            r = CALL.response(r, opts.data);
 
                         resolve(r);
 
