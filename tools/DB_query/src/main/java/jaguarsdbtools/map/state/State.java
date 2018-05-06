@@ -36,11 +36,11 @@ public class State {
     private boolean original;
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "state", fetch = FetchType.EAGER)
     private Set<District> districts = new HashSet<>();
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "state", fetch = FetchType.EAGER)
     private Set<VotingDataState> votingDataStates = new HashSet<>();
 
     public State() {}

@@ -27,7 +27,8 @@ public class VotingDataDistrictQuery {
 
     @Test
     public void createVotingDataDistricts() {
-        int stateId = 2;
+        // int stateId = 2; <- NH
+        int stateId = 1; // OH
         State state = sm.getState(stateId);
         Set<District> districts = state.getDistricts();
         for(District d : districts) {
