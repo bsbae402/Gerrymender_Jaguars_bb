@@ -4,7 +4,11 @@ from functools import partial
 import pyproj
 import json
 
-fname = "OH_districts_2011_REVISED.json"
+# fname = "WI_wards_2010_jaguars_v2.json"
+fname = "WI_district_2011_jaguars.json"
+# fname = "OH_precincts_2010_fixed_v2.json"
+# fname = "state_tl_2010_39_OH.json"
+# fname = "OH_districts_2011_REVISED.json"
 # fname = "state_tl_2010_NH.json"
 # fname = "district_tl_2010_NH.json"
 # fname = "NH_precincts.json"
@@ -34,5 +38,5 @@ for i in range(0, len(gdf.geometry)):
     geoid_area_perimeter['perimeter'] = projected.length
     jsonObjList.append(geoid_area_perimeter)
 
-with open('area_perimeter_district_OH_2011.json', 'w') as outfile:
+with open('area_perimeter_districts_WI_2011.json', 'w') as outfile:
     json.dump(jsonObjList, outfile)

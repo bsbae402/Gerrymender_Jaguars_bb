@@ -20,8 +20,9 @@ def convertToProjection(poly):
         poly
     )
     return projected
-    
-precinct_geo_fname = "./NH_precincts_2010.json"
+
+precinct_geo_fname = "./WI_wards_2010_jaguars_v2.json"   
+#precinct_geo_fname = "./NH_precincts_2010.json"
 gdf = geopandas.read_file(precinct_geo_fname)
 geoid_list = gdf["GEOID10"]
 
@@ -50,7 +51,7 @@ for i in range(0, len(geom_polygons)):
     relation["to"] = adj_poly_objs
     adj_geoid_relations.append(relation)
 
-out_relation_fname = "./NH_2010_precincts_neighbor_relations.json"
+out_relation_fname = "./WI_2010_precincts_neighbor_relations.json"
 with open(out_relation_fname, 'w') as outfile:
     json.dump(adj_geoid_relations, outfile)
  
