@@ -71,8 +71,6 @@ public class AlgorithmController {
     public String updateRedistrictAlgorithm(
             @RequestParam("algorithm_id") int hashint,
             @RequestParam("loop_count") int loopCount) {
-        //// TODO: We are not actually using the given weights, it seems
-        //// TODO: We are not checking connected components yet
         AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
         ArrayList<AlgorithmAction> algorithmActions = algorithm.mainLogic(loopCount, ai);
 

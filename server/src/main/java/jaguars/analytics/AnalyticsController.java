@@ -56,11 +56,12 @@ public class AnalyticsController {
         JsonObject retObj = new JsonObject();
         retObj.addProperty("compactness_score", cm.getCompactnessMeasure(district));
         retObj.addProperty("efficiency_gap_score", cm.getEfficiencyGap(district));
-        retObj.addProperty("lowest_precinct_population ", lowest.getPopulation());
-        retObj.addProperty("Lowest_pop_geoid ", lowest.getGeoId());
-        retObj.addProperty("highest_precinct_population ", highest.getPopulation());
-        retObj.addProperty("highest_pop_geoid ", highest.getGeoId());
-        retObj.addProperty("number_of_precincts  ", district.getPrecincts().size());
+        retObj.addProperty("lowest_precinct_population", lowest.getPopulation());
+        retObj.addProperty("Lowest_pop_geoid", lowest.getGeoId());
+        retObj.addProperty("highest_precinct_population", highest.getPopulation());
+        retObj.addProperty("highest_pop_geoid", highest.getGeoId());
+        retObj.addProperty("number_of_precincts", district.getPrecincts().size());
+        retObj.addProperty("median_income", district.getMedianIncome());
 
         return retObj.toString();
     }

@@ -221,6 +221,10 @@ public class Algorithm {
         int loopSteps = 0;
         while(loopSteps < iterations) {
             Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+
+            while (!targetPrecinctOfOld.ismovable()){
+                targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+            }
             State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState);
 
             /* DELETE THIS AFTER IMPLEMENTING CONNECTED COMPONENTS CONSTRAINT ALGO */
