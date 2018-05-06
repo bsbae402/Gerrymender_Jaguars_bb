@@ -35,6 +35,10 @@ public class District {
     private String code;
     @Expose
     private boolean original;
+    @Expose
+    private boolean movable;
+    @Expose
+    private int medianIncome;
 
     @JsonIgnore
     @Expose(serialize = false)
@@ -67,9 +71,12 @@ public class District {
             newVdd.setDistrict(this);
             this.votingDataDistricts.add(newVdd);
         }
+        this.movable = district.ismovable();
+        this.medianIncome = district.getMedianIncome();
     }
 
-    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original, State state) {
+    public District(String name, int population, int electionYear, double area, double perimeter,
+                    String geoId, int totalVotes, String code, boolean original, State state, boolean movable, int medianIncome) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -80,6 +87,8 @@ public class District {
         this.code = code;
         this.original = original;
         this.state = state;
+        this.movable = movable;
+        this.medianIncome = medianIncome;
     }
 
     public int getId() {
@@ -186,6 +195,22 @@ public class District {
         this.votingDataDistricts = votingDataDistricts;
     }
 
+    public boolean ismovable() {
+        return movable;
+    }
+
+    public void setmovable(boolean movable) {
+        this.movable = movable;
+    }
+
+    public int getMedianIncome() {
+        return medianIncome;
+    }
+
+    public void setMedianIncome(int medianIncome) {
+        this.medianIncome = medianIncome;
+    }
+
     @Override
     public String toString() {
         return "District{" +
@@ -199,6 +224,8 @@ public class District {
                 ", totalVotes=" + totalVotes +
                 ", code='" + code + '\'' +
                 ", original=" + original +
+                ", movable=" + movable +
+                ", medianIncome=" + medianIncome +
                 '}';
     }
 }

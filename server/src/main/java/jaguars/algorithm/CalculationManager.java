@@ -148,7 +148,7 @@ public class CalculationManager {
         return Math.abs(MeasureCalculator.calculateEfficiencyGap(district.getTotalVotes(), repWasted, demWasted));
     }
 
-    public double objectiveFunction(State state){
+    public double objectiveFunction(State state, double compactnessWeight, double efficiencyWeight){
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
         double compactnessSum = 0;
         double avgCompactness;
@@ -159,10 +159,10 @@ public class CalculationManager {
         avgCompactness = compactnessSum / (double)districts.size();
         double efficiencyGapScore = 1 - getEfficiencyGap(state);
 
-        return (AppConstants.DEFAULT_COMPACTNESS_WEIGHT * avgCompactness) + (AppConstants.DEFAULT_EFFICIENCY_WEIGHT * efficiencyGapScore);
+        return (compactnessWeight * avgCompactness) + (efficiencyWeight * efficiencyGapScore);
     }
 
-    public boolean getPopulationThres(State state) {
+    public boolean getPopulationThres(State state, double popThres) {
         int[] districtPops = new int[state.getDistricts().size()];
         int i = 0;
 
@@ -170,7 +170,7 @@ public class CalculationManager {
             districtPops[i] = d.getPopulation();
             i++;
         }
-        return MeasureCalculator.calculatePopThreshold(state.getPopulation(), districtPops);
+        return MeasureCalculator.calculatePopThreshold(state.getPopulation(), districtPops, popThres);
     }
 
     public boolean isAllPrecinctsConnected(District district,
