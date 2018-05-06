@@ -36,11 +36,11 @@ public class State {
     private boolean original;
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "state", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
     private Set<District> districts = new HashSet<>();
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "state", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
     private Set<VotingDataState> votingDataStates = new HashSet<>();
 
     public State() {}
@@ -211,6 +211,14 @@ public class State {
                 if(p.getCode().equals(precinctCode))
                     return p;
             }
+        }
+        return null;
+    }
+
+    public District getDistrictByDgeoid(String dgeoid) {
+        for(District d : districts) {
+            if(d.getGeoId().equals(dgeoid))
+                return d;
         }
         return null;
     }

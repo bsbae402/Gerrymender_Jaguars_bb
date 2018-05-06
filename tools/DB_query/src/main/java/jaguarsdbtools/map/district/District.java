@@ -36,16 +36,16 @@ public class District {
     private boolean original;
 
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id")
     private State state;
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
     private Set<Precinct> precincts = new HashSet<>();
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
     private Set<VotingDataDistrict> votingDataDistricts = new HashSet<>();
 
     public District() {}

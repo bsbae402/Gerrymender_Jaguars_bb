@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DistrictRepository extends CrudRepository<District, Integer> {
     List<District> findByState(State state);
+    List<District> findByGeoId(String geoId);
 }

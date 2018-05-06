@@ -31,6 +31,9 @@ public class PrecinctNeighborManager {
                     case "OH2010":
                         jsonPath = AppConstants.PATH_PRECINCT_NEIGHBOR_RELATIONS_OH2010;
                         break;
+                    case "WI2010":
+                        jsonPath = AppConstants.PATH_PRECINCT_NEIGHBOR_RELATIONS_WI2010;
+                        break;
                     default:
                         fileNotExistYet = true;
                         break;
