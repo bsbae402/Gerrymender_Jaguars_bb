@@ -22,8 +22,8 @@ public final class MeasureCalculator {
         return 1 / (perimeter / circumference);
     }
 
-    public static boolean calculatePopThreshold(int statePop, int[] districtPops) {
-        int delta = (int)(statePop * AppConstants.DEFAULT_POPULATION_THRESHOLD);
+    public static boolean calculatePopThreshold(int statePop, int[] districtPops, double popThres) {
+        int delta = (int)(statePop * popThres);
         int equalPop = statePop / districtPops.length;
         int lowerThreshold = equalPop - delta;
         int higherThreshold = equalPop + delta;

@@ -21,7 +21,7 @@ public class VotingDataDistrict {
     private boolean original;
 
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "district_id")
     private District district;
 
