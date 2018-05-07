@@ -451,6 +451,7 @@ whenReady(function() {
 		$("#cview .infoselects [info=syinfo]").addClass("ok");
 		clickTab("syinfo");
 
+		$("#cview .syinfo .fields").empty();
 		$("#cview .syinfo .statename .right").html(sy.name);
 		$("#cview .syinfo .year .right").html(sy.election_year);
 		$("#cview .syinfo .population .right").html(commaNumbers(sy.population));
@@ -547,6 +548,7 @@ whenReady(function() {
 
 		activateTabAndSelect("dinfo", true);
 		
+		$("#cview .dinfo .fields").empty();
 		$("#cview .dinfo .statename .right").html(sy.name);
 		$("#cview .dinfo .year .right").html(sy.election_year);
 		$("#cview .dinfo .code .right").html(district.code);
@@ -670,6 +672,9 @@ whenReady(function() {
 				if (state.name == props.NAME)
 					selectState(state);
 			})
+		}
+		if (layerObject.name == "precincts2") {
+			redistrictPrecinctClick(data, props, layer);
 		}
 	};
 
@@ -900,6 +905,27 @@ whenReady(function() {
 				whendone();
 		});
 	}
+	$("#credistrict .colors .color.dummy .enabled").click(function() {
+		var id = parseInt($(this).closest(".color").attr("district_id"));
+		var district = active.districts.find((d) => d.id == id);
+		if (!district) return;
+
+		var enabled = $(this).closest(".color").hasClass("disabled");
+		if (!enabled) $(this).closest(".color").addClass("disabled");
+		else $(this).closest(".color").removeClass("disabled");
+		district.ignoreRedistrict = !enabled;
+
+		active.precincts.forEach((p) => {
+			if (p.district_id != id) return;
+			p.ignoreRedistrictDistrict = district.ignoreRedistrict;
+
+			var r = 0;
+			if (p.ignoreRedistrict || p.ignoreRedistrictDistrict) r += 0.75;
+			if (p.ignoreRedistrict && p.ignoreRedistrictDistrict) r += 0.15;
+			p.color = mergeColors(district.color, [10, 10, 10], r);
+		});
+		active.precinctsLayer2.update();
+	});
 	$("#credistrict .colors .color.dummy .reset").click(function() {
 		var id = parseInt($(this).closest(".color").attr("district_id"));
 		var district = active.districts.find((d) => d.id == id);
@@ -924,6 +950,7 @@ whenReady(function() {
 		active.precinctsLayer2.update();
 	}
 
+	var redistrictPrecinctClick;
 	var resetAlgorithm, clearAlgorithm;
 	// algorithm
 	(function() {
@@ -947,6 +974,11 @@ whenReady(function() {
 			o.newDistrict = active.districts.find((d) => d.id == precinct.new_district_id);
 
 			genericHover($el, precinct, o);
+			if (precinct.ignoreRedistrict || precinct.ignoreRedistrictDistrict) {
+				$("<div>").addClass("ignore")
+					.insertAfter($el.find(".title"));
+				$el.addClass("ignore");
+			}
 			return true;
 		}
 
@@ -1009,6 +1041,21 @@ whenReady(function() {
 					map.fitBounds2(layer);
 			}
 		});
+
+		redistrictPrecinctClick = function(data, props) {
+			if (running || aid != -1) return;
+			var d = active.districts.find((d) => d.id == data.district_id);
+			console.log(d);
+			if (!d) return;
+
+			data.ignoreRedistrict = !data.ignoreRedistrict;
+			var r = 0;
+			if (data.ignoreRedistrict || data.ignoreRedistrictDistrict) r += 0.75;
+			if (data.ignoreRedistrict && data.ignoreRedistrictDistrict) r += 0.15;
+			data.color = mergeColors(d.color, [10, 10, 10], r);
+			active.precinctsLayer2.update();
+			map.updateHover();
+		}
 
 		function registerChange(change) {
 			var d = active.districts.find((d) => d.id == change.new_district_id),
@@ -1122,10 +1169,18 @@ whenReady(function() {
 					   ["ew", "efficiency_weight"],
 					   ["pt", "population_threshold"]];
 			var data = {
-				state_id : active.sy.id
+				state_id : active.sy.id,
+				ignore_precinct_geo_ids : [],
+				ignore_district_geo_ids : [],
 			};
 			map.forEach((a) => {
 				data[a[1]] = sliders[a[0]][4];
+			});
+			active.districts.forEach((d) => {
+				if (d.ignoreRedistrict) data.ignore_district_geo_ids.push(d.geo_id);
+			});
+			active.precincts.forEach((p) => {
+				if (p.ignoreRedistrict) data.ignore_precinct_geo_ids.push(p.geo_id);
 			});
 
 			APICall("startalgorithm", data)
@@ -1158,6 +1213,7 @@ whenReady(function() {
         ["highest_precinct_population", "Highest Precinct Population", 0],
         ["number_of_precincts", "Number of Precincts", 0],
         ["number_of_border_precincts", "Number of Border Precincts", 0],
+        ["median_income", "Median Income", 2],
 	];
 	$(".analytics .button").click(function() {
 		var $an = $(this).closest(".analytics"),
@@ -1190,9 +1246,14 @@ whenReady(function() {
 					var MAP = ANALYTIC_MAPPINGS.find((a) => a[0] == k);
 					if (!MAP) return;
 					var $field = $("<div>").addClass("field");
+
+					var value = r[k], v2 = value;
+					if (MAP[2] > -1) v2 = value.toFixed(MAP[2]);
+					if (value > 1000) v2 = commaNumbers(v2);
+
 					$field.append(
 						$("<div>").addClass("left").html(MAP[1]),
-						$("<div>").addClass("right").html(r[k].toFixed(MAP[2])),
+						$("<div>").addClass("right").html(v2),
 						);
 					$fields.append($field);
 				})

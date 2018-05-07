@@ -107,6 +107,9 @@
     font-size:13px;
     font-family: "Lato";
 }
+#map .popup.ignore {
+    color:#555;
+}
 #map .popup.hide {
     display: none;
 }
@@ -114,6 +117,18 @@
     font-weight:700;
     font-size:14px;
     margin-bottom:2px;
+}
+#map .popup.ignore .title {
+    margin-bottom: 0;
+}
+#map .popup .ignore {
+    font-weight:500;
+    font-size:12px;
+    margin-bottom:4px;
+    color:#888;
+}
+#map .popup .ignore::before {
+    content:"Excluding this precinct from being redistricted";
 }
 #map .popup .info {
     white-space: nowrap;
@@ -733,6 +748,26 @@
     color:#666;
 }
 #credistrict .colors .reset:hover {
+    text-decoration: underline;
+}
+#credistrict .colors .enabled {
+    display: inline-block;
+    vertical-align: middle;
+    font-size:11px;
+    margin-right:10px;
+    cursor:pointer;
+    color:#666;
+}
+#credistrict .colors .enabled::before {
+    content:"enabled";
+}
+#credistrict .colors .color.disabled {
+    opacity:0.6;
+}
+#credistrict .colors .color.disabled .enabled::before {
+    content:"disabled";
+}
+#credistrict .colors .enabled:hover {
     text-decoration: underline;
 }
 #credistrict .colors .c {
