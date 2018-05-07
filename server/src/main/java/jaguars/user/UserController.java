@@ -14,6 +14,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -88,26 +92,27 @@ public class UserController {
 
     @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
     public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
-                         @RequestParam("email") String email) {
+                         @RequestParam("email") String email, @RequestParam("ignore_verify") boolean verify)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
         ArrayList<User> users = new ArrayList<User>(um.findUsersByUsername(username));
 
         if(users.size() >= 1) {
             return "{ \"user_id\" : -1 }";
         }
 
-        // GENERATE KEY
-        Random random = new Random();
-        byte[] r = new byte[64];
-        random.nextBytes(r);
-        String key = Base64.encodeBase64String(r);
-        String body = "In order to verify your account, input your username and the following code:\n" +
-                key;
+        if (!verify){
+            // GENERATE KEY
+            String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
+            System.out.println(Long.toHexString(Double.doubleToLongBits(Math.random())));
+            String body = "In order to verify your account, input your username and the following code:\n" +
+                    key;
 
-        emailService.sendSimpleMessage(email, "Gerrymandering Online Verification", body);
+            emailService.sendSimpleMessage(email, "Gerrymandering Online Verification", body);
 
-        // Add Pending Verification
-        pvm.addPendingVerification(username, key);
-        User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
+            // Add Pending Verification
+            pvm.addPendingVerification(username, key);
+        }
+        User createdUser = um.saveUser(username, password, email, UserRole.USER, verify); // ADMIN should be registered through DB directly
         JsonObject retObj = Json.object().add("user_id", createdUser.getId());
         return retObj.toString();
     }
@@ -139,14 +144,16 @@ public class UserController {
                     .add("user_id", -1)
                     .add("username", "")
                     .add("email", "")
-                    .add("role", -1);
+                    .add("role", -1)
+                    .add("verified", false);
             return retObj.toString();
         }
 
         JsonObject retObj = Json.object().add("error", 0)
                 .add("user_id", user.getId())
                 .add("username", user.getUsername())
-                .add("email", user.getEmail());
+                .add("email", user.getEmail())
+                .add("verified", user.isVerified());
         switch (user.getRole()) {
             case USER:
                 retObj.add("user_type", 1);
