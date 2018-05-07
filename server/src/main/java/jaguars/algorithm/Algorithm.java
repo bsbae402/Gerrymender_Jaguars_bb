@@ -39,7 +39,7 @@ public class Algorithm {
         return selectableDistricts.get(idx);
     }
 
-    private boolean renewPrecinctCode(Precinct targetPrecinct) {
+    public boolean renewPrecinctCode(Precinct targetPrecinct) {
         String postfix = targetPrecinct.getCode().substring(4);
         String districtCode = targetPrecinct.getDistrict().getCode();
         targetPrecinct.setCode(districtCode + postfix);
@@ -89,7 +89,7 @@ public class Algorithm {
         changedDistrict.setTotalVotes(changedDistrict.getTotalVotes() + votingDiff);
     }
 
-    private ArrayList<Precinct> extractPrecinctsByNeighborDataList(ArrayList<NeighborData> neighborDataList,
+    public ArrayList<Precinct> extractPrecinctsByNeighborDataList(ArrayList<NeighborData> neighborDataList,
                                                                     ArrayList<Precinct> precincts) {
         ArrayList<Precinct> extracted = new ArrayList<>();
         for(Precinct p : precincts) {
@@ -105,9 +105,7 @@ public class Algorithm {
         State newDistrictState = sm.cloneState(oldDistrictState);
 
         // get reference of all precincts in the cloned state
-        ArrayList<Precinct> clonedPrecincts = new ArrayList<>();
-        for(District d : newDistrictState.getDistricts())
-            clonedPrecincts.addAll(d.getPrecincts());
+        ArrayList<Precinct> clonedPrecincts = newDistrictState.getPrecincts();
 
         // find the target precinct of the cloned state
         Precinct clonedTarget = null;
@@ -144,32 +142,45 @@ public class Algorithm {
         }
 
         District newAffiliation = getRandomDistrict(selectableDistricts);
+
+        // update the state/district/precinct in accordance with the move
+        changePrecinctAffiliationOfState(clonedTarget, newAffiliation, newDistrictState, neighbors, neighborDataList);
+
+        return newDistrictState;
+    }
+
+    public boolean changePrecinctAffiliationOfState(Precinct clonedTargetPrecinct, District newAffiliation,
+                                                    State newState, ArrayList<Precinct> neighbors,
+                                                    ArrayList<NeighborData> neighborDataList) {
+        District oldAffiliation = clonedTargetPrecinct.getDistrict();
+
         // change the affiliation of the cloned target precinct
-        clonedTarget.setDistrict(newAffiliation);
-        newAffiliation.getPrecincts().add(clonedTarget);
-        oldAffiliation.getPrecincts().remove(clonedTarget);
+        clonedTargetPrecinct.setDistrict(newAffiliation);
+        newAffiliation.getPrecincts().add(clonedTargetPrecinct);
+        oldAffiliation.getPrecincts().remove(clonedTargetPrecinct);
+
         // update precinct code
-        boolean codeFormatOkay = renewPrecinctCode(clonedTarget);
+        boolean codeFormatOkay = renewPrecinctCode(clonedTargetPrecinct);
         if(!codeFormatOkay)
-            System.out.println(targetPrecinct.getCode() + " is wrong code format!");
+            System.out.println(clonedTargetPrecinct.getCode() + " is wrong code format!");
 
         // update area and perimeter of the gaining district(new affiliation)
-        newAffiliation.setArea(newAffiliation.getArea() + clonedTarget.getArea());
-        newAffiliation.setPerimeter(calculateChangedPerimeter(newAffiliation,clonedTarget,
+        newAffiliation.setArea(newAffiliation.getArea() + clonedTargetPrecinct.getArea());
+        newAffiliation.setPerimeter(calculateChangedPerimeter(newAffiliation, clonedTargetPrecinct,
                 neighbors, neighborDataList));
 
         // update area and perimeter of the losing district(old affiliation)
-        oldAffiliation.setArea(oldAffiliation.getArea() - clonedTarget.getArea());
-        oldAffiliation.setPerimeter(calculateChangedPerimeter(oldAffiliation, clonedTarget,
+        oldAffiliation.setArea(oldAffiliation.getArea() - clonedTargetPrecinct.getArea());
+        oldAffiliation.setPerimeter(calculateChangedPerimeter(oldAffiliation, clonedTargetPrecinct,
                 neighbors, neighborDataList));
 
         // update population and total votes - new Affiliation
-        newAffiliation.setPopulation(newAffiliation.getPopulation() + clonedTarget.getPopulation());
-        updateChangedDistrictVotingData(newAffiliation, clonedTarget);
+        newAffiliation.setPopulation(newAffiliation.getPopulation() + clonedTargetPrecinct.getPopulation());
+        updateChangedDistrictVotingData(newAffiliation, clonedTargetPrecinct);
 
         // update population and total votes - old Affiliation
-        oldAffiliation.setPopulation(oldAffiliation.getPopulation() - clonedTarget.getPopulation());
-        updateChangedDistrictVotingData(oldAffiliation, clonedTarget);
+        oldAffiliation.setPopulation(oldAffiliation.getPopulation() - clonedTargetPrecinct.getPopulation());
+        updateChangedDistrictVotingData(oldAffiliation, clonedTargetPrecinct);
 
         // [THIS SHOULD NOT BE TRUE IF CONNECTED COMPONENT CONSTRAINT CHECK IS COMPLETE]
         // check if the target is border or not
@@ -182,23 +193,23 @@ public class Algorithm {
                 break;
             }
         }
-        clonedTarget.setBorder(difAffFound);
+        clonedTargetPrecinct.setBorder(difAffFound);
 
         // update the borderness of neighboring precincts of the target.
         for(Precinct neighbor : neighbors) {
             // if target's affiliation and neighbor's affiliation are different,
             // the neighbor is automatically border.
-            if(!neighbor.getDistrict().equals(clonedTarget.getDistrict())) {
+            if(!neighbor.getDistrict().equals(clonedTargetPrecinct.getDistrict())) {
                 neighbor.setBorder(true);
                 continue;
             }
             // here, the target's affiliation and the neighbor's affiliation are same.
             // These neighbors are all in new affiliation of the target.
             // get neighbors of one neighbor
-            ArrayList<NeighborData> neighborsNeighborsDataList = pnm.getNeighborDataOfPGeoId(newDistrictState.getCode(),
-                    newDistrictState.getElectionYear(), neighbor.getGeoId());
+            ArrayList<NeighborData> neighborsNeighborsDataList = pnm.getNeighborDataOfPGeoId(newState.getCode(),
+                    newState.getElectionYear(), neighbor.getGeoId());
             ArrayList<Precinct> neighborsNeighbors = extractPrecinctsByNeighborDataList(
-                    neighborsNeighborsDataList, clonedPrecincts);
+                    neighborsNeighborsDataList, newState.getPrecincts());
 
             difAffFound = false; // set if different affiliation is found around the neighbor
             for(Precinct p : neighborsNeighbors) {
@@ -209,7 +220,8 @@ public class Algorithm {
             }
             neighbor.setBorder(difAffFound);
         }
-        return newDistrictState;
+
+        return true;
     }
 
     public ArrayList<AlgorithmAction> mainLogic(int iterations, AlgorithmInstance ai) {

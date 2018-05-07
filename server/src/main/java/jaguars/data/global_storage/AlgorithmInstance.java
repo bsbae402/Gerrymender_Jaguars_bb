@@ -10,8 +10,8 @@ public class AlgorithmInstance {
     private double compactnessWeight;
     private double efficiencyWeight;
     private double populationThreshold;
-    private HashSet<String> ignored_precints;
-    private HashSet<String> ignored_districts;
+    private HashSet<String> ignored_precints; // geoid
+    private HashSet<String> ignored_districts; // geoid
 
     public AlgorithmInstance(State stateOrigin, State algorithmState,
                              double compactnessWeight, double efficiencyWeight, double populationThreshold,
