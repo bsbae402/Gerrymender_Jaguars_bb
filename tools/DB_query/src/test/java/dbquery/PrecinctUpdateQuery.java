@@ -115,4 +115,70 @@ public class PrecinctUpdateQuery {
             }
         }
     }
+
+    private class PgeoidBorder {
+        public String pgeoid;
+        public boolean border;
+
+        public PgeoidBorder(String pgeoid, boolean border) {
+            this.pgeoid = pgeoid;
+            this.border = border;
+        }
+    }
+    @Test
+    public void addPrecinctBorderness() {
+        // int stateId = 3; // going to update all the state's precincts borderness: WI
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/isborder_WI_2010.json";
+        Gson gson = new GsonBuilder().create();
+        try {
+            FileReader fileReader = new FileReader(jsonFilePath);
+            Type typeList = new TypeToken<List<PgeoidBorder>>(){}.getType();
+            List<PgeoidBorder> jobjList = gson.fromJson(fileReader, typeList);
+
+            for(PgeoidBorder pgeoidBorder : jobjList) {
+                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(pgeoidBorder.pgeoid);
+                if(precinctsOfSameGeoId.size() > 1) {
+                    System.out.println("There are two or more geoid precinct for geoid: " + pgeoidBorder.pgeoid);
+                }
+                if(precinctsOfSameGeoId == null || precinctsOfSameGeoId.size() == 0) {
+                    System.out.println(pgeoidBorder.pgeoid + " doesn't exist in DB!");
+                    continue;
+                }
+                Precinct firstOne = precinctsOfSameGeoId.get(0);
+                firstOne.setBorder(pgeoidBorder.border);
+                Precinct result = pm.updatePrecinct(firstOne);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /*
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precincts_WI_2010.json";
+        Gson gson = new GsonBuilder().create();
+        try {
+            FileReader fileReader = new FileReader(jsonFilePath);
+            Type typeListGAP = new TypeToken<List<GeoidAreaPerimeter>>(){}.getType();
+            List<GeoidAreaPerimeter> gapList = gson.fromJson(fileReader, typeListGAP);
+
+            for(GeoidAreaPerimeter gap : gapList) {
+                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(gap.geoid);
+                if(precinctsOfSameGeoId.size() > 1) {
+                    System.out.println("There are two or more geoid precinct for geoid: " + gap.geoid);
+                }
+                if(precinctsOfSameGeoId == null || precinctsOfSameGeoId.size() == 0) {
+                    System.out.println(gap.geoid + " doesn't exist in DB!");
+                    continue;
+                }
+                Precinct firstOne = precinctsOfSameGeoId.get(0);
+                firstOne.setPerimeter(gap.perimeter);
+                //firstOne.setArea(gap.area);
+                Precinct result = pm.updatePrecinct(firstOne);
+                //System.out.println("pid " + result.getId() + " is updated");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+         */
+    }
 }
