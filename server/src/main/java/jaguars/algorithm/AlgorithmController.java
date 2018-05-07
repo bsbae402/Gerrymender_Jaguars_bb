@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -35,11 +37,16 @@ public class AlgorithmController {
     public String startRedistrictAlgorithm(@RequestParam("state_id") int stateId,
                                            @RequestParam("compactness_weight") double compactnessWeight,
                                            @RequestParam("efficiency_weight") double efficiencyWeight,
-                                           @RequestParam("population_threshold") double populationThreshold) {
+                                           @RequestParam("population_threshold") double populationThreshold,
+                                           @RequestParam("ignore_precinct_ids") int[] ignored_p_array,
+                                           @RequestParam("ignore_district_ids") int[] ignored_d_array) {
         State stateOrigin = sm.getState(stateId);
         State algoState = sm.cloneState(stateOrigin);
+        HashSet<Integer> ignored_precincts = new HashSet(Arrays.asList(ignored_p_array));
+        HashSet<Integer> ignored_districts = new HashSet(Arrays.asList(ignored_d_array));
+
         AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
-                efficiencyWeight, populationThreshold);
+                efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
         Integer hashint = ags.registerAlgorithmInstance(ai);
 
         Set<District> districts = algoState.getDistricts();
@@ -89,11 +96,13 @@ public class AlgorithmController {
     public String storageRegister(@RequestParam("state_id") int stateId,
                                   @RequestParam("compactness_weight") double compactnessWeight,
                                   @RequestParam("efficiency_weight") double efficiencyWeight,
-                                  @RequestParam("population_threshold") double populationThreshold) {
+                                  @RequestParam("population_threshold") double populationThreshold,
+                                  @RequestParam("ignore_precinct_ids") HashSet<Integer> ignored_precincts,
+                                  @RequestParam("ignore_district_ids") HashSet<Integer> ignored_districts) {
         State stateOrigin = sm.getState(stateId);
         State algoState = sm.cloneState(stateOrigin);
         AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
-                efficiencyWeight, populationThreshold);
+                efficiencyWeight, populationThreshold,ignored_precincts, ignored_districts);
         Integer hashint = ags.registerAlgorithmInstance(ai);
         JsonObject retObj = new JsonObject();
         retObj.addProperty("algorithm_id", hashint);

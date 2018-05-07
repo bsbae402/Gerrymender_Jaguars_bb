@@ -101,7 +101,7 @@ public class Algorithm {
         return extracted;
     }
 
-    private State generateNewDistrictBoundaries(Precinct targetPrecinct, State oldDistrictState) {
+    private State generateNewDistrictBoundaries(Precinct targetPrecinct, State oldDistrictState, AlgorithmInstance ai) {
         State newDistrictState = sm.cloneState(oldDistrictState);
 
         // get reference of all precincts in the cloned state
@@ -132,7 +132,8 @@ public class Algorithm {
         for(Precinct neighbor : neighbors) {
             District neighborsDistrict = neighbor.getDistrict();
             if(!neighborsDistrict.getCode().equals(oldAffiliation.getCode())
-                    && !selectableDistricts.contains(neighborsDistrict))
+                    && !selectableDistricts.contains(neighborsDistrict)
+                    && !ai.getIgnored_districts().contains(neighborsDistrict.getGeoId()))
                 selectableDistricts.add(neighborsDistrict);
         }
         if(selectableDistricts.size() == 0) {
@@ -222,10 +223,10 @@ public class Algorithm {
         while(loopSteps < iterations) {
             Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
 
-            while (!targetPrecinctOfOld.ismovable()){
+            while (ai.getIgnored_precints().contains(targetPrecinctOfOld.getGeoId())){
                 targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
             }
-            State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState);
+            State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState, ai);
 
             /* DELETE THIS AFTER IMPLEMENTING CONNECTED COMPONENTS CONSTRAINT ALGO */
             if(newState == null) {
