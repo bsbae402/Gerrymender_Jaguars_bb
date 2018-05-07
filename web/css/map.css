@@ -905,6 +905,32 @@
 #credistrict .updates {
     margin-top:15px;
     height:220px;
+    font-weight:300;
+}
+#credistrict .updates .table {
+    font-size:0;
+}
+#credistrict .updates .labels {
+    font-weight:600;
+    margin-top:2px;
+}
+#credistrict .updates .field1 {
+    width: 240px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight:400;
+}
+#credistrict .updates .labels .field1 {
+    font-weight:600;
+}
+#credistrict .updates .dc .field1 {
+    padding-left:6px;
+}
+#credistrict .updates .before,
+#credistrict .updates .after {
+    width: 120px;
+    display: inline-block;
+    font-size: 14px;
 }
 
 
