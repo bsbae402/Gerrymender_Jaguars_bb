@@ -58,6 +58,9 @@ function getPerc(a, b) {
     return 100 * a / b;
 }
 
+function mergeColors(a, b, r=0.5) {
+    return a.map((aa, i) => a[i] + r * (b[i] - a[i]));
+}
 function generateColors(n) {
     var colors = [];
     for(var i=0;i<n;i++) {
