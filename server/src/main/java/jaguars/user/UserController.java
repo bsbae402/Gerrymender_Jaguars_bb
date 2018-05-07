@@ -95,7 +95,11 @@ public class UserController {
                          @RequestParam("email") String email, @RequestParam("ignore_verify") boolean verify)
             throws NoSuchAlgorithmException, UnsupportedEncodingException {
         ArrayList<User> users = new ArrayList<User>(um.findUsersByUsername(username));
+        if(users.size() >= 1) {
+            return "{ \"user_id\" : -1 }";
+        }
 
+        users = new ArrayList<>(um.findUserByEmail(email));
         if(users.size() >= 1) {
             return "{ \"user_id\" : -1 }";
         }
