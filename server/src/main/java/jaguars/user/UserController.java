@@ -112,7 +112,7 @@ public class UserController {
         return retObj.toString();
     }
 
-    @RequestMapping(value = "/verify", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/verify", method = RequestMethod.POST)
     public String verify(@RequestParam("username") String username,
                          @RequestParam("verify") String verify) {
         PendingVerifications pv = pvm.findUsersByUsername(username).get(0);
