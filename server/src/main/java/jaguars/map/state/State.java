@@ -232,4 +232,12 @@ public class State {
         }
         return null;
     }
+
+    public ArrayList<Precinct> getPrecincts() {
+        ArrayList<Precinct> precincts = new ArrayList<>();
+        for(District d : getDistricts()) {
+            precincts.addAll(d.getPrecincts());
+        }
+        return precincts;
+    }
 }

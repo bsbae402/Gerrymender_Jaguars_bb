@@ -2,9 +2,12 @@ package jaguars.algorithm;
 
 import com.google.gson.*;
 import jaguars.AppConstants;
+import jaguars.data.NeighborData;
+import jaguars.data.PrecinctNeighborManager;
 import jaguars.data.global_storage.AlgorithmGlobalStorage;
 import jaguars.data.global_storage.AlgorithmInstance;
 import jaguars.map.district.District;
+import jaguars.map.precinct.Precinct;
 import jaguars.map.state.State;
 import jaguars.map.state.StateManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,8 @@ public class AlgorithmController {
     private HttpSession session;
     @Autowired
     private CalculationManager cm;
+    @Autowired
+    private PrecinctNeighborManager pnm;
 
     @RequestMapping(value = "/algorithm/start", method = RequestMethod.POST)
     public String startRedistrictAlgorithm(@RequestParam("state_id") int stateId,
@@ -113,5 +118,115 @@ public class AlgorithmController {
     public AlgorithmInstance storageGet(@RequestParam("algorithm_id") int hashint) {
         AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
         return ai;
+    }
+
+    @RequestMapping(value = "algorithm/manual/start", method = RequestMethod.POST)
+    public String startManualRedistrict(@RequestParam("state_id") int stateId,
+                                        @RequestParam("compactness_weight") double compactnessWeight,
+                                        @RequestParam("efficiency_weight") double efficiencyWeight,
+                                        @RequestParam("population_threshold") double populationThreshold) {
+        State stateOrigin = sm.getState(stateId);
+        State algoState = sm.cloneState(stateOrigin);
+        HashSet<String> ignored_precincts = new HashSet(); // empty set. We are not using them
+        HashSet<String> ignored_districts = new HashSet();
+
+        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
+                efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
+        Integer hashint = ags.registerAlgorithmInstance(ai);
+
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        JsonObject retObj = new JsonObject();
+        retObj.addProperty("algorithm_id", hashint);
+
+        return retObj.toString();
+    }
+
+    @RequestMapping(value = "algorithm/manual/precinct/select", method = RequestMethod.POST)
+    public String selectPrecinctManual(@RequestParam("algorithm_id") int hashint,
+                                        @RequestParam("precinct_geoid") String precinctGeoId) {
+        AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
+        State algoState = ai.getAlgorithmState();
+        Precinct targetPrecinct = algoState.getPrecinctByPgeoid(precinctGeoId);
+        ArrayList<Precinct> borderPrecincts = algoState.getBorderPrecincts();
+        if(!borderPrecincts.contains(targetPrecinct)) {
+            JsonObject retObj = new JsonObject();
+            retObj.addProperty("error", -1);
+            return retObj.toString();
+        }
+
+        if(ai.getIgnored_precints().contains(precinctGeoId)) {
+            JsonObject retObj = new JsonObject();
+            retObj.addProperty("error", -2);
+            return retObj.toString();
+        }
+
+        // if the target is on border
+        ArrayList<NeighborData> neighborDataList = pnm.getNeighborDataOfPGeoId(algoState.getCode(),
+                algoState.getElectionYear(), targetPrecinct.getGeoId());
+        // find all neighboring precincts
+        ArrayList<Precinct> neighbors = algorithm.extractPrecinctsByNeighborDataList(neighborDataList, algoState.getPrecincts());
+
+        District oldAffiliation = targetPrecinct.getDistrict();
+        // The list of selectable districts of the target precinct.
+        ArrayList<District> selectableDistricts = new ArrayList<>();
+        for(Precinct neighbor : neighbors) {
+            District neighborsDistrict = neighbor.getDistrict();
+            if(!neighborsDistrict.getCode().equals(oldAffiliation.getCode())
+                    && !selectableDistricts.contains(neighborsDistrict)
+                    && !ai.getIgnored_districts().contains(neighborsDistrict.getGeoId()))
+                selectableDistricts.add(neighborsDistrict);
+        }
+        if(selectableDistricts.size() == 0) {
+            // this means that the targetPrecinct is not a border precinct
+            System.out.println("There are no selectable districts! -> target precinct is not border!");
+            System.out.println("target precinct: " + targetPrecinct.getName());
+            return null;
+        }
+
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+
+        ArrayList<String> selectableDgeoids = new ArrayList<>();
+        for(District d : selectableDistricts) {
+            selectableDgeoids.add(d.getGeoId());
+        }
+        JsonElement selectableDgeoidList = gson.toJsonTree(selectableDgeoids);
+
+        JsonObject retObj = new JsonObject();
+        retObj.add("selectable_districts", selectableDgeoidList);
+
+        return retObj.toString();
+    }
+
+    @RequestMapping(value = "algorithm/manual/precinct/update", method = RequestMethod.POST)
+    public String manualPrecinctUpdate(@RequestParam("algorithm_id") int hashint,
+                                    @RequestParam("precinct_geoid") String precinctGeoId,
+                                    @RequestParam("district_geoid") String districtGeoId){
+        AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
+        State algoState = ai.getAlgorithmState();
+        Precinct targetPrecinct = algoState.getPrecinctByPgeoid(precinctGeoId);
+        District oldAffiliation = targetPrecinct.getDistrict();
+        District newAffiliation = algoState.getDistrictByDgeoid(districtGeoId);
+
+        ArrayList<NeighborData> neighborDataList = pnm.getNeighborDataOfPGeoId(algoState.getCode(),
+                algoState.getElectionYear(), targetPrecinct.getGeoId());
+        // find all neighboring precincts
+        ArrayList<Precinct> neighbors = algorithm.extractPrecinctsByNeighborDataList(neighborDataList, algoState.getPrecincts());
+
+        // change the affiliation of the cloned target precinct
+        algorithm.changePrecinctAffiliationOfState(targetPrecinct, newAffiliation,
+                algoState, neighbors, neighborDataList);
+
+        JsonObject retObj = new JsonObject();
+        retObj.addProperty("new_district_compactness", cm.getCompactnessMeasure(newAffiliation));
+        retObj.addProperty("old_district_compactness", cm.getCompactnessMeasure(oldAffiliation));
+        retObj.addProperty("state_wide_efficiency_gap", cm.getEfficiencyGap(algoState));
+
+        return retObj.toString();
     }
 }
