@@ -35,6 +35,14 @@ var API_CALLS = [
         },
         adummy : function(data={}) { return { user_id : 0, error : 0, } },
     },
+    {
+        name : "verifyuser",
+        method : "POST",
+        url : "user/verify",
+        response : function(r={}, data={}) {
+            return r;
+        },
+    },
 
     // users
     {

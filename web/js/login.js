@@ -11,6 +11,14 @@ whenReady(function() {
 				$(".login .username").focus();
 		}, 300);
 	});
+	$('[href="/login.html#signup"]').click(function(e) {
+		if (!$(".carousel").hasClass("a"))
+			$(".login .subtext").click();
+	});
+	$('[href="/login.html"]').click(function(e) {
+		if ($(".carousel").hasClass("a"))
+			$(".signup .subtext").click();
+	});
 
 	if (window.location.hash.indexOf("signup") > -1)
 		$("#app .carousel").addClass("a");
@@ -73,15 +81,17 @@ whenReady(function() {
 					username : user,
 					password : pass,
 					email : email,
+					ignore_verify : false,
 				})
 				.then((r) => {
-					if (r.error) {
+					if (r.error || r.user_id == -1) {
 						$(".signup .error").addClass("show");
-						if (r.error === 1)
-							$(".signup .error").html("Username already exists");
+						if (r.error === 1 || r.user_id === -1)
+							$(".signup .error").html("Email/Username already exists");
 						else
 							$(".signup .error").html("Unknown error");
 					} else {
+						/*
 						jset("user", {
 							loggedin : true,
 							username : user,
@@ -90,6 +100,8 @@ whenReady(function() {
 						});
 
 						window.location.href = "/account.html";
+						*/
+						window.location.href = "/verify.html?signedup";
 					}
 				});
 

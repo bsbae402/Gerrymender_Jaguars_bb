@@ -108,6 +108,7 @@ whenReady(function() {
                 email : $(".users .user.add .email input").val(),
                 username : $(".users .user.add .username input").val(),
                 password : $(".users .user.add .password input").val(),
+                ignore_verify : true,
             };
 
             $(".users .user.add input").val("");

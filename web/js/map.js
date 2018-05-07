@@ -805,6 +805,7 @@ whenReady(function() {
 		cw : [0, 1, 0.5],
 		ew : [0, 1, 0.5],
 		pt : [0.001, 0.25, 0.1],
+		lp : [0, 6, 1],
 	}
 	$("#credistrict .slider").each(function(index) {
 		var $slider = $(this), $c = $slider.closest(".constraint");
@@ -812,8 +813,13 @@ whenReady(function() {
 		var slider = new Slider($slider, (sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]));
 		sliders[s][3] = slider;
 		slider.onChangeAlways((v) => {
-			var n = sliders[s][0] + (sliders[s][1] - sliders[s][0]) * v;
-			$c.find(".label span").html(n.toFixed(4));
+			var n = sliders[s][0] + (sliders[s][1] - sliders[s][0]) * v,
+				ns = n.toFixed(4);;
+			if (s == "lp") {
+				n = Math.round(Math.pow(10, n));
+				ns = commaNumbers(n);
+			}
+			$c.find(".label span").html(ns);
 			sliders[s][4] = n;
 		}, true);
 	});
@@ -1170,11 +1176,14 @@ whenReady(function() {
 
 			var map = [["cw", "compactness_weight"],
 					   ["ew", "efficiency_weight"],
-					   ["pt", "population_threshold"]];
+					   ["pt", "population_threshold"],
+					   ["lp", "loops"],
+					   ];
 			var data = {
 				state_id : active.sy.id,
 				ignore_precinct_geo_ids : [-1],
 				ignore_district_geo_ids : [-1],
+				loops : TOTAL_LOOPS,
 			};
 			map.forEach((a) => {
 				data[a[1]] = sliders[a[0]][4];
@@ -1186,14 +1195,26 @@ whenReady(function() {
 				if (p.ignoreRedistrict) data.ignore_precinct_geo_ids.push(p.geo_id);
 			});
 
+			TOTAL_LOOPS = data.loops;
+			if (TOTAL_LOOPS < 100) LOOP_ITERATE = TOTAL_LOOPS / 10;
+			else if (TOTAL_LOOPS < 1000) LOOP_ITERATE = TOTAL_LOOPS / 10;
+			else if (TOTAL_LOOPS < 10000) LOOP_ITERATE = TOTAL_LOOPS / 50;
+			else if (TOTAL_LOOPS < 100000) LOOP_ITERATE = TOTAL_LOOPS / 200;
+			else if (TOTAL_LOOPS < 1000000) LOOP_ITERATE = TOTAL_LOOPS / 500;
+			else if (TOTAL_LOOPS < 10000000) LOOP_ITERATE = TOTAL_LOOPS / 1000;
+			else LOOP_ITERATE = TOTAL_LOOPS / 10000;
+			LOOP_ITERATE = Math.round(LOOP_ITERATE);
+			LOOP_ITERATE = Math.min(Math.max(LOOP_ITERATE, 10), 1000);
+
 			APICall("startalgorithm", data)
 				.then((r) => {
 					updates = [];
 					running = true;
 					paused = false;
 					aid = r.algorithm_id;
-					totalLoops = r.loops;
+
 					totalLoops = TOTAL_LOOPS;
+
 					loopCount = 0;
 					lastUpdate = 0;
 					renderTime = 0;
