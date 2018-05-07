@@ -35,6 +35,8 @@ public class Precinct {
     private String code;
     @Expose
     private boolean original;
+    @Expose
+    private boolean movable;
 
     @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,7 +44,7 @@ public class Precinct {
     private District district;
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "precinct", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "precinct", fetch = FetchType.EAGER)
     private Set<VotingDataPrecinct> votingDataPrecincts = new HashSet<>();
 
     public Precinct() {}

@@ -25,7 +25,9 @@ public class VotingDataStateQuery {
 
     @Test
     public void createVotingDataStates() {
-        int stateId = 2;
+        // int stateId = 2; // NH
+        // int stateId = 1; // NH
+        int stateId = 3; // NH
         State state = sm.getState(stateId);
         int votesDEM = 0;
         int votesREP = 0;

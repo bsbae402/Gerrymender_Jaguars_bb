@@ -34,6 +34,10 @@ public class District {
     private String code;
     @Expose
     private boolean original;
+    @Expose
+    private boolean movable;
+    @Expose
+    private int medianIncome;
 
     @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,11 +45,11 @@ public class District {
     private State state;
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
     private Set<Precinct> precincts = new HashSet<>();
 
     @Expose(serialize = false)
-    @OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
     private Set<VotingDataDistrict> votingDataDistricts = new HashSet<>();
 
     public District() {}
