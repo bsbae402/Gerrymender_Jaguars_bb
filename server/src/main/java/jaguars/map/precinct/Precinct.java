@@ -36,6 +36,8 @@ public class Precinct {
     private String code;
     @Expose
     private boolean original;
+    @Expose
+    private boolean movable;
 
     @JsonIgnore
     @Expose(serialize = false)
@@ -65,9 +67,11 @@ public class Precinct {
             newVdp.setPrecinct(this);
             this.votingDataPrecincts.add(newVdp);
         }
+        this.movable = precinct.ismovable();
     }
 
-    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean border, String code, boolean original, District district) {
+    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId,
+                    int totalVotes, boolean border, String code, boolean original, District district, boolean movable) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -79,6 +83,7 @@ public class Precinct {
         this.code = code;
         this.original = original;
         this.district = district;
+        this.movable = movable;
     }
 
     public int getId() {
@@ -185,6 +190,14 @@ public class Precinct {
         this.votingDataPrecincts = votingDataPrecincts;
     }
 
+    public boolean ismovable() {
+        return movable;
+    }
+
+    public void setmovable(boolean movable) {
+        this.movable = movable;
+    }
+
     @Override
     public String toString() {
         return "Precinct{" +
@@ -199,6 +212,7 @@ public class Precinct {
                 ", border=" + border +
                 ", code='" + code + '\'' +
                 ", original=" + original +
+                ", movable=" + movable +
                 '}';
     }
 }

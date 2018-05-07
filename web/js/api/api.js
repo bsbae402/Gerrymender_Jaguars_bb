@@ -137,15 +137,25 @@ var API_CALLS = [
         name : "getdistricts",
         method : "POST",
         url : "district/get/bystateid",
-        response : (r, data) => handleVotingData(r),
+        response : (r, data) => {
+            var r = handleVotingData(r);
+            r.forEach((d) => {
+                d.ignoreRedistrict = false;
+            });
+            return r;
+        },
     },
     {
         name : "getprecincts",
         method : "POST",
         url : "precinct/get/bydistrictid",
         response : (r, data) => {
-            var r = handleVotingData(r)
-            r.forEach((d) => d.district_id = data.district_id);
+            var r = handleVotingData(r);
+            r.forEach((d) => {
+                d.district_id = data.district_id;
+                d.ignoreRedistrict = false;
+                d.ignoreRedistrictDistrict = false;
+            });
             return r;
         },
     },
@@ -156,7 +166,7 @@ var API_CALLS = [
         method : "GET",
         url : "analytics/{type}",
         response : (r, data) => r,
-        dummy : (data) => {
+        adummy : (data) => {
             var m = [];
             if (data.type == "state") {
                 m = [

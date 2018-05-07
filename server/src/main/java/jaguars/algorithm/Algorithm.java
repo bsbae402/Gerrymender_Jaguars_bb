@@ -221,6 +221,10 @@ public class Algorithm {
         int loopSteps = 0;
         while(loopSteps < iterations) {
             Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+
+            while (!targetPrecinctOfOld.ismovable()){
+                targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+            }
             State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState);
 
             /* DELETE THIS AFTER IMPLEMENTING CONNECTED COMPONENTS CONSTRAINT ALGO */
@@ -229,7 +233,7 @@ public class Algorithm {
                 continue;
             }
 
-            if(cm.getPopulationThres(newState)) {
+            if(!cm.getPopulationThres(newState, ai.getPopulationThreshold())) {
                 loopSteps++;
                 continue;
             }
@@ -241,8 +245,8 @@ public class Algorithm {
                 continue;
             }
 
-            double oldScore = cm.objectiveFunction(oldState);
-            double newScore = cm.objectiveFunction(newState);
+            double oldScore = cm.objectiveFunction(oldState, ai.getCompactnessWeight(), ai.getEfficiencyWeight());
+            double newScore = cm.objectiveFunction(newState, ai.getCompactnessWeight(), ai.getEfficiencyWeight());
             if(newScore < oldScore){
                 loopSteps++;
                 continue;

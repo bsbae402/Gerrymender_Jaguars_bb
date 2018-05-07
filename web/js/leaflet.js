@@ -15,6 +15,8 @@ class LeafletMap {
 		this.hover = {
 			activeLayer : null,
 			$el : null,
+			func : null, layer : null, props : null,
+			pos : { x : 0, y : 0, },
 		};
 	}
 
@@ -63,7 +65,29 @@ class LeafletMap {
 		this.hover.$el.css({
 			left : pos.x + "px",
 			top : pos.y + "px",
-		})
+		});
+		this.hover.pos = pos;
+	}
+	updateHover() {
+		this.setupHover(this.hover.func, this.hover.layer, this.hover.props);
+		this.hover.$el.css({
+			left : this.hover.pos.x + "px",
+			top : this.hover.pos.y + "px",
+		});
+	}
+	setupHover(func=null, layer=null, props=null) {
+		this.hover.func = func;
+		this.hover.layer = layer;
+		this.hover.props = props;
+
+		this.hover.$el.attr("style", "").attr("class", "popup hide").html("");
+        var shouldHover = func(this.hover.$el, layer, props);
+        if (shouldHover) {
+        	this.hover.active = layer;
+        	this.hover.$el.removeClass("hide");
+        } else {
+        	this.hover.active = null;
+        }
 	}
 
 	cleanLayers() {
@@ -233,14 +257,7 @@ class LeafletMap {
 		        	})
 		        }
 
-		        this.hover.$el.attr("style", "").attr("css", "popup hide").html("");
-		        var shouldHover = settings.hover(this.hover.$el, layer, props);
-		        if (shouldHover) {
-		        	this.hover.active = layer;
-		        	this.hover.$el.removeClass("hide");
-		        } else {
-		        	this.hover.active = null;
-		        }
+		        this.setupHover(settings.hover, layer, props);
 	        },
 	        mouseout : (e) => {
 	        	var layer = e.target, feature = layer.feature, props = feature.properties;
@@ -374,9 +391,6 @@ var COLOR_SCHEME = {
 }
 function buildColor(arr, alpha=1) {
 	return "rgba(" + arr.map((a) => Math.round(parseInt(a)).toFixed(0)).join(",") + ", " + alpha + ")";
-}
-function mergeColors(a, b, r=0.5) {
-	return a.map((aa, i) => a[i] + r * (b[i] - a[i]));
 }
 
 
