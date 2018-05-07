@@ -190,7 +190,8 @@ public class UserController {
                         .add("username", a.getUsername())
                         .add("password", a.getPassword())
                         .add("email", a.getEmail())
-                        .add("role", a.getRole().name());
+                        .add("role", a.getRole().name())
+                        .add("verified", a.isVerified());
                 retJsonArr.add(obj);
             }
             return retJsonArr.toString();
