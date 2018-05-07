@@ -91,6 +91,10 @@ public class UserController {
                          @RequestParam("email") String email) {
         ArrayList<User> users = new ArrayList<User>(um.findUsersByUsername(username));
 
+        if(users.size() >= 1) {
+            return "{ \"user_id\" : -1 }";
+        }
+
         // GENERATE KEY
         Random random = new Random();
         byte[] r = new byte[64];
@@ -103,10 +107,6 @@ public class UserController {
 
         // Add Pending Verification
         pvm.addPendingVerification(username, key);
-
-        if(users.size() >= 1) {
-            return "{ \"user_id\" : -1 }";
-        }
         User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
         JsonObject retObj = Json.object().add("user_id", createdUser.getId());
         return retObj.toString();
