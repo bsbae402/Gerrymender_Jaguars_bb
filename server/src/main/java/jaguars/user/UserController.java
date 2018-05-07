@@ -103,9 +103,9 @@ public class UserController {
         if (!verify){
             // GENERATE KEY
             String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
-            System.out.println(Long.toHexString(Double.doubleToLongBits(Math.random())));
-            String body = "In order to verify your account, input your username and the following code:\n" +
-                    key;
+
+            String body = "In order to verify your account, click on the following link:\n" +
+                    "http://gerrymandering.online/verify.html?u=" + username + "&v=" + key;
 
             emailService.sendSimpleMessage(email, "Gerrymandering Online Verification", body);
 
@@ -120,15 +120,20 @@ public class UserController {
     @RequestMapping(value = "/user/verify", method = RequestMethod.POST)
     public String verify(@RequestParam("username") String username,
                          @RequestParam("verify") String verify) {
-        PendingVerifications pv = pvm.findUsersByUsername(username).get(0);
         int error = 0;
+        try {
+            PendingVerifications pv = pvm.findUsersByUsername(username).get(0);
 
-        if (pv.getVerify().equals(verify)){
-            pvm.removePendingVerification(pv.getId());
 
-            User user = um.findUsersByUsername(username).get(0);
-            um.verify(user.getId());
-        } else {
+            if (pv.getVerify().equals(verify)) {
+                pvm.removePendingVerification(pv.getId());
+
+                User user = um.findUsersByUsername(username).get(0);
+                um.verify(user.getId());
+            } else {
+                error = -1;
+            }
+        } catch (java.lang.IndexOutOfBoundsException e){
             error = -1;
         }
 
