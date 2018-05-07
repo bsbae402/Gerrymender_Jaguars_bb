@@ -3,10 +3,10 @@ import pandas
 import sys
 import json
 
-district_fname = "OH_districts_2011_REVISED.json"
+district_fname = "WI_district_2011_jaguars.json"
 district_gdf = geopandas.read_file(district_fname)
 
-precinct_fname = "OH_precincts_fixed.json"
+precinct_fname = "WI_wards_2010_jaguars_v2.json"
 precinct_gdf = geopandas.read_file(precinct_fname)
 
 pgeoid_list = precinct_gdf['GEOID10']
@@ -51,5 +51,5 @@ for p_idx in range(0, len(pidx_to_intr_didxs)):
         mapping["dgeoid"] = dgeoid_list[didxs[0]]
     mapping_json_arr.append(mapping)
 
-with open('precinct_district_mapping_OH.json', 'w') as outfile:
+with open('precinct_district_mapping_WI.json', 'w') as outfile:
     json.dump(mapping_json_arr, outfile)
