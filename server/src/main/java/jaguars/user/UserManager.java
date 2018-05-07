@@ -36,7 +36,12 @@ public class UserManager {
     }
 
     public User saveUser(String username, String password, String email, UserRole role) {
-        User newUser = new User(username, password, email, role);
+        User newUser = new User(username, password, email, role, false);
+        return userRepository.save(newUser);
+    }
+
+    public User saveUser(String username, String password, String email, UserRole role, boolean verified) {
+        User newUser = new User(username, password, email, role, verified);
         return userRepository.save(newUser);
     }
 
@@ -64,6 +69,13 @@ public class UserManager {
         user.setPassword(password);
         user.setEmail(email);
 
+        userRepository.save(user);
+    }
+
+    public void verify(int userid) {
+        User user = userRepository.findOne(userid);
+
+        user.setVerified(true);
         userRepository.save(user);
     }
 

@@ -4,6 +4,9 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import jaguars.AppConstants;
+import jaguars.user.pending_verifications.PendingVerifications;
+import jaguars.user.pending_verifications.PendingVerificationsManager;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +15,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 @RestController
 public class UserController {
     @Autowired
     UserManager um;
+    @Autowired
+    EmailServiceImpl emailService;
+    @Autowired
+    PendingVerificationsManager pvm;
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -41,7 +49,7 @@ public class UserController {
             System.out.println("BUT there seems more than one users of the same name...");
 
         User user = users.get(0);
-        if(!password.equals(user.getPassword())) {
+        if(!user.isVerified() || !password.equals(user.getPassword())) {
             JsonObject retObj = Json.object().add("error", 1)
                     .add("user_id", "")
                     .add("user_type", -1);
@@ -82,11 +90,44 @@ public class UserController {
     public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
                          @RequestParam("email") String email) {
         ArrayList<User> users = new ArrayList<User>(um.findUsersByUsername(username));
+
+        // GENERATE KEY
+        Random random = new Random();
+        byte[] r = new byte[64];
+        random.nextBytes(r);
+        String key = Base64.encodeBase64String(r);
+        String body = "In order to verify your account, input your username and the following code:\n" +
+                key;
+
+        emailService.sendSimpleMessage(email, "Gerrymandering Online Verification", body);
+
+        // Add Pending Verification
+        pvm.addPendingVerification(username, key);
+
         if(users.size() >= 1) {
             return "{ \"user_id\" : -1 }";
         }
         User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
         JsonObject retObj = Json.object().add("user_id", createdUser.getId());
+        return retObj.toString();
+    }
+
+    @RequestMapping(value = "/verify", method = RequestMethod.POST)
+    public String verify(@RequestParam("username") String username,
+                         @RequestParam("verify") String verify) {
+        PendingVerifications pv = pvm.findUsersByUsername(username).get(0);
+        int error = 0;
+
+        if (pv.getVerify().equals(verify)){
+            pvm.removePendingVerification(pv.getId());
+
+            User user = um.findUsersByUsername(username).get(0);
+            um.verify(user.getId());
+        } else {
+            error = -1;
+        }
+
+        JsonObject retObj = Json.object().add("error", error);
         return retObj.toString();
     }
 
@@ -166,7 +207,7 @@ public class UserController {
                 return "{ \"error\" : 1," +
                         "\"user_id\" : -1 }";
             }
-            User createdUser = um.saveUser(username, password, email, UserRole.USER); // ADMIN should be registered through DB directly
+            User createdUser = um.saveUser(username, password, email, UserRole.USER, true); // ADMIN should be registered through DB directly
             JsonObject retObj = Json.object().add("user_id", createdUser.getId());
             return retObj.toString();
     }
