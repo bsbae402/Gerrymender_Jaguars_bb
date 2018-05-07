@@ -58,7 +58,7 @@
             return false;
         }
     });
-
+    
     $(function() {
         
         var includes = $('[data-include]');

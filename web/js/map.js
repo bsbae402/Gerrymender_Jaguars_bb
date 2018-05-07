@@ -1081,6 +1081,9 @@ whenReady(function() {
 				$change.find(".compactness2").html(change.new_district_compactness.toFixed(4));
 				$("#credistrict .changes").append($change);
 			}
+
+			$("#credistrict .updates .dc[did=" + d.id + "] .after").html(change.new_district_compactness.toFixed(8));
+			$("#credistrict .updates .seg .after").html(change.state_wide_efficiency_gap.toFixed(8));
 		}
 
 		setInterval(() => {
@@ -1170,8 +1173,8 @@ whenReady(function() {
 					   ["pt", "population_threshold"]];
 			var data = {
 				state_id : active.sy.id,
-				ignore_precinct_geo_ids : [],
-				ignore_district_geo_ids : [],
+				ignore_precinct_geo_ids : [-1],
+				ignore_district_geo_ids : [-1],
 			};
 			map.forEach((a) => {
 				data[a[1]] = sliders[a[0]][4];
@@ -1194,6 +1197,20 @@ whenReady(function() {
 					loopCount = 0;
 					lastUpdate = 0;
 					renderTime = 0;
+
+					$("#credistrict .updates .seg .before, #credistrict .updates .seg .after").html(r.init_state_efficiency_gap.toFixed(8));
+					$("#credistrict .updates .dc").remove();
+					r.init_district_compactness_list.forEach((dc, ind) => {
+						var district = active.districts.find((d) => d.id == dc.district_id);
+						if (!district) district = active.districts[ind];
+						if (!district) return;
+						var $dc = $("<div>").addClass("row dc").attr("did", district.id).append(
+							$("<div>").addClass("field field1").html(district.name),
+							$("<div>").addClass("field before").html(dc.compactness.toFixed(8)),
+							$("<div>").addClass("field after").html(dc.compactness.toFixed(8)),
+							);
+						$("#credistrict .updates .table").append($dc);
+					});
 
 					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop, #credistrict .algorithm .reset").removeClass("disabled");
 					$("#credistrict .algresults .progress").css("width", 0);
