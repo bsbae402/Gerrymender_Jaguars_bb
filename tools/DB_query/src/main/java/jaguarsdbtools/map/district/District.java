@@ -34,6 +34,10 @@ public class District {
     private String code;
     @Expose
     private boolean original;
+    @Expose
+    private boolean movable;
+    @Expose
+    private int medianIncome;
 
     @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.LAZY)

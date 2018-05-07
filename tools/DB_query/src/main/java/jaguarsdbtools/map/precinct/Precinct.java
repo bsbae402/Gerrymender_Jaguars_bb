@@ -35,6 +35,8 @@ public class Precinct {
     private String code;
     @Expose
     private boolean original;
+    @Expose
+    private boolean movable;
 
     @Expose(serialize = false)
     @ManyToOne(fetch = FetchType.LAZY)

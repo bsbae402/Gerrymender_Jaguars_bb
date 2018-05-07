@@ -41,9 +41,8 @@ public class PrecinctUpdateQuery {
 
     @Test
     public void updatePrecinctPerimeters() {
-        int censusYear = 2010;
         //String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precinct_NH_2010.json";
-        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precincts_OH_2010.json";
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precincts_WI_2010.json";
         Gson gson = new GsonBuilder().create();
         try {
             FileReader fileReader = new FileReader(jsonFilePath);
@@ -64,6 +63,37 @@ public class PrecinctUpdateQuery {
                 //firstOne.setArea(gap.area);
                 Precinct result = pm.updatePrecinct(firstOne);
                 //System.out.println("pid " + result.getId() + " is updated");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void updatePrecinctPerimetersAreas() {
+        //String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precincts_WI_2010.json";
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precincts_OH_2010.json";
+        Gson gson = new GsonBuilder().create();
+        try {
+            FileReader fileReader = new FileReader(jsonFilePath);
+            Type typeListGAP = new TypeToken<List<GeoidAreaPerimeter>>(){}.getType();
+            List<GeoidAreaPerimeter> gapList = gson.fromJson(fileReader, typeListGAP);
+
+            for(GeoidAreaPerimeter gap : gapList) {
+                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(gap.geoid);
+                if(precinctsOfSameGeoId.size() > 1) {
+                    System.out.println("There are two or more geoid precinct for geoid: " + gap.geoid);
+                }
+                if(precinctsOfSameGeoId == null || precinctsOfSameGeoId.size() == 0) {
+                    System.out.println(gap.geoid + " doesn't exist in DB!");
+                    continue;
+                }
+                Precinct firstOne = precinctsOfSameGeoId.get(0);
+                if(firstOne.getArea() == 0 || firstOne.getPerimeter() == 0) {
+                    firstOne.setPerimeter(gap.perimeter);
+                    firstOne.setArea(gap.area);
+                    Precinct result = pm.updatePrecinct(firstOne);
+                }
             }
         } catch (Exception e){
             e.printStackTrace();
