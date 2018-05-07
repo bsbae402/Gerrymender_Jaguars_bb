@@ -1119,7 +1119,7 @@ whenReady(function() {
 
 						var perc = update.loop / totalLoops * 100;
 						$("#credistrict .algresults .progress").css("width", perc + "%");
-						if (!update.is_running) {
+						if (perc >= 100) {
 							// finished
 							$("#credistrict .algorithm .pause, #credistrict .algorithm .stop").addClass("disabled");
 						}
