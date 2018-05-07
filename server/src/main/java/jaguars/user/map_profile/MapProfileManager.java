@@ -20,8 +20,4 @@ public class MapProfileManager {
         return mapProfiles;
     }
 
-    public MapProfile saveMapProfile(String profileTitle) {
-        MapProfile createdProfile = mpr.save(new MapProfile(profileTitle));
-        return createdProfile;
-    }
 }

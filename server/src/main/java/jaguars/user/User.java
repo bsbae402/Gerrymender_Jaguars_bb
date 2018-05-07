@@ -1,10 +1,10 @@
 package jaguars.user;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jaguars.user.map_profile.MapProfile;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -16,6 +16,9 @@ public class User {
     private String email;
     private UserRole role;
     private boolean verified;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<MapProfile> mapProfiles;
 
     public User() {
     }
@@ -74,6 +77,14 @@ public class User {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public Set<MapProfile> getMapProfiles() {
+        return mapProfiles;
+    }
+
+    public void setMapProfiles(Set<MapProfile> mapProfiles) {
+        this.mapProfiles = mapProfiles;
     }
 
     @Override
