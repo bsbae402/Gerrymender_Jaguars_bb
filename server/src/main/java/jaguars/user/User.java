@@ -15,15 +15,17 @@ public class User {
     private String password;
     private String email;
     private UserRole role;
+    private boolean verified;
 
     public User() {
     }
 
-    public User(String username, String password, String email, UserRole role) {
+    public User(String username, String password, String email, UserRole role, boolean verified) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.verified = verified;
     }
 
     public int getId() {
@@ -66,6 +68,14 @@ public class User {
         this.role = role;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -74,6 +84,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
+                ", verified=" + verified +
                 '}';
     }
 }
