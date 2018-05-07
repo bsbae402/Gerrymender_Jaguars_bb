@@ -10,12 +10,12 @@ public class AlgorithmInstance {
     private double compactnessWeight;
     private double efficiencyWeight;
     private double populationThreshold;
-    private HashSet<Integer> ignored_precints;
-    private HashSet<Integer> ignored_districts;
+    private HashSet<String> ignored_precints;
+    private HashSet<String> ignored_districts;
 
     public AlgorithmInstance(State stateOrigin, State algorithmState,
                              double compactnessWeight, double efficiencyWeight, double populationThreshold,
-                             HashSet<Integer> ignored_precints, HashSet<Integer> ignored_districts) {
+                             HashSet<String> ignored_precints, HashSet<String> ignored_districts) {
         this.stateOrigin = stateOrigin;
         this.algorithmState = algorithmState;
         this.compactnessWeight = compactnessWeight;
@@ -65,19 +65,19 @@ public class AlgorithmInstance {
         this.populationThreshold = populationThreshold;
     }
 
-    public HashSet<Integer> getIgnored_precints() {
+    public HashSet<String> getIgnored_precints() {
         return ignored_precints;
     }
 
-    public void setIgnored_precints(HashSet<Integer> ignored_precints) {
+    public void setIgnored_precints(HashSet<String> ignored_precints) {
         this.ignored_precints = ignored_precints;
     }
 
-    public HashSet<Integer> getIgnored_districts() {
+    public HashSet<String> getIgnored_districts() {
         return ignored_districts;
     }
 
-    public void setIgnored_districts(HashSet<Integer> ignored_districts) {
+    public void setIgnored_districts(HashSet<String> ignored_districts) {
         this.ignored_districts = ignored_districts;
     }
 

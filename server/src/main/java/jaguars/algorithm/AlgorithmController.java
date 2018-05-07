@@ -38,12 +38,12 @@ public class AlgorithmController {
                                            @RequestParam("compactness_weight") double compactnessWeight,
                                            @RequestParam("efficiency_weight") double efficiencyWeight,
                                            @RequestParam("population_threshold") double populationThreshold,
-                                           @RequestParam("ignore_precinct_ids") int[] ignored_p_array,
-                                           @RequestParam("ignore_district_ids") int[] ignored_d_array) {
+                                           @RequestParam("ignore_precinct_geo_ids[]") String[] ignored_p_array,
+                                           @RequestParam("ignore_district_geo_ids[]") String[] ignored_d_array) {
         State stateOrigin = sm.getState(stateId);
         State algoState = sm.cloneState(stateOrigin);
-        HashSet<Integer> ignored_precincts = new HashSet(Arrays.asList(ignored_p_array));
-        HashSet<Integer> ignored_districts = new HashSet(Arrays.asList(ignored_d_array));
+        HashSet<String> ignored_precincts = new HashSet(Arrays.asList(ignored_p_array));
+        HashSet<String> ignored_districts = new HashSet(Arrays.asList(ignored_d_array));
 
         AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
                 efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
@@ -97,8 +97,8 @@ public class AlgorithmController {
                                   @RequestParam("compactness_weight") double compactnessWeight,
                                   @RequestParam("efficiency_weight") double efficiencyWeight,
                                   @RequestParam("population_threshold") double populationThreshold,
-                                  @RequestParam("ignore_precinct_ids") HashSet<Integer> ignored_precincts,
-                                  @RequestParam("ignore_district_ids") HashSet<Integer> ignored_districts) {
+                                  @RequestParam("ignore_precinct_geo_ids[]") HashSet<String> ignored_precincts,
+                                  @RequestParam("ignore_district_geo_ids[]") HashSet<String> ignored_districts) {
         State stateOrigin = sm.getState(stateId);
         State algoState = sm.cloneState(stateOrigin);
         AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
