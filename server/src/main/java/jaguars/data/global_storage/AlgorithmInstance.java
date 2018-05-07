@@ -2,20 +2,27 @@ package jaguars.data.global_storage;
 
 import jaguars.map.state.State;
 
+import java.util.HashSet;
+
 public class AlgorithmInstance {
     private State stateOrigin;  // will be same throughout the algorithm
     private State algorithmState;   // will continuously change for each update
     private double compactnessWeight;
     private double efficiencyWeight;
     private double populationThreshold;
+    private HashSet<String> ignored_precints;
+    private HashSet<String> ignored_districts;
 
     public AlgorithmInstance(State stateOrigin, State algorithmState,
-                             double compactnessWeight, double efficiencyWeight, double populationThreshold) {
+                             double compactnessWeight, double efficiencyWeight, double populationThreshold,
+                             HashSet<String> ignored_precints, HashSet<String> ignored_districts) {
         this.stateOrigin = stateOrigin;
         this.algorithmState = algorithmState;
         this.compactnessWeight = compactnessWeight;
         this.efficiencyWeight = efficiencyWeight;
         this.populationThreshold = populationThreshold;
+        this.ignored_precints = ignored_precints;
+        this.ignored_districts = ignored_districts;
     }
 
     public State getStateOrigin() {
@@ -56,6 +63,22 @@ public class AlgorithmInstance {
 
     public void setPopulationThreshold(double populationThreshold) {
         this.populationThreshold = populationThreshold;
+    }
+
+    public HashSet<String> getIgnored_precints() {
+        return ignored_precints;
+    }
+
+    public void setIgnored_precints(HashSet<String> ignored_precints) {
+        this.ignored_precints = ignored_precints;
+    }
+
+    public HashSet<String> getIgnored_districts() {
+        return ignored_districts;
+    }
+
+    public void setIgnored_districts(HashSet<String> ignored_districts) {
+        this.ignored_districts = ignored_districts;
     }
 
     @Override
