@@ -15,21 +15,30 @@ public class AlgorithmAction {
     @Expose
     private int newDistrictId;
     @Expose
-    private double newDistrictCompactness;
+    private double newDistrictCompactnessSch;
     @Expose
-    private double oldDistrictCompactness;
+    private double oldDistrictCompactnessSch;
+    @Expose
+    private double newDistrictCompactnessPP;
+    @Expose
+    private double oldDistrictCompactnessPP;
     @Expose
     private double stateWideEfficiencyGap;
 
     public AlgorithmAction() {
     }
 
-    public AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId, double newDistrictCompactness, double oldDistrictCompactness, double stateWideEfficiencyGap) {
+    public AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId,
+                           double newDistrictCompactnessPP, double oldDistrictCompactnessPP,
+                           double newDistrictCompactnessSch, double oldDistrictCompactnessSch,
+                           double stateWideEfficiencyGap) {
         this.precinctId = precinctId;
         this.oldDistrictId = oldDistrictId;
         this.newDistrictId = newDistrictId;
-        this.newDistrictCompactness = newDistrictCompactness;
-        this.oldDistrictCompactness = oldDistrictCompactness;
+        this.newDistrictCompactnessPP = newDistrictCompactnessPP;
+        this.oldDistrictCompactnessPP = oldDistrictCompactnessPP;
+        this.newDistrictCompactnessSch = newDistrictCompactnessSch;
+        this.oldDistrictCompactnessSch = oldDistrictCompactnessSch;
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
     }
 
@@ -57,20 +66,36 @@ public class AlgorithmAction {
         this.newDistrictId = newDistrictId;
     }
 
-    public double getNewDistrictCompactness() {
-        return newDistrictCompactness;
+    public double getnewDistrictCompactnessPP() {
+        return newDistrictCompactnessPP;
     }
 
-    public void setNewDistrictCompactness(double newDistrictCompactness) {
-        this.newDistrictCompactness = newDistrictCompactness;
+    public void setnewDistrictCompactnessPP(double newDistrictCompactnessPP) {
+        this.newDistrictCompactnessPP = newDistrictCompactnessPP;
     }
 
-    public double getOldDistrictCompactness() {
-        return oldDistrictCompactness;
+    public double getoldDistrictCompactnessPP() {
+        return oldDistrictCompactnessPP;
     }
 
-    public void setOldDistrictCompactness(double oldDistrictCompactness) {
-        this.oldDistrictCompactness = oldDistrictCompactness;
+    public void setoldDistrictCompactnessPP(double oldDistrictCompactnessPP) {
+        this.oldDistrictCompactnessPP = oldDistrictCompactnessPP;
+    }
+
+    public double getNewDistrictCompactnessSch() {
+        return newDistrictCompactnessSch;
+    }
+
+    public void setNewDistrictCompactnessSch(double newDistrictCompactnessSch) {
+        this.newDistrictCompactnessSch = newDistrictCompactnessSch;
+    }
+
+    public double getOldDistrictCompactnessSch() {
+        return oldDistrictCompactnessSch;
+    }
+
+    public void setOldDistrictCompactnessSch(double oldDistrictCompactnessSch) {
+        this.oldDistrictCompactnessSch = oldDistrictCompactnessSch;
     }
 
     public double getStateWideEfficiencyGap() {
@@ -87,8 +112,8 @@ public class AlgorithmAction {
                 "precinctId=" + precinctId +
                 ", oldDistrictId=" + oldDistrictId +
                 ", newDistrictId=" + newDistrictId +
-                ", newDistrictCompactness=" + newDistrictCompactness +
-                ", oldDistrictCompactness=" + oldDistrictCompactness +
+                ", newDistrictCompactnessPP=" + newDistrictCompactnessPP +
+                ", oldDistrictCompactnessSch=" + oldDistrictCompactnessSch +
                 ", stateWideEfficiencyGap=" + stateWideEfficiencyGap +
                 '}';
     }

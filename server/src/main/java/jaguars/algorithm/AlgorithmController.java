@@ -43,7 +43,8 @@ public class AlgorithmController {
 
     @RequestMapping(value = "/algorithm/start", method = RequestMethod.POST)
     public String startRedistrictAlgorithm(@RequestParam("state_id") int stateId,
-                                           @RequestParam("compactness_weight") double compactnessWeight,
+                                           @RequestParam("polsby_compactness_weight") double compactnessWeightPP,
+                                           @RequestParam("schwartzberg_compactness_weight") double compactnessWeightSch,
                                            @RequestParam("efficiency_weight") double efficiencyWeight,
                                            @RequestParam("population_threshold") double populationThreshold,
                                            @RequestParam("ignore_precinct_geo_ids[]") String[] ignored_p_array,
@@ -53,7 +54,7 @@ public class AlgorithmController {
         HashSet<String> ignored_precincts = new HashSet(Arrays.asList(ignored_p_array));
         HashSet<String> ignored_districts = new HashSet(Arrays.asList(ignored_d_array));
 
-        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
+        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeightPP, compactnessWeightSch,
                 efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
         Integer hashint = ags.registerAlgorithmInstance(ai);
 
@@ -62,8 +63,10 @@ public class AlgorithmController {
         for(District d : districts) {
             JsonObject distCompact = new JsonObject();
             distCompact.addProperty("district_id", d.getId());
-            double compactnessMeasure = cm.getCompactnessMeasure(d);
-            distCompact.addProperty("compactness", compactnessMeasure);
+            double compactnessMeasurePP = cm.getCompactnessMeasurePP(d);
+            double compactnessMeasureSch = cm.getCompactnessMeasureSch(d);
+            distCompact.addProperty("compactness_pp", compactnessMeasurePP);
+            distCompact.addProperty("compactness_sch", compactnessMeasureSch);
             initDistCompactList.add(distCompact);
         }
 
@@ -100,32 +103,10 @@ public class AlgorithmController {
         return retObj.toString();
     }
 
-    @RequestMapping(value = "algorithm/storage/register", method = RequestMethod.POST)
-    public String storageRegister(@RequestParam("state_id") int stateId,
-                                  @RequestParam("compactness_weight") double compactnessWeight,
-                                  @RequestParam("efficiency_weight") double efficiencyWeight,
-                                  @RequestParam("population_threshold") double populationThreshold,
-                                  @RequestParam("ignore_precinct_geo_ids[]") HashSet<String> ignored_precincts,
-                                  @RequestParam("ignore_district_geo_ids[]") HashSet<String> ignored_districts) {
-        State stateOrigin = sm.getState(stateId);
-        State algoState = sm.cloneState(stateOrigin);
-        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
-                efficiencyWeight, populationThreshold,ignored_precincts, ignored_districts);
-        Integer hashint = ags.registerAlgorithmInstance(ai);
-        JsonObject retObj = new JsonObject();
-        retObj.addProperty("algorithm_id", hashint);
-        return retObj.toString();
-    }
-
-    @RequestMapping(value = "algorithm/storage/get", method = RequestMethod.POST)
-    public AlgorithmInstance storageGet(@RequestParam("algorithm_id") int hashint) {
-        AlgorithmInstance ai = ags.getAlgorithmInstance(hashint);
-        return ai;
-    }
-
     @RequestMapping(value = "algorithm/manual/start", method = RequestMethod.POST)
     public String startManualRedistrict(@RequestParam("state_id") int stateId,
-                                        @RequestParam("compactness_weight") double compactnessWeight,
+                                        @RequestParam("compactness_weight_pp") double compactnessWeightPP,
+                                        @RequestParam("compactness_weight_sch") double compactnessWeightSch,
                                         @RequestParam("efficiency_weight") double efficiencyWeight,
                                         @RequestParam("population_threshold") double populationThreshold) {
         State stateOrigin = sm.getState(stateId);
@@ -133,7 +114,7 @@ public class AlgorithmController {
         HashSet<String> ignored_precincts = new HashSet(); // empty set. We are not using them
         HashSet<String> ignored_districts = new HashSet();
 
-        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeight,
+        AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeightPP, compactnessWeightSch,
                 efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
         Integer hashint = ags.registerAlgorithmInstance(ai);
 
@@ -226,8 +207,10 @@ public class AlgorithmController {
                 algoState, neighbors, neighborDataList);
 
         JsonObject retObj = new JsonObject();
-        retObj.addProperty("new_district_compactness", cm.getCompactnessMeasure(newAffiliation));
-        retObj.addProperty("old_district_compactness", cm.getCompactnessMeasure(oldAffiliation));
+        retObj.addProperty("new_district_compactness_pp", cm.getCompactnessMeasurePP(newAffiliation));
+        retObj.addProperty("old_district_compactness_pp", cm.getCompactnessMeasurePP(oldAffiliation));
+        retObj.addProperty("new_district_compactness_sch", cm.getCompactnessMeasureSch(newAffiliation));
+        retObj.addProperty("old_district_compactness_sch", cm.getCompactnessMeasureSch(oldAffiliation));
         retObj.addProperty("state_wide_efficiency_gap", cm.getEfficiencyGap(algoState));
 
         return retObj.toString();
