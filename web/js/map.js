@@ -1178,12 +1178,15 @@ whenReady(function() {
 				$change.find(".precinct").html(p.name);
 				$change.find(".district1").html(doriginal.name);
 				$change.find(".district2").html(d.name);
-				$change.find(".compactness1").html(change.old_district_compactness.toFixed(4));
-				$change.find(".compactness2").html(change.new_district_compactness.toFixed(4));
+				var a = change.old_district_compactness_pp + change.old_district_compactness_sch,
+					b = change.new_district_compactness_pp + change.new_district_compactness_sch;
+				$change.find(".compactness1").html(a.toFixed(4));
+				$change.find(".compactness2").html(b.toFixed(4));
 				$("#credistrict .changes").append($change);
 			}
 
-			$("#credistrict .updates .dc[did=" + d.id + "] .after").html(change.new_district_compactness.toFixed(8));
+			$("#credistrict .updates .dc[did=" + d.id + "].p .after").html(change.new_district_compactness_pp.toFixed(8));
+			$("#credistrict .updates .dc[did=" + d.id + "].s .after").html(change.new_district_compactness_sch.toFixed(8));
 			$("#credistrict .updates .seg .after").html(change.state_wide_efficiency_gap.toFixed(8));
 		}
 
@@ -1317,17 +1320,26 @@ whenReady(function() {
 					renderTime = 0;
 
 					$("#credistrict .updates .seg .before, #credistrict .updates .seg .after").html(r.init_state_efficiency_gap.toFixed(8));
-					$("#credistrict .updates .dc").remove();
+					$("#credistrict .updates .dc, #credistrict .updates .labelsremove").remove();
 					r.init_district_compactness_list.forEach((dc, ind) => {
-						var district = active.districts.find((d) => d.id == dc.district_id);
+						var district = active.districts.find((d) => d.geo_id == dc.district_geoid);
 						if (!district) district = active.districts[ind];
 						if (!district) return;
-						var $dc = $("<div>").addClass("row dc").attr("did", district.id).append(
-							$("<div>").addClass("field field1").html(district.name),
-							$("<div>").addClass("field before").html(dc.compactness.toFixed(8)),
-							$("<div>").addClass("field after").html(dc.compactness.toFixed(8)),
+						$("#credistrict .updates .table").append(
+							$("<div>").addClass("row labels labelsremove").append(
+								$("<div>").addClass("field field1").html(district.name),
+								),
+							$("<div>").addClass("row dc p").attr("did", district.id).append(
+								$("<div>").addClass("field field1").html("Polsby Compactness Score"),
+								$("<div>").addClass("field before").html(dc.compactness_pp.toFixed(8)),
+								$("<div>").addClass("field after").html(dc.compactness_pp.toFixed(8)),
+								),
+							$("<div>").addClass("row dc s").attr("did", district.id).append(
+								$("<div>").addClass("field field1").html("Schwartzberg Compactness Score"),
+								$("<div>").addClass("field before").html(dc.compactness_sch.toFixed(8)),
+								$("<div>").addClass("field after").html(dc.compactness_sch.toFixed(8)),
+								),
 							);
-						$("#credistrict .updates .table").append($dc);
 					});
 
 					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop, #credistrict .algorithm .reset").removeClass("disabled");
