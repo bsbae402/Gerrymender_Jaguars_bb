@@ -253,6 +253,7 @@ whenReady(function() {
 	var states;
 
 	var active = {
+		states : null,
 		state : null,
 		sy : null,
 		districtsLayer : null,
@@ -452,6 +453,7 @@ whenReady(function() {
 		clickTab("syinfo");
 
 		$("#cview .syinfo .fields").empty();
+		$("#cview .syinfo .right2").html("");
 		$("#cview .syinfo .statename .right").html(sy.name);
 		$("#cview .syinfo .year .right").html(sy.election_year);
 		$("#cview .syinfo .population .right").html(commaNumbers(sy.population));
@@ -461,6 +463,18 @@ whenReady(function() {
 
 		$("#cview .yearbox .yearselect.active").removeClass("active");
 		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
+
+		$("#cview .syinfo .compareto select option").not(".empty").remove();
+		$("#cview .syinfo .compareto select").val(-1);
+		states.forEach((state) => {
+			state.years.forEach((year) => {
+				var s = state.yearMap[state.years];
+				if (s == sy) return;
+				$("#cview .syinfo .compareto select").append(
+					$("<option>").html(s.name + " " + s.election_year).val(s.name+","+s.election_year)
+					);
+			});
+		});
 
 		APICall("getdistrictsgeojson",
 			{
@@ -494,6 +508,26 @@ whenReady(function() {
 
 			});
 	}
+	$("#cview .syinfo .compareto select").on("change", function() {
+		var val = $(this).val();
+		if (val.indexOf(",") == -1) $("#cview .syinfo .right2").html("");
+		val = val.split(",");
+		val[1] = parseInt(val[1]);
+		var sy = null;
+		states.forEach((state) => {
+			state.years.forEach((year) => {
+				var s = state.yearMap[state.years];
+				if (s.name == val[0] && s.election_year == val[1]) sy = s;
+			});
+		});
+		if (sy) {
+			$("#cview .syinfo .statename .right2").html(sy.name);
+			$("#cview .syinfo .year .right2").html(sy.election_year);
+			$("#cview .syinfo .population .right2").html(commaNumbers(sy.population));
+			$("#cview .syinfo .area .right2").html(commaNumbers((sy.area / 1000000).toFixed(1)) + " sq km");
+			$("#cview .syinfo .perimeter .right2").html(commaNumbers((sy.perimeter / 1000).toFixed(1)) + " km");
+		}
+	});
 
 
 	function hoverPrecinct($el, layer, props) {

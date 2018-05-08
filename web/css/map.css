@@ -574,8 +574,18 @@
 }
 #cview .info .lrfield .right {
     display: inline-block;
-    width: calc(100% - 130px);
+    width: 200px;
     font-weight: 300;
+}
+#cview .info .lrfield .right2 {
+    display: inline-block;
+    width: calc(100% - 130px - 200px);
+    font-weight: 300;
+}
+#cview .info .lrfield select,
+#cview .info .lrfield select option {
+    font-weight:300;
+    font-size:13px;
 }
 #cview .info .votes {
     margin-top:7px;
