@@ -1329,6 +1329,8 @@ whenReady(function() {
 
 	var ANALYTIC_MAPPINGS = [
 		["compactness_score", "Compactness Score", 3],
+		["polsby_compactness_score", "Polsby Compactness Score", 3],
+		["schwartzberg_compactness_score", "Schwartzberg Compactness Score", 3],
         ["efficiency_gap_score", "Efficiency Gap Score", 3],
         ["lowest_district_population", "Lowest District Population", 0],
         ["highest_district_population", "Highest District Population", 0],
