@@ -159,7 +159,8 @@ public class PrecinctUpdateQuery {
     @Test
     public void updatePrecinctBorderness() {
         // int stateId = 3; // going to update all the state's precincts borderness: WI
-        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/isborder_WI_2010_v2.json";
+//        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/isborder_WI_2010_v2.json";
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/isborder_OH_2010_v2.json";
         Gson gson = new GsonBuilder().create();
         try {
             FileReader fileReader = new FileReader(jsonFilePath);
@@ -177,6 +178,7 @@ public class PrecinctUpdateQuery {
                 }
                 Precinct firstOne = precinctsOfSameGeoId.get(0);
                 if(firstOne.isBorder() != pgeoidBorder.border) {
+                    System.out.println(firstOne.getGeoId() + " borderness change to " + pgeoidBorder.border);
                     firstOne.setBorder(pgeoidBorder.border);
                     Precinct result = pm.updatePrecinct(firstOne);
                 }

@@ -2,7 +2,8 @@ import json
 
 print("start")
 # neighbor_fname = "NH_2010_precincts_neighbor_relations.json"
-neighbor_fname = "WI_2010_precincts_neighbor_relations.json"
+# neighbor_fname = "WI_2010_precincts_neighbor_relations.json"
+neighbor_fname = "OH_2010_precincts_neighbor_relations.json"
 
 neighbor_list = json.load(open(neighbor_fname))
 print("json load complete")
@@ -25,7 +26,8 @@ for neighbor_relation in neighbor_list:
     new_neighbor_list.append(new_neighbor_relation)
 
 # out_fname ="NH_2010_precincts_neighbor_relations_v2.json"
-out_fname ="WI_2010_precincts_neighbor_relations_v2.json"
+# out_fname ="WI_2010_precincts_neighbor_relations_v2.json"
+out_fname ="OH_2010_precincts_neighbor_relations_v2.json"
 with open(out_fname, 'w') as outfile:
     json.dump(new_neighbor_list, outfile)
 
