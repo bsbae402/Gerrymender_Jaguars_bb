@@ -172,8 +172,9 @@ whenReady(function() {
 
 
         var sliders = {
-            cw : [0, 1, 0.5],
-            ew : [0, 1, 0.5],
+            pcw : [0, 1, 0.3],
+            scw : [0, 1, 0.3],
+            ew : [0, 1, 0.4],
             pt : [0.001, 0.25, 0.1],
             lp : [0, 6, 1],
         };
@@ -198,11 +199,18 @@ whenReady(function() {
             }, true);
         });
         (function() {
-            var pair = [sliders.cw, sliders.ew];
-            pair.forEach((p) => {
+            var pair = [sliders.pcw, sliders.scw, sliders.ew];
+            pair.forEach((p, index) => {
                 p[3].onChange((v) => {
-                    var o = (pair[0] == p) ? pair[1] : pair[0];
-                    o[3].change(1 - v, false);
+                    var remainingtotal = pair.filter((p2, index2) => index != index2).map((p) => p[4]).reduce((a, b) => a + b);
+                    var newremainingtotal = 1 - v;
+                    pair.forEach((p2, index2) => {
+                        if (index == index2) return;
+                        if (remainingtotal == 0)
+                            p2[3].change(newremainingtotal / (pair.length - 1), false);
+                        else
+                            p2[3].change(p2[4] * newremainingtotal / remainingtotal, false);
+                    });
                 });
             });
             $("#account .constraint .reset").click(function() {
@@ -213,7 +221,8 @@ whenReady(function() {
         })();
         var csavet, cansave = false;
         var cmap = [
-            ["cw", "compactness_weight"],
+            ["pcw", "polsby_compactness_weight"],
+            ["scw", "schwartzberg_compactness_weight"],
             ["ew", "efficiency_weight"],
             ["pt", "population_threshold"],
             ["lp", "loops"],

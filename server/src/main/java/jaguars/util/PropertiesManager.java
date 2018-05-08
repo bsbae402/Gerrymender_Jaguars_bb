@@ -13,8 +13,10 @@ import java.io.Writer;
 @Service
 public class PropertiesManager {
     private class PropertiesTable {
-        @SerializedName(AppConstants.PROP_NAME_COMPACTNESS_WEIGHT)
-        public double defaultCompactnessWeight;
+        @SerializedName(AppConstants.PROP_NAME_COMPACTNESS_WEIGHT_PP)
+        public double defaultCompactnessWeightPp;
+        @SerializedName(AppConstants.PROP_NAME_COMPACTNESS_WEIGHT_SCH)
+        public double defaultCompactnessWeightSch;
         @SerializedName(AppConstants.PROP_NAME_EFFICIENCY_WEIGHT)
         public double defaultEfficiencyWeight;
         @SerializedName(AppConstants.PROP_NAME_POPULATION_THRESHOLD)
@@ -22,8 +24,10 @@ public class PropertiesManager {
         @SerializedName(AppConstants.PROP_NAME_MAX_LOOP_STEPS)
         public int maxLoopSteps;
 
-        public PropertiesTable(double defaultCompactnessWeight, double defaultEfficiencyWeight, double defaultPopulationThreshold, int maxLoopSteps) {
-            this.defaultCompactnessWeight = defaultCompactnessWeight;
+        public PropertiesTable(double defaultCompactnessWeightPp, double defaultCompactnessWeightSch,
+                               double defaultEfficiencyWeight, double defaultPopulationThreshold, int maxLoopSteps) {
+            this.defaultCompactnessWeightPp = defaultCompactnessWeightPp;
+            this.defaultCompactnessWeightSch = defaultCompactnessWeightSch;
             this.defaultEfficiencyWeight = defaultEfficiencyWeight;
             this.defaultPopulationThreshold = defaultPopulationThreshold;
             this.maxLoopSteps = maxLoopSteps;
@@ -43,8 +47,12 @@ public class PropertiesManager {
         }
     }
 
-    public double getDefaultCompactnessWeight() {
-        return propertiesTable.defaultCompactnessWeight;
+    public double getDefaultCompactnessWeightPp() {
+        return propertiesTable.defaultCompactnessWeightPp;
+    }
+
+    public double getDefaultCompactnessWeightSch() {
+        return propertiesTable.defaultCompactnessWeightSch;
     }
 
     public double getDefaultEfficiencyWeight() {
@@ -59,8 +67,12 @@ public class PropertiesManager {
         return propertiesTable.maxLoopSteps;
     }
 
-    public void setDefaultCompactnessWeight(double defaultCompactnessWeight) {
-        this.propertiesTable.defaultCompactnessWeight = defaultCompactnessWeight;
+    public void setDefaultCompactnessWeightPp(double defaultCompactnessWeightPp) {
+        this.propertiesTable.defaultCompactnessWeightPp = defaultCompactnessWeightPp;
+    }
+
+    public void setDefaultCompactnessWeightSch(double defaultCompactnessWeightSch) {
+        this.propertiesTable.defaultCompactnessWeightSch = defaultCompactnessWeightSch;
     }
 
     public void setDefaultEfficiencyWeight(double defaultEfficiencyWeight) {
@@ -75,9 +87,9 @@ public class PropertiesManager {
         this.propertiesTable.maxLoopSteps = maxLoopSteps;
     }
 
-    public boolean updateAlgorithmContraints(double compactnessWeight, double efficiencyWeight,
+    public boolean updateAlgorithmContraints(double compactnessWeightPp, double compactnessWeightSch, double efficiencyWeight,
                                              double populationThreshold, int maxLoops) {
-        PropertiesTable newProperties = new PropertiesTable(compactnessWeight,
+        PropertiesTable newProperties = new PropertiesTable(compactnessWeightPp, compactnessWeightSch,
                 efficiencyWeight, populationThreshold, maxLoops);
         if(exportUpdatedProperties(newProperties)) {
             // file writing successful

@@ -589,6 +589,8 @@ whenReady(function() {
 		$("#cview .dinfo .population .right").html(commaNumbers(district.population));
 		$("#cview .dinfo .area .right").html(commaNumbers((district.area / 1000000).toFixed(1)) + " sq km");
 		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000).toFixed(1)) + " km");
+		$("#cview .dinfo .medianincome .right").html("$" + commaNumbers(district.median_income.toFixed(2)));
+		$("#cview .dinfo .incumbent .right").html(district.incumbent);
 		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
 
 		active.districtsLayer.applySettings({
@@ -708,7 +710,7 @@ whenReady(function() {
 			})
 		}
 		if (layerObject.name == "precincts2") {
-			redistrictPrecinctClick(data, props, layer);
+			redistrictPrecinctClick(data);
 		}
 	};
 
@@ -836,8 +838,9 @@ whenReady(function() {
 
 	// sliders
 	var sliders = {
-		cw : [0, 1, 0.5],
-		ew : [0, 1, 0.5],
+        pcw : [0, 1, 0.3],
+        scw : [0, 1, 0.3],
+		ew : [0, 1, 0.4],
 		pt : [0.001, 0.25, 0.1],
 		lp : [0, 6, 1],
 	}
@@ -858,23 +861,32 @@ whenReady(function() {
 		}, true);
 	});
 	(function() {
-		var pair = [sliders.cw, sliders.ew];
-		pair.forEach((p) => {
-			p[3].onChange((v) => {
-				var o = (pair[0] == p) ? pair[1] : pair[0];
-				o[3].change(1 - v, false);
-			});
-		});
+		var pair = [sliders.pcw, sliders.scw, sliders.ew];
+        pair.forEach((p, index) => {
+            p[3].onChange((v) => {
+                var remainingtotal = pair.filter((p2, index2) => index != index2).map((p) => p[4]).reduce((a, b) => a + b);
+                var newremainingtotal = 1 - v;
+                pair.forEach((p2, index2) => {
+                    if (index == index2) return;
+                    if (remainingtotal == 0)
+                        p2[3].change(newremainingtotal / (pair.length - 1), false);
+                    else
+                        p2[3].change(p2[4] * newremainingtotal / remainingtotal, false);
+                });
+            });
+        });
 		$("#credistrict .constraint .reset").click(function() {
 			var s = $(this).closest(".constraint").find(".slider").attr("slider");
 			var slider = sliders[s][3];
 			slider.change((sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]))
 		});
-		var cmap = [["cw", "compactness_weight"],
-				   ["ew", "efficiency_weight"],
-				   ["pt", "population_threshold"],
-				   ["lp", "loops"],
-				   ];
+		var cmap = [
+			["pcw", "polsby_compactness_weight"],
+            ["scw", "schwartzberg_compactness_weight"],
+			["ew", "efficiency_weight"],
+			["pt", "population_threshold"],
+			["lp", "loops"],
+		];
         APICall("getconstraints")
             .then((r) => {
                 cmap.forEach((a) => {
@@ -1047,11 +1059,15 @@ whenReady(function() {
 			if (!active.precincts) return;
 			active.precincts.forEach((p) => {
 				var d = active.districts.find((d) => d.id == p.district_id);
-				if (!d) return;
+				if (!d || !d.color) return;
 				p.color = d.color;
 				p.colorChange = mergeColors(d.color, [200, 200, 200], 0.5);
 				p.colorChange2 = mergeColors(d.color, [10, 10, 10], 0.65);
 				if (p.new_district_id) delete p.new_district_id;
+
+				if (p.ignoreRedistrict) {
+					redistrictPrecinctClick(p, false, false);
+				}
 			});
 
 			$(".usechangemap").prop("checked", false);
@@ -1120,19 +1136,21 @@ whenReady(function() {
 			}
 		});
 
-		redistrictPrecinctClick = function(data, props) {
+		redistrictPrecinctClick = function(data, change=true, render=true) {
 			if (running || aid != -1) return;
 			var d = active.districts.find((d) => d.id == data.district_id);
-			console.log(d);
 			if (!d) return;
 
-			data.ignoreRedistrict = !data.ignoreRedistrict;
+			if (change)
+				data.ignoreRedistrict = !data.ignoreRedistrict;
 			var r = 0;
 			if (data.ignoreRedistrict || data.ignoreRedistrictDistrict) r += 0.75;
 			if (data.ignoreRedistrict && data.ignoreRedistrictDistrict) r += 0.15;
 			data.color = mergeColors(d.color, [10, 10, 10], r);
-			active.precinctsLayer2.update();
-			map.updateHover();
+			if (render) {
+				active.precinctsLayer2.update();
+				map.updateHover();
+			}
 		}
 
 		function registerChange(change) {
@@ -1160,12 +1178,15 @@ whenReady(function() {
 				$change.find(".precinct").html(p.name);
 				$change.find(".district1").html(doriginal.name);
 				$change.find(".district2").html(d.name);
-				$change.find(".compactness1").html(change.old_district_compactness.toFixed(4));
-				$change.find(".compactness2").html(change.new_district_compactness.toFixed(4));
+				var a = change.old_district_compactness_pp + change.old_district_compactness_sch,
+					b = change.new_district_compactness_pp + change.new_district_compactness_sch;
+				$change.find(".compactness1").html(a.toFixed(4));
+				$change.find(".compactness2").html(b.toFixed(4));
 				$("#credistrict .changes").append($change);
 			}
 
-			$("#credistrict .updates .dc[did=" + d.id + "] .after").html(change.new_district_compactness.toFixed(8));
+			$("#credistrict .updates .dc[did=" + d.id + "].p .after").html(change.new_district_compactness_pp.toFixed(8));
+			$("#credistrict .updates .dc[did=" + d.id + "].s .after").html(change.new_district_compactness_sch.toFixed(8));
 			$("#credistrict .updates .seg .after").html(change.state_wide_efficiency_gap.toFixed(8));
 		}
 
@@ -1251,11 +1272,13 @@ whenReady(function() {
 			if (running) return;
 			$(this).addClass("disabled");
 
-			var map = [["cw", "compactness_weight"],
-					   ["ew", "efficiency_weight"],
-					   ["pt", "population_threshold"],
-					   ["lp", "loops"],
-					   ];
+			var map = [
+	            ["pcw", "polsby_compactness_weight"],
+	            ["scw", "schwartzberg_compactness_weight"],
+				["ew", "efficiency_weight"],
+				["pt", "population_threshold"],
+				["lp", "loops"],
+				];
 			var data = {
 				state_id : active.sy.id,
 				ignore_precinct_geo_ids : [-1],
@@ -1297,17 +1320,25 @@ whenReady(function() {
 					renderTime = 0;
 
 					$("#credistrict .updates .seg .before, #credistrict .updates .seg .after").html(r.init_state_efficiency_gap.toFixed(8));
-					$("#credistrict .updates .dc").remove();
+					$("#credistrict .updates .dc, #credistrict .updates .labelsremove").remove();
 					r.init_district_compactness_list.forEach((dc, ind) => {
-						var district = active.districts.find((d) => d.id == dc.district_id);
-						if (!district) district = active.districts[ind];
+						var district = active.districts.find((d) => d.geo_id == dc.district_geoid);
 						if (!district) return;
-						var $dc = $("<div>").addClass("row dc").attr("did", district.id).append(
-							$("<div>").addClass("field field1").html(district.name),
-							$("<div>").addClass("field before").html(dc.compactness.toFixed(8)),
-							$("<div>").addClass("field after").html(dc.compactness.toFixed(8)),
+						$("#credistrict .updates .table").append(
+							$("<div>").addClass("row labels labelsremove").append(
+								$("<div>").addClass("field field1").html(district.name),
+								),
+							$("<div>").addClass("row dc p").attr("did", district.id).append(
+								$("<div>").addClass("field field1").html("Polsby Compactness Score"),
+								$("<div>").addClass("field before").html(dc.compactness_pp.toFixed(8)),
+								$("<div>").addClass("field after").html(dc.compactness_pp.toFixed(8)),
+								),
+							$("<div>").addClass("row dc s").attr("did", district.id).append(
+								$("<div>").addClass("field field1").html("Schwartzberg Compactness Score"),
+								$("<div>").addClass("field before").html(dc.compactness_sch.toFixed(8)),
+								$("<div>").addClass("field after").html(dc.compactness_sch.toFixed(8)),
+								),
 							);
-						$("#credistrict .updates .table").append($dc);
 					});
 
 					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop, #credistrict .algorithm .reset").removeClass("disabled");
@@ -1321,6 +1352,8 @@ whenReady(function() {
 
 	var ANALYTIC_MAPPINGS = [
 		["compactness_score", "Compactness Score", 3],
+		["polsby_compactness_score", "Polsby Compactness Score", 3],
+		["schwartzberg_compactness_score", "Schwartzberg Compactness Score", 3],
         ["efficiency_gap_score", "Efficiency Gap Score", 3],
         ["lowest_district_population", "Lowest District Population", 0],
         ["highest_district_population", "Highest District Population", 0],

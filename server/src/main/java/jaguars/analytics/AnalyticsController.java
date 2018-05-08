@@ -36,7 +36,8 @@ public class AnalyticsController {
         District highest = cm.findHighestDistrictPop(state);
 
         JsonObject retObj = new JsonObject();
-        retObj.addProperty("compactness_score", cm.getStateAverageCompactness(state));
+        retObj.addProperty("polsby_compactness_score", cm.getStateAverageCompactnessPP(state));
+        retObj.addProperty("schwartzberg_compactness_score", cm.getStateAverageCompactnessSch(state));
         retObj.addProperty("efficiency_gap_score", cm.getEfficiencyGap(state));
         retObj.addProperty("lowest_district_population", lowest.getPopulation());
         retObj.addProperty("Lowest_pop_geoid ", lowest.getGeoId());
@@ -54,7 +55,8 @@ public class AnalyticsController {
         Precinct highest = cm.findHighestPrecinctPop(district);
 
         JsonObject retObj = new JsonObject();
-        retObj.addProperty("compactness_score", cm.getCompactnessMeasure(district));
+        retObj.addProperty("polsby_compactness_score", cm.getCompactnessMeasurePP(district));
+        retObj.addProperty("schwartzberg_compactness_score", cm.getCompactnessMeasureSch(district));
         retObj.addProperty("efficiency_gap_score", cm.getEfficiencyGap(district));
         retObj.addProperty("lowest_precinct_population", lowest.getPopulation());
         retObj.addProperty("Lowest_pop_geoid", lowest.getGeoId());
@@ -62,6 +64,7 @@ public class AnalyticsController {
         retObj.addProperty("highest_pop_geoid", highest.getGeoId());
         retObj.addProperty("number_of_precincts", district.getPrecincts().size());
         retObj.addProperty("median_income", district.getMedianIncome());
+        retObj.addProperty("incumbent", district.getIncumbent());
 
         return retObj.toString();
     }

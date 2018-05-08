@@ -1,6 +1,7 @@
 {
-  "default_compactness_weight": 0.5504201680672268,
-  "default_efficiency_weight": 0.4495798319327732,
+  "default_compactness_weight_pp": 0.18283256698905978,
+  "default_compactness_weight_sch": 0.7111344537815125,
+  "default_efficiency_weight": 0.10603297922942768,
   "default_population_threshold": 0.09997478991596638,
   "max_loop_steps": 2556
 }

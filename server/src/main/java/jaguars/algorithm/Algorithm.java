@@ -261,8 +261,8 @@ public class Algorithm {
                 continue;
             }
 
-            double oldScore = cm.objectiveFunction(oldState, ai.getCompactnessWeight(), ai.getEfficiencyWeight());
-            double newScore = cm.objectiveFunction(newState, ai.getCompactnessWeight(), ai.getEfficiencyWeight());
+            double oldScore = cm.objectiveFunction(oldState, ai.getCompactnessWeightPP(), ai.getCompactnessWeightSch(), ai.getEfficiencyWeight());
+            double newScore = cm.objectiveFunction(newState, ai.getCompactnessWeightPP(), ai.getCompactnessWeightSch(), ai.getEfficiencyWeight());
             if(newScore < oldScore){
                 loopSteps++;
                 continue;
@@ -279,8 +279,10 @@ public class Algorithm {
             AlgorithmAction algoAct = new AlgorithmAction(originTargetPrecinct.getId(),
                     originOldAff.getId(),
                     originNewAff.getId(),
-                    cm.getCompactnessMeasure(newAffDistrictOfNew),
-                    cm.getCompactnessMeasure(oldAffDistrictOfNew),
+                    cm.getCompactnessMeasurePP(newAffDistrictOfNew),
+                    cm.getCompactnessMeasurePP(oldAffDistrictOfNew),
+                    cm.getCompactnessMeasureSch(newAffDistrictOfNew),
+                    cm.getCompactnessMeasureSch(oldAffDistrictOfNew),
                     cm.getEfficiencyGap(newState));
             // AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId, double newDistrictCompactness, double oldDistrictCompactness, double stateWideEfficiencyGap)
             algoActionList.add(algoAct);

@@ -156,6 +156,14 @@
 								<div class="left">Perimeter</div>
 								<div class="right"></div>
 							</div>
+							<div class="lrfield medianincome">
+								<div class="left">Median Income</div>
+								<div class="right"></div>
+							</div>
+							<div class="lrfield incumbent">
+								<div class="left">Representative</div>
+								<div class="right"></div>
+							</div>
 							<div class="votes">
 								<div class="label">Votes</div>
 								<div class="bar">
@@ -235,6 +243,7 @@
 					<div class="tabs">
 						<div tab="opt" class="tab active">Options</div>
 						<div tab="alg" class="tab">Algorithm</div>
+						<div tab="gd" class="tab">Goodness</div>
 					</div>
 
 					<div class="rcontainers">
@@ -244,10 +253,17 @@
 							<div class="constraints">
 								<div class="constraint">
 									<div class="label">
-										Compactness Weight: <span></span>
+										Polsby Compactness Weight: <span></span>
 										<div class="reset">reset</div>
 									</div>
-									<div class="slider cw" slider="cw"></div>
+									<div class="slider pcw" slider="pcw"></div>
+								</div>
+								<div class="constraint">
+									<div class="label">
+										Schwartzberg Compactness Weight: <span></span>
+										<div class="reset">reset</div>
+									</div>
+									<div class="slider scw" slider="scw"></div>
 								</div>
 								<div class="constraint">
 									<div class="label">
@@ -335,13 +351,16 @@
 											<div class="field before">0</div>
 											<div class="field after">0</div>
 										</div>
-										<div class="row labels">
-											<div class="field field1">District Compactness</div>
-										</div>
 									</div>
 								</div>
 
 							</div>
+
+						</div>
+
+						<div class="gd rcontainer">
+
+							Goodness panel
 
 						</div>
 

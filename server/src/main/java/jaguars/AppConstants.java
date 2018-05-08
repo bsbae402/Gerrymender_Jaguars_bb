@@ -34,7 +34,8 @@ public class AppConstants {
     public static final String PATH_APP_PROPERTIES_JSON = PATH_JSONS + "/app_properties.json";
 
     // properties json names
-    public static final String PROP_NAME_COMPACTNESS_WEIGHT = "default_compactness_weight";
+    public static final String PROP_NAME_COMPACTNESS_WEIGHT_PP = "default_compactness_weight_pp";
+    public static final String PROP_NAME_COMPACTNESS_WEIGHT_SCH = "default_compactness_weight_sch";
     public static final String PROP_NAME_EFFICIENCY_WEIGHT = "default_efficiency_weight";
     public static final String PROP_NAME_POPULATION_THRESHOLD = "default_population_threshold";
     public static final String PROP_NAME_MAX_LOOP_STEPS = "max_loop_steps";
