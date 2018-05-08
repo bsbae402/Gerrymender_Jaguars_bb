@@ -240,7 +240,7 @@ var API_CALLS = [
         response : (r, data) => r,
         adummy : () => {
             window.algloop = 0;
-            window.alglooptotal = 100;
+            window.alglooptotal = 10000;
             return {
                 algorithm_id : 0,
                 loops : window.alglooptotal,

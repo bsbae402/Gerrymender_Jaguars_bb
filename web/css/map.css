@@ -868,9 +868,12 @@
 }
 #credistrict .changes {
     margin-top:15px;
-    height:calc(100% - 45px - 15px - 220px);
-    min-height:140px;
+    height:calc(100% - 45px - 15px - 220px - 10px - 30px);
+    min-height:60px;
     overflow-y:scroll;
+}
+#credistrict .settings {
+    height:30px;
 }
 #credistrict .changes .change.dummy {
     display: none;
@@ -913,6 +916,24 @@
 #credistrict .changes .change .subline .compactness2 {
     color:#111;
 }
+
+#credistrict .settings {
+    margin-top:10px;
+}
+#credistrict .settings .setting {
+    display: block;
+    width: 100%;
+}
+#credistrict .settings .setting > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+#credistrict .settings .setting.usechange div {
+    font-size:13px;
+    position: relative;
+    top:-2px;
+}
+
 #credistrict .updates {
     margin-top:15px;
     height:220px;

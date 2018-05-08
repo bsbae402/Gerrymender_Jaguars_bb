@@ -1049,8 +1049,13 @@ whenReady(function() {
 				var d = active.districts.find((d) => d.id == p.district_id);
 				if (!d) return;
 				p.color = d.color;
+				p.colorChange = mergeColors(d.color, [200, 200, 200], 0.5);
+				p.colorChange2 = mergeColors(d.color, [10, 10, 10], 0.65);
 				if (p.new_district_id) delete p.new_district_id;
 			});
+
+			$(".usechangemap").prop("checked", false);
+			usechangemap = false;
 
 			map.removeMarkerChange();
 			markers = [];
@@ -1063,6 +1068,24 @@ whenReady(function() {
 			isQuerying = false;
 			running = false;
 		};
+
+		var usechangemap = false;
+		$(".usechangemap").on("click", function() {
+			var c = $(this).prop("checked");
+			usechangemap = c;
+			active.precincts.forEach((p) => {
+				if (!c) {
+					p.color = p.color_;
+				} else {
+					p.color_ = p.color;
+					if (p.new_district_id)
+						p.color = p.colorChange2;
+					else
+						p.color = p.colorChange;
+				}
+			});
+			active.precinctsLayer2.update();
+		});
 
 		function reset() {
 			aid = -1;
@@ -1118,7 +1141,12 @@ whenReady(function() {
 			if (!d || !p) return;
 			var doriginal = active.districts.find((d) => d.id == p.district_id);
 
-			p.color = d.color;
+			if (usechangemap) {
+				p.color = p.colorChange2;
+				p.color_ = d.color;
+			} else {
+				p.color = d.color;
+			}
 			p.new_district_id = d.id;
 			active.precinctsLayer2.update();
 			var marker = map.addMarkerChange(active.precinctsLayer2, p);
