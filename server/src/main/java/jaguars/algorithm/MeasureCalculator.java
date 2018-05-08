@@ -1,6 +1,5 @@
 package jaguars.algorithm;
 
-import jaguars.AppConstants;
 import jaguars.data.NeighborData;
 import jaguars.data.PrecinctNeighborRelation;
 import jaguars.map.district.District;
@@ -37,86 +36,63 @@ public final class MeasureCalculator {
     }
 
     // neighborDataList is state-level precinct neighbor relation data holder
-    public static ArrayList<Set<Precinct>> getConnectedComponentsInDistrict(
+    // RETURN: geoid set list. If some geoids are in same set, it means they are in same connected component
+    public static ArrayList<Set<String>> getConnectedComponentsInDistrict(
             District district,
             HashMap<String, PrecinctNeighborRelation> precinctNeighborRelationMap) {
+        // ( precinctGeoId : PrecinctNeighborRelation } pair in precinctNeighborRelationMap
 
-//        Set<Precinct> precincts = district.getPrecincts();
-//
-//        ArrayList<Set<String>> connectedComponentList = new ArrayList<>();
-//        HashMap<String, Set<String>> referenceToItsSet = new HashMap<>();
-//
-//        for(Precinct p : precincts) {
-//            Set<String> connectedComponent = new HashSet<>();
-//            connectedComponent.add(p.getGeoId());
-//            connectedComponentList.add(connectedComponent);
-//            referenceToItsSet.put(p.getGeoId(), connectedComponent);
-//        }
-//
-//        PriorityQueue<String> pqGeoids = new PriorityQueue<>();
-//        boolean expandedLastTime = true;
-//        while(expandedLastTime) {
-//            Set<String> firstCC = connectedComponentList.get(0);
-//            ArrayList<String> elements = new ArrayList<>();
-//            for(String geoid : firstCC) {
-//                elements.add(geoid);
-//            }
-//
-//
-//        }
+        // first, build from -> to_list hash map
+        HashMap<String, ArrayList<String>> fromToList = new HashMap<>();
+        for(PrecinctNeighborRelation pnr : precinctNeighborRelationMap.values()) {
+            ArrayList<NeighborData> ndList = pnr.getNeighborDataList();
+            ArrayList<String> toGeoidList = new ArrayList<>();
+            for(NeighborData nd : ndList)
+                toGeoidList.add(nd.getToGeoId());
+            fromToList.put(pnr.getFromGeoId(), toGeoidList);
+        }
 
-//
-//        ArrayList<Set<Precinct>> connectedComponentSetList = new ArrayList<>();
-//        HashMap<Precinct, Set<Precinct>> referenceToItsSet = new HashMap<>();
-//
-//        // individual precinct becomes its own set
-//        for(Precinct p : precincts) {
-//            Set<Precinct> connectedComponentSet = new HashSet<>();
-//            connectedComponentSet.add(p);
-//            connectedComponentSetList.add(connectedComponentSet);
-//            referenceToItsSet.put(p, connectedComponentSet);
-//        }
-//
-//        for(Precinct p : precincts) {
-//            String pgeoid = p.getGeoId();
-//            PrecinctNeighborRelation pnr = precinctNeighborRelationMap.get(pgeoid);
-//            ArrayList<NeighborData> ndList =  pnr.getNeighborDataList();
-//            for(NeighborData nd : ndList) {
-//                nd.getToGeoId()
-//            }
-//
-//            NeighborData firstNd = ndList.get(0);
-//            firstNd.getToGeoId();
-//
-//            referenceToItsSet.get(p);
-//        }
-//
-//        for(Set<Precinct> ccSet : connectedComponentSetList) {
-//
-//        }
-//
-//        for(Precinct p : precincts) {
-//            String pgeoid = p.getGeoId();
-//            PrecinctNeighborRelation pnr = precinctNeighborRelationMap.get(pgeoid);
-//            ArrayList<NeighborData> ndList =  pnr.getNeighborDataList();
-//
-//
-//            NeighborData firstNd = ndList.get(0);
-//            firstNd.getToGeoId();
-//        }
-//        // ( precinctGeoId : PrecinctNeighborRelation }
-//        PrecinctNeighborRelation pnr = precinctNeighborRelationMap.get("GEOIDASDFASDF");
-//
-//        boolean neighboringFound = true;
-//        while(neighboringFound) {
-//            neighboringFound = false;
-//
-//        }
-//
-//        // stubbed
-        Set<Precinct> oneset = new HashSet<>();
-        ArrayList<Set<Precinct>> listSizeOne = new ArrayList<>();
-        listSizeOne.add(oneset);
-        return listSizeOne;
+        Set<Precinct> precinctsOfDistrict = district.getPrecincts();
+
+        ArrayList<String> pgeoidsOfDistrict = new ArrayList<>();
+        ArrayList<Set<String>> connectedComponentList = new ArrayList<>();
+        HashMap<String, Set<String>> referenceToItsSet = new HashMap<>();
+
+        for(Precinct p : precinctsOfDistrict) {
+            Set<String> connectedComponent = new HashSet<>();
+            connectedComponent.add(p.getGeoId());
+            connectedComponentList.add(connectedComponent);
+            referenceToItsSet.put(p.getGeoId(), connectedComponent);
+            pgeoidsOfDistrict.add(p.getGeoId());
+        }
+
+        for(Precinct p : precinctsOfDistrict) {
+            ArrayList<String> toGeoidList = fromToList.get(p.getGeoId());
+            Set<String> itsSet = referenceToItsSet.get(p.getGeoId());
+            for(String neighborGeoid : toGeoidList) {
+                // if the neighbor is in same district
+                // if itsSet not yet contains the neighbor
+                if(pgeoidsOfDistrict.contains(neighborGeoid)
+                        && !itsSet.contains(neighborGeoid)) {
+                    // neighbors set will be removed from the memory
+                    Set<String> neighborsSet = referenceToItsSet.get(neighborGeoid);
+                    for(String elementFromNeighborSet : neighborsSet) {
+                        referenceToItsSet.put(elementFromNeighborSet, itsSet);
+                        itsSet.add(elementFromNeighborSet);
+                    }
+                    connectedComponentList.remove(neighborsSet);
+                }
+            }
+        }
+
+        // stubbed
+//        Set<Precinct> oneset = new HashSet<>();
+//        ArrayList<Set<Precinct>> listSizeOne = new ArrayList<>();
+//        listSizeOne.add(oneset);
+        if(connectedComponentList.size() > 1) {
+            System.out.println("flag on here");
+        }
+        System.out.println(connectedComponentList);
+        return connectedComponentList;
     }
 }

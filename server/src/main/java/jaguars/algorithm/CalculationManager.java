@@ -175,7 +175,7 @@ public class CalculationManager {
 
     public boolean isAllPrecinctsConnected(District district,
                                            HashMap<String, PrecinctNeighborRelation> precinctNeighborRelationMap) {
-        ArrayList<Set<Precinct>> connectedComponentList
+        ArrayList<Set<String>> connectedComponentList
                 = MeasureCalculator.getConnectedComponentsInDistrict(district, precinctNeighborRelationMap);
         if(connectedComponentList.size() > 1)
             return false;
