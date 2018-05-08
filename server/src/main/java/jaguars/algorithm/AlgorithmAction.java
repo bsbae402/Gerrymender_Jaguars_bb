@@ -28,6 +28,10 @@ public class AlgorithmAction {
     private double stateOldObjectiveScore;
     @Expose
     private double stateNewObjectiveScore;
+    @Expose
+    private double districtOldObjectiveScore;
+    @Expose
+    private double districtNewObjectiveScore;
 
     public AlgorithmAction() {
     }
@@ -128,6 +132,24 @@ public class AlgorithmAction {
     public void setstateNewObjectiveScore(double stateNewObjectiveScore) {
         this.stateNewObjectiveScore = stateNewObjectiveScore;
     }
+
+    public double getDistrictOldObjectiveScore() {
+        return districtOldObjectiveScore;
+    }
+
+    public void setDistrictOldObjectiveScore(double DistrictOldObjectiveScore) {
+        this.districtOldObjectiveScore = DistrictOldObjectiveScore;
+    }
+
+    public double getDistrictNewObjectiveScore() {
+        return districtNewObjectiveScore;
+    }
+
+    public void setDistrictNewObjectiveScore(double DistrictNewObjectiveScore) {
+        this.districtNewObjectiveScore = DistrictNewObjectiveScore;
+    }
+
+
 
     @Override
     public String toString() {

@@ -181,6 +181,16 @@ public class CalculationManager {
                 (efficiencyWeight * efficiencyGapScore);
     }
 
+    public double objectiveFunction(District district, double compactnessWeightPP, double compactnessWeightSch, double efficiencyWeight){
+        double CompactnessPP = getCompactnessMeasurePP(district);
+        double CompactnessSch = getCompactnessMeasureSch(district);
+        double efficiencyGapScore = 1 - getEfficiencyGap(district);
+
+        return (compactnessWeightPP * CompactnessPP) +
+                (compactnessWeightSch * CompactnessSch) +
+                (efficiencyWeight * efficiencyGapScore);
+    }
+
     public boolean getPopulationThres(State state, double popThres) {
         int[] districtPops = new int[state.getDistricts().size()];
         int i = 0;
