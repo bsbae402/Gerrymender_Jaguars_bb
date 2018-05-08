@@ -136,8 +136,10 @@ public class Algorithm {
         }
         if(selectableDistricts.size() == 0) {
             // this means that the targetPrecinct is not a border precinct
-            System.out.println("There are no selectable districts! -> target precinct is not border!");
-            System.out.println("target precinct: " + targetPrecinct.getName());
+            System.out.println("There are no selectable districts, but the target precinct is border...");
+            System.out.println("target precinct name: " + targetPrecinct.getName());
+            System.out.println("target precinct geoid: " + targetPrecinct.getGeoId());
+
             return null;
         }
 
@@ -242,6 +244,7 @@ public class Algorithm {
 
             /* DELETE THIS AFTER IMPLEMENTING CONNECTED COMPONENTS CONSTRAINT ALGO */
             if(newState == null) {
+                System.out.println("generateNewDistrictBoundaries() returned null");
                 loopSteps++;
                 continue;
             }

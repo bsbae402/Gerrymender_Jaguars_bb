@@ -104,12 +104,15 @@ public class PrecinctUpdateQuery {
     // This will change them to districtCode + VTDST10
     @Test
     public void addPrecinctCodePrefix() {
-        int stateId = 2; // going to update all the state's precincts codes
+        int stateId = 3; // going to update all the state's precincts codes
         List<District> districts = dm.getDistricts(stateId);
         for(District d : districts) {
             List<Precinct> precincts = pm.getPrecinctsByDistrictId(d.getId());
             for(Precinct p : precincts) {
                 String newPCode = d.getCode() + p.getCode();
+                String firstFourChar = p.getCode().substring(0, 4);
+                if(firstFourChar.equals(newPCode))
+                    continue;
                 p.setCode(newPCode);
                 pm.updatePrecinct(p);
             }
@@ -152,33 +155,5 @@ public class PrecinctUpdateQuery {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-        /*
-        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/area_perimeter_precincts_WI_2010.json";
-        Gson gson = new GsonBuilder().create();
-        try {
-            FileReader fileReader = new FileReader(jsonFilePath);
-            Type typeListGAP = new TypeToken<List<GeoidAreaPerimeter>>(){}.getType();
-            List<GeoidAreaPerimeter> gapList = gson.fromJson(fileReader, typeListGAP);
-
-            for(GeoidAreaPerimeter gap : gapList) {
-                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(gap.geoid);
-                if(precinctsOfSameGeoId.size() > 1) {
-                    System.out.println("There are two or more geoid precinct for geoid: " + gap.geoid);
-                }
-                if(precinctsOfSameGeoId == null || precinctsOfSameGeoId.size() == 0) {
-                    System.out.println(gap.geoid + " doesn't exist in DB!");
-                    continue;
-                }
-                Precinct firstOne = precinctsOfSameGeoId.get(0);
-                firstOne.setPerimeter(gap.perimeter);
-                //firstOne.setArea(gap.area);
-                Precinct result = pm.updatePrecinct(firstOne);
-                //System.out.println("pid " + result.getId() + " is updated");
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-         */
     }
 }
