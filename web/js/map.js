@@ -1323,7 +1323,6 @@ whenReady(function() {
 					$("#credistrict .updates .dc, #credistrict .updates .labelsremove").remove();
 					r.init_district_compactness_list.forEach((dc, ind) => {
 						var district = active.districts.find((d) => d.geo_id == dc.district_geoid);
-						if (!district) district = active.districts[ind];
 						if (!district) return;
 						$("#credistrict .updates .table").append(
 							$("<div>").addClass("row labels labelsremove").append(
