@@ -9,7 +9,6 @@ import jaguarsdbtools.map.district.District;
 import jaguarsdbtools.map.district.DistrictManager;
 import jaguarsdbtools.map.precinct.Precinct;
 import jaguarsdbtools.map.precinct.PrecinctManager;
-import jaguarsdbtools.util.CensusCalculator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +149,37 @@ public class PrecinctUpdateQuery {
                 Precinct firstOne = precinctsOfSameGeoId.get(0);
                 firstOne.setBorder(pgeoidBorder.border);
                 Precinct result = pm.updatePrecinct(firstOne);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void updatePrecinctBorderness() {
+        // int stateId = 3; // going to update all the state's precincts borderness: WI
+        String jsonFilePath = AppConstants.PATH_JSON_FILES + "/isborder_WI_2010_v2.json";
+        Gson gson = new GsonBuilder().create();
+        try {
+            FileReader fileReader = new FileReader(jsonFilePath);
+            Type typeList = new TypeToken<List<PgeoidBorder>>(){}.getType();
+            List<PgeoidBorder> jobjList = gson.fromJson(fileReader, typeList);
+
+            for(PgeoidBorder pgeoidBorder : jobjList) {
+                List<Precinct> precinctsOfSameGeoId = pm.getPrecinctsByGeoId(pgeoidBorder.pgeoid);
+                if(precinctsOfSameGeoId.size() > 1) {
+                    System.out.println("There are two or more geoid precinct for geoid: " + pgeoidBorder.pgeoid);
+                }
+                if(precinctsOfSameGeoId == null || precinctsOfSameGeoId.size() == 0) {
+                    System.out.println(pgeoidBorder.pgeoid + " doesn't exist in DB!");
+                    continue;
+                }
+                Precinct firstOne = precinctsOfSameGeoId.get(0);
+                if(firstOne.isBorder() != pgeoidBorder.border) {
+                    firstOne.setBorder(pgeoidBorder.border);
+                    Precinct result = pm.updatePrecinct(firstOne);
+                }
             }
 
         } catch (Exception e){

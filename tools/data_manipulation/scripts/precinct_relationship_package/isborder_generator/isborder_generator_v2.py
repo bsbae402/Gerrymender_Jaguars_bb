@@ -4,8 +4,10 @@ import json
 import copy
 from shapely.geometry import Polygon
 
-neighbor_fname = "WI_2010_precincts_neighbor_relations.json"
+neighbor_fname = "WI_2010_precincts_neighbor_relations_v2.json"
 mapping_fname = "precinct_district_mapping_WI.json"
+# neighbor_fname = "NH_2010_precincts_neighbor_relations_v2.json"
+# mapping_fname = "precinct_district_mapping_NH.json"
 
 neighbor_list = json.load(open(neighbor_fname))
 mapping_list = json.load(open(mapping_fname))
@@ -47,8 +49,8 @@ for neighbor_relation in neighbor_list:
             break
     isborder_dict_list.append(isborder_dict)
 
-# out_fname = "isborder_NH_2010.json"
-out_fname = "isborder_WI_2010.json"
+# out_fname = "isborder_NH_2010_v2.json"
+out_fname = "isborder_WI_2010_v2.json"
 with open(out_fname, 'w') as outfile:
     json.dump(isborder_dict_list, outfile)
 

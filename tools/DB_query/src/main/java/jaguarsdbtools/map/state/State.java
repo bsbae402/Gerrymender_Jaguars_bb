@@ -6,6 +6,7 @@ import jaguarsdbtools.map.district.District;
 import jaguarsdbtools.map.precinct.Precinct;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -221,5 +222,13 @@ public class State {
                 return d;
         }
         return null;
+    }
+
+    public ArrayList<Precinct> getPrecincts() {
+        ArrayList<Precinct> precincts = new ArrayList<>();
+        for(District d : getDistricts()) {
+            precincts.addAll(d.getPrecincts());
+        }
+        return precincts;
     }
 }
