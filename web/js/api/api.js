@@ -213,7 +213,7 @@ var API_CALLS = [
         method : "GET",
         url : "algorithm/constraints",
         response : (r, data) => r,
-        dummy : () => {
+        adummy : () => {
             return {
                 compactness_weight : 0.5,
                 efficiency_weight : 0.5,
