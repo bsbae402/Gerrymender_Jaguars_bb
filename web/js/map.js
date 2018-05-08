@@ -589,6 +589,8 @@ whenReady(function() {
 		$("#cview .dinfo .population .right").html(commaNumbers(district.population));
 		$("#cview .dinfo .area .right").html(commaNumbers((district.area / 1000000).toFixed(1)) + " sq km");
 		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000).toFixed(1)) + " km");
+		$("#cview .dinfo .medianincome .right").html("$" + commaNumbers(district.median_income.toFixed(2)));
+		$("#cview .dinfo .incumbent .right").html(district.incumbent);
 		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
 
 		active.districtsLayer.applySettings({
@@ -708,7 +710,7 @@ whenReady(function() {
 			})
 		}
 		if (layerObject.name == "precincts2") {
-			redistrictPrecinctClick(data, props, layer);
+			redistrictPrecinctClick(data);
 		}
 	};
 
@@ -1047,11 +1049,15 @@ whenReady(function() {
 			if (!active.precincts) return;
 			active.precincts.forEach((p) => {
 				var d = active.districts.find((d) => d.id == p.district_id);
-				if (!d) return;
+				if (!d || !d.color) return;
 				p.color = d.color;
 				p.colorChange = mergeColors(d.color, [200, 200, 200], 0.5);
 				p.colorChange2 = mergeColors(d.color, [10, 10, 10], 0.65);
 				if (p.new_district_id) delete p.new_district_id;
+
+				if (p.ignoreRedistrict) {
+					redistrictPrecinctClick(p, false, false);
+				}
 			});
 
 			$(".usechangemap").prop("checked", false);
@@ -1120,19 +1126,21 @@ whenReady(function() {
 			}
 		});
 
-		redistrictPrecinctClick = function(data, props) {
+		redistrictPrecinctClick = function(data, change=true, render=true) {
 			if (running || aid != -1) return;
 			var d = active.districts.find((d) => d.id == data.district_id);
-			console.log(d);
 			if (!d) return;
 
-			data.ignoreRedistrict = !data.ignoreRedistrict;
+			if (change)
+				data.ignoreRedistrict = !data.ignoreRedistrict;
 			var r = 0;
 			if (data.ignoreRedistrict || data.ignoreRedistrictDistrict) r += 0.75;
 			if (data.ignoreRedistrict && data.ignoreRedistrictDistrict) r += 0.15;
 			data.color = mergeColors(d.color, [10, 10, 10], r);
-			active.precinctsLayer2.update();
-			map.updateHover();
+			if (render) {
+				active.precinctsLayer2.update();
+				map.updateHover();
+			}
 		}
 
 		function registerChange(change) {
