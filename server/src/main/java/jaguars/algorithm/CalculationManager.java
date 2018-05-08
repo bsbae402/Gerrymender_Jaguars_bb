@@ -72,22 +72,36 @@ public class CalculationManager {
         return retPre;
     }
 
-    public double getStateAverageCompactness(State state) {
+    public double getStateAverageCompactnessPP(State state) {
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
         double sum = 0;
 
         for (District d : districts) {
-            sum += getCompactnessMeasure(d);
+            sum += getCompactnessMeasurePP(d);
         }
         return sum / districts.size();
     }
 
-    public double getCompactnessMeasure(District district){
+    public double getStateAverageCompactnessSch(State state) {
+        ArrayList<District> districts = new ArrayList<>(state.getDistricts());
+        double sum = 0;
+
+        for (District d : districts) {
+            sum += getCompactnessMeasureSch(d);
+        }
+        return sum / districts.size();
+    }
+
+    public double getCompactnessMeasureSch(District district){
         double area = district.getArea();
         double perimeter = district.getPerimeter();
-        double[] measures = {MeasureCalculator.calculateCompactnessPP(area, perimeter),
-                MeasureCalculator.calculateCompactnessSch(area, perimeter)};
-        return (measures[0] + measures[1]) / 2;
+        return MeasureCalculator.calculateCompactnessSch(area, perimeter);
+    }
+
+    public double getCompactnessMeasurePP(District district){
+        double area = district.getArea();
+        double perimeter = district.getPerimeter();
+        return MeasureCalculator.calculateCompactnessPP(area, perimeter);
     }
 
     public double getEfficiencyGap(State state) {
@@ -148,18 +162,23 @@ public class CalculationManager {
         return Math.abs(MeasureCalculator.calculateEfficiencyGap(district.getTotalVotes(), repWasted, demWasted));
     }
 
-    public double objectiveFunction(State state, double compactnessWeight, double efficiencyWeight){
+    public double objectiveFunction(State state, double compactnessWeightPP, double compactnessWeightSch, double efficiencyWeight){
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
-        double compactnessSum = 0;
-        double avgCompactness;
+        double compactnessSumPP = 0, compactnessSumSch = 0;
+        double avgCompactnessPP, avgCompactnessSch;
 
         for (District d : state.getDistricts()) {
-            compactnessSum += getCompactnessMeasure(d);
+            compactnessSumPP += getCompactnessMeasurePP(d);
+            compactnessSumSch += getCompactnessMeasureSch(d);
         }
-        avgCompactness = compactnessSum / (double)districts.size();
+
+        avgCompactnessSch = compactnessSumSch / (double)districts.size();
+        avgCompactnessPP = compactnessSumPP / (double)districts.size();
         double efficiencyGapScore = 1 - getEfficiencyGap(state);
 
-        return (compactnessWeight * avgCompactness) + (efficiencyWeight * efficiencyGapScore);
+        return (compactnessWeightPP * avgCompactnessPP) +
+                (compactnessWeightSch * avgCompactnessSch) +
+                (efficiencyWeight * efficiencyGapScore);
     }
 
     public boolean getPopulationThres(State state, double popThres) {

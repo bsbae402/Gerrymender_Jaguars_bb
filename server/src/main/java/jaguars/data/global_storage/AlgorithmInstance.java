@@ -7,18 +7,20 @@ import java.util.HashSet;
 public class AlgorithmInstance {
     private State stateOrigin;  // will be same throughout the algorithm
     private State algorithmState;   // will continuously change for each update
-    private double compactnessWeight;
+    private double compactnessWeightPP;
+    private double compactnessWeightSch;
     private double efficiencyWeight;
     private double populationThreshold;
     private HashSet<String> ignored_precints; // geoid
     private HashSet<String> ignored_districts; // geoid
 
     public AlgorithmInstance(State stateOrigin, State algorithmState,
-                             double compactnessWeight, double efficiencyWeight, double populationThreshold,
+                             double compactnessWeightPP, double compactnessWeightSch, double efficiencyWeight, double populationThreshold,
                              HashSet<String> ignored_precints, HashSet<String> ignored_districts) {
         this.stateOrigin = stateOrigin;
         this.algorithmState = algorithmState;
-        this.compactnessWeight = compactnessWeight;
+        this.compactnessWeightPP = compactnessWeightPP;
+        this.compactnessWeightSch = compactnessWeightSch;
         this.efficiencyWeight = efficiencyWeight;
         this.populationThreshold = populationThreshold;
         this.ignored_precints = ignored_precints;
@@ -41,12 +43,20 @@ public class AlgorithmInstance {
         this.algorithmState = algorithmState;
     }
 
-    public double getCompactnessWeight() {
-        return compactnessWeight;
+    public double getCompactnessWeightPP() {
+        return compactnessWeightPP;
     }
 
-    public void setCompactnessWeight(double compactnessWeight) {
-        this.compactnessWeight = compactnessWeight;
+    public void setCompactnessWeightPP(double compactnessWeightPP) {
+        this.compactnessWeightPP = compactnessWeightPP;
+    }
+
+    public double getCompactnessWeightSch() {
+        return compactnessWeightSch;
+    }
+
+    public void setCompactnessWeight(double compactnessWeightSch) {
+        this.compactnessWeightSch = compactnessWeightSch;
     }
 
     public double getEfficiencyWeight() {
@@ -86,7 +96,8 @@ public class AlgorithmInstance {
         return "AlgorithmInstance{" +
                 "stateOrigin=" + stateOrigin +
                 ", algorithmState=" + algorithmState +
-                ", compactnessWeight=" + compactnessWeight +
+                ", compactnessWeightPP=" + compactnessWeightPP +
+                ", compactnessWeightSch=" + compactnessWeightSch +
                 ", efficiencyWeight=" + efficiencyWeight +
                 ", populationThreshold=" + populationThreshold +
                 '}';
