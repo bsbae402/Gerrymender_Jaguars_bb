@@ -703,6 +703,7 @@
 }
 
 #credistrict .constraint {
+    user-select: none;
     margin-bottom:9px;
 }
 #credistrict .constraint .label {

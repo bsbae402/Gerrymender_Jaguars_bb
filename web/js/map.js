@@ -456,7 +456,7 @@ whenReady(function() {
 		$("#cview .syinfo .year .right").html(sy.election_year);
 		$("#cview .syinfo .population .right").html(commaNumbers(sy.population));
 		$("#cview .syinfo .area .right").html(commaNumbers((sy.area / 1000000).toFixed(1)) + " sq km");
-		$("#cview .syinfo .perimeter .right").html(commaNumbers((sy.perimeter / 1000000).toFixed(1)) + " km");
+		$("#cview .syinfo .perimeter .right").html(commaNumbers((sy.perimeter / 1000).toFixed(1)) + " km");
 		setupVoteBar(sy.votes, $("#cview .syinfo .votes"));
 
 		$("#cview .yearbox .yearselect.active").removeClass("active");
@@ -554,7 +554,7 @@ whenReady(function() {
 		$("#cview .dinfo .code .right").html(district.code);
 		$("#cview .dinfo .population .right").html(commaNumbers(district.population));
 		$("#cview .dinfo .area .right").html(commaNumbers((district.area / 1000000).toFixed(1)) + " sq km");
-		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000000).toFixed(1)) + " km");
+		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000).toFixed(1)) + " km");
 		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
 
 		active.districtsLayer.applySettings({
@@ -647,7 +647,7 @@ whenReady(function() {
 		$("#cview .pinfo .code .right").html(precinct.code);
 		$("#cview .pinfo .population .right").html(commaNumbers(precinct.population));
 		$("#cview .pinfo .area .right").html(commaNumbers((precinct.area / 1000000).toFixed(1)) + " sq km");
-		$("#cview .pinfo .perimeter .right").html(commaNumbers((precinct.perimeter / 1000000).toFixed(1)) + " km");
+		$("#cview .pinfo .perimeter .right").html(commaNumbers((precinct.perimeter / 1000).toFixed(1)) + " km");
 		setupVoteBar(precinct.votes, $("#cview .pinfo .votes"));
 
 		map.fitBounds2(precinctLayer);
@@ -836,6 +836,21 @@ whenReady(function() {
 			var slider = sliders[s][3];
 			slider.change((sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]))
 		});
+		var cmap = [["cw", "compactness_weight"],
+				   ["ew", "efficiency_weight"],
+				   ["pt", "population_threshold"],
+				   ["lp", "loops"],
+				   ];
+        APICall("getconstraints")
+            .then((r) => {
+                cmap.forEach((a) => {
+                    if (r.hasOwnProperty(a[1])) {
+                        var s = sliders[a[0]], v = parseFloat(r[a[1]]);
+                        if (a[0] == "lp") v = Math.log10(v);
+                        s[3].change((v - s[0]) / (s[1] - s[0]), false);
+                    }
+                });
+            });
 	})();
 
 	// Redistricting
