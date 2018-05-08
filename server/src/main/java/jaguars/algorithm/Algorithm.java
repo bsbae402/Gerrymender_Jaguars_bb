@@ -237,7 +237,8 @@ public class Algorithm {
         while(loopSteps < iterations) {
             Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
 
-            while (ai.getIgnored_precints().contains(targetPrecinctOfOld.getGeoId())){
+            while (ai.getIgnored_precints().contains(targetPrecinctOfOld.getGeoId()) ||
+                    ai.getIgnored_districts().contains(targetPrecinctOfOld.getDistrict().getGeoId())){
                 targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
             }
             State newState = generateNewDistrictBoundaries(targetPrecinctOfOld, oldState, ai);
