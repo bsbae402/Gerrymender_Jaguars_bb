@@ -39,6 +39,8 @@ public class District {
     private boolean movable;
     @Expose
     private int medianIncome;
+    @Expose
+    private String incumbent;
 
     @JsonIgnore
     @Expose(serialize = false)
@@ -73,10 +75,12 @@ public class District {
         }
         this.movable = district.ismovable();
         this.medianIncome = district.getMedianIncome();
+        this.incumbent = district.getIncumbent();
     }
 
     public District(String name, int population, int electionYear, double area, double perimeter,
-                    String geoId, int totalVotes, String code, boolean original, State state, boolean movable, int medianIncome) {
+                    String geoId, int totalVotes, String code, boolean original, State state,
+                    boolean movable, int medianIncome, String incumbent) {
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -89,6 +93,7 @@ public class District {
         this.state = state;
         this.movable = movable;
         this.medianIncome = medianIncome;
+        this.incumbent = incumbent;
     }
 
     public int getId() {
@@ -211,6 +216,14 @@ public class District {
         this.medianIncome = medianIncome;
     }
 
+    public String getIncumbent() {
+        return incumbent;
+    }
+
+    public void setIncumbent(String incumbent) {
+        this.incumbent = incumbent;
+    }
+
     @Override
     public String toString() {
         return "District{" +
@@ -226,6 +239,7 @@ public class District {
                 ", original=" + original +
                 ", movable=" + movable +
                 ", medianIncome=" + medianIncome +
+                ", incumbent=" + incumbent +
                 '}';
     }
 }

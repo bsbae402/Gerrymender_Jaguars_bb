@@ -62,6 +62,7 @@ public class AnalyticsController {
         retObj.addProperty("highest_pop_geoid", highest.getGeoId());
         retObj.addProperty("number_of_precincts", district.getPrecincts().size());
         retObj.addProperty("median_income", district.getMedianIncome());
+        retObj.addProperty("incumbent", district.getIncumbent());
 
         return retObj.toString();
     }
