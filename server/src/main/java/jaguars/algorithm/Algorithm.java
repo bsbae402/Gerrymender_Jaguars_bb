@@ -110,7 +110,7 @@ public class Algorithm {
         // find the target precinct of the cloned state
         Precinct clonedTarget = null;
         for(Precinct p : clonedPrecincts) {
-            if(targetPrecinct.getCode().equals(p.getCode()))
+            if(targetPrecinct.getGeoId().equals(p.getGeoId()))
                 clonedTarget = p;
         }
         if(clonedTarget == null) {
