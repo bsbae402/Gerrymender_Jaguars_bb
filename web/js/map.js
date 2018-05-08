@@ -253,6 +253,7 @@ whenReady(function() {
 	var states;
 
 	var active = {
+		states : null,
 		state : null,
 		sy : null,
 		districtsLayer : null,
@@ -452,15 +453,28 @@ whenReady(function() {
 		clickTab("syinfo");
 
 		$("#cview .syinfo .fields").empty();
+		$("#cview .syinfo .right2").html("");
 		$("#cview .syinfo .statename .right").html(sy.name);
 		$("#cview .syinfo .year .right").html(sy.election_year);
 		$("#cview .syinfo .population .right").html(commaNumbers(sy.population));
 		$("#cview .syinfo .area .right").html(commaNumbers((sy.area / 1000000).toFixed(1)) + " sq km");
-		$("#cview .syinfo .perimeter .right").html(commaNumbers((sy.perimeter / 1000000).toFixed(1)) + " km");
+		$("#cview .syinfo .perimeter .right").html(commaNumbers((sy.perimeter / 1000).toFixed(1)) + " km");
 		setupVoteBar(sy.votes, $("#cview .syinfo .votes"));
 
 		$("#cview .yearbox .yearselect.active").removeClass("active");
 		$("#cview .yearbox .yearselect[year="+sy.election_year+"]").addClass("active");
+
+		$("#cview .syinfo .compareto select option").not(".empty").remove();
+		$("#cview .syinfo .compareto select").val(-1);
+		states.forEach((state) => {
+			state.years.forEach((year) => {
+				var s = state.yearMap[state.years];
+				if (s == sy) return;
+				$("#cview .syinfo .compareto select").append(
+					$("<option>").html(s.name + " " + s.election_year).val(s.name+","+s.election_year)
+					);
+			});
+		});
 
 		APICall("getdistrictsgeojson",
 			{
@@ -494,6 +508,26 @@ whenReady(function() {
 
 			});
 	}
+	$("#cview .syinfo .compareto select").on("change", function() {
+		var val = $(this).val();
+		if (val.indexOf(",") == -1) $("#cview .syinfo .right2").html("");
+		val = val.split(",");
+		val[1] = parseInt(val[1]);
+		var sy = null;
+		states.forEach((state) => {
+			state.years.forEach((year) => {
+				var s = state.yearMap[state.years];
+				if (s.name == val[0] && s.election_year == val[1]) sy = s;
+			});
+		});
+		if (sy) {
+			$("#cview .syinfo .statename .right2").html(sy.name);
+			$("#cview .syinfo .year .right2").html(sy.election_year);
+			$("#cview .syinfo .population .right2").html(commaNumbers(sy.population));
+			$("#cview .syinfo .area .right2").html(commaNumbers((sy.area / 1000000).toFixed(1)) + " sq km");
+			$("#cview .syinfo .perimeter .right2").html(commaNumbers((sy.perimeter / 1000).toFixed(1)) + " km");
+		}
+	});
 
 
 	function hoverPrecinct($el, layer, props) {
@@ -554,7 +588,7 @@ whenReady(function() {
 		$("#cview .dinfo .code .right").html(district.code);
 		$("#cview .dinfo .population .right").html(commaNumbers(district.population));
 		$("#cview .dinfo .area .right").html(commaNumbers((district.area / 1000000).toFixed(1)) + " sq km");
-		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000000).toFixed(1)) + " km");
+		$("#cview .dinfo .perimeter .right").html(commaNumbers((district.perimeter / 1000).toFixed(1)) + " km");
 		setupVoteBar(district.votes, $("#cview .dinfo .votes"));
 
 		active.districtsLayer.applySettings({
@@ -647,7 +681,7 @@ whenReady(function() {
 		$("#cview .pinfo .code .right").html(precinct.code);
 		$("#cview .pinfo .population .right").html(commaNumbers(precinct.population));
 		$("#cview .pinfo .area .right").html(commaNumbers((precinct.area / 1000000).toFixed(1)) + " sq km");
-		$("#cview .pinfo .perimeter .right").html(commaNumbers((precinct.perimeter / 1000000).toFixed(1)) + " km");
+		$("#cview .pinfo .perimeter .right").html(commaNumbers((precinct.perimeter / 1000).toFixed(1)) + " km");
 		setupVoteBar(precinct.votes, $("#cview .pinfo .votes"));
 
 		map.fitBounds2(precinctLayer);
@@ -805,6 +839,7 @@ whenReady(function() {
 		cw : [0, 1, 0.5],
 		ew : [0, 1, 0.5],
 		pt : [0.001, 0.25, 0.1],
+		lp : [0, 6, 1],
 	}
 	$("#credistrict .slider").each(function(index) {
 		var $slider = $(this), $c = $slider.closest(".constraint");
@@ -812,8 +847,13 @@ whenReady(function() {
 		var slider = new Slider($slider, (sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]));
 		sliders[s][3] = slider;
 		slider.onChangeAlways((v) => {
-			var n = sliders[s][0] + (sliders[s][1] - sliders[s][0]) * v;
-			$c.find(".label span").html(n.toFixed(4));
+			var n = sliders[s][0] + (sliders[s][1] - sliders[s][0]) * v,
+				ns = n.toFixed(4);;
+			if (s == "lp") {
+				n = Math.round(Math.pow(10, n));
+				ns = commaNumbers(n);
+			}
+			$c.find(".label span").html(ns);
 			sliders[s][4] = n;
 		}, true);
 	});
@@ -830,6 +870,21 @@ whenReady(function() {
 			var slider = sliders[s][3];
 			slider.change((sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]))
 		});
+		var cmap = [["cw", "compactness_weight"],
+				   ["ew", "efficiency_weight"],
+				   ["pt", "population_threshold"],
+				   ["lp", "loops"],
+				   ];
+        APICall("getconstraints")
+            .then((r) => {
+                cmap.forEach((a) => {
+                    if (r.hasOwnProperty(a[1])) {
+                        var s = sliders[a[0]], v = parseFloat(r[a[1]]);
+                        if (a[0] == "lp") v = Math.log10(v);
+                        s[3].change((v - s[0]) / (s[1] - s[0]), false);
+                    }
+                });
+            });
 	})();
 
 	// Redistricting
@@ -1081,6 +1136,9 @@ whenReady(function() {
 				$change.find(".compactness2").html(change.new_district_compactness.toFixed(4));
 				$("#credistrict .changes").append($change);
 			}
+
+			$("#credistrict .updates .dc[did=" + d.id + "] .after").html(change.new_district_compactness.toFixed(8));
+			$("#credistrict .updates .seg .after").html(change.state_wide_efficiency_gap.toFixed(8));
 		}
 
 		setInterval(() => {
@@ -1167,11 +1225,14 @@ whenReady(function() {
 
 			var map = [["cw", "compactness_weight"],
 					   ["ew", "efficiency_weight"],
-					   ["pt", "population_threshold"]];
+					   ["pt", "population_threshold"],
+					   ["lp", "loops"],
+					   ];
 			var data = {
 				state_id : active.sy.id,
-				ignore_precinct_geo_ids : [],
-				ignore_district_geo_ids : [],
+				ignore_precinct_geo_ids : [-1],
+				ignore_district_geo_ids : [-1],
+				loops : TOTAL_LOOPS,
 			};
 			map.forEach((a) => {
 				data[a[1]] = sliders[a[0]][4];
@@ -1183,17 +1244,43 @@ whenReady(function() {
 				if (p.ignoreRedistrict) data.ignore_precinct_geo_ids.push(p.geo_id);
 			});
 
+			TOTAL_LOOPS = data.loops;
+			if (TOTAL_LOOPS < 100) LOOP_ITERATE = TOTAL_LOOPS / 10;
+			else if (TOTAL_LOOPS < 1000) LOOP_ITERATE = TOTAL_LOOPS / 10;
+			else if (TOTAL_LOOPS < 10000) LOOP_ITERATE = TOTAL_LOOPS / 50;
+			else if (TOTAL_LOOPS < 100000) LOOP_ITERATE = TOTAL_LOOPS / 200;
+			else if (TOTAL_LOOPS < 1000000) LOOP_ITERATE = TOTAL_LOOPS / 500;
+			else if (TOTAL_LOOPS < 10000000) LOOP_ITERATE = TOTAL_LOOPS / 1000;
+			else LOOP_ITERATE = TOTAL_LOOPS / 10000;
+			LOOP_ITERATE = Math.round(LOOP_ITERATE);
+			LOOP_ITERATE = Math.min(Math.max(LOOP_ITERATE, 10), 1000);
+
 			APICall("startalgorithm", data)
 				.then((r) => {
 					updates = [];
 					running = true;
 					paused = false;
 					aid = r.algorithm_id;
-					totalLoops = r.loops;
+
 					totalLoops = TOTAL_LOOPS;
+
 					loopCount = 0;
 					lastUpdate = 0;
 					renderTime = 0;
+
+					$("#credistrict .updates .seg .before, #credistrict .updates .seg .after").html(r.init_state_efficiency_gap.toFixed(8));
+					$("#credistrict .updates .dc").remove();
+					r.init_district_compactness_list.forEach((dc, ind) => {
+						var district = active.districts.find((d) => d.id == dc.district_id);
+						if (!district) district = active.districts[ind];
+						if (!district) return;
+						var $dc = $("<div>").addClass("row dc").attr("did", district.id).append(
+							$("<div>").addClass("field field1").html(district.name),
+							$("<div>").addClass("field before").html(dc.compactness.toFixed(8)),
+							$("<div>").addClass("field after").html(dc.compactness.toFixed(8)),
+							);
+						$("#credistrict .updates .table").append($dc);
+					});
 
 					$("#credistrict .algorithm .pause, #credistrict .algorithm .stop, #credistrict .algorithm .reset").removeClass("disabled");
 					$("#credistrict .algresults .progress").css("width", 0);

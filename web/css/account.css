@@ -11,7 +11,7 @@
 	width:900px;
 	max-width:calc(100% - 40px);
 	text-align: left;
-	padding:25px 0 20px;
+	padding:25px 0 120px;
 }
 #account h1 {
 	font-weight:400;
@@ -150,11 +150,15 @@
 #account .admin .users .user.add > .edit,
 #account .admin .users .user.add > .delete,
 #account .admin .users .user.add > .id,
+#account .admin .users .user.add > .verified,
 #account .admin .users .user.add > .type {
 	visibility: hidden;
 }
 #account .admin .users .user > .id {
 	width:25px;
+}
+#account .admin .users .user > .verified {
+	width:60px;
 }
 #account .admin .users .user > .type {
 	width:60px;
@@ -197,4 +201,34 @@
 }
 #account .admin .users .user.add .password {
 	width:90px;
+}
+
+
+#account .constraint {
+	user-select: none;
+    margin-bottom:9px;
+    max-width:500px;
+}
+#account .constraint .label {
+    position: relative;
+    width:100%;
+    display: inline-block;
+    font-size:13px;
+    font-weight:300;
+}
+#account .constraint .label span {
+    font-weight: 500;
+}
+#account .constraint .label .reset {
+    position: absolute;
+    right:0;
+    top:0;
+    cursor: pointer;
+    color:#666;
+}
+#account .constraint .label .reset:hover { text-decoration: underline; }
+#account .constraint .slider {
+    display: block;
+    width: 100%;
+    margin-top:1px;
 }

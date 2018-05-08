@@ -26,6 +26,10 @@ public class UserManager {
         return allUsers;
     }
 
+    public List<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public User findUserById(int userId) {
         return userRepository.findOne(userId);
     }

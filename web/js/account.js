@@ -108,6 +108,7 @@ whenReady(function() {
                 email : $(".users .user.add .email input").val(),
                 username : $(".users .user.add .username input").val(),
                 password : $(".users .user.add .password input").val(),
+                ignore_verify : true,
             };
 
             $(".users .user.add input").val("");
@@ -155,6 +156,7 @@ whenReady(function() {
             $user.attr("uid", user.user_id);
             $user.attr("pw", user.password);
             $user.find(".id").html(user.user_id);
+            $user.find(".verified").html(user.verified ? "Yes" : "No");
             $user.find(".type").html(user.role);
             $user.find(".email .text").html(user.email);
             $user.find(".username .text").html(user.username);
@@ -167,6 +169,79 @@ whenReady(function() {
                     addUser(u);
                 });
             });
+
+
+        var sliders = {
+            cw : [0, 1, 0.5],
+            ew : [0, 1, 0.5],
+            pt : [0.001, 0.25, 0.1],
+            lp : [0, 6, 1],
+        };
+        window.sliders = sliders;
+        $("#account .slider").each(function(index) {
+            var $slider = $(this), $c = $slider.closest(".constraint");
+            var s = $slider.attr("slider");
+            var slider = new Slider($slider, (sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]));
+            sliders[s][3] = slider;
+            slider.onChangeAlways((v) => {
+                var n = sliders[s][0] + (sliders[s][1] - sliders[s][0]) * v,
+                    ns = n.toFixed(4);;
+                if (s == "lp") {
+                    n = Math.round(Math.pow(10, n));
+                    ns = commaNumbers(n);
+                }
+                $c.find(".label span").html(ns);
+                sliders[s][4] = n;
+                if (csavet)
+                    window.clearTimeout(csavet);
+                csavet = window.setTimeout(csave, 100);
+            }, true);
+        });
+        (function() {
+            var pair = [sliders.cw, sliders.ew];
+            pair.forEach((p) => {
+                p[3].onChange((v) => {
+                    var o = (pair[0] == p) ? pair[1] : pair[0];
+                    o[3].change(1 - v, false);
+                });
+            });
+            $("#account .constraint .reset").click(function() {
+                var s = $(this).closest(".constraint").find(".slider").attr("slider");
+                var slider = sliders[s][3];
+                slider.change((sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]))
+            });
+        })();
+        var csavet, cansave = false;
+        var cmap = [
+            ["cw", "compactness_weight"],
+            ["ew", "efficiency_weight"],
+            ["pt", "population_threshold"],
+            ["lp", "loops"],
+            ];
+        function csave() {
+            var data = {};
+            cmap.forEach((a) => {
+                data[a[1]] = sliders[a[0]][4];
+            });
+
+            if (cansave)
+                APICall("editconstraints", data)
+                    .then((r) => {}, () => {});
+        };
+        APICall("getconstraints")
+            .then((r) => {
+                cmap.forEach((a) => {
+                    if (r.hasOwnProperty(a[1])) {
+                        var s = sliders[a[0]], v = parseFloat(r[a[1]]);
+                        if (a[0] == "lp") v = Math.log10(v);
+                        s[3].change((v - s[0]) / (s[1] - s[0]), false);
+                    }
+                });
+                setTimeout(function() {
+                    cansave = true;
+                }, 110);
+            });
+
     }
 
 

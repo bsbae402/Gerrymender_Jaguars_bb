@@ -35,6 +35,14 @@ var API_CALLS = [
         },
         adummy : function(data={}) { return { user_id : 0, error : 0, } },
     },
+    {
+        name : "verifyuser",
+        method : "POST",
+        url : "user/verify",
+        response : function(r={}, data={}) {
+            return r;
+        },
+    },
 
     // users
     {
@@ -200,6 +208,31 @@ var API_CALLS = [
     },
 
     // algorithm
+    {
+        name : "getconstraints",
+        method : "GET",
+        url : "algorithm/constraints",
+        response : (r, data) => r,
+        dummy : () => {
+            return {
+                compactness_weight : 0.5,
+                efficiency_weight : 0.5,
+                population_threshold : 0.1,
+                loops : 100,
+            }
+        },
+    },
+    {
+        name : "editconstraints",
+        method : "POST",
+        url : "algorithm/constraints",
+        response : (r, data) => r,
+        adummy : () => {
+            return {
+                ok : true,
+            }
+        },
+    },
     {
         name : "startalgorithm",
         method : "POST",
