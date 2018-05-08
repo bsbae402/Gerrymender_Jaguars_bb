@@ -41,29 +41,29 @@ public final class MeasureCalculator {
             District district,
             HashMap<String, PrecinctNeighborRelation> precinctNeighborRelationMap) {
 
-        Set<Precinct> precincts = district.getPrecincts();
-
-        ArrayList<Set<String>> connectedComponentList = new ArrayList<>();
-        HashMap<String, Set<String>> referenceToItsSet = new HashMap<>();
-
-        for(Precinct p : precincts) {
-            Set<String> connectedComponent = new HashSet<>();
-            connectedComponent.add(p.getGeoId());
-            connectedComponentList.add(connectedComponent);
-            referenceToItsSet.put(p.getGeoId(), connectedComponent);
-        }
-
-        PriorityQueue<String> pqGeoids = new PriorityQueue<>();
-        boolean expandedLastTime = true;
-        while(expandedLastTime) {
-            Set<String> firstCC = connectedComponentList.get(0);
-            ArrayList<String> elements = new ArrayList<>();
-            for(String geoid : firstCC) {
-                elements.add(geoid);
-            }
-
-
-        }
+//        Set<Precinct> precincts = district.getPrecincts();
+//
+//        ArrayList<Set<String>> connectedComponentList = new ArrayList<>();
+//        HashMap<String, Set<String>> referenceToItsSet = new HashMap<>();
+//
+//        for(Precinct p : precincts) {
+//            Set<String> connectedComponent = new HashSet<>();
+//            connectedComponent.add(p.getGeoId());
+//            connectedComponentList.add(connectedComponent);
+//            referenceToItsSet.put(p.getGeoId(), connectedComponent);
+//        }
+//
+//        PriorityQueue<String> pqGeoids = new PriorityQueue<>();
+//        boolean expandedLastTime = true;
+//        while(expandedLastTime) {
+//            Set<String> firstCC = connectedComponentList.get(0);
+//            ArrayList<String> elements = new ArrayList<>();
+//            for(String geoid : firstCC) {
+//                elements.add(geoid);
+//            }
+//
+//
+//        }
 
 //
 //        ArrayList<Set<Precinct>> connectedComponentSetList = new ArrayList<>();
@@ -114,10 +114,9 @@ public final class MeasureCalculator {
 //        }
 //
 //        // stubbed
-//        Set<Precinct> oneset = new HashSet<>();
-//        ArrayList<Set<Precinct>> listSizeOne = new ArrayList<>();
-//        listSizeOne.add(oneset);
-//        return listSizeOne;
-        return null;
+        Set<Precinct> oneset = new HashSet<>();
+        ArrayList<Set<Precinct>> listSizeOne = new ArrayList<>();
+        listSizeOne.add(oneset);
+        return listSizeOne;
     }
 }
