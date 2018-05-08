@@ -10,6 +10,7 @@ import jaguars.map.district.District;
 import jaguars.map.precinct.Precinct;
 import jaguars.map.state.State;
 import jaguars.map.state.StateManager;
+import jaguars.util.PropertiesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,8 @@ public class AlgorithmController {
     private CalculationManager cm;
     @Autowired
     private PrecinctNeighborManager pnm;
+    @Autowired
+    private PropertiesManager propMan;
 
     @RequestMapping(value = "/algorithm/start", method = RequestMethod.POST)
     public String startRedistrictAlgorithm(@RequestParam("state_id") int stateId,
@@ -227,6 +230,28 @@ public class AlgorithmController {
         retObj.addProperty("old_district_compactness", cm.getCompactnessMeasure(oldAffiliation));
         retObj.addProperty("state_wide_efficiency_gap", cm.getEfficiencyGap(algoState));
 
+        return retObj.toString();
+    }
+
+    @RequestMapping(value = "algorithm/constraints", method = RequestMethod.GET)
+    public String returnAlgorithmConstraints(){
+        JsonObject retObj = new JsonObject();
+        retObj.addProperty("compactness_weight", propMan.getDefaultCompactnessWeight());
+        retObj.addProperty("efficiency_weight", propMan.getDefaultEfficiencyWeight());
+        retObj.addProperty("population_threshold", propMan.getDefaultPopulationThreshold());
+        retObj.addProperty("loops", propMan.getMaxLoopSteps());
+        return retObj.toString();
+    }
+
+    @RequestMapping(value = "algorithm/constraints", method = RequestMethod.POST)
+    public String updateAlgorithmContrainst(@RequestParam("compactness_weight") double compactnessWeight,
+                                            @RequestParam("efficiency_weight") double efficiencyWeight,
+                                            @RequestParam("population_threshold") double populationThreshold,
+                                            @RequestParam("loops") int maxLoops){
+        boolean fileOk = propMan.updateAlgorithmContraints(compactnessWeight,
+                efficiencyWeight, populationThreshold, maxLoops);
+        JsonObject retObj = new JsonObject();
+        retObj.addProperty("ok", fileOk);
         return retObj.toString();
     }
 }

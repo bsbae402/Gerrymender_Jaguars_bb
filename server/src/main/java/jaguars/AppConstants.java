@@ -31,6 +31,13 @@ public class AppConstants {
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbor_relations.json";
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_OH2010 = PATH_JSONS + "/OH_2010_precincts_neighbor_relations.json";
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_WI2010 = PATH_JSONS + "/WI_2010_precincts_neighbor_relations.json";
+    public static final String PATH_APP_PROPERTIES_JSON = PATH_JSONS + "/app_properties.json";
+
+    // properties json names
+    public static final String PROP_NAME_COMPACTNESS_WEIGHT = "default_compactness_weight";
+    public static final String PROP_NAME_EFFICIENCY_WEIGHT = "default_efficiency_weight";
+    public static final String PROP_NAME_POPULATION_THRESHOLD = "default_population_threshold";
+    public static final String PROP_NAME_MAX_LOOP_STEPS = "max_loop_steps";
 
     // return codes
     public static final int ON_SUCCESS = 0;
