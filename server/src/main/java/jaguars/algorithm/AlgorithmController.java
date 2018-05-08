@@ -219,7 +219,8 @@ public class AlgorithmController {
     @RequestMapping(value = "algorithm/constraints", method = RequestMethod.GET)
     public String returnAlgorithmConstraints(){
         JsonObject retObj = new JsonObject();
-        retObj.addProperty("compactness_weight", propMan.getDefaultCompactnessWeight());
+        retObj.addProperty("polsby_compactness_weight", propMan.getDefaultCompactnessWeightPp());
+        retObj.addProperty("schwartzberg_compactness_weight", propMan.getDefaultCompactnessWeightSch());
         retObj.addProperty("efficiency_weight", propMan.getDefaultEfficiencyWeight());
         retObj.addProperty("population_threshold", propMan.getDefaultPopulationThreshold());
         retObj.addProperty("loops", propMan.getMaxLoopSteps());
@@ -227,11 +228,12 @@ public class AlgorithmController {
     }
 
     @RequestMapping(value = "algorithm/constraints", method = RequestMethod.POST)
-    public String updateAlgorithmContrainst(@RequestParam("compactness_weight") double compactnessWeight,
+    public String updateAlgorithmContrainst(@RequestParam("polsby_compactness_weight") double compactnessWeightPp,
+                                            @RequestParam("schwartzberg_compactness_weight") double compactnessWeightSch,
                                             @RequestParam("efficiency_weight") double efficiencyWeight,
                                             @RequestParam("population_threshold") double populationThreshold,
                                             @RequestParam("loops") int maxLoops){
-        boolean fileOk = propMan.updateAlgorithmContraints(compactnessWeight,
+        boolean fileOk = propMan.updateAlgorithmContraints(compactnessWeightPp, compactnessWeightSch,
                 efficiencyWeight, populationThreshold, maxLoops);
         JsonObject retObj = new JsonObject();
         retObj.addProperty("ok", fileOk);
