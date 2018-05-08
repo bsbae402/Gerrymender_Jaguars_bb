@@ -838,8 +838,9 @@ whenReady(function() {
 
 	// sliders
 	var sliders = {
-		cw : [0, 1, 0.5],
-		ew : [0, 1, 0.5],
+        pcw : [0, 1, 0.3],
+        scw : [0, 1, 0.3],
+		ew : [0, 1, 0.4],
 		pt : [0.001, 0.25, 0.1],
 		lp : [0, 6, 1],
 	}
@@ -860,23 +861,32 @@ whenReady(function() {
 		}, true);
 	});
 	(function() {
-		var pair = [sliders.cw, sliders.ew];
-		pair.forEach((p) => {
-			p[3].onChange((v) => {
-				var o = (pair[0] == p) ? pair[1] : pair[0];
-				o[3].change(1 - v, false);
-			});
-		});
+		var pair = [sliders.pcw, sliders.scw, sliders.ew];
+        pair.forEach((p, index) => {
+            p[3].onChange((v) => {
+                var remainingtotal = pair.filter((p2, index2) => index != index2).map((p) => p[4]).reduce((a, b) => a + b);
+                var newremainingtotal = 1 - v;
+                pair.forEach((p2, index2) => {
+                    if (index == index2) return;
+                    if (remainingtotal == 0)
+                        p2[3].change(newremainingtotal / (pair.length - 1), false);
+                    else
+                        p2[3].change(p2[4] * newremainingtotal / remainingtotal, false);
+                });
+            });
+        });
 		$("#credistrict .constraint .reset").click(function() {
 			var s = $(this).closest(".constraint").find(".slider").attr("slider");
 			var slider = sliders[s][3];
 			slider.change((sliders[s][2] - sliders[s][0]) / (sliders[s][1] - sliders[s][0]))
 		});
-		var cmap = [["cw", "compactness_weight"],
-				   ["ew", "efficiency_weight"],
-				   ["pt", "population_threshold"],
-				   ["lp", "loops"],
-				   ];
+		var cmap = [
+			["pcw", "polsby_compactness_weight"],
+            ["scw", "schwartzberg_compactness_weight"],
+			["ew", "efficiency_weight"],
+			["pt", "population_threshold"],
+			["lp", "loops"],
+		];
         APICall("getconstraints")
             .then((r) => {
                 cmap.forEach((a) => {
@@ -1259,11 +1269,13 @@ whenReady(function() {
 			if (running) return;
 			$(this).addClass("disabled");
 
-			var map = [["cw", "compactness_weight"],
-					   ["ew", "efficiency_weight"],
-					   ["pt", "population_threshold"],
-					   ["lp", "loops"],
-					   ];
+			var map = [
+	            ["pcw", "polsby_compactness_weight"],
+	            ["scw", "schwartzberg_compactness_weight"],
+				["ew", "efficiency_weight"],
+				["pt", "population_threshold"],
+				["lp", "loops"],
+				];
 			var data = {
 				state_id : active.sy.id,
 				ignore_precinct_geo_ids : [-1],
