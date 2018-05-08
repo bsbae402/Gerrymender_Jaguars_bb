@@ -25,9 +25,9 @@ public class AlgorithmAction {
     @Expose
     private double stateWideEfficiencyGap;
     @Expose
-    private double oldObjectiveScore;
+    private double stateOldObjectiveScore;
     @Expose
-    private double newObjectiveScore;
+    private double stateNewObjectiveScore;
 
     public AlgorithmAction() {
     }
@@ -35,7 +35,7 @@ public class AlgorithmAction {
     public AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId,
                            double newDistrictCompactnessPp, double oldDistrictCompactnessPp,
                            double newDistrictCompactnessSch, double oldDistrictCompactnessSch,
-                           double oldObjectiveScore, double newObjectiveScore,
+                           double stateOldObjectiveScore, double stateNewObjectiveScore,
                            double stateWideEfficiencyGap) {
         this.precinctId = precinctId;
         this.oldDistrictId = oldDistrictId;
@@ -45,8 +45,8 @@ public class AlgorithmAction {
         this.newDistrictCompactnessSch = newDistrictCompactnessSch;
         this.oldDistrictCompactnessSch = oldDistrictCompactnessSch;
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
-        this.oldObjectiveScore = oldObjectiveScore;
-        this.newObjectiveScore = newObjectiveScore;
+        this.stateOldObjectiveScore = stateOldObjectiveScore;
+        this.stateNewObjectiveScore = stateNewObjectiveScore;
     }
 
     public int getPrecinctId() {
@@ -113,20 +113,20 @@ public class AlgorithmAction {
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
     }
 
-    public double getOldObjectiveScore() {
-        return oldObjectiveScore;
+    public double getstateOldObjectiveScore() {
+        return stateOldObjectiveScore;
     }
 
-    public void setOldObjectiveScore(double oldObjectiveScore) {
-        this.oldObjectiveScore = oldObjectiveScore;
+    public void setstateOldObjectiveScore(double stateOldObjectiveScore) {
+        this.stateOldObjectiveScore = stateOldObjectiveScore;
     }
 
-    public double getNewObjectiveScore() {
-        return newObjectiveScore;
+    public double getstateNewObjectiveScore() {
+        return stateNewObjectiveScore;
     }
 
-    public void setNewObjectiveScore(double newObjectiveScore) {
-        this.newObjectiveScore = newObjectiveScore;
+    public void setstateNewObjectiveScore(double stateNewObjectiveScore) {
+        this.stateNewObjectiveScore = stateNewObjectiveScore;
     }
 
     @Override
@@ -138,8 +138,8 @@ public class AlgorithmAction {
                 ", newDistrictCompactnessPp=" + newDistrictCompactnessPp +
                 ", oldDistrictCompactnessSch=" + oldDistrictCompactnessSch +
                 ", stateWideEfficiencyGap=" + stateWideEfficiencyGap +
-                ", oldObjectiveScore=" + oldObjectiveScore +
-                ", newObjectiveScore=" + newObjectiveScore +
+                ", stateOldObjectiveScore=" + stateOldObjectiveScore +
+                ", stateNewObjectiveScore=" + stateNewObjectiveScore +
                 '}';
     }
 }
