@@ -24,6 +24,10 @@ public class AlgorithmAction {
     private double oldDistrictCompactnessPp;
     @Expose
     private double stateWideEfficiencyGap;
+    @Expose
+    private double oldObjectiveScore;
+    @Expose
+    private double newObjectiveScore;
 
     public AlgorithmAction() {
     }
@@ -31,6 +35,7 @@ public class AlgorithmAction {
     public AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId,
                            double newDistrictCompactnessPp, double oldDistrictCompactnessPp,
                            double newDistrictCompactnessSch, double oldDistrictCompactnessSch,
+                           double oldObjectiveScore, double newObjectiveScore,
                            double stateWideEfficiencyGap) {
         this.precinctId = precinctId;
         this.oldDistrictId = oldDistrictId;
@@ -40,6 +45,8 @@ public class AlgorithmAction {
         this.newDistrictCompactnessSch = newDistrictCompactnessSch;
         this.oldDistrictCompactnessSch = oldDistrictCompactnessSch;
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
+        this.oldObjectiveScore = oldObjectiveScore;
+        this.newObjectiveScore = newObjectiveScore;
     }
 
     public int getPrecinctId() {
@@ -106,6 +113,22 @@ public class AlgorithmAction {
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
     }
 
+    public double getOldObjectiveScore() {
+        return oldObjectiveScore;
+    }
+
+    public void setOldObjectiveScore(double oldObjectiveScore) {
+        this.oldObjectiveScore = oldObjectiveScore;
+    }
+
+    public double getNewObjectiveScore() {
+        return newObjectiveScore;
+    }
+
+    public void setNewObjectiveScore(double newObjectiveScore) {
+        this.newObjectiveScore = newObjectiveScore;
+    }
+
     @Override
     public String toString() {
         return "AlgorithmAction{" +
@@ -115,6 +138,8 @@ public class AlgorithmAction {
                 ", newDistrictCompactnessPp=" + newDistrictCompactnessPp +
                 ", oldDistrictCompactnessSch=" + oldDistrictCompactnessSch +
                 ", stateWideEfficiencyGap=" + stateWideEfficiencyGap +
+                ", oldObjectiveScore=" + oldObjectiveScore +
+                ", newObjectiveScore=" + newObjectiveScore +
                 '}';
     }
 }

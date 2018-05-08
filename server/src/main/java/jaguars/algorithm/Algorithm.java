@@ -283,6 +283,8 @@ public class Algorithm {
                     cm.getCompactnessMeasurePP(oldAffDistrictOfNew),
                     cm.getCompactnessMeasureSch(newAffDistrictOfNew),
                     cm.getCompactnessMeasureSch(oldAffDistrictOfNew),
+                    oldScore,
+                    newScore,
                     cm.getEfficiencyGap(newState));
             // AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId, double newDistrictCompactness, double oldDistrictCompactness, double stateWideEfficiencyGap)
             algoActionList.add(algoAct);
