@@ -28,9 +28,9 @@ public class AppConstants {
 
     // Path json
     public static final String PATH_JSONS = PATH_RESOURCES + "/jsons";
-    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbor_relations.json";
+    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_NH2010 = PATH_JSONS + "/NH_2010_precincts_neighbor_relations_v2.json";
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_OH2010 = PATH_JSONS + "/OH_2010_precincts_neighbor_relations.json";
-    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_WI2010 = PATH_JSONS + "/WI_2010_precincts_neighbor_relations.json";
+    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_WI2010 = PATH_JSONS + "/WI_2010_precincts_neighbor_relations_v2.json";
     public static final String PATH_APP_PROPERTIES_JSON = PATH_JSONS + "/app_properties.json";
 
     // properties json names
