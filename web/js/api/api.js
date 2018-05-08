@@ -215,8 +215,9 @@ var API_CALLS = [
         response : (r, data) => r,
         adummy : () => {
             return {
-                compactness_weight : 0.5,
-                efficiency_weight : 0.5,
+                polsby_compactness_weight : 0.3,
+                schwartzberg_compactness_weight : 0.3,
+                efficiency_weight : 0.4,
                 population_threshold : 0.1,
                 loops : 100,
             }
