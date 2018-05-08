@@ -62,7 +62,7 @@ public class AlgorithmController {
         JsonArray initDistCompactList = new JsonArray();
         for(District d : districts) {
             JsonObject distCompact = new JsonObject();
-            distCompact.addProperty("district_id", d.getId());
+            distCompact.addProperty("district_geoid", d.getGeoId());
             double compactnessMeasurePP = cm.getCompactnessMeasurePP(d);
             double compactnessMeasureSch = cm.getCompactnessMeasureSch(d);
             distCompact.addProperty("compactness_pp", compactnessMeasurePP);
