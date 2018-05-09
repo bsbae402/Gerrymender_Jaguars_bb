@@ -468,7 +468,7 @@ whenReady(function() {
 		$("#cview .syinfo .compareto select").val(-1);
 		states.forEach((state) => {
 			state.years.forEach((year) => {
-				var s = state.yearMap[state.years];
+				var s = state.yearMap[year];
 				if (s == sy) return;
 				$("#cview .syinfo .compareto select").append(
 					$("<option>").html(s.name + " " + s.election_year).val(s.name+","+s.election_year)
@@ -516,7 +516,7 @@ whenReady(function() {
 		var sy = null;
 		states.forEach((state) => {
 			state.years.forEach((year) => {
-				var s = state.yearMap[state.years];
+				var s = state.yearMap[year];
 				if (s.name == val[0] && s.election_year == val[1]) sy = s;
 			});
 		});

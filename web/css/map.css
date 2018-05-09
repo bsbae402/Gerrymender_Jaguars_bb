@@ -462,11 +462,11 @@
     width:80px;
 }
 #cview .yearbox .yearselect .votes {
-    width:90px;
+    width:110px;
 }
 #cview .yearbox .yearselect .votes::after { content: " votes"; }
 #cview .yearbox .yearselect .population {
-    width:130px;
+    width:140px;
 }
 #cview .yearbox .yearselect .population::before {
     content:"/";
