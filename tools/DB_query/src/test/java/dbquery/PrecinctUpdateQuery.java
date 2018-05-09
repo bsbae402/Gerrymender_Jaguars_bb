@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -187,5 +188,22 @@ public class PrecinctUpdateQuery {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void changePrecinctAffiliation() {
+        // WI, Janesville Ward 33, 55105378250033: from WI02 to WI01
+        List<Precinct> targetPrecincts = pm.getPrecinctsByGeoId("55105378250033");
+
+        Precinct firstOnePrec = targetPrecincts.get(0);
+
+        // WI District 1: 5501
+        List<District> newAffiliations = dm.getDistrictsByGeoId("5501");
+        District firstOneDist = newAffiliations.get(0);
+
+        firstOnePrec.setDistrict(firstOneDist);
+        String newCode = firstOneDist.getCode() + firstOnePrec.getCode().substring(4);
+        firstOnePrec.setCode(newCode);
+        pm.updatePrecinct(firstOnePrec);
     }
 }
