@@ -493,12 +493,19 @@
     font-size:14px;
 }
 #cview .analytics .field .left {
-    width: 200px;
+    width: 240px;
     font-weight: 500;
 }
 #cview .analytics .field .right {
-    width: calc(100% - 200px);
+    width: 200px;
     font-weight: 300;
+}
+#cview .analytics .field .right2 {
+    width: calc(100% - 240px - 200px);
+    font-weight: 300;
+}
+#cview .analytics .field.l > div {
+    font-weight:500;
 }
 
 
