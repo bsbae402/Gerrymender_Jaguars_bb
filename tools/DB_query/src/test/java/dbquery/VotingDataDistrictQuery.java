@@ -30,7 +30,8 @@ public class VotingDataDistrictQuery {
         // int stateId = 2; <- NH
         // int stateId = 1; // OH
         // int stateId = 3; // WI
-        int stateId = 4; // 2014 WI
+        // int stateId = 4; // 2014 WI
+        int stateId = 5; // 2014 NH
         State state = sm.getState(stateId);
         Set<District> districts = state.getDistricts();
         for(District d : districts) {
