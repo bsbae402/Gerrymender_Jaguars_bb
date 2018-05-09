@@ -1,4 +1,7 @@
 var ENDPOINT = "http://localhost:8080/";
+if (window.location.href.indexOf("gerrymandering.online") > -1) {
+    ENDPOINT = "http://35.174.152.138:8080/";
+}
 
 var API_CALLS = [
     
