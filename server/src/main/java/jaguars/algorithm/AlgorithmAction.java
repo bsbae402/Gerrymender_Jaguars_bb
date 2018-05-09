@@ -33,34 +33,37 @@ public class AlgorithmAction {
     @Expose
     private double districtNewObjectiveScore;
 
-    public void checkNaN(){
+    public boolean checkNaN(){
+
         if (Double.isNaN(newDistrictCompactnessPp)){
-            newDistrictCompactnessPp = 0;
+            return true;
         }
         if (Double.isNaN(oldDistrictCompactnessPp)){
-            oldDistrictCompactnessPp = 0;
+            return true;
         }
         if (Double.isNaN(newDistrictCompactnessSch)){
-            newDistrictCompactnessSch = 0;
+            return true;
         }
         if (Double.isNaN(oldDistrictCompactnessSch)){
-            oldDistrictCompactnessSch = 0;
+            return true;
         }
         if (Double.isNaN(stateWideEfficiencyGap)){
-            stateWideEfficiencyGap = 0;
+            return true;
         }
         if (Double.isNaN(stateNewObjectiveScore)){
-            stateNewObjectiveScore = 0;
+            return true;
         }
         if (Double.isNaN(stateOldObjectiveScore)){
-            stateOldObjectiveScore = 0;
+            return true;
         }
         if (Double.isNaN(districtOldObjectiveScore)){
-            districtOldObjectiveScore = 0;
+            return true;
         }
         if (Double.isNaN(districtNewObjectiveScore)){
-            districtNewObjectiveScore = 0;
+            return true;
         }
+
+        return false;
     }
 
 

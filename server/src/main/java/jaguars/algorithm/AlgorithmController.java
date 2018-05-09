@@ -101,7 +101,9 @@ public class AlgorithmController {
                 .setPrettyPrinting().create();
 
         for (AlgorithmAction aa : algorithmActions) {
-            aa.checkNaN();
+            if (aa.checkNaN()){
+                algorithmActions.remove(aa);
+            }
         }
 
         JsonElement allChangesElem = gson.toJsonTree(algorithmActions);
