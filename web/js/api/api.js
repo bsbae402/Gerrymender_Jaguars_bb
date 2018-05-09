@@ -318,7 +318,7 @@ var API_CALLS = [
         method : "POST",
         url : "contact",
         response : (r, data) => r,
-        dummy : () => {return {ok : true};},
+        adummy : () => {return {ok : true};},
     },
 
 ];
