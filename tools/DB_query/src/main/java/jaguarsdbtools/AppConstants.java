@@ -9,7 +9,7 @@ public class AppConstants {
 
     public static final String PATH_NEIGHBOR_FILES = PATH_RESOURCES + "/neighbor_files";
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_NH2010 = PATH_NEIGHBOR_FILES + "/NH_2010_precincts_neighbor_relations_v2.json";
-    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_OH2010 = PATH_NEIGHBOR_FILES + "/OH_2010_precincts_neighbor_relations_v2.json";
+    public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_OH2010 = PATH_NEIGHBOR_FILES + "/OH_2010_precincts_neighbor_relations_v3.json";
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_WI2010 = PATH_NEIGHBOR_FILES + "/WI_2010_precincts_neighbor_relations_v3.json";
 
 }

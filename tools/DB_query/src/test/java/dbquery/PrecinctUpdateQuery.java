@@ -5,6 +5,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import jaguarsdbtools.AppConstants;
 import jaguarsdbtools.JaguarsDBQuery;
+import jaguarsdbtools.data.PoliticalParty;
+import jaguarsdbtools.data.vd_district.VotingDataDistrict;
+import jaguarsdbtools.data.vd_district.VotingDataDistrictManager;
+import jaguarsdbtools.data.vd_precinct.VotingDataPrecinct;
 import jaguarsdbtools.map.district.District;
 import jaguarsdbtools.map.district.DistrictManager;
 import jaguarsdbtools.map.precinct.Precinct;
@@ -19,6 +23,7 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {JaguarsDBQuery.class})
@@ -38,6 +43,8 @@ public class PrecinctUpdateQuery {
     private DistrictManager dm;
     @Autowired
     private PrecinctManager pm;
+    @Autowired
+    private VotingDataDistrictManager vddm;
 
     @Test
     public void updatePrecinctPerimeters() {
@@ -205,5 +212,54 @@ public class PrecinctUpdateQuery {
         String newCode = firstOneDist.getCode() + firstOnePrec.getCode().substring(4);
         firstOnePrec.setCode(newCode);
         pm.updatePrecinct(firstOnePrec);
+    }
+
+    // this will update precinct and the related two districts
+    @Test
+    public void renewPrecinct() {
+        // 39049049AZA, id: 3630, FRANKLIN-E
+        // COLS 01-C (39049049AAP, id: 2527)
+        Precinct precinct = pm.getPrecinct(2527);
+
+        Set<VotingDataPrecinct> vdpSet = precinct.getVotingDataPrecincts();
+
+        // old aff: OH15, id: 17
+        // old aff: OH03, id: 5
+        District oldAff = dm.getDistrictById(5);
+        Set<VotingDataDistrict> oldAffVDD = oldAff.getVotingDataDistricts();
+        for(VotingDataDistrict vdd : oldAffVDD) {
+            for(VotingDataPrecinct vdp : vdpSet) {
+                if(vdd.getPoliticalParty() == vdp.getPoliticalParty()) {
+                    // this is for old affiliation
+                    int updatedDistVote = vdd.getVotes() - vdp.getVotes();
+                    vdd.setVotes(updatedDistVote);
+                    vddm.saveVotingDataDistrict(vdd);
+                }
+            }
+        }
+
+        // new aff: OH03, id: 5
+        // new aff: OH15, id: 17
+        District newAff = dm.getDistrictById(17);
+        Set<VotingDataDistrict> newAffVDD = newAff.getVotingDataDistricts();
+        for(VotingDataDistrict vdd : newAffVDD) {
+            for(VotingDataPrecinct vdp : vdpSet) {
+                if(vdd.getPoliticalParty() == vdp.getPoliticalParty()) {
+                    // this is for new affiliation
+                    int updatedDistVote = vdd.getVotes() + vdp.getVotes();
+                    vdd.setVotes(updatedDistVote);
+                    vddm.saveVotingDataDistrict(vdd);
+                }
+            }
+        }
+
+        // not border anymore ...
+        //precinct.setBorder(false);
+
+        // change affiliation
+        precinct.setDistrict(newAff);
+        String newCode = newAff.getCode() + precinct.getCode().substring(4);
+        precinct.setCode(newCode);
+        pm.updatePrecinct(precinct);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {JaguarsDBQuery.class})
@@ -38,5 +39,15 @@ public class PrecinctCheckQuery {
                 precinctCodeCounter.replace(p.getCode(), currentCount);
             }
         }
+    }
+
+    @Test
+    public void queryPrecinctIdByGeoId() {
+        //String precinctGeoId = "39049049AZA";
+        //String precinctGeoId = "39049049AAP";
+        String precinctGeoId = "39085007999"; // Water
+        List<Precinct> plistOfGeo = pm.getPrecinctsByGeoId(precinctGeoId);
+        for(Precinct p : plistOfGeo)
+            System.out.println(p.getId());
     }
 }

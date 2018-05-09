@@ -15,6 +15,10 @@ public class PrecinctManager {
     @Autowired
     private DistrictRepository dr;
 
+    public Precinct getPrecinct(int pid) {
+        return pr.findOne(pid);
+    }
+
     public List<Precinct> getAllPrecincts() {
         List<Precinct> precincts = new ArrayList<>();
         for(Precinct p : pr.findAll())

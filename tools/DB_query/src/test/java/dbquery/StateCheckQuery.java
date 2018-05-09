@@ -27,7 +27,8 @@ public class StateCheckQuery {
 
     @Test
     public void checkDistrictConnectedComponents() {
-        int stateId = 3; // WI
+        //int stateId = 3; // WI
+        int stateId = 1; // OH
         State state = sm.getState(stateId);
         HashMap<String, PrecinctNeighborRelation> precNeiRelMap
                 = pnm.getPrecinctNeighborRelationMap(state.getCode(), state.getElectionYear());
