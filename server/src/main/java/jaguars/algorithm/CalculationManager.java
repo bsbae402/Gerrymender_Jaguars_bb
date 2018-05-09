@@ -112,6 +112,7 @@ public class CalculationManager {
 
         for (District d : districts) {
             for (VotingDataDistrict vdd : d.getVotingDataDistricts()) {
+                districtTotalVotes = d.getTotalVotes();
                 int wastedVotes = vdd.getVotes();
 
                 if (vdd.getVotes() > (districtTotalVotes/2) + 1) {
