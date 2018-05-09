@@ -527,6 +527,7 @@ whenReady(function() {
 			$("#cview .syinfo .area .right2").html(commaNumbers((sy.area / 1000000).toFixed(1)) + " sq km");
 			$("#cview .syinfo .perimeter .right2").html(commaNumbers((sy.perimeter / 1000).toFixed(1)) + " km");
 		}
+		compareAnalytics();
 	});
 
 
@@ -1400,6 +1401,38 @@ whenReady(function() {
         ["number_of_border_precincts", "Number of Border Precincts", 0],
         ["median_income", "Median Income", 2],
 	];
+	function compareAnalytics(sy) {
+		var val = $("#cview .syinfo .compareto select").val(),
+			sy = null;
+		val = val.split(",");
+		if (val.length > 1) {
+			val[1] = parseInt(val[1]);
+			states.forEach((state) => {
+				state.years.forEach((year) => {
+					var s = state.yearMap[year];
+					if (s.name == val[0] && s.election_year == val[1]) sy = s;
+				});
+			});
+		}
+		$(".syinfo .analytics .fields .right2").html("");
+		if (!sy) {
+			return;
+		}
+		$(".syinfo .analytics .fields .field.l .right2").html(sy.name + " " + sy.election_year);
+		APICall("analytics", {type : "state", state_id : sy.id})
+			.then((r) => {
+				Object.keys(r).forEach((k) => {
+					var MAP = ANALYTIC_MAPPINGS.find((a) => a[0] == k);
+					if (!MAP) return;
+
+					var value = r[k], v2 = value;
+					if (MAP[2] > -1) v2 = value.toFixed(MAP[2]);
+					if (value > 1000) v2 = commaNumbers(v2);
+
+					$(".syinfo .analytics .fields [key=" + k + "] .right2").html(v2);
+				})
+			});
+	}
 	$(".analytics .button").click(function() {
 		var $an = $(this).closest(".analytics"),
 			$info = $(this).closest(".info");
@@ -1422,15 +1455,22 @@ whenReady(function() {
 		}
 		if (!thing) return;
 
+		$an.find(".fields").empty();
+
 		APICall("analytics", $.extend({}, data))
 			.then((r) => {
 				var $fields = $an.find(".fields");
-				$fields.empty();
+				$fields.append(
+					$("<div>").addClass("field l").append(
+						$("<div>").addClass("left"),
+						$("<div>").addClass("right").html(thing.name + " " + thing.election_year),
+						$("<div>").addClass("right2"),
+						));
 
 				Object.keys(r).forEach((k) => {
 					var MAP = ANALYTIC_MAPPINGS.find((a) => a[0] == k);
 					if (!MAP) return;
-					var $field = $("<div>").addClass("field");
+					var $field = $("<div>").addClass("field").attr("key", k);
 
 					var value = r[k], v2 = value;
 					if (MAP[2] > -1) v2 = value.toFixed(MAP[2]);
@@ -1439,9 +1479,11 @@ whenReady(function() {
 					$field.append(
 						$("<div>").addClass("left").html(MAP[1]),
 						$("<div>").addClass("right").html(v2),
+						$("<div>").addClass("right2"),
 						);
 					$fields.append($field);
-				})
+				});
+				compareAnalytics();
 			});
 	});
 
