@@ -107,11 +107,6 @@ public class CalculationManager {
     public double getEfficiencyGap(State state) {
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
         int districtTotalVotes = 0;
-        for(District d : districts) {
-            for(VotingDataDistrict vdd : d.getVotingDataDistricts()) {
-                districtTotalVotes += vdd.getVotes();
-            }
-        }
         int demWasted = 0;
         int repWasted = 0;
 
