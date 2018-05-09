@@ -106,6 +106,12 @@ public class CalculationManager {
 
     public double getEfficiencyGap(State state) {
         ArrayList<District> districts = new ArrayList<>(state.getDistricts());
+        int districtTotalVotes = 0;
+        for(District d : districts) {
+            for(VotingDataDistrict vdd : d.getVotingDataDistricts()) {
+                districtTotalVotes += vdd.getVotes();
+            }
+        }
         int demWasted = 0;
         int repWasted = 0;
 
@@ -113,8 +119,8 @@ public class CalculationManager {
             for (VotingDataDistrict vdd : d.getVotingDataDistricts()) {
                 int wastedVotes = vdd.getVotes();
 
-                if (vdd.getVotes() > (d.getTotalVotes()/2) + 1) {
-                    wastedVotes -= ((d.getTotalVotes()/2) + 1);
+                if (vdd.getVotes() > (districtTotalVotes/2) + 1) {
+                    wastedVotes -= ((districtTotalVotes/2) + 1);
                 }
                 switch (vdd.getPoliticalParty()){
                     case REP:

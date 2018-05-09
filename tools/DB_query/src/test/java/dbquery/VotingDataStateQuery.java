@@ -27,7 +27,8 @@ public class VotingDataStateQuery {
     public void createVotingDataStates() {
         // int stateId = 2; // NH
         // int stateId = 1; // NH
-        int stateId = 3; // NH
+        // int stateId = 3; // NH
+        int stateId = 4; // WI 2014
         State state = sm.getState(stateId);
         int votesDEM = 0;
         int votesREP = 0;

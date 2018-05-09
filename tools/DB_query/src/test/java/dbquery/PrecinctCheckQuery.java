@@ -45,7 +45,8 @@ public class PrecinctCheckQuery {
     public void queryPrecinctIdByGeoId() {
         //String precinctGeoId = "39049049AZA";
         //String precinctGeoId = "39049049AAP";
-        String precinctGeoId = "39085007999"; // Water
+        //String precinctGeoId = "39085007999"; // Water
+        String precinctGeoId = "55105378250033";
         List<Precinct> plistOfGeo = pm.getPrecinctsByGeoId(precinctGeoId);
         for(Precinct p : plistOfGeo)
             System.out.println(p.getId());
