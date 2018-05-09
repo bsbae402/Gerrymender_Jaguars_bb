@@ -13,9 +13,7 @@ import jaguars.map.state.StateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class Algorithm {
@@ -30,6 +28,42 @@ public class Algorithm {
         Random rand = new Random();
         int idx = rand.nextInt(borderPrecincts.size());
         return borderPrecincts.get(idx);
+    }
+
+    private Comparator<Precinct> precinctHighestPop = new Comparator<Precinct>(){
+        @Override
+        public int compare(Precinct o1, Precinct o2)
+        {
+            return Integer.compare(o1.getPopulation(), o2.getPopulation());
+        }
+    };
+
+    private Precinct getHighestPopPrecinct(ArrayList<Precinct> borderPrecincts, AlgorithmInstance ai) {
+        Collections.sort(borderPrecincts, precinctHighestPop);
+        Collections.reverse(borderPrecincts);
+
+        for (Precinct p : borderPrecincts) {
+            if (ai.getUsedPrecincts().contains(p.getGeoId())){
+                continue;
+            } else {
+                ai.getUsedPrecincts().add(p.getGeoId());
+                return p;
+            }
+        }
+        return borderPrecincts.get(0);
+    }
+
+    private Precinct getLowestPopPrecinct(ArrayList<Precinct> borderPrecincts, AlgorithmInstance ai) {
+        Collections.sort(borderPrecincts, precinctHighestPop);
+        for (Precinct p : borderPrecincts) {
+            if (ai.getUsedPrecincts().contains(p.getGeoId())){
+                continue;
+            } else {
+                ai.getUsedPrecincts().add(p.getGeoId());
+                return p;
+            }
+        }
+        return borderPrecincts.get(0);
     }
 
     // select one random district from the array list.
@@ -235,7 +269,18 @@ public class Algorithm {
         State oldState = sm.cloneState(algoState);
         int loopSteps = 0;
         while(loopSteps < iterations) {
-            Precinct targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+            Precinct targetPrecinctOfOld;
+            switch (ai.getHeuristic()){
+                case 0:     targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+                            break;
+                case 1:     targetPrecinctOfOld = getHighestPopPrecinct(oldState.getBorderPrecincts(), ai);
+                            break;
+                case 2:     targetPrecinctOfOld = getLowestPopPrecinct(oldState.getBorderPrecincts(), ai);
+                            break;
+                default:    targetPrecinctOfOld = getRandomPrecinct(oldState.getBorderPrecincts());
+                            break;
+            }
+            getHighestPopPrecinct(oldState.getBorderPrecincts(), ai);
 
             while (ai.getIgnored_precints().contains(targetPrecinctOfOld.getGeoId()) ||
                     ai.getIgnored_districts().contains(targetPrecinctOfOld.getDistrict().getGeoId())){

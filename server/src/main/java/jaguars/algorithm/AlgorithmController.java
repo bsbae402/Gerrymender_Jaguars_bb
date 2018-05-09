@@ -48,14 +48,15 @@ public class AlgorithmController {
                                            @RequestParam("efficiency_weight") double efficiencyWeight,
                                            @RequestParam("population_threshold") double populationThreshold,
                                            @RequestParam("ignore_precinct_geo_ids[]") String[] ignored_p_array,
-                                           @RequestParam("ignore_district_geo_ids[]") String[] ignored_d_array) {
+                                           @RequestParam("ignore_district_geo_ids[]") String[] ignored_d_array,
+                                           @RequestParam("heuristic") int heuristic) {
         State stateOrigin = sm.getState(stateId);
         State algoState = sm.cloneState(stateOrigin);
         HashSet<String> ignored_precincts = new HashSet(Arrays.asList(ignored_p_array));
         HashSet<String> ignored_districts = new HashSet(Arrays.asList(ignored_d_array));
 
         AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeightPP, compactnessWeightSch,
-                efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
+                efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts, heuristic);
         Integer hashint = ags.registerAlgorithmInstance(ai);
 
         Set<District> districts = algoState.getDistricts();
@@ -108,14 +109,15 @@ public class AlgorithmController {
                                         @RequestParam("compactness_weight_pp") double compactnessWeightPP,
                                         @RequestParam("compactness_weight_sch") double compactnessWeightSch,
                                         @RequestParam("efficiency_weight") double efficiencyWeight,
-                                        @RequestParam("population_threshold") double populationThreshold) {
+                                        @RequestParam("population_threshold") double populationThreshold,
+                                        @RequestParam("heuristic") int heuristic) {
         State stateOrigin = sm.getState(stateId);
         State algoState = sm.cloneState(stateOrigin);
         HashSet<String> ignored_precincts = new HashSet(); // empty set. We are not using them
         HashSet<String> ignored_districts = new HashSet();
 
         AlgorithmInstance ai = new AlgorithmInstance(stateOrigin, algoState,compactnessWeightPP, compactnessWeightSch,
-                efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts);
+                efficiencyWeight, populationThreshold, ignored_precincts, ignored_districts, heuristic);
         Integer hashint = ags.registerAlgorithmInstance(ai);
 
         Gson gson = new GsonBuilder()
