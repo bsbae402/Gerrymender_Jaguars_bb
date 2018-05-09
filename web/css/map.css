@@ -663,8 +663,9 @@
 
 
 #credistrict .tabs {
-    width: calc(100% - 60px);
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.14);
+    width: calc(100% - 150px);
+    width:250px;
+    box-shadow: 0px 2px 1px -2px rgba(0, 0, 0, 0.15);
     height:28px;
 }
 #credistrict .rcontainers {
@@ -691,6 +692,7 @@
     position: relative;
     font-weight: 300;
     font-family: Raleway;
+    font-size:16px;
 }
 #credistrict .tabs .tab.active {
     color:#007;
@@ -712,6 +714,31 @@
     bottom:0px;
 }
 
+#credistrict .heuristic {
+    vertical-align: middle;
+    font-size:14px;
+    font-weight: 400;
+}
+#credistrict .heuristic select {
+    min-width:140px;
+    cursor:pointer;
+    border:1px solid rgba(0, 0, 0, 0.4);
+    background:#eee;
+    padding:3px 6px 1px;
+    margin-left:5px;
+}
+#credistrict .heuristic select,
+#credistrict .heuristic select option {
+    font-size:13px;
+    font-weight:300;
+}
+#credistrict .heuristic select option {
+    padding:2px 0;
+}
+#credistrict .constraints {
+    height:250px;
+    margin-top:15px;
+}
 #credistrict .constraint {
     user-select: none;
     margin-bottom:9px;
@@ -740,6 +767,8 @@
 }
 #credistrict .colors {
     height:200px;
+    margin-top:15px;
+    height:calc(100% - 250px - 15px - 25px - 15px);
     overflow-y:auto;
 }
 #credistrict .colors .color.dummy {
@@ -748,7 +777,7 @@
 #credistrict .colors .color {
     width:100%;
     font-size:0;
-    padding:3px 0;
+    padding:6px 0;
 }
 #credistrict .colors .reset {
     display: inline-block;
@@ -768,6 +797,7 @@
     margin-right:10px;
     cursor:pointer;
     color:#666;
+    min-width:45px;
 }
 #credistrict .colors .enabled::before {
     content:"enabled";
@@ -789,6 +819,7 @@
     width:20px;
     height:20px;
     cursor:pointer;
+    border:1px solid rgba(0, 0, 0, 0.2);
 }
 #credistrict .colors .c:hover {
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.16);
@@ -820,11 +851,10 @@
     position: relative;
     width: 100%;
     height:30px;
-    border-radius:3px;
     overflow: hidden;
-    background:#ddd;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
+    background:#eee;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
 }
 @keyframes slideshow {
   0%    { left: -280px; }
@@ -836,7 +866,7 @@
     max-width: 100%;
     height:100%;
     background:#aca;
-    box-shadow: inset 0px 0px 1px 1px rgba(30, 100, 30, 0.2);
+    box-shadow: inset 0px 0px 1px 1px rgba(30, 100, 30, 0.08);
 }
 #credistrict .progressbar .scrolling {
     position: absolute;
@@ -858,22 +888,20 @@
     height: 0;
 }
 #credistrict .progressbar .scrolling > div.ul {
-    border-top:30px solid #aaa;
+    border-top:30px solid #cdd;
     border-right:30px solid transparent;
     margin-right:10px;
 }
 #credistrict .progressbar .scrolling > div.br {
-    border-bottom:30px solid #aaa;
+    border-bottom:30px solid #cdd;
     border-left:30px solid transparent;
-}
-#credistrict .changes {
-    margin-top:15px;
-    height:calc(100% - 45px - 15px - 220px - 10px - 30px);
-    min-height:60px;
-    overflow-y:scroll;
 }
 #credistrict .settings {
     height:30px;
+    margin-top:20px;
+}
+#credistrict .results {
+    height:calc(100% - 30px - 30px - 20px);
 }
 #credistrict .changes .change.dummy {
     display: none;
@@ -917,9 +945,6 @@
     color:#111;
 }
 
-#credistrict .settings {
-    margin-top:10px;
-}
 #credistrict .settings .setting {
     display: block;
     width: 100%;
@@ -928,41 +953,83 @@
     display: inline-block;
     vertical-align: middle;
 }
+#credistrict .settings .setting.usechange {
+    cursor:pointer;
+    font-size:0;
+}
+#credistrict .usechange .checkbox {
+    display: inline-block;
+    user-select: none;
+    width:16px;
+    height:16px;
+    background-image: url("/img/checkbox.png");
+    background-position: 0px 0px;
+    background-size:200% 200%;
+    margin-right:10px;
+}
+#credistrict .usechange:hover .checkbox {
+    background-position:100% 0%;
+}
+#credistrict .usechange:active .checkbox {
+    background-position:100% 100%;
+    opacity:0.6;
+}
+#credistrict .usechange.checked .checkbox {
+    background-position:100% 100%;
+}
+#credistrict .usechange.checked:hover .checkbox {
+    opacity:0.6;
+}
+#credistrict .usechange.checked:active .checkbox {
+    background-position:0% 0%;
+    opacity:0.6;
+}
 #credistrict .settings .setting.usechange div {
-    font-size:13px;
+    font-size:12px;
     position: relative;
     top:-2px;
 }
 
 #credistrict .updates {
-    margin-top:15px;
     height:220px;
     font-weight:300;
 }
 #credistrict .updates .table {
     font-size:0;
 }
+#credistrict .updates .table > .labels:first-child {
+    margin-bottom:7px;
+}
+#credistrict .updates .row {
+    margin-bottom:3px;
+}
 #credistrict .updates .labels {
-    font-weight:600;
-    margin-top:2px;
+    font-weight:500;
+    padding-top:5px;
 }
 #credistrict .updates .field1 {
-    width: 240px;
+    width: 250px;
     display: inline-block;
-    font-size: 14px;
-    font-weight:400;
+    vertical-align: middle;
+    font-size: 13px;
+    font-weight:300;
 }
 #credistrict .updates .labels .field1 {
-    font-weight:600;
+    font-weight:400;
 }
 #credistrict .updates .dc .field1 {
-    padding-left:6px;
+    padding-left:9px;
 }
 #credistrict .updates .before,
-#credistrict .updates .after {
-    width: 120px;
+#credistrict .updates .after,
+#credistrict .updates .change {
+    width: 90px;
     display: inline-block;
-    font-size: 14px;
+    vertical-align: middle;
+    font-size: 12px;
+}
+#credistrict .updates .labels > div {
+    font-size:13px;
 }
 
 

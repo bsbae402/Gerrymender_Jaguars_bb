@@ -102,23 +102,24 @@ body, input, textarea, select {
 
 .button {
     display: inline-block;
-    background:#ddd;
-    border:1px solid rgba(100, 100, 100, 0.5);
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+    background:#eee;
+    border:1px solid rgba(100, 100, 100, 0.1);
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.01);
     padding:5px 10px 6px;
     cursor: pointer;
     font-size:13px;
 }
 .button:hover {
-    background:#bbb;
+    background:#ddd;
 }
 .button:active {
-    background:#aaa;
-    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    background:#ccc;
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.04);
 }
 .button.disabled {
     cursor:not-allowed;
     color:#555;
     background:#ccc;
 }
+
 

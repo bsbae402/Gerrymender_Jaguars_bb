@@ -827,13 +827,22 @@ whenReady(function() {
 
 
 	// Redistrict tabs
-	$("#credistrict .tabs .tab").click(function() {
+	$("#credistrict > .content > .tabs > .tab").click(function() {
 		if ($(this).hasClass("active")) return;
-		$("#credistrict .tabs .tab.active").removeClass("active");
+		$("#credistrict > .content > .tabs > .tab.active").removeClass("active");
 		$(this).addClass("active");
 		var tab = $(this).attr("tab");
-		$("#credistrict .rcontainers .rcontainer.show").removeClass("show");
-		$("#credistrict .rcontainers .rcontainer."+tab).addClass("show");
+		$("#credistrict > .content > .rcontainers > .rcontainer.show").removeClass("show");
+		$("#credistrict > .content > .rcontainers > .rcontainer."+tab).addClass("show");
+	});
+	// Algorithm result tabs
+	$("#credistrict .results > .tabs > .tab").click(function() {
+		if ($(this).hasClass("active")) return;
+		$("#credistrict .results > .tabs > .tab.active").removeClass("active");
+		$(this).addClass("active");
+		var tab = $(this).attr("tab");
+		$("#credistrict .results > .rcontainers > .rcontainer.show").removeClass("show");
+		$("#credistrict .results > .rcontainers > .rcontainer."+tab).addClass("show");
 	});
 
 	// sliders
@@ -1070,8 +1079,8 @@ whenReady(function() {
 				}
 			});
 
-			$(".usechangemap").prop("checked", false);
-			usechangemap = false;
+			if (usechangemap)
+				$(".usechange").click();
 
 			map.removeMarkerChange();
 			markers = [];
@@ -1086,8 +1095,9 @@ whenReady(function() {
 		};
 
 		var usechangemap = false;
-		$(".usechangemap").on("click", function() {
-			var c = $(this).prop("checked");
+		$(".usechange").on("click", function() {
+			var c = !$(this).hasClass("checked");
+			$(this).toggleClass("checked");
 			usechangemap = c;
 			active.precincts.forEach((p) => {
 				if (!c) {
@@ -1153,6 +1163,16 @@ whenReady(function() {
 			}
 		}
 
+		function editFieldSet($field, after, fix=8) {
+			var val = parseFloat($field.find(".before").html());
+			if (isNaN(after)) after = 0;
+			$field.find(".after").html(after.toFixed(fix));
+			var change = after - val;
+			if (Math.abs(change) < 0.000001)
+				$field.find(".change").html("--");
+			else
+				$field.find(".change").html((change>0 ? "+" : "") + change.toFixed(fix - 1));
+		}
 		function registerChange(change) {
 			var d = active.districts.find((d) => d.id == change.new_district_id),
 				p = active.precincts.find((p) => p.id == change.precinct_id);
@@ -1182,12 +1202,16 @@ whenReady(function() {
 					b = change.new_district_compactness_pp + change.new_district_compactness_sch;
 				$change.find(".compactness1").html(a.toFixed(4));
 				$change.find(".compactness2").html(b.toFixed(4));
+				$change.find(".objective1").html(change.district_old_objective_score.toFixed(4));
+				$change.find(".objective2").html(change.district_new_objective_score.toFixed(4));
 				$("#credistrict .changes").append($change);
 			}
 
-			$("#credistrict .updates .dc[did=" + d.id + "].p .after").html(change.new_district_compactness_pp.toFixed(8));
-			$("#credistrict .updates .dc[did=" + d.id + "].s .after").html(change.new_district_compactness_sch.toFixed(8));
-			$("#credistrict .updates .seg .after").html(change.state_wide_efficiency_gap.toFixed(8));
+			editFieldSet($("#credistrict .updates .seg"), change.state_wide_efficiency_gap);
+			editFieldSet($("#credistrict .updates .obj"), change.state_new_objective_score);
+			editFieldSet($("#credistrict .updates .dc[did=" + d.id + "].p"), change.new_district_compactness_pp);
+			editFieldSet($("#credistrict .updates .dc[did=" + d.id + "].s"), change.new_district_compactness_sch);
+			editFieldSet($("#credistrict .updates .dc[did=" + d.id + "].o"), change.district_new_objective_score);
 		}
 
 		setInterval(() => {
@@ -1284,6 +1308,7 @@ whenReady(function() {
 				ignore_precinct_geo_ids : [-1],
 				ignore_district_geo_ids : [-1],
 				loops : TOTAL_LOOPS,
+				heuristic : $("#credistrict .heuristic select").val(),
 			};
 			map.forEach((a) => {
 				data[a[1]] = sliders[a[0]][4];
@@ -1306,6 +1331,7 @@ whenReady(function() {
 			LOOP_ITERATE = Math.round(LOOP_ITERATE);
 			LOOP_ITERATE = Math.min(Math.max(LOOP_ITERATE, 10), 1000);
 
+
 			APICall("startalgorithm", data)
 				.then((r) => {
 					updates = [];
@@ -1320,6 +1346,9 @@ whenReady(function() {
 					renderTime = 0;
 
 					$("#credistrict .updates .seg .before, #credistrict .updates .seg .after").html(r.init_state_efficiency_gap.toFixed(8));
+					$("#credistrict .updates .seg .change").html("-");
+					$("#credistrict .updates .obj .before, #credistrict .updates .obj .after").html(toFixed(r.init_state_objective_score, 8));
+					$("#credistrict .updates .obj .change").html("-");
 					$("#credistrict .updates .dc, #credistrict .updates .labelsremove").remove();
 					r.init_district_compactness_list.forEach((dc, ind) => {
 						var district = active.districts.find((d) => d.geo_id == dc.district_geoid);
@@ -1332,11 +1361,19 @@ whenReady(function() {
 								$("<div>").addClass("field field1").html("Polsby Compactness Score"),
 								$("<div>").addClass("field before").html(dc.compactness_pp.toFixed(8)),
 								$("<div>").addClass("field after").html(dc.compactness_pp.toFixed(8)),
+								$("<div>").addClass("field change").html("-"),
 								),
 							$("<div>").addClass("row dc s").attr("did", district.id).append(
 								$("<div>").addClass("field field1").html("Schwartzberg Compactness Score"),
 								$("<div>").addClass("field before").html(dc.compactness_sch.toFixed(8)),
 								$("<div>").addClass("field after").html(dc.compactness_sch.toFixed(8)),
+								$("<div>").addClass("field change").html("-"),
+								),
+							$("<div>").addClass("row dc o").attr("did", district.id).append(
+								$("<div>").addClass("field field1").html("Objective Score"),
+								$("<div>").addClass("field before").html(toFixed(dc.objective_score, 8)),
+								$("<div>").addClass("field after").html(toFixed(dc.objective_score, 8)),
+								$("<div>").addClass("field change").html("-"),
 								),
 							);
 					});

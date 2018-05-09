@@ -1,4 +1,9 @@
 
+function toFixed(num, d) {
+    if (isNaN(num)) return "0";
+    else return num.toFixed(d);
+}
+
 function mapArrayToCoords(arr) {
     var a = [];
     for(var i=0;i<arr.length;i+=2) {
