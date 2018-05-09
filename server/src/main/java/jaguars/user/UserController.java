@@ -229,6 +229,16 @@ public class UserController {
             return retObj.toString();
     }
 
+    @RequestMapping(value = "/contact", method = RequestMethod.POST)
+    public String contact(@RequestParam("name") String name, @RequestParam("email") String email,
+                               @RequestParam("message") String message) {
 
+        String replyMessage = "Thank you for your feedback! We will look at it as soon as we can. Heres the message:\n"+message;
+        emailService.sendSimpleMessage(email, "Gerrymandering Online Feedback", replyMessage);
+
+        emailService.sendSimpleMessage("cse356m3@gmail.com", "Gerrymandering Online Feedback from "+ name, message);
+
+        return "{ \"ok\" : true}";
+    }
 
 }
