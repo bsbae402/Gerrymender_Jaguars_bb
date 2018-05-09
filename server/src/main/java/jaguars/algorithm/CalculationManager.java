@@ -132,6 +132,7 @@ public class CalculationManager {
                 }
             }
         }
+
         return Math.abs(MeasureCalculator.calculateEfficiencyGap(state.getTotalVotes(), repWasted, demWasted));
     }
 

@@ -100,6 +100,10 @@ public class AlgorithmController {
                 .excludeFieldsWithoutExposeAnnotation()
                 .setPrettyPrinting().create();
 
+        for (AlgorithmAction aa : algorithmActions) {
+            aa.checkNaN();
+        }
+
         JsonElement allChangesElem = gson.toJsonTree(algorithmActions);
         JsonObject retObj = new JsonObject();
         retObj.add("all_changes", allChangesElem);
