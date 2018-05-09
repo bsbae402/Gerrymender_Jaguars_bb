@@ -24,6 +24,14 @@ public class AlgorithmAction {
     private double oldDistrictCompactnessPp;
     @Expose
     private double stateWideEfficiencyGap;
+    @Expose
+    private double stateOldObjectiveScore;
+    @Expose
+    private double stateNewObjectiveScore;
+    @Expose
+    private double districtOldObjectiveScore;
+    @Expose
+    private double districtNewObjectiveScore;
 
     public AlgorithmAction() {
     }
@@ -31,6 +39,7 @@ public class AlgorithmAction {
     public AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId,
                            double newDistrictCompactnessPp, double oldDistrictCompactnessPp,
                            double newDistrictCompactnessSch, double oldDistrictCompactnessSch,
+                           double stateOldObjectiveScore, double stateNewObjectiveScore,
                            double stateWideEfficiencyGap) {
         this.precinctId = precinctId;
         this.oldDistrictId = oldDistrictId;
@@ -40,6 +49,8 @@ public class AlgorithmAction {
         this.newDistrictCompactnessSch = newDistrictCompactnessSch;
         this.oldDistrictCompactnessSch = oldDistrictCompactnessSch;
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
+        this.stateOldObjectiveScore = stateOldObjectiveScore;
+        this.stateNewObjectiveScore = stateNewObjectiveScore;
     }
 
     public int getPrecinctId() {
@@ -106,6 +117,40 @@ public class AlgorithmAction {
         this.stateWideEfficiencyGap = stateWideEfficiencyGap;
     }
 
+    public double getstateOldObjectiveScore() {
+        return stateOldObjectiveScore;
+    }
+
+    public void setstateOldObjectiveScore(double stateOldObjectiveScore) {
+        this.stateOldObjectiveScore = stateOldObjectiveScore;
+    }
+
+    public double getstateNewObjectiveScore() {
+        return stateNewObjectiveScore;
+    }
+
+    public void setstateNewObjectiveScore(double stateNewObjectiveScore) {
+        this.stateNewObjectiveScore = stateNewObjectiveScore;
+    }
+
+    public double getDistrictOldObjectiveScore() {
+        return districtOldObjectiveScore;
+    }
+
+    public void setDistrictOldObjectiveScore(double DistrictOldObjectiveScore) {
+        this.districtOldObjectiveScore = DistrictOldObjectiveScore;
+    }
+
+    public double getDistrictNewObjectiveScore() {
+        return districtNewObjectiveScore;
+    }
+
+    public void setDistrictNewObjectiveScore(double DistrictNewObjectiveScore) {
+        this.districtNewObjectiveScore = DistrictNewObjectiveScore;
+    }
+
+
+
     @Override
     public String toString() {
         return "AlgorithmAction{" +
@@ -115,6 +160,8 @@ public class AlgorithmAction {
                 ", newDistrictCompactnessPp=" + newDistrictCompactnessPp +
                 ", oldDistrictCompactnessSch=" + oldDistrictCompactnessSch +
                 ", stateWideEfficiencyGap=" + stateWideEfficiencyGap +
+                ", stateOldObjectiveScore=" + stateOldObjectiveScore +
+                ", stateNewObjectiveScore=" + stateNewObjectiveScore +
                 '}';
     }
 }
