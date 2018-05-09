@@ -243,12 +243,20 @@
 					<div class="tabs">
 						<div tab="opt" class="tab active">Options</div>
 						<div tab="alg" class="tab">Algorithm</div>
-						<div tab="gd" class="tab">Goodness</div>
 					</div>
 
 					<div class="rcontainers">
 
 						<div class="opt rcontainer show">
+
+							<div class="heuristic">
+								Heuristic:
+								<select>
+									<option value="0" selecte>Random</option>
+									<option value="1">Highest Population</option>
+									<option value="2">Lowest Population</option>
+								</select>
+							</div>
 
 							<div class="constraints">
 								<div class="constraint">
@@ -307,6 +315,7 @@
 								<div class="button stop disabled">Stop algorithm</div>
 								<div class="button reset disabled">Reset</div>
 							</div>
+
 							<div class="algresults">
 
 								<div class="progressbar">
@@ -316,51 +325,74 @@
 
 								<div class="settings">
 									<div class="setting usechange">
-										<input type="checkbox" name="usechangemap" class="usechangemap" />
+										<div class="checkbox usechangemap"></div>
 										<div>View Original and Redistricted Changes</div>
 									</div>
 								</div>
 
-								<div class="changes">
-									<div class="change dummy">
-										<div class="mainline">
-											<div class="precinct">Precinct</div>
-											moved to
-											<div class="district district2">District</div>
-											from
-											<div class="district district1">District</div>
-										</div>
-										<div class="subline">
-											Improved district compactness from
-											<div class="compactness1"></div>
-											to
-											<div class="compactness2"></div>
-										</div>
+								<div class="results">
+
+									<div class="tabs">
+										<div tab="changes" class="tab active">Changes</div>
+										<div tab="goodness" class="tab">Goodness</div>
 									</div>
-								</div>
 
-								<div class="updates">
-									<div class="table">
-										<div class="row labels">
-											<div class="field field1"></div>
-											<div class="field before">Before</div>
-											<div class="field after">After</div>
+									<div class="rcontainers">
+
+										<div class="rcontainer changes show">
+											<div class="change dummy">
+												<div class="mainline">
+													<div class="precinct">Precinct</div>
+													moved to
+													<div class="district district2">District</div>
+													from
+													<div class="district district1">District</div>
+												</div>
+												<div class="subline">
+													Improved district compactness from
+													<div class="compactness1"></div>
+													to
+													<div class="compactness2"></div>
+												</div>
+												<div class="subline">
+													Improved district objective score from
+													<div class="objective1"></div>
+													to
+													<div class="objective2"></div>
+												</div>
+											</div>
 										</div>
-										<div class="row seg">
-											<div class="field field1">State Efficiency Gap</div>
-											<div class="field before">0</div>
-											<div class="field after">0</div>
+
+										<div class="rcontainer goodness">
+											<div class="updates">
+												<div class="table">
+													<div class="row labels">
+														<div class="field field1"></div>
+														<div class="field before">Before</div>
+														<div class="field after">After</div>
+														<div class="field change">Change</div>
+													</div>
+													<div class="row seg">
+														<div class="field field1">State Efficiency Gap</div>
+														<div class="field before">0</div>
+														<div class="field after">0</div>
+														<div class="field change">0</div>
+													</div>
+													<div class="row obj">
+														<div class="field field1">State Objective Score</div>
+														<div class="field before">0</div>
+														<div class="field after">0</div>
+														<div class="field change">0</div>
+													</div>
+												</div>
+											</div>
 										</div>
+
 									</div>
-								</div>
 
-							</div>
+								</div> <!-- results -->
 
-						</div>
-
-						<div class="gd rcontainer">
-
-							Goodness panel
+							</div> <!-- algresults -->
 
 						</div>
 
