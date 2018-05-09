@@ -68,6 +68,8 @@ public class AlgorithmController {
             double compactnessMeasureSch = cm.getCompactnessMeasureSch(d);
             distCompact.addProperty("compactness_pp", compactnessMeasurePP);
             distCompact.addProperty("compactness_sch", compactnessMeasureSch);
+            distCompact.addProperty("objective_score", cm.objectiveFunction(d,compactnessWeightPP,
+                    compactnessMeasureSch,efficiencyWeight));
             initDistCompactList.add(distCompact);
         }
 
@@ -78,8 +80,9 @@ public class AlgorithmController {
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         JsonObject retObj = new JsonObject();
-        retObj.addProperty("loops", AppConstants.MAX_LOOP_STEPS);
         retObj.add("init_district_compactness_list", initDistCompactList);
+        retObj.addProperty("init_state_objective_score", cm.objectiveFunction(algoState, compactnessWeightPP,
+                compactnessWeightSch, efficiencyWeight));
         retObj.addProperty("init_state_efficiency_gap", initStateEffGap);
         retObj.addProperty("algorithm_id", hashint);
 
