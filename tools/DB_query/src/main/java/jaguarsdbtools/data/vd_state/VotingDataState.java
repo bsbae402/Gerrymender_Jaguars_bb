@@ -21,7 +21,7 @@ public class VotingDataState {
     private boolean original;
 
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private State state;
 

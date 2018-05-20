@@ -40,7 +40,7 @@ public class District {
     private int medianIncome;
 
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id")
     private State state;
 

@@ -21,7 +21,7 @@ public class VotingDataPrecinct {
     private boolean original;
 
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "precinct_id")
     private Precinct precinct;
 

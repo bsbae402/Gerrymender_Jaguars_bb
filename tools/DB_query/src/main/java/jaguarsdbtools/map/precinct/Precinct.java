@@ -39,7 +39,7 @@ public class Precinct {
     private boolean movable;
 
     @Expose(serialize = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "district_id")
     private District district;
 
