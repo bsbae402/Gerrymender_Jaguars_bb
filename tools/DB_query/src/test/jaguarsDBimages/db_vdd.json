@@ -1,0 +1,758 @@
+[
+  {
+    "id": 1,
+    "political_party": "DEM",
+    "votes": 164872,
+    "original": true,
+    "district_id": 1
+  },
+  {
+    "id": 2,
+    "political_party": "REP",
+    "votes": 159679,
+    "original": true,
+    "district_id": 1
+  },
+  {
+    "id": 3,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 1
+  },
+  {
+    "id": 4,
+    "political_party": "DEM",
+    "votes": 171707,
+    "original": true,
+    "district_id": 2
+  },
+  {
+    "id": 5,
+    "political_party": "REP",
+    "votes": 156474,
+    "original": true,
+    "district_id": 2
+  },
+  {
+    "id": 6,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 2
+  },
+  {
+    "id": 7,
+    "political_party": "DEM",
+    "votes": 187729,
+    "original": true,
+    "district_id": 11
+  },
+  {
+    "id": 8,
+    "political_party": "REP",
+    "votes": 87024,
+    "original": true,
+    "district_id": 11
+  },
+  {
+    "id": 9,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 11
+  },
+  {
+    "id": 10,
+    "political_party": "DEM",
+    "votes": 96910,
+    "original": true,
+    "district_id": 6
+  },
+  {
+    "id": 11,
+    "political_party": "REP",
+    "votes": 206940,
+    "original": true,
+    "district_id": 6
+  },
+  {
+    "id": 12,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 6
+  },
+  {
+    "id": 13,
+    "political_party": "DEM",
+    "votes": 86761,
+    "original": true,
+    "district_id": 10
+  },
+  {
+    "id": 14,
+    "political_party": "REP",
+    "votes": 220683,
+    "original": true,
+    "district_id": 10
+  },
+  {
+    "id": 15,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 10
+  },
+  {
+    "id": 16,
+    "political_party": "DEM",
+    "votes": 84958,
+    "original": true,
+    "district_id": 8
+  },
+  {
+    "id": 17,
+    "political_party": "REP",
+    "votes": 207234,
+    "original": true,
+    "district_id": 8
+  },
+  {
+    "id": 18,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 8
+  },
+  {
+    "id": 19,
+    "political_party": "DEM",
+    "votes": 141256,
+    "original": true,
+    "district_id": 3
+  },
+  {
+    "id": 20,
+    "political_party": "REP",
+    "votes": 202712,
+    "original": true,
+    "district_id": 3
+  },
+  {
+    "id": 21,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 3
+  },
+  {
+    "id": 22,
+    "political_party": "DEM",
+    "votes": 86503,
+    "original": true,
+    "district_id": 9
+  },
+  {
+    "id": 23,
+    "political_party": "REP",
+    "votes": 189996,
+    "original": true,
+    "district_id": 9
+  },
+  {
+    "id": 24,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 9
+  },
+  {
+    "id": 25,
+    "political_party": "DEM",
+    "votes": 106028,
+    "original": true,
+    "district_id": 14
+  },
+  {
+    "id": 26,
+    "political_party": "REP",
+    "votes": 232365,
+    "original": true,
+    "district_id": 14
+  },
+  {
+    "id": 27,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 14
+  },
+  {
+    "id": 28,
+    "political_party": "DEM",
+    "votes": 109203,
+    "original": true,
+    "district_id": 12
+  },
+  {
+    "id": 29,
+    "political_party": "REP",
+    "votes": 214358,
+    "original": true,
+    "district_id": 12
+  },
+  {
+    "id": 30,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 12
+  },
+  {
+    "id": 31,
+    "political_party": "DEM",
+    "votes": 100953,
+    "original": true,
+    "district_id": 7
+  },
+  {
+    "id": 32,
+    "political_party": "REP",
+    "votes": 240604,
+    "original": true,
+    "district_id": 7
+  },
+  {
+    "id": 33,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 7
+  },
+  {
+    "id": 34,
+    "political_party": "DEM",
+    "votes": 115344,
+    "original": true,
+    "district_id": 18
+  },
+  {
+    "id": 35,
+    "political_party": "REP",
+    "votes": 217706,
+    "original": true,
+    "district_id": 18
+  },
+  {
+    "id": 36,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 18
+  },
+  {
+    "id": 37,
+    "political_party": "DEM",
+    "votes": 234831,
+    "original": true,
+    "district_id": 13
+  },
+  {
+    "id": 38,
+    "political_party": "REP",
+    "votes": 58415,
+    "original": true,
+    "district_id": 13
+  },
+  {
+    "id": 39,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 13
+  },
+  {
+    "id": 40,
+    "political_party": "DEM",
+    "votes": 111089,
+    "original": true,
+    "district_id": 17
+  },
+  {
+    "id": 41,
+    "political_party": "REP",
+    "votes": 215838,
+    "original": true,
+    "district_id": 17
+  },
+  {
+    "id": 42,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 17
+  },
+  {
+    "id": 43,
+    "political_party": "DEM",
+    "votes": 110873,
+    "original": true,
+    "district_id": 4
+  },
+  {
+    "id": 44,
+    "political_party": "REP",
+    "votes": 217762,
+    "original": true,
+    "district_id": 4
+  },
+  {
+    "id": 45,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 4
+  },
+  {
+    "id": 46,
+    "political_party": "DEM",
+    "votes": 118981,
+    "original": true,
+    "district_id": 16
+  },
+  {
+    "id": 47,
+    "political_party": "REP",
+    "votes": 202422,
+    "original": true,
+    "district_id": 16
+  },
+  {
+    "id": 48,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 16
+  },
+  {
+    "id": 49,
+    "political_party": "DEM",
+    "votes": 192309,
+    "original": true,
+    "district_id": 15
+  },
+  {
+    "id": 50,
+    "political_party": "REP",
+    "votes": 91150,
+    "original": true,
+    "district_id": 15
+  },
+  {
+    "id": 51,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 15
+  },
+  {
+    "id": 52,
+    "political_party": "DEM",
+    "votes": 191443,
+    "original": true,
+    "district_id": 5
+  },
+  {
+    "id": 53,
+    "political_party": "REP",
+    "votes": 89646,
+    "original": true,
+    "district_id": 5
+  },
+  {
+    "id": 54,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 5
+  },
+  {
+    "id": 55,
+    "political_party": "DEM",
+    "votes": 273534,
+    "original": true,
+    "district_id": 20
+  },
+  {
+    "id": 56,
+    "political_party": "REP",
+    "votes": 124042,
+    "original": true,
+    "district_id": 20
+  },
+  {
+    "id": 57,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 20
+  },
+  {
+    "id": 58,
+    "political_party": "DEM",
+    "votes": 220183,
+    "original": true,
+    "district_id": 22
+  },
+  {
+    "id": 59,
+    "political_party": "REP",
+    "votes": 3,
+    "original": true,
+    "district_id": 22
+  },
+  {
+    "id": 60,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 22
+  },
+  {
+    "id": 61,
+    "political_party": "DEM",
+    "votes": 114460,
+    "original": true,
+    "district_id": 23
+  },
+  {
+    "id": 62,
+    "political_party": "REP",
+    "votes": 260678,
+    "original": true,
+    "district_id": 23
+  },
+  {
+    "id": 63,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 23
+  },
+  {
+    "id": 64,
+    "political_party": "DEM",
+    "votes": 135685,
+    "original": true,
+    "district_id": 26
+  },
+  {
+    "id": 65,
+    "political_party": "REP",
+    "votes": 227892,
+    "original": true,
+    "district_id": 26
+  },
+  {
+    "id": 66,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 26
+  },
+  {
+    "id": 67,
+    "political_party": "DEM",
+    "votes": 257406,
+    "original": true,
+    "district_id": 21
+  },
+  {
+    "id": 68,
+    "political_party": "REP",
+    "votes": 175,
+    "original": true,
+    "district_id": 21
+  },
+  {
+    "id": 69,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 21
+  },
+  {
+    "id": 70,
+    "political_party": "DEM",
+    "votes": 133074,
+    "original": true,
+    "district_id": 24
+  },
+  {
+    "id": 71,
+    "political_party": "REP",
+    "votes": 204151,
+    "original": true,
+    "district_id": 24
+  },
+  {
+    "id": 72,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 24
+  },
+  {
+    "id": 73,
+    "political_party": "DEM",
+    "votes": 107019,
+    "original": true,
+    "district_id": 19
+  },
+  {
+    "id": 74,
+    "political_party": "REP",
+    "votes": 230095,
+    "original": true,
+    "district_id": 19
+  },
+  {
+    "id": 75,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 19
+  },
+  {
+    "id": 76,
+    "political_party": "DEM",
+    "votes": 138637,
+    "original": true,
+    "district_id": 25
+  },
+  {
+    "id": 77,
+    "political_party": "REP",
+    "votes": 223412,
+    "original": true,
+    "district_id": 25
+  },
+  {
+    "id": 78,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 25
+  },
+  {
+    "id": 79,
+    "political_party": "DEM",
+    "votes": 155358,
+    "original": true,
+    "district_id": 29
+  },
+  {
+    "id": 80,
+    "political_party": "REP",
+    "votes": 119533,
+    "original": true,
+    "district_id": 29
+  },
+  {
+    "id": 81,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 29
+  },
+  {
+    "id": 82,
+    "political_party": "DEM",
+    "votes": 121844,
+    "original": true,
+    "district_id": 32
+  },
+  {
+    "id": 83,
+    "political_party": "REP",
+    "votes": 169241,
+    "original": true,
+    "district_id": 32
+  },
+  {
+    "id": 84,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 32
+  },
+  {
+    "id": 85,
+    "political_party": "DEM",
+    "votes": 179045,
+    "original": true,
+    "district_id": 30
+  },
+  {
+    "id": 86,
+    "political_party": "REP",
+    "votes": 68490,
+    "original": true,
+    "district_id": 30
+  },
+  {
+    "id": 87,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 30
+  },
+  {
+    "id": 88,
+    "political_party": "DEM",
+    "votes": 105216,
+    "original": true,
+    "district_id": 27
+  },
+  {
+    "id": 89,
+    "political_party": "REP",
+    "votes": 181421,
+    "original": true,
+    "district_id": 27
+  },
+  {
+    "id": 90,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 27
+  },
+  {
+    "id": 91,
+    "political_party": "DEM",
+    "votes": 100189,
+    "original": true,
+    "district_id": 34
+  },
+  {
+    "id": 92,
+    "political_party": "REP",
+    "votes": 185582,
+    "original": true,
+    "district_id": 34
+  },
+  {
+    "id": 93,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 34
+  },
+  {
+    "id": 94,
+    "political_party": "DEM",
+    "votes": 112716,
+    "original": true,
+    "district_id": 33
+  },
+  {
+    "id": 95,
+    "political_party": "REP",
+    "votes": 169487,
+    "original": true,
+    "district_id": 33
+  },
+  {
+    "id": 96,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 33
+  },
+  {
+    "id": 97,
+    "political_party": "DEM",
+    "votes": 224918,
+    "original": true,
+    "district_id": 28
+  },
+  {
+    "id": 98,
+    "political_party": "REP",
+    "votes": 103617,
+    "original": true,
+    "district_id": 28
+  },
+  {
+    "id": 99,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 28
+  },
+  {
+    "id": 100,
+    "political_party": "DEM",
+    "votes": 101182,
+    "original": true,
+    "district_id": 31
+  },
+  {
+    "id": 101,
+    "political_party": "REP",
+    "votes": 231133,
+    "original": true,
+    "district_id": 31
+  },
+  {
+    "id": 102,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 31
+  },
+  {
+    "id": 103,
+    "political_party": "DEM",
+    "votes": 128194,
+    "original": true,
+    "district_id": 36
+  },
+  {
+    "id": 104,
+    "political_party": "REP",
+    "votes": 106789,
+    "original": true,
+    "district_id": 36
+  },
+  {
+    "id": 105,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 36
+  },
+  {
+    "id": 106,
+    "political_party": "DEM",
+    "votes": 119276,
+    "original": true,
+    "district_id": 35
+  },
+  {
+    "id": 107,
+    "political_party": "REP",
+    "votes": 128056,
+    "original": true,
+    "district_id": 35
+  },
+  {
+    "id": 108,
+    "political_party": "OTHER",
+    "votes": 0,
+    "original": true,
+    "district_id": 35
+  }
+]

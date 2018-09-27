@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Ohio",
+    "population": 11614373,
+    "election_year": 2016,
+    "area": 1.160977208141516E11,
+    "perimeter": 1621693.0648072,
+    "geo_id": "39",
+    "total_votes": 4970026,
+    "code": "OH",
+    "original": true
+  },
+  {
+    "id": 2,
+    "name": "New Hampshire",
+    "population": 1342795,
+    "election_year": 2016,
+    "area": 2.421422171818395E10,
+    "perimeter": 976242.3249557,
+    "geo_id": "33",
+    "total_votes": 652732,
+    "code": "NH",
+    "original": true
+  },
+  {
+    "id": 3,
+    "name": "Wisconsin",
+    "population": 5795483,
+    "election_year": 2016,
+    "area": 1.6963484694859055E11,
+    "perimeter": 2144769.879502,
+    "geo_id": "55",
+    "total_votes": 2650446,
+    "code": "WI",
+    "original": true
+  },
+  {
+    "id": 4,
+    "name": "Wisconsin",
+    "population": 5795483,
+    "election_year": 2014,
+    "area": 1.6963484694859055E11,
+    "perimeter": 2144769.879502,
+    "geo_id": "55",
+    "total_votes": 2328972,
+    "code": "WI",
+    "original": true
+  },
+  {
+    "id": 5,
+    "name": "New Hampshire",
+    "population": 1342795,
+    "election_year": 2014,
+    "area": 2.421422171818395E10,
+    "perimeter": 976242.3249557,
+    "geo_id": "33",
+    "total_votes": 482315,
+    "code": "NH",
+    "original": true
+  }
+]

@@ -12,4 +12,6 @@ public class AppConstants {
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_OH2010 = PATH_NEIGHBOR_FILES + "/OH_2010_precincts_neighbor_relations_v3.json";
     public static final String PATH_PRECINCT_NEIGHBOR_RELATIONS_WI2010 = PATH_NEIGHBOR_FILES + "/WI_2010_precincts_neighbor_relations_v3.json";
 
+    public static final String PATH_DB_IMAGE_FILES = "src/test/jaguarsDBimages";
+    public static final String PATH_STATE_IMAGE_JSON = PATH_DB_IMAGE_FILES + "/db_state.json";
 }
