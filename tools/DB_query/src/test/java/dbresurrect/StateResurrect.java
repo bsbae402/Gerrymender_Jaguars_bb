@@ -1,6 +1,8 @@
 package dbresurrect;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import jaguarsdbtools.AppConstants;
 import jaguarsdbtools.map.state.State;
@@ -30,9 +32,12 @@ public class StateResurrect {
     @Autowired
     private StateRepository strep;
 
+    // should turn off autoincrement since we have id in json
     @Test
     public void testResurrect() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create();
         try{
             JsonReader reader = new JsonReader(new FileReader(AppConstants.PATH_STATE_IMAGE_JSON));
             ArrayList<State> stateList = gson.fromJson(reader, STATE_TYPE);

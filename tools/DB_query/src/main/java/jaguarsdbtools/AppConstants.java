@@ -14,4 +14,6 @@ public class AppConstants {
 
     public static final String PATH_DB_IMAGE_FILES = "src/test/jaguarsDBimages";
     public static final String PATH_STATE_IMAGE_JSON = PATH_DB_IMAGE_FILES + "/db_state.json";
+    public static final String PATH_VDS_IMAGE_JSON = PATH_DB_IMAGE_FILES + "/db_vds.json";
+    public static final String PATH_DISTRICT_IMAGE_JSON = PATH_DB_IMAGE_FILES + "/db_district.json";
 }

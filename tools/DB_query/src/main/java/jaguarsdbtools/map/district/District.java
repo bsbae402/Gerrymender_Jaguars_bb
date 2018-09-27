@@ -13,7 +13,6 @@ import java.util.Set;
 public class District {
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Expose
@@ -64,6 +63,8 @@ public class District {
         this.totalVotes = district.getTotalVotes();
         this.code = district.getCode();
         this.original = false;
+        this.movable = false;
+        this.medianIncome = 0;
         for (VotingDataDistrict vdd : district.getVotingDataDistricts()) {
             VotingDataDistrict newVdd = new VotingDataDistrict(vdd);
             newVdd.setDistrict(this);
@@ -71,7 +72,8 @@ public class District {
         }
     }
 
-    public District(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original, State state) {
+    public District(int id, String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, String code, boolean original, boolean movable, int medianIncome) {
+        this.id = id;
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -81,7 +83,8 @@ public class District {
         this.totalVotes = totalVotes;
         this.code = code;
         this.original = original;
-        this.state = state;
+        this.movable = movable;
+        this.medianIncome = medianIncome;
     }
 
     public int getId() {
@@ -162,6 +165,22 @@ public class District {
 
     public void setOriginal(boolean original) {
         this.original = original;
+    }
+
+    public void setMovable(boolean movable) {
+        this.movable = movable;
+    }
+
+    public void setMedianIncome(int medianIncome) {
+        this.medianIncome = medianIncome;
+    }
+
+    public boolean isMovable() {
+        return movable;
+    }
+
+    public int getMedianIncome() {
+        return medianIncome;
     }
 
     public State getState() {

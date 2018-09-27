@@ -15,7 +15,6 @@ import java.util.Set;
 public class State {
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Expose
     private String name;
