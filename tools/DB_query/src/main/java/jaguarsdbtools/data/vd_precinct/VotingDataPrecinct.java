@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class VotingDataPrecinct {
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Expose

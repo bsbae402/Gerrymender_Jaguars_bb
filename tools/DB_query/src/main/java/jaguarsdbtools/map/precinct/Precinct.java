@@ -12,7 +12,6 @@ import java.util.Set;
 public class Precinct {
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Expose
@@ -67,7 +66,8 @@ public class Precinct {
         }
     }
 
-    public Precinct(String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean border, String code, boolean original, District district) {
+    public Precinct(int id, String name, int population, int electionYear, double area, double perimeter, String geoId, int totalVotes, boolean border, String code, boolean original, boolean movable) {
+        this.id = id;
         this.name = name;
         this.population = population;
         this.electionYear = electionYear;
@@ -78,7 +78,7 @@ public class Precinct {
         this.border = border;
         this.code = code;
         this.original = original;
-        this.district = district;
+        this.movable = movable;
     }
 
     public int getId() {
@@ -175,6 +175,14 @@ public class Precinct {
 
     public void setDistrict(District district) {
         this.district = district;
+    }
+
+    public boolean isMovable() {
+        return movable;
+    }
+
+    public void setMovable(boolean movable) {
+        this.movable = movable;
     }
 
     public Set<VotingDataPrecinct> getVotingDataPrecincts() {
