@@ -3,7 +3,7 @@
 //     ENDPOINT = "http://35.174.152.138:8080/";
 // }
 
-var ENDPOINT = "http://13.125.133.7:8080";
+var ENDPOINT = "http://13.125.133.7:8080/";
 
 var API_CALLS = [
     
