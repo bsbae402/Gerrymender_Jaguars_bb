@@ -235,6 +235,9 @@ public class AlgorithmController {
         retObj.addProperty("efficiency_weight", propMan.getDefaultEfficiencyWeight());
         retObj.addProperty("population_threshold", propMan.getDefaultPopulationThreshold());
         retObj.addProperty("loops", propMan.getMaxLoopSteps());
+
+        System.out.println(retObj);
+
         return retObj.toString();
     }
 
