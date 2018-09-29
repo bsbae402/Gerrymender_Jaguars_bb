@@ -229,6 +229,8 @@ public class AlgorithmController {
 
     @RequestMapping(value = "algorithm/constraints", method = RequestMethod.GET)
     public String returnAlgorithmConstraints(){
+        System.out.println("Getting request with algorithm/constraints");
+
         JsonObject retObj = new JsonObject();
         retObj.addProperty("polsby_compactness_weight", propMan.getDefaultCompactnessWeightPp());
         retObj.addProperty("schwartzberg_compactness_weight", propMan.getDefaultCompactnessWeightSch());
