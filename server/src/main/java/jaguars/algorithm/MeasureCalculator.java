@@ -90,7 +90,7 @@ public final class MeasureCalculator {
 //        ArrayList<Set<Precinct>> listSizeOne = new ArrayList<>();
 //        listSizeOne.add(oneset);
         if(connectedComponentList.size() > 1) {
-            System.out.println("District: " + district.getGeoId() + " has " + connectedComponentList.size() + " components");
+            //System.out.println("District: " + district.getGeoId() + " has " + connectedComponentList.size() + " components");
         }
         return connectedComponentList;
     }

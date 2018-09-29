@@ -3,7 +3,7 @@
 //     ENDPOINT = "http://35.174.152.138:8080/";
 // }
 
-var ENDPOINT = "http://13.125.133.7:8080/";
+var ENDPOINT = "http://52.79.140.104:8080/";
 
 var API_CALLS = [
     
@@ -295,7 +295,7 @@ var API_CALLS = [
         method : "POST",
         url : "algorithm/stop",
         response : (r, data) => r,
-        dummy : () => {
+        adummy : () => {
             is_running : false
         },
     },

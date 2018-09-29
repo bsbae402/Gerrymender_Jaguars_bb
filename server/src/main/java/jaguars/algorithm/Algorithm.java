@@ -337,6 +337,9 @@ public class Algorithm {
             algoAct.setDistrictNewObjectiveScore(cm.objectiveFunction(newAffDistrictOfNew, ai.getCompactnessWeightPP(), ai.getCompactnessWeightSch(), ai.getEfficiencyWeight()));
             // AlgorithmAction(int precinctId, int oldDistrictId, int newDistrictId, double newDistrictCompactness, double oldDistrictCompactness, double stateWideEfficiencyGap)
             algoActionList.add(algoAct);
+            ////
+            //System.out.println("num of algoActions: " + algoActionList.size());
+            ////
             oldState = newState;
             loopSteps++;
         }

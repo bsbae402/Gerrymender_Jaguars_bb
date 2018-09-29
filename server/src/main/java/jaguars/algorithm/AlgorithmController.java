@@ -255,4 +255,15 @@ public class AlgorithmController {
         retObj.addProperty("ok", fileOk);
         return retObj.toString();
     }
+
+    @RequestMapping(value = "algorithm/stop", method = RequestMethod.POST)
+    public String stopAlgorithm(@RequestParam("algorithm_id") int hashint) {
+        System.out.println("algorithm/stop is requested");
+        //System.out.println(hashint);
+        if(hashint != -1 && ags.getAlgorithmInstance(hashint) != null) {
+            System.out.println("removing algorithm: " + hashint);
+            ags.removeAlgorithmInstance(hashint);
+        }
+        return "{}";
+    }
 }

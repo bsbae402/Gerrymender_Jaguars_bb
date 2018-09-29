@@ -1115,6 +1115,12 @@ whenReady(function() {
 		});
 
 		function reset() {
+			if(aid != -1) {
+				APICall("stopalgorithm", {algorithm_id : aid})
+				.then((r) => {
+					console.log("stop algorithm");
+				});
+			}
 			aid = -1;
 			$("#credistrict .algresults").removeClass("show");
 			$("#credistrict .algorithm .pause").html("Pause algorithm");
